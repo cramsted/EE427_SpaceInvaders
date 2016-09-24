@@ -1,12 +1,12 @@
 /*
- * global.h
+ * globals.h
  *
  *  Created on: Sep 23, 2016
  *      Author: superman
  */
 
-#ifndef GLOBAL_H_
-#define GLOBAL_H_
+#ifndef GLOBALS_H_
+#define GLOBALS_H_
 
 
-#endif /* GLOBAL_H_ */
+#endif /* GLOBALS_H_ */

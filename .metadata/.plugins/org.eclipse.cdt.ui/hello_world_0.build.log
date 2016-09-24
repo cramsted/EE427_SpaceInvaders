@@ -2,13 +2,13 @@
 **** Build of configuration Debug for project hello_world_0 ****
 
 make all 
-Building file: ../src/render.c
+Building file: ../src/globals.c
 Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/render.d" -MT"src/render.d" -o"src/render.o" "../src/render.c"
-../src/render.c:53: warning: 'aliens' defined but not used
-../src/render.c:54: warning: 'tank' defined but not used
-../src/render.c:55: warning: 'bunkers' defined but not used
-Finished building: ../src/render.c
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/globals.d" -MT"src/globals.d" -o"src/globals.o" "../src/globals.c"
+../src/globals.c:10: warning: 'aliens' defined but not used
+../src/globals.c:11: warning: 'tank' defined but not used
+../src/globals.c:12: warning: 'bunkers' defined but not used
+Finished building: ../src/globals.c
 ' '
 Building target: hello_world_0.elf
 Invoking: MicroBlaze gcc linker

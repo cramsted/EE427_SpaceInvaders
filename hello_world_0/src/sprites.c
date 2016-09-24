@@ -201,3 +201,4 @@ const int bunkerDamage3_6x6[] = {
 	packword6(1,1,1,1,1,1),
 	packword6(1,1,1,1,1,1)
 };
+
