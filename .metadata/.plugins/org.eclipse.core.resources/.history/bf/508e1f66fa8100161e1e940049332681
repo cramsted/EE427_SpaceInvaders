@@ -1,0 +1,18 @@
+/*
+ * render.c
+ *
+ *  Created on: Sep 23, 2016
+ *      Author: superman
+ */
+#include "render.h"
+int findPixelValue(int x, int y, int col, int row, int *sprite){
+	int xval = (col - x) >> 1;
+	int yval = (row - y) >> 1;
+
+	//check to make sure we haven't gone out of bounds
+//	if(yval >= size){
+//		return -1;
+//	}
+
+	return (sprite[yval] << xval) & 0x80000000;
+}

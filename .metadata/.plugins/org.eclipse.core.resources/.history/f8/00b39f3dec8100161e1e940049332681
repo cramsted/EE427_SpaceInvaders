@@ -1,0 +1,3 @@
+
+
+int findPixelValue(int x, int y, int col, int row);

@@ -1,0 +1,8 @@
+
+
+int findPixelValue(int x, int y, int col, int row, int *sprite){
+	int xval = col - x;
+	int yval = row - y;
+
+
+}
