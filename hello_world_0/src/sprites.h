@@ -88,5 +88,6 @@ typedef struct {
 
 Tank initTank(int x, int y);
 Position initPosition(int x, int y);
+Aliens initAliens(int x, int y);
 
 #endif /* SPRITES_H_ */

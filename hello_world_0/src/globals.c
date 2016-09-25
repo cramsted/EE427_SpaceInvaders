@@ -7,6 +7,6 @@
 #include "globals.h"
 #include "sprites.h"
 
-static Aliens aliens;
-static Tank tank;
-static Bunker bunkers[MAX_BUNKERS];
+//static Aliens aliens;
+//static Tank tank;
+//static Bunker bunkers[MAX_BUNKERS];

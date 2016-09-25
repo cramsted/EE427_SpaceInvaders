@@ -5,6 +5,8 @@
  *      Author: superman
  */
 #include "sprites.h"
+#include <stdio.h>
+
 //Sprite dimensions
 #define TANK_HEIGHT 8
 #define TANK_WIDTH 15
@@ -12,6 +14,8 @@
 #define BUNKER_WIDTH 24
 #define ALIEN_HEIGHT 8
 #define ALIEN_WIDTH 12
+#define XPADDING 8
+#define YPADDING 16
 
 //Colors
 #define GREEN 0x0000FF00
@@ -80,12 +84,22 @@ Alien initAlien(int x, int y, alien_type_e type) {
 Aliens initAliens(int x, int y){
 	Aliens a;
 	a.numActiveBullets = 0;
-	int row, col, startingX = ALIENS_START_X, startingY = ALIENS_START_Y;
-	const int alien_width = ALIEN_WIDTH + PADDING;
+	int row, col;
+	const int alien_width = 2 * ALIEN_WIDTH + XPADDING;
+	const int alien_height = 2 * ALIEN_HEIGHT + YPADDING;
 	for(row = 0; row < ALIENS_ROW; row++){
-		for(col = 0; col < ALIENS_COL; row++){
-			a.aliens[row][col] = initAlien(ALIENS_START_X * alien_width,
-					)
+		for(col = 0; col < ALIENS_COL; col++){
+			alien_type_e type;
+			if (row == 0){
+				type = top_alien_in;
+			}else if(row >= 1 && row < 3){
+				type = middle_alien_in;
+			}else{
+				type = bottom_alien_in;
+			}
+			a.aliens[row][col] = initAlien(ALIENS_START_X + (col * alien_width),
+					ALIENS_START_Y + (row * alien_height), type);
 		}
 	}
+	return a;
 }
