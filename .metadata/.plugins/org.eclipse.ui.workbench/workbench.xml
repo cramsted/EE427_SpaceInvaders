@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="16" version="2.0">
+<workbench progressCount="21" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="100" y="100">
 <fastViewData fastViewLocation="1024"/>
@@ -35,40 +35,41 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
-<part id="5"/>
-<part id="6"/>
-<part id="4"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.internal.EditorStack@606bdd1f" ratio="0.4995885" ratioLeft="607" ratioRight="608" relationship="2" relative="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/main.c" title="main.c" tooltip="hello_world_0/src/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1714" selectionTopPixel="2199"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1182" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="render.c" partName="render.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/render.c" title="render.c" tooltip="hello_world_0/src/render.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="render.c" partName="render.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/render.c" title="render.c" tooltip="hello_world_0/src/render.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/render.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="123" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1612" selectionTopPixel="459"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="render.h" partName="render.h" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/render.h" title="render.h" tooltip="hello_world_0/src/render.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/render.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="196" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="124" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="globals.c" partName="globals.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/globals.c" title="globals.c" tooltip="hello_world_0/src/globals.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/globals.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="125" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="sprites.c" partName="sprites.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/sprites.c" title="sprites.c" tooltip="hello_world_0/src/sprites.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sprites.c" partName="sprites.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/sprites.c" title="sprites.c" tooltip="hello_world_0/src/sprites.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/sprites.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7649" selectionTopPixel="2641"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="402" selectionTopPixel="6"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="globals.h" partName="globals.h" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/globals.h" title="globals.h" tooltip="hello_world_0/src/globals.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/globals.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="125" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sprites.h" partName="sprites.h" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/sprites.h" title="sprites.h" tooltip="hello_world_0/src/sprites.h" workbook="DefaultEditorWorkbook">
+<editor focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="sprites.h" partName="sprites.h" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/sprites.h" title="sprites.h" tooltip="hello_world_0/src/sprites.h" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/sprites.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="821" selectionTopPixel="23"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="545" selectionTopPixel="51"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sprite_bit_maps.c" partName="sprite_bit_maps.c" path="C:/Users/superman/Desktop/SpaceInvaders/hello_world_0/src/sprite_bit_maps.c" title="sprite_bit_maps.c" tooltip="hello_world_0/src/sprite_bit_maps.c" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/sprite_bit_maps.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="16" selectionOffset="2627" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -81,7 +82,6 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (1 item)"/>
 <category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
@@ -163,8 +163,13 @@
 <view id="org.eclipse.tm.terminal.view.TerminalView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.cdt.make.ui.views.MakeView"/>
-<view id="org.eclipse.ui.internal.introview"/>
-<fastViewBars/>
+<fastViewBars>
+<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@15fddb33" orientation="512" selectedTabId="org.eclipse.ui.internal.introview" style="0">
+<fastViews>
+<view id="org.eclipse.ui.internal.introview" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="topLeft">
@@ -179,13 +184,11 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@15fddb33" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="topLeft">
-<folder activePageID="org.eclipse.ui.internal.introview" appearance="2" expanded="2">
-<page content="org.eclipse.ui.internal.introview" label="Welcome"/>
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="topLeft"/>
@@ -205,7 +208,7 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="topRight" ratio="0.7493333" ratioLeft="562" ratioRight="188" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="topRight" ratio="0.93492943" ratioLeft="1523" ratioRight="106" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.cdt.make.ui.views.MakeView" label="Make Target"/>
@@ -222,162 +225,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/main.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/sprites.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/sprites.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/render.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/globals.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/globals.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/sprite_bit_maps.c"/>
 </editors>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="2965" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="2965" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="2965" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="3318" y="30"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="3672" y="32"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="4028" y="33"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="4385" y="32"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7451" y="0"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="4741" y="33"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="5098" y="21"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="5525" y="24"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="6865" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7061" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7257" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="778" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7453" y="29"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="1318" y="0"/>
-</item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="6693" y="0"/>
-</item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="232" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1714" y="0"/>
-</item>
-<item historyLabel="render.c" index="3">
-<position info="not_deleted" x="344" y="0"/>
-</item>
-<item historyLabel="render.c" index="3">
+<item historyLabel="render.c" index="2">
 <position/>
 </item>
-<item historyLabel="render.c" index="3">
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="1399" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
 <position/>
 </item>
-<item historyLabel="render.c" index="3">
-<position info="not_deleted" x="122" y="0"/>
-</item>
-<item historyLabel="render.c" index="3">
-<position info="not_deleted" x="137" y="0"/>
-</item>
-<item historyLabel="render.c" index="3">
+<item historyLabel="render.c" index="2">
 <position/>
 </item>
-<item historyLabel="render.c" index="3">
-<position info="not_deleted" x="127" y="0"/>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1461" y="0"/>
 </item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7649" y="0"/>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="627" y="0"/>
 </item>
-<item historyLabel="sprites.h" index="2">
-<position info="not_deleted" x="821" y="0"/>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1991" y="0"/>
 </item>
-<item historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7649" y="0"/>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="627" y="0"/>
 </item>
-<item historyLabel="render.c" index="3">
-<position info="not_deleted" x="123" y="0"/>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1854" y="0"/>
 </item>
-<item historyLabel="globals.h" index="4">
-<position info="not_deleted" x="146" y="0"/>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="214" y="0"/>
 </item>
-<item historyLabel="globals.c" index="5">
-<position info="not_deleted" x="125" y="0"/>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1923" y="0"/>
 </item>
-<item historyLabel="globals.h" index="4">
-<position info="not_deleted" x="125" y="0"/>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
 </item>
-<item historyLabel="globals.c" index="5">
-<position info="not_deleted" x="125" y="0"/>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1923" y="0"/>
 </item>
-<item active="true" historyLabel="sprites.c" index="1">
-<position info="not_deleted" x="7649" y="0"/>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1946" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1946" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="627" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1994" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1987" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="484" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3254" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="1533" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3254" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="1533" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="1536" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3254" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3254" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="2221" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3268" y="0"/>
+</item>
+<item historyLabel="sprite_bit_maps.c" index="3">
+<position info="not_deleted" x="2627" y="16"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3253" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="2221" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="2730" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="484" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="3028" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1395" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1631" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="625" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1469" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="625" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1589" y="0"/>
+</item>
+<item historyLabel="sprites.c" index="0">
+<position info="not_deleted" x="402" y="0"/>
+</item>
+<item historyLabel="render.c" index="2">
+<position info="not_deleted" x="1562" y="0"/>
+</item>
+<item historyLabel="sprites.h" index="1">
+<position info="not_deleted" x="545" y="0"/>
+</item>
+<item active="true" historyLabel="render.c" index="2">
+<position info="not_deleted" x="1562" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -385,11 +386,7 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
 <trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="topRight"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@15fddb33"/>
 </trimArea>
 <trimArea IMemento.internal.id="128">
@@ -399,11 +396,19 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sprite_bit_maps.c" tooltip="hello_world_0/src/sprite_bit_maps.c">
+<persistable path="/hello_world_0/src/sprite_bit_maps.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="globals.c" tooltip="hello_world_0/src/globals.c">
+<persistable path="/hello_world_0/src/globals.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xparameters.h" tooltip="hello_world_bsp_0/microblaze_0/include/xparameters.h">
+<persistable path="/hello_world_bsp_0/microblaze_0/include/xparameters.h"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sprites.h" tooltip="hello_world_0/src/sprites.h">
 <persistable path="/hello_world_0/src/sprites.h"/>
 </file>
@@ -415,9 +420,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="globals.h" tooltip="hello_world_0/src/globals.h">
 <persistable path="/hello_world_0/src/globals.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="globals.c" tooltip="hello_world_0/src/globals.c">
-<persistable path="/hello_world_0/src/globals.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="draw.h" tooltip="hello_world_0/src/draw.h">
 <persistable path="/hello_world_0/src/draw.h"/>
