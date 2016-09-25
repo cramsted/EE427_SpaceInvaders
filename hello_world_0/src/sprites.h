@@ -12,10 +12,22 @@
 
 #define ALIENS_COL 10
 #define ALIENS_ROW 5
+#define MAX_LIVES 3
 #define MAX_BUNKERS 4
 #define MAX_BULLETS 5 // one for tank and four for aliens
 #define ALIENS_START_X 50
 #define ALIENS_START_Y 50
+#define BUNKER_START_X 110
+#define BUNKER_START_Y 350
+#define TANK_START_X 305
+#define TANK_START_Y 420
+#define LIFE_START_X 450
+#define LIFE_START_Y 20
+#define XLIFE_PADDING 10
+#define GROUND_START_Y 450
+//Colors
+#define GREEN 0x0000FF00
+#define WHITE 0x00FFFFFF
 
 //meta data for the sprites
 typedef struct {
@@ -74,6 +86,10 @@ typedef struct {
 } Bunker;
 
 typedef struct {
+	Bunker bunkers[MAX_BUNKERS];
+} Bunkers;
+
+typedef struct {
 	Position p;
 	Sprite sp;
 } Bullet;
@@ -89,5 +105,5 @@ typedef struct {
 Tank initTank(int x, int y);
 Position initPosition(int x, int y);
 Aliens initAliens(int x, int y);
-
+Bunkers initBunkers(int x, int y);
 #endif /* SPRITES_H_ */

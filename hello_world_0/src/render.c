@@ -11,9 +11,15 @@
 #include "xparameters.h"
 #include "xio.h"
 
+#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
 //funciton prototypes
 void edit_frameBuffer(Sprite *sp, Position *p);
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);
+void drawAliens();
+void drawBunkers();
+void drawTank();
+void drawStaticImages();
 
 #define FRAME_BUFFER_0_ADDR 0xC0000000  // Starting location in DDR where we will store the images that we display.
 static XAxiVdma videoDMAController;
@@ -21,36 +27,59 @@ static XAxiVdma videoDMAController;
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
 unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
-//	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR) + 640
-//			* 480;
+//	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH
+//			* SCREEN_HEIGHT;
 void init() {
 	// TODO: initialize various structs, etc.
 	// init alien positions and draw them
 	// init tank position and lives and draw it
 	// init bunker positions and erosion and draw them
 	// init score
-	memset(framePointer0, 0, 640 * 480 * 4);
-	Tank t = initTank(320, 400);
+	drawStaticImages();
+	drawTank();
+	drawAliens();
+	drawBunkers();
+	//	render(); //needed only for changing the index of the frame buffer
+}
+
+void drawStaticImages(){
+	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
+	int col;
+	for (col = 0; col < SCREEN_WIDTH; col++){
+		framePointer0[GROUND_START_Y * SCREEN_WIDTH + col] = GREEN;
+		framePointer0[(GROUND_START_Y + 1) * SCREEN_WIDTH + col] = GREEN;
+	}
+}
+void drawTank() {
+	Tank t = initTank(TANK_START_X, TANK_START_Y);
 	edit_frameBuffer(&t.sp, &t.p);
-	xil_printf("after frameBuffer");
+	Tank life = initTank(LIFE_START_X, LIFE_START_Y);
+	int col;
+	for(col = 0; col < MAX_LIVES; col++){
+		life.p.x = LIFE_START_X + (col * XLIFE_PADDING) + col * life.sp.width;
+		edit_frameBuffer(&life.sp, &life.p);
+	}
+}
 
-	xil_printf("size of aliens: %d\n\r", sizeof(Aliens));
-
+void drawAliens() {
 	Aliens a = initAliens(ALIENS_START_X, ALIENS_START_Y);
 	int row, col;
-	xil_printf("Before for loop");
 	for (row = 0; row < ALIENS_ROW; row++) {
-		xil_printf("first for loop");
 		for (col = 0; col < ALIENS_COL; col++) {
 			Alien *temp = &a.aliens[row][col];
-			xil_printf("Alien X: %d Y: %d\n\r", temp->p.x, temp->p.y);
 			edit_frameBuffer(&temp->sp, &temp->p);
 		}
 	}
-	xil_printf("done initializing frame buffer\n\r");
-	//	render();
 }
 
+void drawBunkers() {
+	Bunkers b = initBunkers(BUNKER_START_X, BUNKER_START_Y);
+	int row;
+	for (row = 0; row < MAX_BUNKERS; row++) {
+		Bunker *temp = &b.bunkers[row];
+		edit_frameBuffer(&temp->sp, &temp->p);
+	}
+}
 void render() {
 	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, 0, //the 0 is the frame index
 			XAXIVDMA_READ)) {
@@ -59,15 +88,15 @@ void render() {
 }
 
 void edit_frameBuffer(Sprite *sp, Position *p) {
-	int maxRow = (p->y + sp->height * 2);
-	int maxCol = (p->x + sp->width * 2);
+	int maxRow = (p->y + sp->height);
+	int maxCol = (p->x + sp->width);
 	int row, col;
 	for (row = p->y; row < maxRow; row++) {
 		for (col = p->x; col < maxCol; col++) {
 			if (findPixelValue(p->x, p->y, col, row, sp)) {
-				framePointer0[row * 640 + col] = sp->Color.color;
+				framePointer0[row * SCREEN_WIDTH + col] = sp->Color.color;
 			} else {
-				framePointer0[row * 640 + col] = 0x00000000;
+				framePointer0[row * SCREEN_WIDTH + col] = 0x00000000;
 			}
 		}
 	}
@@ -77,7 +106,7 @@ void edit_frameBuffer(Sprite *sp, Position *p) {
 int findPixelValue(int x, int y, int col, int row, Sprite *sp) {
 	int xval = (col - x) >> 1;
 	int yval = (row - y) >> 1;
-	int mask = 1 << (sp->width - 1);
+	int mask = 1 << ((sp->width >> 1) - 1);
 	return (sp->sprite[yval] << xval) & mask;
 }
 
@@ -115,11 +144,11 @@ void init_videoDMAController() {
 			xil_printf("DMA Mismatch Error\r\n");
 	}
 	// Now we tell the driver about the geometry of our frame buffer and a few other things.
-	// Our image is 480 x 640.
+	// Our image is SCREEN_HEIGHT x SCREEN_WIDTH.
 	XAxiVdma_DmaSetup myFrameBuffer;
-	myFrameBuffer.VertSizeInput = 480; // 480 vertical pixels.
-	myFrameBuffer.HoriSizeInput = 640 * 4; // 640 horizontal (32-bit pixels).
-	myFrameBuffer.Stride = 640 * 4; // Dont' worry about the rest of the values.
+	myFrameBuffer.VertSizeInput = SCREEN_HEIGHT; // SCREEN_HEIGHT vertical pixels.
+	myFrameBuffer.HoriSizeInput = SCREEN_WIDTH * 4; // SCREEN_WIDTH horizontal (32-bit pixels).
+	myFrameBuffer.Stride = SCREEN_WIDTH * 4; // Dont' worry about the rest of the values.
 	myFrameBuffer.FrameDelay = 0;
 	myFrameBuffer.EnableCircularBuf = 1;
 	myFrameBuffer.EnableSync = 0;
@@ -134,7 +163,7 @@ void init_videoDMAController() {
 	// is where you will write your video data. The vdma IP/driver then streams it to the HDMI
 	// IP.
 	myFrameBuffer.FrameStoreStartAddr[0] = FRAME_BUFFER_0_ADDR;
-	//	myFrameBuffer.FrameStoreStartAddr[1] = FRAME_BUFFER_0_ADDR + 4 * 640 * 480;
+	//	myFrameBuffer.FrameStoreStartAddr[1] = FRAME_BUFFER_0_ADDR + 4 * SCREEN_WIDTH * SCREEN_HEIGHT;
 
 	if (XST_FAILURE == XAxiVdma_DmaSetBufferAddr(&videoDMAController,
 			XAXIVDMA_READ, myFrameBuffer.FrameStoreStartAddr)) {
@@ -154,5 +183,5 @@ void init_videoDMAController() {
 		xil_printf("vdma parking failed\n\r");
 	}
 	// This tells the HDMI controller the resolution of your display (there must be a better way to do this).
-	XIo_Out32(XPAR_AXI_HDMI_0_BASEADDR, 640*480);
+	XIo_Out32(XPAR_AXI_HDMI_0_BASEADDR, SCREEN_WIDTH*SCREEN_HEIGHT);
 }

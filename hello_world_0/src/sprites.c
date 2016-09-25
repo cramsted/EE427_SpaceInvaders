@@ -8,18 +8,15 @@
 #include <stdio.h>
 
 //Sprite dimensions
-#define TANK_HEIGHT 8
-#define TANK_WIDTH 15
-#define BUNKER_HEIGHT 18
-#define BUNKER_WIDTH 24
-#define ALIEN_HEIGHT 8
-#define ALIEN_WIDTH 12
-#define XPADDING 8
-#define YPADDING 16
-
-//Colors
-#define GREEN 0x0000FF00
-#define WHITE 0x00FFFFFF
+#define TANK_HEIGHT (8*2)
+#define TANK_WIDTH (15*2)
+#define BUNKER_HEIGHT (18*2)
+#define BUNKER_WIDTH (24*2)
+#define ALIEN_HEIGHT (8*2)
+#define ALIEN_WIDTH (12*2)
+#define XALIEN_PADDING (8)
+#define YALIEN_PADDING (16)
+#define XBUNKER_PADDING (80)
 
 extern const int saucer_16x7[];
 extern const int alien_explosion_12x10[];
@@ -72,6 +69,15 @@ Bunker initBunker(int x, int y) {
 	return b;
 }
 
+Bunkers initBunkers(int x, int y){
+	Bunkers b;
+	int row;
+	const int bunker_width = BUNKER_WIDTH + XBUNKER_PADDING;
+	for(row = 0; row < MAX_BUNKERS; row ++){
+		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
+	}
+	return b;
+}
 
 Alien initAlien(int x, int y, alien_type_e type) {
 	Alien a;
@@ -85,8 +91,8 @@ Aliens initAliens(int x, int y){
 	Aliens a;
 	a.numActiveBullets = 0;
 	int row, col;
-	const int alien_width = 2 * ALIEN_WIDTH + XPADDING;
-	const int alien_height = 2 * ALIEN_HEIGHT + YPADDING;
+	const int alien_width = ALIEN_WIDTH + XALIEN_PADDING;
+	const int alien_height = ALIEN_HEIGHT + YALIEN_PADDING;
 	for(row = 0; row < ALIENS_ROW; row++){
 		for(col = 0; col < ALIENS_COL; col++){
 			alien_type_e type;
