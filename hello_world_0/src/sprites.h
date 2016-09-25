@@ -10,23 +10,12 @@
 
 #include <stdint.h>
 
-#define MAX_ALIENS 55
+#define ALIENS_COL 10
+#define ALIENS_ROW 5
 #define MAX_BUNKERS 4
 #define MAX_BULLETS 5 // one for tank and four for aliens
-extern const int saucer_16x7[];
-extern const int alien_explosion_12x10[];
-extern const int alien_top_in_12x8[];
-extern const int alien_top_out_12x8[];
-extern const int alien_middle_in_12x8[];
-extern const int alien_middle_out_12x8[];
-extern const int alien_bottom_in_12x8[];
-extern const int alien_bottom_out_12x8[];
-extern const int tank_15x8[];
-extern const int bunker_24x18[];
-extern const int bunkerDamage0_6x6[];
-extern const int bunkerDamage1_6x6[];
-extern const int bunkerDamage2_6x6[];
-extern const int bunkerDamage3_6x6[];
+#define ALIENS_START_X 50
+#define ALIENS_START_Y 50
 
 //meta data for the sprites
 typedef struct {
@@ -49,15 +38,27 @@ typedef struct {
 	int y;
 } Position;
 
+typedef enum {
+	top_alien_in = 0,	// 0
+	top_alien_out,		// 1
+	middle_alien_in,	// 2
+	middle_alien_out,	// 3
+	bottom_alien_in,	// 4
+	bottom_alien_out	// 5
+} alien_type_e;
+
+//TODO: make an enum for bullet types
+
 typedef struct {
-	Position p;
 	int alive;
+	Position p;
 	Sprite sp;
+	alien_type_e type;
 } Alien;
 
 typedef struct {
 	int numActiveBullets;
-	Alien aliens[MAX_ALIENS];
+	Alien aliens[ALIENS_ROW][ALIENS_COL];
 } Aliens;
 
 typedef struct {
