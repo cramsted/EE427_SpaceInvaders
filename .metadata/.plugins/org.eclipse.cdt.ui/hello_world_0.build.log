@@ -2,13 +2,14 @@
 **** Build of configuration Debug for project hello_world_0 ****
 
 make all 
-Building file: ../src/globals.c
+Building file: ../src/sprites.c
 Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/globals.d" -MT"src/globals.d" -o"src/globals.o" "../src/globals.c"
-../src/globals.c:10: warning: 'aliens' defined but not used
-../src/globals.c:11: warning: 'tank' defined but not used
-../src/globals.c:12: warning: 'bunkers' defined but not used
-Finished building: ../src/globals.c
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/sprites.d" -MT"src/sprites.d" -o"src/sprites.o" "../src/sprites.c"
+../src/sprites.c: In function 'initBunker':
+../src/sprites.c:247: warning: control reaches end of non-void function
+../src/sprites.c: In function 'initAlien':
+../src/sprites.c:253: warning: control reaches end of non-void function
+Finished building: ../src/sprites.c
 ' '
 Building target: hello_world_0.elf
 Invoking: MicroBlaze gcc linker
@@ -18,7 +19,7 @@ Finished building target: hello_world_0.elf
 Invoking: MicroBlaze Print Size
 mb-size hello_world_0.elf  |tee "hello_world_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  13034	    444	   6118	  19596	   4c8c	hello_world_0.elf
+  13898	    448	   9206	  23552	   5c00	hello_world_0.elf
 Finished building: hello_world_0.elf.size
 ' '
 Invoking: Xilinx ELF Check

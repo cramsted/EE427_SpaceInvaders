@@ -8,7 +8,8 @@
 #ifndef RENDER_H_
 #define RENDER_H_
 
-int findPixelValue(int x, int y, int col, int row, int *spriteStruct);
-
+void init_videoDMAController();
+void init();
+void render();
 #endif /* RENDER_H_ */
 
