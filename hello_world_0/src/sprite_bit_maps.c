@@ -214,10 +214,9 @@ const int bulletCross_3x5[] = {
 };
 
 const int bulletLightning_3x5[] = {
-		packword3(0,1,1),
 		packword3(0,1,0),
 		packword3(1,0,0),
 		packword3(0,1,0),
 		packword3(0,0,1),
-		packword3(0,1,1)
+		packword3(0,1,0)
 };

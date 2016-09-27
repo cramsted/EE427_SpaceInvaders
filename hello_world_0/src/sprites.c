@@ -72,48 +72,50 @@ Bunker initBunker(int x, int y) {
 	return b;
 }
 
-Bunkers initBunkers(int x, int y){
+Bunkers initBunkers(int x, int y) {
 	Bunkers b;
 	int row;
 	const int bunker_width = BUNKER_WIDTH + XBUNKER_PADDING;
-	for(row = 0; row < MAX_BUNKERS; row ++){
+	for (row = 0; row < MAX_BUNKERS; row++) {
 		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
 	}
 	return b;
 }
 
-Alien initAlien(int x, int y, alien_type_e type) {
+Alien initAlien(int x, int y, alien_type_e type, uint8_t row) {
 	Alien a;
 	a.alive = 1;
+	a.row = row;
 	a.p = initPosition(x, y);
 	a.sp = initSprite(ALIEN_HEIGHT, ALIEN_WIDTH, WHITE, alien_sprites[type]);
 	return a;
 }
 
-Aliens initAliens(int x, int y){
+Aliens initAliens(int x, int y) {
 	Aliens a;
 	a.numActiveBullets = 0;
 	int row, col;
 	const int alien_width = ALIEN_WIDTH + XALIEN_PADDING;
 	const int alien_height = ALIEN_HEIGHT + YALIEN_PADDING;
-	for(row = 0; row < ALIENS_ROW; row++){
-		for(col = 0; col < ALIENS_COL; col++){
+	for (row = 0; row < ALIENS_ROW; row++) {
+		for (col = 0; col < ALIENS_COL; col++) {
 			alien_type_e type;
-			if (row == 0){
+			if (row == 0) {
 				type = top_alien_in;
-			}else if(row >= 1 && row < 3){
+			} else if (row >= 1 && row < 3) {
 				type = middle_alien_in;
-			}else{
+			} else {
 				type = bottom_alien_in;
 			}
-			a.aliens[row][col] = initAlien(ALIENS_START_X + (col * alien_width),
-					ALIENS_START_Y + (row * alien_height), type);
+			a.aliens[row][col] = initAlien(
+					ALIENS_START_X + (col * alien_width),
+					ALIENS_START_Y + (row * alien_height), type, row);
 		}
 	}
 	return a;
 }
 
-Character initChar(int x, int y, const int *sprite){
+Character initChar(int x, int y, const int *sprite) {
 	Character c;
 	c.p.x = x;
 	c.p.y = y;
@@ -121,20 +123,20 @@ Character initChar(int x, int y, const int *sprite){
 	return c;
 }
 
-Bullet initBullet(const int *sprite){
+Bullet initBullet(const int *sprite) {
 	Bullet b;
 	b.active = 0;
 	b.sp = initSprite(BULLET_HEIGHT, BULLET_WIDTH, WHITE, sprite);
 	return b;
 }
 
-Bullets initBullets(){
+Bullets initBullets() {
 	Bullets b;
 	int i;
-	for(i = 0; i < MAX_BULLETS; i++){
-		if( i & 1){
-		b.bullets[i] = initBullet(bulletLightning_3x5);
-		} else{
+	for (i = 0; i < MAX_BULLETS; i++) {
+		if (i & 1) {
+			b.bullets[i] = initBullet(bulletLightning_3x5);
+		} else {
 			b.bullets[i] = initBullet(bulletCross_3x5);
 		}
 	}

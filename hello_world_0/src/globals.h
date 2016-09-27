@@ -16,4 +16,5 @@ extern Bullets bullets;
 
 void tankPew();
 void alienPew();
+
 #endif /* GLOBALS_H_ */

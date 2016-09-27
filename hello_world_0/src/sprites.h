@@ -73,27 +73,29 @@ typedef enum {
 //TODO: make an enum for bullet types
 
 typedef struct {
-	int alive;
 	Position p;
 	Sprite sp;
 	alien_type_e type;
+	uint8_t alive;
+	uint8_t row;
 } Alien;
 
 typedef struct {
-	int numActiveBullets;
 	Alien aliens[ALIENS_ROW][ALIENS_COL];
+	Alien* frontRowAliens[ALIENS_COL];
+	uint8_t numActiveBullets;
 } Aliens;
 
 typedef struct {
 	Position p;
-	int lives;
 	Sprite sp;
+	uint8_t lives;
 } Tank;
 
 typedef struct {
 	Position p;
-	int erosionLevel;
 	Sprite sp;
+	uint8_t erosionLevel;
 } Bunker;
 
 typedef struct {
@@ -104,7 +106,7 @@ typedef struct {
 	Position p;
 	Sprite sp;
 	// 0 inactive, 1 is active
-	int active;
+	uint8_t active;
 } Bullet;
 
 typedef struct {
@@ -117,7 +119,7 @@ typedef struct {
 
 typedef struct {
 	Position p;
-	int score;
+	uint32_t score;
 	Sprite *sp[MAX_SCORE_DIGITS];
 } Score;
 

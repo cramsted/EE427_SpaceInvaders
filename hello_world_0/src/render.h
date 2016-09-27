@@ -8,6 +8,8 @@
 #ifndef RENDER_H_
 #define RENDER_H_
 
+#define BULLETS_UPDATE_Y 5
+
 void init_videoDMAController();
 void init();
 void render();

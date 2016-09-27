@@ -3,6 +3,10 @@
  *
  *  Created on: Sep 23, 2016
  *      Author: superman
+ *
+ * TODO's:
+ *   bunker decay
+ *   controls
  */
 #include "render.h"
 #include <stdio.h>
@@ -23,6 +27,7 @@ void drawTank(int x);
 void drawStaticImages();
 void drawCharacters();
 void drawLives();
+void updateBullets();
 
 #define FRAME_BUFFER_0_ADDR 0xC0000000  // Starting location in DDR where we will store the images that we display.
 static XAxiVdma videoDMAController;
@@ -44,6 +49,7 @@ extern const int six_8x5[];
 extern const int seven_8x5[];
 extern const int eight_8x5[];
 extern const int nine_8x5[];
+
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
@@ -58,6 +64,10 @@ void init() {
 	// init score
 	tank = initTank(TANK_START_X, TANK_START_Y);
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
+	int i;
+	for (i = 0; i < ALIENS_COL; i++) {
+		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW-1][i];
+	}
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
 	bullets = initBullets();
 	drawStaticImages();
@@ -66,24 +76,35 @@ void init() {
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y);
 	drawLives();
 	//	render(); //needed only for changing the index of the frame buffer
-	int i, j;
-	//	for( i = TANK_START_X; i < SCREEN_WIDTH - tank.sp.width; i++){
-	//		drawTank(i);
-	//		volatile unsigned int j = 0;
-	//		while(j < 400000){
-	//			j++;
+//	int j;
+	//	int endx = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
+	//	int endy = SCREEN_HEIGHT - ALIENS_START_Y - ((aliens.aliens[0][0].sp.height
+	//			+ 16) * 5);
+	//	for (j = ALIENS_START_Y; j < endy; j += 10) {
+	//		for (i = ALIENS_START_X; i < endx; i++) {
+	//			drawAliens(i, j);
+	//			volatile unsigned int j = 0;
+	//			while (j < 50000) {
+	//				j++;
+	//			}
 	//		}
 	//	}
-	int endx = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
-	int endy = SCREEN_HEIGHT - ALIENS_START_Y - ((aliens.aliens[0][0].sp.height
-			+ 16) * 5);
-	for (j = ALIENS_START_Y; j < endy; j += 10) {
-		for (i = ALIENS_START_X; i < endx; i++) {
-			drawAliens(i, j);
-			volatile unsigned int j = 0;
-			while (j < 50000) {
-				j++;
-			}
+
+	for (i = 0; i < ALIENS_COL; i++) {
+		Alien *a = aliens.frontRowAliens[i];
+		xil_printf("front row alien (x,y) = (%d,%d)\n\r", a->p.x, a->p.y);
+	}
+
+	tankPew();
+	alienPew();
+	alienPew();
+	alienPew();
+	alienPew();
+	for (i = 0; i < 20; i++) {
+		updateBullets();
+		volatile int j = 0;
+		while (j < 4000000) {
+			j++;
 		}
 	}
 }
@@ -129,6 +150,7 @@ void drawLives() {
 		edit_frameBuffer(&life.sp, &life.p);
 	}
 }
+
 void drawTank(int x) {
 	tank.sp.Color.color = BLACK;
 	edit_frameBuffer(&tank.sp, &tank.p);
@@ -159,6 +181,34 @@ void drawBunkers(int x, int y) {
 		edit_frameBuffer(&temp->sp, &temp->p);
 	}
 }
+
+void updateBullets() {
+	int i;
+	Bullet *b = bullets.bullets;
+
+	// tank bullet
+	if (b[0].active) {
+		b[0].sp.Color.color = BLACK;
+		edit_frameBuffer(&b[0].sp, &b[0].p);
+		b[0].sp.Color.color = WHITE;;
+		b[0].p.y -= BULLETS_UPDATE_Y;
+		edit_frameBuffer(&b[0].sp, &b[0].p);
+	}
+
+	// alien bullets
+	for (i = 1; i < MAX_BULLETS; i++) {
+		if (b[i].active) {
+			b[i].sp.Color.color = BLACK;
+			edit_frameBuffer(&b[i].sp, &b[i].p);
+			b[i].sp.Color.color = WHITE;
+			b[i].p.y += BULLETS_UPDATE_Y;
+			edit_frameBuffer(&b[i].sp, &b[i].p);
+		}
+	}
+
+	// TODO: limits - destroy the bullets when they exit the screen
+}
+
 void render() {
 	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, 0, //the 0 is the frame index
 			XAXIVDMA_READ)) {
