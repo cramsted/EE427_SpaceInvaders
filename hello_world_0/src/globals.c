@@ -5,8 +5,7 @@
  *      Author: superman
  */
 #include "globals.h"
-#include "sprites.h"
 
-//static Aliens aliens;
-//static Tank tank;
-//static Bunker bunkers[MAX_BUNKERS];
+Tank tank;
+Aliens aliens;
+Bunkers bunkers;

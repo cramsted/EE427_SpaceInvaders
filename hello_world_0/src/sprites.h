@@ -34,9 +34,11 @@
 #define XLIFE_PADDING 10
 #define CHARACTER_PADDING 4
 #define GROUND_START_Y 450
+
 //Colors
 #define GREEN 0x0000FF00
 #define WHITE 0x00FFFFFF
+#define BLACK 0x00000000
 
 //meta data for the sprites
 typedef struct {

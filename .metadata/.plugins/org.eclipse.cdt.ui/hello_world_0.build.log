@@ -2,20 +2,10 @@
 **** Build of configuration Debug for project hello_world_0 ****
 
 make all 
-Building file: ../src/globals.c
-Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/globals.d" -MT"src/globals.d" -o"src/globals.o" "../src/globals.c"
-Finished building: ../src/globals.c
-' '
 Building file: ../src/render.c
 Invoking: MicroBlaze gcc compiler
 mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/render.d" -MT"src/render.d" -o"src/render.o" "../src/render.c"
 Finished building: ../src/render.c
-' '
-Building file: ../src/sprites.c
-Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/sprites.d" -MT"src/sprites.d" -o"src/sprites.o" "../src/sprites.c"
-Finished building: ../src/sprites.c
 ' '
 Building target: hello_world_0.elf
 Invoking: MicroBlaze gcc linker
@@ -25,7 +15,7 @@ Finished building target: hello_world_0.elf
 Invoking: MicroBlaze Print Size
 mb-size hello_world_0.elf  |tee "hello_world_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  16642	    408	   7510	  24560	   5ff0	hello_world_0.elf
+  17106	    408	   9254	  26768	   6890	hello_world_0.elf
 Finished building: hello_world_0.elf.size
 ' '
 Invoking: Xilinx ELF Check
