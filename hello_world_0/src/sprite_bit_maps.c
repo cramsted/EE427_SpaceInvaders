@@ -31,6 +31,8 @@
 #define packword6(b5,b4,b3,b2,b1,b0) \
 ((b5  << 5 ) | (b4  << 4 ) | (b3  << 3 ) | (b2  << 2 ) | (b1  << 1 ) | (b0  << 0 ) )
 
+#define packword3(b2,b1,b0) \
+((b2  << 2 ) | (b1  << 1 ) | (b0  << 0 ) )
 const int saucer_16x7[] =
 {
 	packword16(0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0),
@@ -201,4 +203,21 @@ const int bunkerDamage3_6x6[] = {
 	packword6(1,1,1,1,1,1),
 	packword6(1,1,1,1,1,1),
 	packword6(1,1,1,1,1,1)
+};
+
+const int bulletCross_3x5[] = {
+		packword3(0,1,0),
+		packword3(0,1,0),
+		packword3(1,1,1),
+		packword3(0,1,0),
+		packword3(0,1,0)
+};
+
+const int bulletLightning_3x5[] = {
+		packword3(0,1,1),
+		packword3(0,1,0),
+		packword3(1,0,0),
+		packword3(0,1,0),
+		packword3(0,0,1),
+		packword3(0,1,1)
 };

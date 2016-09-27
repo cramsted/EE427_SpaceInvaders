@@ -10,6 +10,8 @@
 //Sprite dimensions
 #define TANK_HEIGHT (8*2)
 #define TANK_WIDTH (15*2)
+#define BULLET_WIDTH (3 * 2)
+#define BULLET_HEIGHT (5 * 2)
 #define BUNKER_HEIGHT (18*2)
 #define BUNKER_WIDTH (24*2)
 #define ALIEN_HEIGHT (8*2)
@@ -32,7 +34,8 @@ extern const int bunkerDamage0_6x6[];
 extern const int bunkerDamage1_6x6[];
 extern const int bunkerDamage2_6x6[];
 extern const int bunkerDamage3_6x6[];
-
+extern const int bulletCross_3x5[];
+extern const int bulletLightning_3x5[];
 const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_middle_in_12x8, alien_middle_out_12x8, alien_bottom_in_12x8,
 		alien_bottom_out_12x8 };
@@ -118,3 +121,22 @@ Character initChar(int x, int y, const int *sprite){
 	return c;
 }
 
+Bullet initBullet(const int *sprite){
+	Bullet b;
+	b.active = 0;
+	b.sp = initSprite(BULLET_HEIGHT, BULLET_WIDTH, WHITE, sprite);
+	return b;
+}
+
+Bullets initBullets(){
+	Bullets b;
+	int i;
+	for(i = 0; i < MAX_BULLETS; i++){
+		if( i & 1){
+		b.bullets[i] = initBullet(bulletLightning_3x5);
+		} else{
+			b.bullets[i] = initBullet(bulletCross_3x5);
+		}
+	}
+	return b;
+}

@@ -59,13 +59,14 @@ void init() {
 	tank = initTank(TANK_START_X, TANK_START_Y);
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
+	bullets = initBullets();
 	drawStaticImages();
 	drawTank(TANK_START_X);
 	drawAliens(ALIENS_START_X, ALIENS_START_Y);
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y);
 	drawLives();
 	//	render(); //needed only for changing the index of the frame buffer
-	int i;
+	int i, j;
 	//	for( i = TANK_START_X; i < SCREEN_WIDTH - tank.sp.width; i++){
 	//		drawTank(i);
 	//		volatile unsigned int j = 0;
@@ -73,12 +74,16 @@ void init() {
 	//			j++;
 	//		}
 	//	}
-	int end = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
-	for (i = ALIENS_START_X; i < end; i++) {
-		drawAliens(i, ALIENS_START_Y);
-		volatile unsigned int j = 0;
-		while (j < 100000) {
-			j++;
+	int endx = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
+	int endy = SCREEN_HEIGHT - ALIENS_START_Y - ((aliens.aliens[0][0].sp.height
+			+ 16) * 5);
+	for (j = ALIENS_START_Y; j < endy; j += 10) {
+		for (i = ALIENS_START_X; i < endx; i++) {
+			drawAliens(i, j);
+			volatile unsigned int j = 0;
+			while (j < 50000) {
+				j++;
+			}
 		}
 	}
 }
@@ -141,6 +146,7 @@ void drawAliens(int x, int y) {
 			edit_frameBuffer(&temp->sp, &temp->p);
 			temp->sp.Color.color = WHITE;
 			temp->p.x = x + (temp->sp.width + 8) * col;
+			temp->p.y = y + (temp->sp.height + 16) * row;
 			edit_frameBuffer(&temp->sp, &temp->p);
 		}
 	}
