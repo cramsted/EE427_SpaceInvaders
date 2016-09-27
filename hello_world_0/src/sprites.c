@@ -109,3 +109,12 @@ Aliens initAliens(int x, int y){
 	}
 	return a;
 }
+
+Character initChar(int x, int y, const int *sprite){
+	Character c;
+	c.p.x = x;
+	c.p.y = y;
+	c.sp = initSprite(CHARACTER_HEIGHT, CHARACTER_WIDTH, WHITE, sprite);
+	return c;
+}
+

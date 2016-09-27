@@ -10,10 +10,15 @@
 
 #include <stdint.h>
 
+#define CHARACTER_HEIGHT (5 * 2)
+#define CHARACTER_WIDTH (8 * 2)
+
 #define ALIENS_COL 10
 #define ALIENS_ROW 5
 #define MAX_LIVES 3
 #define MAX_BUNKERS 4
+#define MAX_SCORE_DIGITS 4
+#define MAX_CHARACTER_LETTERS 5
 #define MAX_BULLETS 5 // one for tank and four for aliens
 #define ALIENS_START_X 50
 #define ALIENS_START_Y 50
@@ -21,9 +26,13 @@
 #define BUNKER_START_Y 350
 #define TANK_START_X 305
 #define TANK_START_Y 420
-#define LIFE_START_X 450
+#define LIFE_START_X 470
 #define LIFE_START_Y 20
+#define SCORE_START_X 20
+#define LIVES_START_X 350
+#define TEXT_START_Y 25
 #define XLIFE_PADDING 10
+#define CHARACTER_PADDING 4
 #define GROUND_START_Y 450
 //Colors
 #define GREEN 0x0000FF00
@@ -102,6 +111,18 @@ typedef struct {
 	Position p;
 } TankBullet;
 
+typedef struct {
+	Position p;
+	int score;
+	Sprite *sp[MAX_SCORE_DIGITS];
+} Score;
+
+typedef struct {
+	Position p;
+	Sprite sp;
+} Character;
+
+Character initChar(int x, int y, const int *sprite);
 Tank initTank(int x, int y);
 Position initPosition(int x, int y);
 Aliens initAliens(int x, int y);
