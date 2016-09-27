@@ -170,39 +170,39 @@ const int bunker_24x18[] =
 // strikes one of these blocks, you erode the block as you sequence through
 // these patterns.
 const int bunkerDamage0_6x6[] = {
-	packword6(0,1,1,0,0,0),
-	packword6(0,0,0,0,0,1),
-	packword6(1,1,0,1,0,0),
-	packword6(1,0,0,0,0,0),
-	packword6(0,0,1,1,0,0),
-	packword6(0,0,0,0,1,0)
+	packword6(1,0,0,1,1,1),
+	packword6(1,1,1,1,1,0),
+	packword6(0,0,1,0,1,1),
+	packword6(0,1,1,1,1,1),
+	packword6(1,1,0,0,1,1),
+	packword6(1,1,1,1,0,1)
 };
 
 const int bunkerDamage1_6x6[] = {
-	packword6(1,1,1,0,1,0),
-	packword6(1,0,1,0,0,1),
-	packword6(1,1,0,1,1,1),
-	packword6(1,0,0,0,0,0),
-	packword6(0,1,1,1,0,1),
-	packword6(0,1,1,0,1,0)
+	packword6(0,0,0,1,0,1),
+	packword6(0,1,0,1,1,0),
+	packword6(0,0,1,0,0,0),
+	packword6(0,1,1,1,1,1),
+	packword6(1,0,0,0,1,0),
+	packword6(1,0,0,1,0,1)
 };
 
 const int bunkerDamage2_6x6[] = {
-	packword6(1,1,1,1,1,1),
-	packword6(1,0,1,1,0,1),
-	packword6(1,1,0,1,1,1),
-	packword6(1,1,0,1,1,0),
-	packword6(0,1,1,1,0,1),
-	packword6(1,1,1,1,1,1)
+	packword6(0,0,0,0,0,0),
+	packword6(0,1,0,0,1,0),
+	packword6(0,0,1,0,0,0),
+	packword6(0,0,1,0,0,1),
+	packword6(1,0,0,0,1,0),
+	packword6(0,0,0,0,0,0)
 };
 
 const int bunkerDamage3_6x6[] = {
-	packword6(1,1,1,1,1,1),
-	packword6(1,1,1,1,1,1),
-	packword6(1,1,1,1,1,1),
-	packword6(1,1,1,1,1,1),
-	packword6(1,1,1,1,1,1),
-	packword6(1,1,1,1,1,1)
+	packword6(0,0,0,0,0,0),
+	packword6(0,0,0,0,0,0),
+	packword6(0,0,0,0,0,0),
+	packword6(0,0,0,0,0,0),
+	packword6(0,0,0,0,0,0),
+	packword6(0,0,0,0,0,0)
 };
 
 const int bulletCross_3x5[] = {

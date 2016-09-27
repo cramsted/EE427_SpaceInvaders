@@ -5,6 +5,7 @@
  *      Author: superman
  */
 #include "globals.h"
+#include "render.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -30,7 +31,7 @@ void alienPew() {
 	// increment before using as index so we don't use a bullet that's already active
 	aliens.numActiveBullets++;
 	Bullet *b = &bullets.bullets[aliens.numActiveBullets];
-	b->p.x = a->p.x + (a->sp.width/2);
+	b->p.x = a->p.x + (a->sp.width / 2);
 	b->p.y = a->p.y + a->sp.height + 1;
 	b->active = 1;
 
@@ -40,3 +41,7 @@ void alienPew() {
 		alien_turn = 0;
 	}
 }
+
+extern const int* erosion_sprites[];
+
+

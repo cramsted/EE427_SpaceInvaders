@@ -11,7 +11,8 @@ src/main.d src/main.o: ../src/main.c ../src/platform.h \
   ../../hello_world_bsp_0/microblaze_0/include/xdebug.h \
   ../../hello_world_bsp_0/microblaze_0/include/xstatus.h \
   ../../hello_world_bsp_0/microblaze_0/include/xil_assert.h \
-  ../../hello_world_bsp_0/microblaze_0/include/xio.h ../src/render.h
+  ../../hello_world_bsp_0/microblaze_0/include/xio.h ../src/render.h \
+  ../src/sprites.h
 
 ../src/platform.h:
 
@@ -42,3 +43,5 @@ src/main.d src/main.o: ../src/main.c ../src/platform.h \
 ../../hello_world_bsp_0/microblaze_0/include/xio.h:
 
 ../src/render.h:
+
+../src/sprites.h:

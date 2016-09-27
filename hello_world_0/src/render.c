@@ -6,7 +6,16 @@
  *
  * TODO's:
  *   bunker decay
+ *   score number
+ *   randomize alien bullets
+ *   kill aliens + update bottom row alien when one dies
  *   controls
+ *   	uart input
+ *   	move aliens left, right, and down
+ *   	move tank left/right
+ *   	create bullets
+ *   	move bullets
+ *   	kill aliens (just disappear)
  */
 #include "render.h"
 #include <stdio.h>
@@ -19,15 +28,11 @@
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
 //function prototypes
-void edit_frameBuffer(Sprite *sp, Position *p);
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);
-void drawAliens(int x, int y);
-void drawBunkers(int x, int y);
-void drawTank(int x);
+
 void drawStaticImages();
 void drawCharacters();
 void drawLives();
-void updateBullets();
 
 #define FRAME_BUFFER_0_ADDR 0xC0000000  // Starting location in DDR where we will store the images that we display.
 static XAxiVdma videoDMAController;
@@ -57,11 +62,10 @@ unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
 //	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH
 //			* SCREEN_HEIGHT;
 void init() {
-	// TODO: initialize various structs, etc.
 	// init alien positions and draw them
 	// init tank position and lives and draw it
-	// init bunker positions and erosion and draw them
-	// init score
+	// init bunker positions and todo: erosion and draw them
+	// todo: init score (numbers)
 	tank = initTank(TANK_START_X, TANK_START_Y);
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
 	int i;
@@ -71,10 +75,10 @@ void init() {
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
 	bullets = initBullets();
 	drawStaticImages();
-	drawTank(TANK_START_X);
-	drawAliens(ALIENS_START_X, ALIENS_START_Y);
+	drawTank(TANK_START_X, &tank);
+	drawAliens(ALIENS_START_X, ALIENS_START_Y, &aliens);
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y);
-	drawLives();
+	drawLives(&tank);
 	//	render(); //needed only for changing the index of the frame buffer
 //	int j;
 	//	int endx = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
@@ -101,7 +105,7 @@ void init() {
 	alienPew();
 	alienPew();
 	for (i = 0; i < 20; i++) {
-		updateBullets();
+		updateBullets(&bullets);
 		volatile int j = 0;
 		while (j < 4000000) {
 			j++;
@@ -137,77 +141,11 @@ void drawCharacters() {
 		edit_frameBuffer(&s.sp, &s.p);
 	}
 }
-void drawLives() {
-	Tank life = initTank(LIFE_START_X, LIFE_START_Y);
-	int col;
-	for (col = 0; col < MAX_LIVES; col++) {
-		if (col < tank.lives) {
-			tank.sp.Color.color = GREEN;
-		} else {
-			tank.sp.Color.color = BLACK;
-		}
-		life.p.x = LIFE_START_X + (col * XLIFE_PADDING) + col * life.sp.width;
-		edit_frameBuffer(&life.sp, &life.p);
-	}
-}
 
-void drawTank(int x) {
-	tank.sp.Color.color = BLACK;
-	edit_frameBuffer(&tank.sp, &tank.p);
-	tank.sp.Color.color = GREEN;
-	tank.p.x = x;
-	edit_frameBuffer(&tank.sp, &tank.p);
-}
 
-void drawAliens(int x, int y) {
-	int row, col;
-	for (row = 0; row < ALIENS_ROW; row++) {
-		for (col = 0; col < ALIENS_COL; col++) {
-			Alien *temp = &aliens.aliens[row][col];
-			temp->sp.Color.color = BLACK;
-			edit_frameBuffer(&temp->sp, &temp->p);
-			temp->sp.Color.color = WHITE;
-			temp->p.x = x + (temp->sp.width + 8) * col;
-			temp->p.y = y + (temp->sp.height + 16) * row;
-			edit_frameBuffer(&temp->sp, &temp->p);
-		}
-	}
-}
 
-void drawBunkers(int x, int y) {
-	int row;
-	for (row = 0; row < MAX_BUNKERS; row++) {
-		Bunker *temp = &bunkers.bunkers[row];
-		edit_frameBuffer(&temp->sp, &temp->p);
-	}
-}
 
-void updateBullets() {
-	int i;
-	Bullet *b = bullets.bullets;
 
-	// tank bullet
-	if (b[0].active) {
-		b[0].sp.Color.color = BLACK;
-		edit_frameBuffer(&b[0].sp, &b[0].p);
-		b[0].sp.Color.color = WHITE;;
-		b[0].p.y -= BULLETS_UPDATE_Y;
-		edit_frameBuffer(&b[0].sp, &b[0].p);
-	}
-
-	// alien bullets
-	for (i = 1; i < MAX_BULLETS; i++) {
-		if (b[i].active) {
-			b[i].sp.Color.color = BLACK;
-			edit_frameBuffer(&b[i].sp, &b[i].p);
-			b[i].sp.Color.color = WHITE;
-			b[i].p.y += BULLETS_UPDATE_Y;
-			edit_frameBuffer(&b[i].sp, &b[i].p);
-		}
-	}
-
-	// TODO: limits - destroy the bullets when they exit the screen
-}
 
 void render() {
 	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, 0, //the 0 is the frame index

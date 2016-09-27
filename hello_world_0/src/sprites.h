@@ -13,21 +13,18 @@
 #define CHARACTER_HEIGHT (5 * 2)
 #define CHARACTER_WIDTH (8 * 2)
 
-#define ALIENS_COL 10
-#define ALIENS_ROW 5
+
 #define MAX_LIVES 3
-#define MAX_BUNKERS 4
+
 #define MAX_SCORE_DIGITS 4
 #define MAX_CHARACTER_LETTERS 5
-#define MAX_BULLETS 5 // one for tank and four for aliens
-#define ALIENS_START_X 8
-#define ALIENS_START_Y 50
-#define BUNKER_START_X 110
-#define BUNKER_START_Y 350
-#define TANK_START_X 305
-#define TANK_START_Y 420
-#define LIFE_START_X 470
-#define LIFE_START_Y 20
+
+
+
+
+
+
+
 #define SCORE_START_X 20
 #define LIVES_START_X 350
 #define TEXT_START_Y 25
@@ -35,7 +32,7 @@
 #define CHARACTER_PADDING 4
 #define GROUND_START_Y 450
 
-//Colors
+//colors
 #define GREEN 0x0000FF00
 #define WHITE 0x00FFFFFF
 #define BLACK 0x00000000
@@ -61,61 +58,13 @@ typedef struct {
 	int y;
 } Position;
 
-typedef enum {
-	top_alien_in = 0,	// 0
-	top_alien_out,		// 1
-	middle_alien_in,	// 2
-	middle_alien_out,	// 3
-	bottom_alien_in,	// 4
-	bottom_alien_out	// 5
-} alien_type_e;
 
-//TODO: make an enum for bullet types
 
-typedef struct {
-	Position p;
-	Sprite sp;
-	alien_type_e type;
-	uint8_t alive;
-	uint8_t row;
-} Alien;
 
-typedef struct {
-	Alien aliens[ALIENS_ROW][ALIENS_COL];
-	Alien* frontRowAliens[ALIENS_COL];
-	uint8_t numActiveBullets;
-} Aliens;
 
-typedef struct {
-	Position p;
-	Sprite sp;
-	uint8_t lives;
-} Tank;
 
-typedef struct {
-	Position p;
-	Sprite sp;
-	uint8_t erosionLevel;
-} Bunker;
 
-typedef struct {
-	Bunker bunkers[MAX_BUNKERS];
-} Bunkers;
 
-typedef struct {
-	Position p;
-	Sprite sp;
-	// 0 inactive, 1 is active
-	uint8_t active;
-} Bullet;
-
-typedef struct {
-	Bullet bullets[MAX_BULLETS];
-} Bullets;
-
-typedef struct {
-	Position p;
-} TankBullet;
 
 typedef struct {
 	Position p;
@@ -129,9 +78,6 @@ typedef struct {
 } Character;
 
 Character initChar(int x, int y, const int *sprite);
-Bullets initBullets();
-Tank initTank(int x, int y);
+Sprite initSprite(int height, int width, uint32_t color, const int *sprite);
 Position initPosition(int x, int y);
-Aliens initAliens(int x, int y);
-Bunkers initBunkers(int x, int y);
 #endif /* SPRITES_H_ */

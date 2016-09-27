@@ -8,10 +8,14 @@
 #ifndef RENDER_H_
 #define RENDER_H_
 
-#define BULLETS_UPDATE_Y 5
+
+
+#include "sprites.h"
 
 void init_videoDMAController();
 void init();
 void render();
+void edit_frameBuffer(Sprite *sp, Position *p);
+
 #endif /* RENDER_H_ */
 

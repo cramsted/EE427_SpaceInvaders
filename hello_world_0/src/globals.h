@@ -8,6 +8,10 @@
 #ifndef GLOBALS_H_
 #define GLOBALS_H_
 #include "sprites.h"
+#include "bunkers.h"
+#include "tank.h"
+#include "aliens.h"
+#include "bullets.h"
 
 extern Aliens aliens;
 extern Tank tank;
