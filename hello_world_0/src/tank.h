@@ -14,6 +14,8 @@
 #define TANK_START_Y 420
 #define LIFE_START_X 470
 #define LIFE_START_Y 20
+#define XLIFE_PADDING 10
+#define MAX_LIVES 3
 
 typedef struct {
 	Position p;

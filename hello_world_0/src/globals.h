@@ -12,13 +12,13 @@
 #include "tank.h"
 #include "aliens.h"
 #include "bullets.h"
+#include "text.h"
 
 extern Aliens aliens;
 extern Tank tank;
 extern Bunkers bunkers;
 extern Bullets bullets;
 
-void tankPew();
-void alienPew();
+
 
 #endif /* GLOBALS_H_ */

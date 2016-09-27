@@ -12,16 +12,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
 	Sprite sp;
 	sp.Color.color = color;
@@ -36,14 +26,6 @@ Position initPosition(int x, int y) {
 	p.x = x;
 	p.y = y;
 	return p;
-}
-
-Character initChar(int x, int y, const int *sprite) {
-	Character c;
-	c.p.x = x;
-	c.p.y = y;
-	c.sp = initSprite(CHARACTER_HEIGHT, CHARACTER_WIDTH, WHITE, sprite);
-	return c;
 }
 
 

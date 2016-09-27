@@ -1,0 +1,21 @@
+/*
+ * text.h
+ *
+ *  Created on: Sep 27, 2016
+ *      Author: superman
+ */
+
+#ifndef TEXT_H_
+#define TEXT_H_
+
+#define MAX_SCORE_DIGITS 4
+#define MAX_CHARACTER_LETTERS 5
+#define SCORE_START_X 20
+#define LIVES_START_X 350
+#define TEXT_START_Y 25
+#define XLIFE_PADDING 10
+#define CHARACTER_PADDING 4
+
+void drawCharacters();
+
+#endif /* TEXT_H_ */

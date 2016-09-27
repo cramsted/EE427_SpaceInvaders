@@ -9,6 +9,8 @@
 #define BULLETS_H_
 
 #include "sprites.h"
+#include "tank.h"
+#include "aliens.h"
 
 #define MAX_BULLETS 5 // one for tank and four for aliens
 
@@ -25,6 +27,7 @@ typedef struct {
 
 void updateBullets(Bullets *bullets);
 Bullets initBullets();
-
+void tankPew(Tank *tank, Bullets *bullets);
+void alienPew(Aliens *aliens, Bullets *bullets);
 
 #endif /* BULLETS_H_ */

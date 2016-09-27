@@ -5,6 +5,7 @@
  *      Author: superman
  */
 #include "bullets.h"
+#include "render.h"
 
 #define BULLET_WIDTH (3 * 2)
 #define BULLET_HEIGHT (5 * 2)
@@ -58,4 +59,30 @@ void updateBullets(Bullets *bullets) {
 	}
 
 	// TODO: limits - destroy the bullets when they exit the screen
+}
+
+void tankPew(Tank *tank, Bullets *bullets) {
+	Bullet *b = &bullets->bullets[0];
+	b->p.x = tank->p.x + (tank->sp.width / 2);
+	b->p.y = tank->p.y - b->sp.height - 1;
+	b->active = 1;
+}
+
+void alienPew(Aliens *aliens, Bullets *bullets) {
+	static int alien_turn = 0;
+	if (aliens->numActiveBullets >= MAX_BULLETS) {
+		return;
+	}
+	Alien *a = aliens->frontRowAliens[alien_turn];
+
+	// increment before using as index so we don't use a bullet that's already active
+	aliens->numActiveBullets++;
+	Bullet *b = &bullets->bullets[aliens->numActiveBullets];
+	b->p.x = a->p.x + (a->sp.width / 2);
+	b->p.y = a->p.y + a->sp.height + 1;
+	b->active = 1;
+
+	if (++alien_turn >= ALIENS_COL) {
+		alien_turn = 0;
+	}
 }
