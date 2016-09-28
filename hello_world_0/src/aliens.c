@@ -64,8 +64,8 @@ Aliens initAliens(int x, int y) {
 	return a;
 }
 
-void killAlien(Alien *alien) {
-	alien->status = dead;
+void killAlien(Aliens *aliens, int alien_index) {
+	aliens->aliens[alien_index]->status = dead;
 }
 
 void drawAliens(int x, int y, Aliens *aliens) {

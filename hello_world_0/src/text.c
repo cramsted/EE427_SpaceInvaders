@@ -66,8 +66,6 @@ void initScore() {
 	score.score = 0;
 	int i;
 	for (i = 0; i < MAX_SCORE_DIGITS; i++) {
-		int x = DIGITS_START_X + (i * (CHARACTER_WIDTH + CHARACTER_PADDING));
-		xil_printf("x = %d\n\r", x);
 		score.sp[i] = initChar(
 				DIGITS_START_X + (i * (CHARACTER_WIDTH + CHARACTER_PADDING)),
 				TEXT_START_Y, digitsArray[0], RED);
@@ -81,16 +79,12 @@ void drawScore() {
 	int digit_three = (score.score / 10) % 10;
 	int digit_four = 0;
 
-	xil_printf("Score = %d, digit1 = %d, d2 = %d, d3 = %d\n\r",
-			score.score, digit_one, digit_two, digit_three);
-
 	score.sp[0].sp.sprite = digitsArray[digit_one];
 	score.sp[1].sp.sprite = digitsArray[digit_two];
 	score.sp[2].sp.sprite = digitsArray[digit_three];
 	score.sp[3].sp.sprite = digitsArray[digit_four];
 	int i;
 	for (i = 0; i < MAX_SCORE_DIGITS; i++) {
-		// TODO: erase and redraw
 		edit_frameBuffer(&score.sp[i].sp, &score.sp[i].p);
 	}
 }

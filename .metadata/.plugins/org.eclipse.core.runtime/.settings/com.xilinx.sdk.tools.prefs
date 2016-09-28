@@ -1,7 +1,7 @@
-#Fri Sep 23 20:59:09 MDT 2016
+#Tue Sep 27 22:15:52 MDT 2016
 com.xilinx.sdk.linkgen.prefs.hello_world_0\:Stack-size=4096
 com.xilinx.sdk.linkgen.prefs.hello_world_0\:.sdata2=microblaze_0_i_bram_ctrl_microblaze_0_d_bram_ctrl
-com.xilinx.sdk.linkgen.prefs.hello_world_0\:.text=microblaze_0_i_bram_ctrl_microblaze_0_d_bram_ctrl
+com.xilinx.sdk.linkgen.prefs.hello_world_0\:.text=MCB_DDR2_S0_AXI_BASEADDR
 com.xilinx.sdk.linkgen.prefs.hello_world_0\:.rodata=microblaze_0_i_bram_ctrl_microblaze_0_d_bram_ctrl
 com.xilinx.sdk.linkgen.prefs.hello_world_0\:.sbss2=microblaze_0_i_bram_ctrl_microblaze_0_d_bram_ctrl
 com.xilinx.sdk.linkgen.prefs.hello_world_0\:Heap-size=1024

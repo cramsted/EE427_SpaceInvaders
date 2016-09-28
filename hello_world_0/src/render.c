@@ -6,13 +6,9 @@
  *
  * TODO's:
  *   randomize alien bullets
- *   controls
- *   	uart input
- *   	move aliens left, right, and down
- *   	move tank left/right
- *   	create bullets
- *   	move bullets
- *   	kill aliens (just disappear)
+ *   kill aliens (take input)
+ *   bullets - destroy when reach limits (off screen or ground)
+ *   erode bunkers (take input)
  */
 #include "render.h"
 #include <stdio.h>
@@ -56,6 +52,7 @@ void init() {
 
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
 	bullets = initBullets();
+
 	initScore();
 	drawGround();
 	drawCharacters();

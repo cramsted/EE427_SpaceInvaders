@@ -1233,3 +1233,51 @@ org.eclipse.cdt.debug.mi.core.cdi.MI2CDIException: Inferior terminated[]
 	at java.util.Observable.notifyObservers(Unknown Source)
 	at org.eclipse.cdt.debug.mi.core.MISession.notifyObservers(Unknown Source)
 	at org.eclipse.cdt.debug.mi.core.EventThread.run(Unknown Source)
+!SESSION 2016-09-27 22:15:57.628 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 4 4 2016-09-27 22:16:02.635
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2016-09-27 22:16:03.430
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2016-09-27 22:16:03.430
+!MESSAGE Unable to restore perspective: Workspace - C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2016-09-27 22:16:03.430
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2016-09-27 22:16:03.430
+!MESSAGE 
+!SUBENTRY 3 org.eclipse.ui 0 0 2016-09-27 22:16:03.430
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2016-09-27 22:16:03.430
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2016-09-27 22:16:03.430
+!MESSAGE OK

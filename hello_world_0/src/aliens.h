@@ -51,5 +51,5 @@ typedef struct {
 Aliens initAliens(int x, int y);
 void drawAliens(int x, int y, Aliens *aliens);
 void updateAliens(Aliens *aliens);
-void killAlien(Alien *alien);
+void killAlien(Aliens *aliens, int alien_index);
 #endif /* ALIENS_H_ */

@@ -26,4 +26,6 @@ typedef struct {
 Tank initTank(int x, int y);
 void drawTank(int x, Tank *tank);
 void drawLives(Tank *tank);
+void moveTankRight(Tank *tank);
+void moveTankLeft(Tank *tank);
 #endif /* TANK_H_ */

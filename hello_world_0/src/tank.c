@@ -9,6 +9,7 @@
 
 #define TANK_HEIGHT (8*2)
 #define TANK_WIDTH (15*2)
+#define PIXELS_PER_MOVE 4
 
 extern const int tank_15x8[];
 
@@ -26,6 +27,16 @@ void drawTank(int x, Tank *tank) {
 	tank->sp.Color.color = GREEN;
 	tank->p.x = x;
 	edit_frameBuffer(&tank->sp, &tank->p);
+}
+
+void moveTankRight(Tank *tank){
+	int currentX = tank->p.x;
+	drawTank(currentX + PIXELS_PER_MOVE, tank);
+}
+
+void moveTankLeft(Tank *tank){
+	int currentX = tank->p.x;
+	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
 void drawLives(Tank *tank) {
