@@ -5,9 +5,7 @@
  *      Author: superman
  *
  * TODO's:
- *   score number
  *   randomize alien bullets
- *   kill aliens + update bottom row alien when one dies
  *   controls
  *   	uart input
  *   	move aliens left, right, and down
@@ -44,6 +42,8 @@ void init() {
 	// init tank position and lives and draw it
 	// init bunker positions and todo: erosion and draw them
 	// todo: init score (numbers)
+	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
+
 	tank = initTank(TANK_START_X, TANK_START_Y);
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
 
@@ -55,6 +55,7 @@ void init() {
 
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
 	bullets = initBullets();
+	initScore();
 	drawGround();
 	drawCharacters();
 	drawTank(TANK_START_X, &tank);
@@ -91,16 +92,19 @@ void init() {
 //			}
 //		}
 //	}
-
+	int j;
+	for(j = 0; j < 10; j++){
+		killAlien(&aliens.aliens[2][j]);
+	}
 	while (1) {
 		updateAliens(&aliens);
+		updateScore(10);
 		volatile int delay = 0;
 		while (delay++ < 2000000);
 	}
 }
 
 void drawGround() {
-	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 	int col;
 	for (col = 0; col < SCREEN_WIDTH; col++) {
 		framePointer0[GROUND_START_Y * SCREEN_WIDTH + col] = GREEN;

@@ -31,7 +31,7 @@ const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 
 Alien initAlien(int x, int y, alien_type_e type, uint8_t row) {
 	Alien a;
-	a.alive = 1;
+	a.status = alive;
 	a.row = row;
 	a.p = initPosition(x, y);
 	a.type = type;
@@ -64,6 +64,10 @@ Aliens initAliens(int x, int y) {
 	return a;
 }
 
+void killAlien(Alien *alien) {
+	alien->status = dead;
+}
+
 void drawAliens(int x, int y, Aliens *aliens) {
 	int row, col;
 	if (aliens->direction == left) {
@@ -77,21 +81,23 @@ void drawAliens(int x, int y, Aliens *aliens) {
 				temp->sp.Color.color = BLACK;
 				edit_frameBuffer(&temp->sp, &temp->p);
 
-				// change the type from out to in or vice versa
-				(temp->type & 1) ? temp->type-- : temp->type++;
-				temp->sp.sprite = alien_sprites[temp->type];
+				if (temp->status == alive) {
+					// change the type from out to in or vice versa
+					(temp->type & 1) ? temp->type-- : temp->type++;
+					temp->sp.sprite = alien_sprites[temp->type];
 
-				// redraw the alien
-				temp->sp.Color.color = WHITE;
-				temp->p.x = x + (temp->sp.width + 8) * col;
-				temp->p.y = y + (temp->sp.height + 16) * row;
-				edit_frameBuffer(&temp->sp, &temp->p);
+					// redraw the alien
+					temp->sp.Color.color = WHITE;
+					temp->p.x = x + (temp->sp.width + 8) * col;
+					temp->p.y = y + (temp->sp.height + 16) * row;
+					edit_frameBuffer(&temp->sp, &temp->p);
+				}
 			}
 
 		}
 	} else {
-		for (row = ALIENS_ROW-1; row >= 0; row--) {
-			for (col = ALIENS_COL-1; col >= 0; col--) {
+		for (row = ALIENS_ROW - 1; row >= 0; row--) {
+			for (col = ALIENS_COL - 1; col >= 0; col--) {
 				Alien *temp = &aliens->aliens[row][col];
 
 				// TODO: check for dead alien - don't need to redraw him
@@ -99,16 +105,17 @@ void drawAliens(int x, int y, Aliens *aliens) {
 				// erase the alien
 				temp->sp.Color.color = BLACK;
 				edit_frameBuffer(&temp->sp, &temp->p);
+				if (temp->status == alive) {
+					// change the type from out to in or vice versa
+					temp->type & 1 ? temp->type-- : temp->type++;
+					temp->sp.sprite = alien_sprites[temp->type];
 
-				// change the type from out to in or vice versa
-				temp->type & 1 ? temp->type-- : temp->type++;
-				temp->sp.sprite = alien_sprites[temp->type];
-
-				// redraw the alien
-				temp->sp.Color.color = WHITE;
-				temp->p.x = x + (temp->sp.width + 8) * col;
-				temp->p.y = y + (temp->sp.height + 16) * row;
-				edit_frameBuffer(&temp->sp, &temp->p);
+					// redraw the alien
+					temp->sp.Color.color = WHITE;
+					temp->p.x = x + (temp->sp.width + 8) * col;
+					temp->p.y = y + (temp->sp.height + 16) * row;
+					edit_frameBuffer(&temp->sp, &temp->p);
+				}
 			}
 		}
 	}
@@ -119,8 +126,8 @@ void updateAliens(Aliens *aliens) {
 	// TODO: adjust alien x position when left column is destroyed
 	// when aliens[0][0] dies, shift the alien we're using right one
 	// when aliens[0][ALIENS_COL-1] dies, shift left
-	int endx = RIGHT_PADDING + SCREEN_WIDTH -
-			((aliens->aliens[0][0].sp.width + XALIEN_PADDING) * ALIENS_COL);
+	int endx = SCREEN_WIDTH - RIGHT_PADDING - ((aliens->aliens[0][0].sp.width
+			+ XALIEN_PADDING) * ALIENS_COL);
 	// TODO: subtract from endx if right col is dead
 	int startx = ALIENS_START_X + XALIEN_PADDING; // TODO: add if left col is dead
 	int currx = aliens->aliens[0][0].p.x;

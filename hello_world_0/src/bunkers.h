@@ -18,7 +18,7 @@
 #define EROSION_HEIGHT_AND_WIDTH (6*2)
 
 typedef enum {
-	none = 0, level1, level2, level3, dead
+	none = 0, level1, level2, level3, gone
 } erosion_e;
 
 typedef struct {

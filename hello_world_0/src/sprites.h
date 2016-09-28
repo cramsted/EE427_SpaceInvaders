@@ -13,9 +13,10 @@
 #define GROUND_START_Y 450
 
 //colors
-#define GREEN 0x0000FF00
-#define WHITE 0x00FFFFFF
-#define BLACK 0x00000000
+#define GREEN 	0x0000FF00
+#define WHITE 	0x00FFFFFF
+#define BLACK 	0x00000000
+#define RED		0x00FF0000
 
 //meta data for the sprites
 typedef struct {

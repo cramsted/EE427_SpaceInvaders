@@ -24,15 +24,20 @@ typedef enum {
 	bottom_alien_out // 5
 } alien_type_e;
 
+
 typedef enum {
 	left, down, right
 } alien_direction_e;
+
+typedef enum {
+	dead, alive
+}alien_life_status_e;
 
 typedef struct {
 	Position p;
 	Sprite sp;
 	alien_type_e type;
-	uint8_t alive;
+	alien_life_status_e status;
 	uint8_t row;
 } Alien;
 
@@ -46,5 +51,5 @@ typedef struct {
 Aliens initAliens(int x, int y);
 void drawAliens(int x, int y, Aliens *aliens);
 void updateAliens(Aliens *aliens);
-
+void killAlien(Alien *alien);
 #endif /* ALIENS_H_ */
