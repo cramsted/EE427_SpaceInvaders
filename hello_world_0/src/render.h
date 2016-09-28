@@ -8,9 +8,10 @@
 #ifndef RENDER_H_
 #define RENDER_H_
 
-
-
 #include "sprites.h"
+
+#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640
 
 void init_videoDMAController();
 void init();

@@ -5,7 +5,6 @@
  *      Author: superman
  *
  * TODO's:
- *   bunker decay
  *   score number
  *   randomize alien bullets
  *   kill aliens + update bottom row alien when one dies
@@ -25,8 +24,6 @@
 #include "xio.h"
 #include "globals.h"
 
-#define SCREEN_HEIGHT 480
-#define SCREEN_WIDTH 640
 //function prototypes
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);
 
@@ -49,10 +46,13 @@ void init() {
 	// todo: init score (numbers)
 	tank = initTank(TANK_START_X, TANK_START_Y);
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
+
+	// TODO: move this to aliens.c
 	int i;
 	for (i = 0; i < ALIENS_COL; i++) {
 		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW-1][i];
 	}
+
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
 	bullets = initBullets();
 	drawGround();
@@ -62,36 +62,40 @@ void init() {
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y);
 	drawLives(&tank);
 	//	render(); //needed only for changing the index of the frame buffer
-//	int j;
-	//	int endx = SCREEN_WIDTH - ((aliens.aliens[0][0].sp.width + 8) * 10);
-	//	int endy = SCREEN_HEIGHT - ALIENS_START_Y - ((aliens.aliens[0][0].sp.height
-	//			+ 16) * 5);
-	//	for (j = ALIENS_START_Y; j < endy; j += 10) {
-	//		for (i = ALIENS_START_X; i < endx; i++) {
-	//			drawAliens(i, j);
-	//			volatile unsigned int j = 0;
-	//			while (j < 50000) {
-	//				j++;
-	//			}
-	//		}
-	//	}
 
-	for (i = 0; i < ALIENS_COL; i++) {
-		Alien *a = aliens.frontRowAliens[i];
-		xil_printf("front row alien (x,y) = (%d,%d)\n\r", a->p.x, a->p.y);
-	}
 
-	tankPew(&tank, &bullets);
-	alienPew(&aliens, &bullets);
-	alienPew(&aliens, &bullets);
-	alienPew(&aliens, &bullets);
-	alienPew(&aliens, &bullets);
-	for (i = 0; i < 20; i++) {
-		updateBullets(&bullets);
-		volatile int j = 0;
-		while (j < 4000000) {
-			j++;
-		}
+//	tankPew(&tank, &bullets);
+//	alienPew(&aliens, &bullets);
+//	alienPew(&aliens, &bullets);
+//	alienPew(&aliens, &bullets);
+//	alienPew(&aliens, &bullets);
+//	for (i = 0; i < 20; i++) {
+//		updateBullets(&bullets);
+//		volatile int j = 0;
+//		while (j < 4000000) {
+//			j++;
+//		}
+//	}
+
+	// erode the bunkers
+//	int j, row, col;
+//	for (row = 0; row < 3; row++) {
+//		for (col = 0; col < 4; col++) {
+//			for (j = 0; j < 4; j++) { // 4 erosion levels
+//				erodeBunker(0, row, col);
+//				erodeBunker(1, row, col);
+//				erodeBunker(2, row, col);
+//				erodeBunker(3, row, col);
+//				volatile int delay = 0;
+//				while (delay++ < 1000000);
+//			}
+//		}
+//	}
+
+	while (1) {
+		updateAliens(&aliens);
+		volatile int delay = 0;
+		while (delay++ < 2000000);
 	}
 }
 

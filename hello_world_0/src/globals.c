@@ -5,9 +5,6 @@
  *      Author: superman
  */
 #include "globals.h"
-#include "render.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 Tank tank;
 Aliens aliens;

@@ -21,9 +21,12 @@ typedef enum {
 	middle_alien_in, // 2
 	middle_alien_out, // 3
 	bottom_alien_in, // 4
-	bottom_alien_out
-// 5
+	bottom_alien_out // 5
 } alien_type_e;
+
+typedef enum {
+	left, down, right
+} alien_direction_e;
 
 typedef struct {
 	Position p;
@@ -37,8 +40,11 @@ typedef struct {
 	Alien aliens[ALIENS_ROW][ALIENS_COL];
 	Alien* frontRowAliens[ALIENS_COL];
 	uint8_t numActiveBullets;
+	alien_direction_e direction;
 } Aliens;
 
 Aliens initAliens(int x, int y);
 void drawAliens(int x, int y, Aliens *aliens);
+void updateAliens(Aliens *aliens);
+
 #endif /* ALIENS_H_ */

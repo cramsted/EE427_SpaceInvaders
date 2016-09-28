@@ -8,6 +8,7 @@
 #include "globals.h"
 #include "render.h"
 #include <string.h>
+#include <stdio.h>
 
 #define BUNKER_HEIGHT (18*2)
 #define BUNKER_WIDTH (24*2)
@@ -19,16 +20,16 @@ extern const int bunkerDamage1_6x6[];
 extern const int bunkerDamage2_6x6[];
 extern const int bunkerDamage3_6x6[];
 
-const int* erosion_sprites[] = {
-		bunkerDamage0_6x6,
-		bunkerDamage1_6x6,
-		bunkerDamage2_6x6,
-		bunkerDamage3_6x6
-};
+Sprite erosion_1;
+Sprite erosion_2;
+Sprite erosion_3;
+Sprite erosion_4;
+
+Sprite* erosion_sprites[] = { &erosion_1, &erosion_2, &erosion_3, &erosion_4 };
 
 Bunker initBunker(int x, int y) {
 	Bunker b;
-	memset(b.erosionLevel, none, EROSION_HEIGHT * EROSION_WIDTH);
+	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS);
 	b.p = initPosition(x, y);
 	b.sp = initSprite(BUNKER_HEIGHT, BUNKER_WIDTH, GREEN, bunker_24x18);
 	return b;
@@ -41,6 +42,14 @@ Bunkers initBunkers(int x, int y) {
 	for (row = 0; row < MAX_BUNKERS; row++) {
 		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
 	}
+	erosion_1 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
+			GREEN, bunkerDamage0_6x6);
+	erosion_2 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
+			GREEN, bunkerDamage1_6x6);
+	erosion_3 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
+			GREEN, bunkerDamage2_6x6);
+	erosion_4 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
+			GREEN, bunkerDamage3_6x6);
 	return b;
 }
 
@@ -53,31 +62,26 @@ void drawBunkers(int x, int y) {
 }
 
 // param bunker selects which bunker to erode
-// TODO: add section of bunker to erode as parameter when doing collision detecting
-void erodeBunker(int bunker) {
+void erodeBunker(int bunker, int row, int col) {
+	if( row == 2 ){
+		if(col == 1 || col == 2){
+			return;
+		}
+	}
 	Bunker *b = &bunkers.bunkers[bunker];
-	static int row = 0;
-	static int col = 0;
 
 	b->erosionLevel[row][col]++;
 
-	// draw it
+	// get position
 	Position p;
-	p.x = b->p.x + ((col / EROSION_WIDTH) * b->sp.width);
-	p.y = b->p.y + ((row / EROSION_HEIGHT) * b->sp.height);
+	p.x = b->p.x + (EROSION_HEIGHT_AND_WIDTH * col);
+	p.y = b->p.y + (EROSION_HEIGHT_AND_WIDTH * row);
 
-	edit_frameBuffer(erosion_sprites[b->erosionLevel[row][col]], &p);
-
-	// select next section
-	if (b->erosionLevel[row][col] == dead) {
-		col++;
-		if (col >= EROSION_WIDTH) {
-			col = 0;
-			row++;
-			if (row >= EROSION_HEIGHT) {
-				row = 0;
-			}
-		}
-	}
+	// erase and redraw
+	Sprite *sp = erosion_sprites[b->erosionLevel[row][col]];
+	sp->Color.color = BLACK;
+	edit_frameBuffer(sp, &p);
+	sp->Color.color = GREEN;
+	edit_frameBuffer(sp, &p);
 
 }

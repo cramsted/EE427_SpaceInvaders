@@ -13,8 +13,9 @@
 #define BUNKER_START_X 	110
 #define BUNKER_START_Y 	350
 #define MAX_BUNKERS 4
-#define EROSION_WIDTH 	4
-#define EROSION_HEIGHT 	5
+#define EROSION_COLS 	4
+#define EROSION_ROWS	3
+#define EROSION_HEIGHT_AND_WIDTH (6*2)
 
 typedef enum {
 	none = 0, level1, level2, level3, dead
@@ -23,7 +24,7 @@ typedef enum {
 typedef struct {
 	Position p;
 	Sprite sp;
-	uint8_t erosionLevel[EROSION_HEIGHT][EROSION_WIDTH];
+	uint8_t erosionLevel[EROSION_ROWS][EROSION_COLS];
 } Bunker;
 
 typedef struct {
@@ -32,5 +33,6 @@ typedef struct {
 
 Bunkers initBunkers(int x, int y);
 void drawBunkers(int x, int y);
-void erodeBunker(int bunker);
+void erodeBunker(int bunker, int row, int col);
+
 #endif /* BUNKERS_H_ */
