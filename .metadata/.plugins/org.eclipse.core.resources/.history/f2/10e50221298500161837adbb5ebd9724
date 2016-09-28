@@ -1,0 +1,18 @@
+/*
+ * controls.c
+ *
+ *  Created on: Sep 27, 2016
+ *      Author: superman
+ */
+#include "controls.h"
+#include <stdio.h>
+
+void readInput(){
+	char str[1];
+	xil_printf("enter a value: ");
+	if (getchar())
+		return; // no input
+	}
+
+	xil_printf("you entered %s\n\r", str);
+}

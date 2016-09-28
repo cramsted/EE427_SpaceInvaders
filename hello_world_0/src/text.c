@@ -76,7 +76,7 @@ void initScore() {
 }
 
 void drawScore() {
-	int digit_one = score.score / 1000;
+	int digit_one = (score.score / 1000) % 10;
 	int digit_two = (score.score / 100) % 10;
 	int digit_three = (score.score / 10) % 10;
 	int digit_four = 0;

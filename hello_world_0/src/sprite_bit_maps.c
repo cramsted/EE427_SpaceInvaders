@@ -33,6 +33,7 @@
 
 #define packword3(b2,b1,b0) \
 ((b2  << 2 ) | (b1  << 1 ) | (b0  << 0 ) )
+
 const int saucer_16x7[] =
 {
 	packword16(0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0),

@@ -24,18 +24,19 @@
 
 //function prototypes
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);
-
 void drawGround();
 
-#define FRAME_BUFFER_0_ADDR 0xC0000000  // Starting location in DDR where we will store the images that we display.
-static XAxiVdma videoDMAController;
+// Starting location in DDR where we will store the images that we display.
+#define FRAME_BUFFER_0_ADDR 0xC1000000
 
+static XAxiVdma videoDMAController;
 
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
 unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
-//	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH
+//	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR)
+//		+ SCREEN_WIDTH
 //			* SCREEN_HEIGHT;
 void init() {
 	// init alien positions and draw them
@@ -92,16 +93,17 @@ void init() {
 //			}
 //		}
 //	}
-	int j;
-	for(j = 0; j < 10; j++){
-		killAlien(&aliens.aliens[2][j]);
-	}
-	while (1) {
-		updateAliens(&aliens);
-		updateScore(10);
-		volatile int delay = 0;
-		while (delay++ < 2000000);
-	}
+
+//	int j;
+//	for(j = 0; j < 10; j++){
+//		killAlien(&aliens.aliens[2][j]);
+//	}
+//	while (1) {
+//		updateAliens(&aliens);
+//		updateScore(10);
+//		volatile int delay = 0;
+//		while (delay++ < 2000000);
+//	}
 }
 
 void drawGround() {
