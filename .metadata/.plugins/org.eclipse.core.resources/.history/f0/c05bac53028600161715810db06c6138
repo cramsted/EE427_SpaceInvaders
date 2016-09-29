@@ -146,14 +146,26 @@ int findEndAlienCol(Aliens *aliens) {
 	return 0;
 }
 
+// TODO: adjust endx for when a column on the right edge is destroyed
+
+// when aliens[0][0] dies, shift the alien we're using right one
+// when aliens[0][ALIENS_COL-1] dies, shift left
+//	int endx = SCREEN_WIDTH - RIGHT_PADDING - ((aliens->aliens[0][0].sp.width
+//			+ XALIEN_PADDING) * ALIENS_COL);
+// TODO: subtract from endx if right col is dead
+ // TODO: add if left col is dead
+//	int currx = aliens->aliens[0][0].p.x;
+//	int curry = aliens->aliens[0][0].p.y;
+
 void updateAliens(Aliens *aliens) {
+
 	// TODO: adjust alien x position when left column is destroyed
 	// by using leftColIndex for currx and curry
 	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
 	int leftColIndex = findStartAlienCol(aliens);
 	int rightColIndex = findEndAlienCol(aliens);
-	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
-	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
+	int currx = aliens->aliens[0][leftColIndex].p.x; // use [0][leftColIndex]
+	int curry = aliens->aliens[0][leftColIndex].p.y; // use [0][leftColIndex]
 	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex *
 			(aliens->aliens[0][0].sp.width + XALIEN_PADDING));
 

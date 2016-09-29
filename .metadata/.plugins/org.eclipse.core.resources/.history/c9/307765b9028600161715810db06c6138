@@ -10,8 +10,6 @@
 #define TANK_HEIGHT (8*2)
 #define TANK_WIDTH (15*2)
 #define PIXELS_PER_MOVE 4
-#define RIGHT_PADDING 4
-#define LEFT_PADDING RIGHT_PADDING
 
 extern const int tank_15x8[];
 

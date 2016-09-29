@@ -147,6 +147,7 @@ int findEndAlienCol(Aliens *aliens) {
 }
 
 void updateAliens(Aliens *aliens) {
+
 	// TODO: adjust alien x position when left column is destroyed
 	// by using leftColIndex for currx and curry
 	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
