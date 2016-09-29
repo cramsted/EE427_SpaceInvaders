@@ -41,26 +41,6 @@ void readInput() {
 		} else {
 			xil_printf("invalid input; enter a new command\n\r");
 		}
-		//		xil_printf("Which alien do you want to kill (format XX)?: ");
-		//
-		//		fgets(str,2,stdin);
-		//		xil_printf("%s\n\r", str);
-
-		//		c = getchar();
-		//		if (!isDigit(c)) {
-		//			xil_printf("Invalid digit\n\r");
-		//			return;
-		//		}
-		//		xil_printf("%c", c);
-		//		c2 = getchar();
-		//		if (!isDigit(c2)) {
-		//			c2 = '0';
-		//		}
-		//		xil_printf("%c\n\r", c);
-		//		c -= '0';
-		//		c2 -= '0';
-		//		int c3 = (int) ((c * 10) + c2);
-		//		killAlien(&aliens, c3);
 		break;
 	case 3: // fire random missile
 		alienPew(&aliens, &bullets);
@@ -75,7 +55,10 @@ void readInput() {
 		moveTankRight(&tank);
 		break;
 	case 7: // erode bunker
-		erodeBunker(0, 0, 0);
+		num = getAlienNumber();
+		if (num >= 0 && num < MAX_BUNKERS) {
+			erodeWholeBunker(num);
+		}
 		break;
 	case 8: // update alien position
 		updateAliens(&aliens);

@@ -6,8 +6,8 @@
  *
  * TODO's:
  *   randomize alien bullets
- *   kill aliens (take input)
- *   erode bunkers (take input)
+ *   make aliens go all the way left when leftmost column is destroyed
+ *     (update leftmost column)
  */
 #include "render.h"
 #include <stdio.h>

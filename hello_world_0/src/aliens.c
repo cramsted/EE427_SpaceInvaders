@@ -77,13 +77,15 @@ void killAlien(Aliens *aliens, int row, int col) {
 
 void drawAliens(int x, int y, Aliens *aliens) {
 	int row, col;
-	if (aliens->direction == left) {
+	if (aliens->direction == left) { // moving left
 		for (row = 0; row < ALIENS_ROW; row++) {
 			for (col = 0; col < ALIENS_COL; col++) {
 				Alien *temp = &aliens->aliens[row][col];
 
-				// erase the alien
+				// erase the alien and update its position
 				eraseAlien(temp);
+				temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
+				temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
 
 				if (temp->status == alive) {
 					// change the type from out to in or vice versa
@@ -92,23 +94,20 @@ void drawAliens(int x, int y, Aliens *aliens) {
 
 					// redraw the alien
 					temp->sp.Color.color = WHITE;
-					temp->p.x = x + (temp->sp.width + 8) * col;
-					temp->p.y = y + (temp->sp.height + 16) * row;
 					edit_frameBuffer(&temp->sp, &temp->p);
 				}
 			}
-
 		}
-	} else {
+	} else { // moving right or down
 		for (row = ALIENS_ROW - 1; row >= 0; row--) {
 			for (col = ALIENS_COL - 1; col >= 0; col--) {
 				Alien *temp = &aliens->aliens[row][col];
 
-				// TODO: check for dead alien - don't need to redraw him
+				// erase the alien and update its position
+				eraseAlien(temp);
+				temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
+				temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
 
-				// erase the alien
-				temp->sp.Color.color = BLACK;
-				edit_frameBuffer(&temp->sp, &temp->p);
 				if (temp->status == alive) {
 					// change the type from out to in or vice versa
 					temp->type & 1 ? temp->type-- : temp->type++;
@@ -116,8 +115,6 @@ void drawAliens(int x, int y, Aliens *aliens) {
 
 					// redraw the alien
 					temp->sp.Color.color = WHITE;
-					temp->p.x = x + (temp->sp.width + 8) * col;
-					temp->p.y = y + (temp->sp.height + 16) * row;
 					edit_frameBuffer(&temp->sp, &temp->p);
 				}
 			}
@@ -125,37 +122,80 @@ void drawAliens(int x, int y, Aliens *aliens) {
 	}
 }
 
+int findStartAlienCol(Aliens *aliens) {
+	int i;
+	Alien *a;
+	for (i = 0; i < ALIENS_COL; i++) {
+		a = &aliens->aliens[0][i];
+		if (a->status == alive) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+int findEndAlienCol(Aliens *aliens) {
+	int i;
+	Alien *a;
+	for (i = ALIENS_COL - 1; i >= 0; i--) {
+		a = &aliens->aliens[0][i];
+		if (a->status == alive) {
+			return i + 1;
+		}
+	}
+	return 0;
+}
+
+// TODO: adjust endx for when a column on the right edge is destroyed
+
+// when aliens[0][0] dies, shift the alien we're using right one
+// when aliens[0][ALIENS_COL-1] dies, shift left
+//	int endx = SCREEN_WIDTH - RIGHT_PADDING - ((aliens->aliens[0][0].sp.width
+//			+ XALIEN_PADDING) * ALIENS_COL);
+// TODO: subtract from endx if right col is dead
+ // TODO: add if left col is dead
+//	int currx = aliens->aliens[0][0].p.x;
+//	int curry = aliens->aliens[0][0].p.y;
+
 void updateAliens(Aliens *aliens) {
-	// TODO: adjust endx for when a column on the right edge is destroyed
+
 	// TODO: adjust alien x position when left column is destroyed
-	// when aliens[0][0] dies, shift the alien we're using right one
-	// when aliens[0][ALIENS_COL-1] dies, shift left
-	int endx = SCREEN_WIDTH - RIGHT_PADDING - ((aliens->aliens[0][0].sp.width
-			+ XALIEN_PADDING) * ALIENS_COL);
-	// TODO: subtract from endx if right col is dead
-	int startx = ALIENS_START_X + XALIEN_PADDING; // TODO: add if left col is dead
-	int currx = aliens->aliens[0][0].p.x;
-	int curry = aliens->aliens[0][0].p.y;
+	// by using leftColIndex for currx and curry
+	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
+	int leftColIndex = findStartAlienCol(aliens);
+	int rightColIndex = findEndAlienCol(aliens);
+	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
+	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
+	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex *
+			(aliens->aliens[0][0].sp.width + XALIEN_PADDING));
+
+	xil_printf("startx = %d, endx = %d, "
+			"currx = %d, curry = %d, "
+			"left col index = %d, right col index = %d\n\r"
+			, startx, endx, currx, curry, leftColIndex, rightColIndex);
 
 	// state machine to determine which way to go
 	switch (aliens->direction) {
 	case left:
+		xil_printf("going left.\n\r");
 		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
-		if (aliens->aliens[0][0].p.x < startx) {
+		if (currx < startx) {
 			aliens->direction = down;
 		}
 		break;
 	case down:
+		xil_printf("going down.\n\r");
 		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
-		if (aliens->aliens[0][0].p.x > (SCREEN_WIDTH >> 2)) { // on right side
+		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
 			aliens->direction = left;
-		} else { // on the left side
+		} else { // on the left side, go right
 			aliens->direction = right;
 		}
 		break;
 	case right:
+		xil_printf("going right.\n\r");
 		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
-		if (aliens->aliens[0][0].p.x > endx) {
+		if (currx > endx) {
 			aliens->direction = down;
 		}
 		break;

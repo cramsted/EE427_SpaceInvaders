@@ -1380,3 +1380,14 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 !MESSAGE Could not find view: org.eclipse.ui.internal.introview
 !SUBENTRY 1 unknown 0 0 2016-09-28 20:37:23.346
 !MESSAGE OK
+
+!ENTRY org.eclipse.jface.text 4 0 2016-09-28 22:51:25.431
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: 0
+	at java.lang.String.charAt(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.c.hover.CSourceHover.getHoverInfo(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AbstractCEditorTextHover.getHoverInfo2(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.c.hover.BestMatchHover.getHoverInfo2(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.c.hover.CEditorTextHoverProxy.getHoverInfo2(Unknown Source)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)

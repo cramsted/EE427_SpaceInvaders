@@ -34,5 +34,6 @@ typedef struct {
 Bunkers initBunkers(int x, int y);
 void drawBunkers(int x, int y);
 void erodeBunker(int bunker, int row, int col);
+void erodeWholeBunker(int bunker);
 
 #endif /* BUNKERS_H_ */

@@ -13,6 +13,7 @@
 #define BUNKER_HEIGHT (18*2)
 #define BUNKER_WIDTH (24*2)
 #define XBUNKER_PADDING (80)
+#define MAX_EROSION 4
 
 extern const int bunker_24x18[];
 extern const int bunkerDamage0_6x6[];
@@ -25,7 +26,7 @@ Sprite erosion_2;
 Sprite erosion_3;
 Sprite erosion_4;
 
-Sprite* erosion_sprites[] = { &erosion_1, &erosion_2, &erosion_3, &erosion_4 };
+Sprite* erosion_sprites[] = { NULL, &erosion_1, &erosion_2, &erosion_3, &erosion_4 };
 
 Bunker initBunker(int x, int y) {
 	Bunker b;
@@ -63,7 +64,13 @@ void drawBunkers(int x, int y) {
 
 // param bunker selects which bunker to erode
 void erodeBunker(int bunker, int row, int col) {
-	if( row == 2 ){
+	// row and col must be valid
+	if (col < 0 || col > EROSION_COLS || row < 0 || row > EROSION_ROWS) {
+		return;
+	}
+
+	// don't erode the empty bunker section
+	if( row == 2){
 		if(col == 1 || col == 2){
 			return;
 		}
@@ -71,6 +78,8 @@ void erodeBunker(int bunker, int row, int col) {
 	Bunker *b = &bunkers.bunkers[bunker];
 
 	b->erosionLevel[row][col]++;
+	if (b->erosionLevel[row][col] > MAX_EROSION)
+		return;
 
 	// get position
 	Position p;
@@ -83,5 +92,14 @@ void erodeBunker(int bunker, int row, int col) {
 	edit_frameBuffer(sp, &p);
 	sp->Color.color = GREEN;
 	edit_frameBuffer(sp, &p);
+}
 
+void erodeWholeBunker(int bunker) {
+	int row;
+	int col;
+	for (row = 0; row < EROSION_ROWS; row++) {
+		for (col = 0; col < EROSION_COLS; col++) {
+			erodeBunker(bunker, row, col);
+		}
+	}
 }
