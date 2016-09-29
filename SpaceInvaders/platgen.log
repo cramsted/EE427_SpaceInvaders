@@ -3,8 +3,7 @@ Release 13.4 - platgen Xilinx EDK 13.4 Build EDK_O.87xd
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 Command Line: platgen -p xc6slx45csg324-3 -lang vhdl -intstyle default -lp
-C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/ -lp
-C:/Users/superman/Desktop/db/space_invaders/user_hardware -msg
+C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/ -msg
 __xps/ise/xmsgprops.lst system.mhs 
 
 WARNING:EDK - INFO:Security:51 - The XILINXD_LICENSE_FILE environment variable
@@ -32,9 +31,6 @@ WARNING:EDK:3605 - Use of the repository located at
    (equivalent of $XILINX_EDK/../edk_user_repository) is now deprecated. 
    It is recommended that you use Global SearchPath preference to specify search
    paths that apply to all the projects.
-WARNING:EDK:3243 - specified path
-   'C:\Users\superman\Desktop\db\space_invaders\user_hardware\' is not a
-   directory!
 
 Overriding IP level properties ...
 INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
@@ -317,7 +313,7 @@ ClkGen elaborate status: PASSED
 Writing HDL for elaborated instances ...
 
 Inserting wrapper level ...
-Completion time: 0.00 seconds
+Completion time: 1.00 seconds
 
 Constructing platform-level connectivity ...
 Completion time: 0.00 seconds
@@ -422,4 +418,4 @@ INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
 
 Rebuilding cache ...
 
-Total run time: 401.00 seconds
+Total run time: 403.00 seconds

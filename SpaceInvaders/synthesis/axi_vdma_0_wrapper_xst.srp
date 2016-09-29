@@ -6863,12 +6863,12 @@ s_axi_lite_aclk|    4.419|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 115.00 secs
-Total CPU time to Xst completion: 114.52 secs
+Total REAL time to Xst completion: 113.00 secs
+Total CPU time to Xst completion: 113.61 secs
  
 --> 
 
-Total memory usage is 346920 kilobytes
+Total memory usage is 347388 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings : 2796 (   0 filtered)
