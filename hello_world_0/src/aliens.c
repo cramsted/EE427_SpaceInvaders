@@ -157,22 +157,22 @@ void updateAliens(Aliens *aliens) {
 	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex *
 			(aliens->aliens[0][0].sp.width + XALIEN_PADDING));
 
-	xil_printf("startx = %d, endx = %d, "
-			"currx = %d, curry = %d, "
-			"left col index = %d, right col index = %d\n\r"
-			, startx, endx, currx, curry, leftColIndex, rightColIndex);
+//	xil_printf("startx = %d, endx = %d, "
+//			"currx = %d, curry = %d, "
+//			"left col index = %d, right col index = %d\n\r"
+//			, startx, endx, currx, curry, leftColIndex, rightColIndex);
 
 	// state machine to determine which way to go
 	switch (aliens->direction) {
 	case left:
-		xil_printf("going left.\n\r");
+//		xil_printf("going left.\n\r");
 		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
 		if (currx < startx) {
 			aliens->direction = down;
 		}
 		break;
 	case down:
-		xil_printf("going down.\n\r");
+//		xil_printf("going down.\n\r");
 		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
 		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
 			aliens->direction = left;
@@ -181,7 +181,7 @@ void updateAliens(Aliens *aliens) {
 		}
 		break;
 	case right:
-		xil_printf("going right.\n\r");
+//		xil_printf("going right.\n\r");
 		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
 		if (currx > endx) {
 			aliens->direction = down;

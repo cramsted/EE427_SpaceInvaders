@@ -6,6 +6,8 @@
  */
 #include "bullets.h"
 #include "render.h"
+#include <stdlib.h>
+#include <time.h>
 
 #define BULLET_WIDTH (3 * 2)
 #define BULLET_HEIGHT (5 * 2)
@@ -26,6 +28,9 @@ Bullet initBullet(const int *sprite) {
 }
 
 Bullets initBullets() {
+	// seed random number generator
+	srand(time(NULL));
+
 	Bullets b;
 	int i;
 	for (i = 0; i < MAX_BULLETS; i++) {
@@ -96,12 +101,17 @@ void tankPew(Tank *tank, Bullets *bullets) {
 
 // Initialize and fire an alien bullet
 void alienPew(Aliens *aliens, Bullets *bullets) {
+
 	static int alien_turn = 0;
+
 	if (aliens->numActiveBullets >= MAX_BULLETS) {
 		return;
 	}
 
 	// Find a random alien
+	do {
+		alien_turn = rand() % ALIENS_COL;
+	} while (aliens->frontRowAliens[alien_turn]->status == dead);
 	Alien *a = aliens->frontRowAliens[alien_turn];
 	aliens->numActiveBullets++;
 

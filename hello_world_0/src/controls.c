@@ -31,6 +31,7 @@ void readInput() {
 
 	switch (c) {
 	case 2: // kill alien
+		xil_printf("which alien number would you like to kill?\n\r");
 		num = getAlienNumber();
 		if (num >= 0 && num <= 54) {
 			xil_printf("kill alien %d\n\r", num);
@@ -55,6 +56,7 @@ void readInput() {
 		moveTankRight(&tank);
 		break;
 	case 7: // erode bunker
+		xil_printf("which bunker would you like to erode?\n\r");
 		num = getAlienNumber();
 		if (num >= 0 && num < MAX_BUNKERS) {
 			erodeWholeBunker(num);
@@ -79,7 +81,6 @@ int isDigit(char c) {
 }
 
 int getAlienNumber() {
-	xil_printf("which alien number would you like to kill?\n\r");
 	char d10pos = getchar();
 	char d1pos = getchar();
 	if (!isDigit(d10pos))

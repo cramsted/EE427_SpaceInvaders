@@ -22,7 +22,7 @@ int findPixelValue(int x, int y, int col, int row, Sprite *sp);
 void drawGround();
 
 // Starting location in DDR where we will store the images that we display.
-#define FRAME_BUFFER_0_ADDR 0xC2000000
+#define FRAME_BUFFER_0_ADDR 0xC3000000
 
 static XAxiVdma videoDMAController;
 

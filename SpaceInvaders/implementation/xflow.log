@@ -315,7 +315,7 @@ NGDBUILD Design Results Summary:
   Number of warnings:  37
 
 Writing NGD file "system.ngd" ...
-Total REAL time to NGDBUILD completion:  45 sec
+Total REAL time to NGDBUILD completion:  46 sec
 Total CPU time to NGDBUILD completion:   45 sec
 
 Writing NGDBUILD log file "system.bld"...
@@ -377,34 +377,34 @@ WARNING:Timing:3159 - The DCM, axi_hdmi_0/axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITr
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 22 secs 
-Total CPU  time at the beginning of Placer: 21 secs 
+Total REAL time at the beginning of Placer: 25 secs 
+Total CPU  time at the beginning of Placer: 22 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:8f047c73) REAL time: 24 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:8f047c73) REAL time: 28 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:8f047c73) REAL time: 25 secs 
+Phase 2.7  Design Feasibility Check (Checksum:8f047c73) REAL time: 29 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:4e7c5e63) REAL time: 25 secs 
+Phase 3.31  Local Placement Optimization (Checksum:4e7c5e63) REAL time: 29 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:65271d29) REAL time: 52 secs 
+(Checksum:65271d29) REAL time: 56 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:65271d29) REAL time: 52 secs 
+Phase 5.36  Local Placement Optimization (Checksum:65271d29) REAL time: 56 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:65271d29) REAL time: 52 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:65271d29) REAL time: 56 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:65271d29) REAL time: 52 secs 
+Phase 7.3  Local Placement Optimization (Checksum:65271d29) REAL time: 56 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:65271d29) REAL time: 52 secs 
+Phase 8.5  Local Placement Optimization (Checksum:65271d29) REAL time: 57 secs 
 
 Phase 9.8  Global Placement
 ........................
@@ -412,21 +412,21 @@ Phase 9.8  Global Placement
 .....................................................................
 ...................................................................................................
 ......
-Phase 9.8  Global Placement (Checksum:b271bbff) REAL time: 1 mins 32 secs 
+Phase 9.8  Global Placement (Checksum:b271bbff) REAL time: 1 mins 36 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:b271bbff) REAL time: 1 mins 33 secs 
+Phase 10.5  Local Placement Optimization (Checksum:b271bbff) REAL time: 1 mins 36 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:bfb560ac) REAL time: 1 mins 40 secs 
+Phase 11.18  Placement Optimization (Checksum:bfb560ac) REAL time: 1 mins 43 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:bfb560ac) REAL time: 1 mins 40 secs 
+Phase 12.5  Local Placement Optimization (Checksum:bfb560ac) REAL time: 1 mins 44 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:22612ec6) REAL time: 1 mins 41 secs 
+Phase 13.34  Placement Validation (Checksum:22612ec6) REAL time: 1 mins 44 secs 
 
-Total REAL time to Placer completion: 1 mins 49 secs 
+Total REAL time to Placer completion: 1 mins 52 secs 
 Total CPU  time to Placer completion: 1 mins 48 secs 
 Running post-placement packing...
 Writing output files...
@@ -524,7 +524,7 @@ Specific Feature Utilization:
 Average Fanout of Non-Clock Nets:                3.86
 
 Peak Memory Usage:  709 MB
-Total REAL time to MAP completion:  1 mins 55 secs 
+Total REAL time to MAP completion:  1 mins 58 secs 
 Total CPU time to MAP completion:   1 mins 54 secs 
 
 Mapping completed.
@@ -668,7 +668,7 @@ WARNING:Timing:3159 - The DCM, axi_hdmi_0/axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITr
 INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
    Command Line Tools User Guide for information on generating a TSI report.
 Starting initial Timing Analysis.  REAL time: 14 secs 
-Finished initial Timing Analysis.  REAL time: 14 secs 
+Finished initial Timing Analysis.  REAL time: 15 secs 
 
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy4_RAMD_D1_O has no
@@ -744,7 +744,7 @@ Phase  1  : 44786 unrouted;      REAL time: 16 secs
 
 Phase  2  : 37409 unrouted;      REAL time: 18 secs 
 
-Phase  3  : 15457 unrouted;      REAL time: 31 secs 
+Phase  3  : 15457 unrouted;      REAL time: 32 secs 
 
 Phase  4  : 15457 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 33 secs 
 
@@ -1094,7 +1094,7 @@ Design statistics:
    Maximum path delay from/to any node:   5.418ns
 
 
-Analysis completed Wed Sep 28 18:37:55 2016
+Analysis completed Thu Sep 29 12:18:05 2016
 --------------------------------------------------------------------------------
 
 Generating Report ...

@@ -470,8 +470,8 @@ Slowest_sync_clk|    2.646|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.05 secs
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 9.64 secs
  
 --> 
 
