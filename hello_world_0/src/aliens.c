@@ -64,8 +64,15 @@ Aliens initAliens(int x, int y) {
 	return a;
 }
 
-void killAlien(Aliens *aliens, int alien_index) {
-	aliens->aliens[alien_index]->status = dead;
+void eraseAlien(Alien *alien) {
+	alien->sp.Color.color = BLACK;
+	edit_frameBuffer(&alien->sp, &alien->p);
+}
+
+void killAlien(Aliens *aliens, int row, int col) {
+	Alien *alien = &aliens->aliens[row][col];
+	alien->status = dead;
+	eraseAlien(alien);
 }
 
 void drawAliens(int x, int y, Aliens *aliens) {
@@ -75,11 +82,8 @@ void drawAliens(int x, int y, Aliens *aliens) {
 			for (col = 0; col < ALIENS_COL; col++) {
 				Alien *temp = &aliens->aliens[row][col];
 
-				// TODO: check for dead alien - don't need to redraw him
-
 				// erase the alien
-				temp->sp.Color.color = BLACK;
-				edit_frameBuffer(&temp->sp, &temp->p);
+				eraseAlien(temp);
 
 				if (temp->status == alive) {
 					// change the type from out to in or vice versa
@@ -143,7 +147,7 @@ void updateAliens(Aliens *aliens) {
 		break;
 	case down:
 		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
-		if (aliens->aliens[0][0].p.x > (SCREEN_WIDTH / 2)) { // on right side
+		if (aliens->aliens[0][0].p.x > (SCREEN_WIDTH >> 2)) { // on right side
 			aliens->direction = left;
 		} else { // on the left side
 			aliens->direction = right;

@@ -9,9 +9,11 @@
 #include <stdio.h>
 
 int isDigit(char c);
+int getAlienNumber();
 
 void readInput() {
-	char c, c2;
+	char c;
+	int num;
 	//	xil_printf("enter: ");
 	c = getchar();
 
@@ -25,30 +27,40 @@ void readInput() {
 	// turn it into a digit
 	c -= '0';
 
-//	char str[2];
+	//	char str[2];
 
 	switch (c) {
 	case 2: // kill alien
-//		xil_printf("Which alien do you want to kill (format XX)?: ");
-//
-//		fgets(str,2,stdin);
-//		xil_printf("%s\n\r", str);
+		num = getAlienNumber();
+		if (num >= 0 && num <= 54) {
+			xil_printf("kill alien %d\n\r", num);
+			// convert 0-54 to row/col
+			int row = num / ALIENS_COL;
+			int col = num % ALIENS_COL;
+			killAlien(&aliens, row, col);
+		} else {
+			xil_printf("invalid input; enter a new command\n\r");
+		}
+		//		xil_printf("Which alien do you want to kill (format XX)?: ");
+		//
+		//		fgets(str,2,stdin);
+		//		xil_printf("%s\n\r", str);
 
-//		c = getchar();
-//		if (!isDigit(c)) {
-//			xil_printf("Invalid digit\n\r");
-//			return;
-//		}
-//		xil_printf("%c", c);
-//		c2 = getchar();
-//		if (!isDigit(c2)) {
-//			c2 = '0';
-//		}
-//		xil_printf("%c\n\r", c);
-//		c -= '0';
-//		c2 -= '0';
-//		int c3 = (int) ((c * 10) + c2);
-//		killAlien(&aliens, c3);
+		//		c = getchar();
+		//		if (!isDigit(c)) {
+		//			xil_printf("Invalid digit\n\r");
+		//			return;
+		//		}
+		//		xil_printf("%c", c);
+		//		c2 = getchar();
+		//		if (!isDigit(c2)) {
+		//			c2 = '0';
+		//		}
+		//		xil_printf("%c\n\r", c);
+		//		c -= '0';
+		//		c2 -= '0';
+		//		int c3 = (int) ((c * 10) + c2);
+		//		killAlien(&aliens, c3);
 		break;
 	case 3: // fire random missile
 		alienPew(&aliens, &bullets);
@@ -81,4 +93,19 @@ int isDigit(char c) {
 		return 0;
 	}
 	return 1;
+}
+
+int getAlienNumber() {
+	xil_printf("which alien number would you like to kill?\n\r");
+	char d10pos = getchar();
+	char d1pos = getchar();
+	if (!isDigit(d10pos))
+		return -1;
+	if (!isDigit(d1pos)) {
+		return d10pos - '0';
+	} else {
+		d10pos -= '0';
+		d1pos -= '0';
+		return (d10pos * 10) + d1pos;
+	}
 }

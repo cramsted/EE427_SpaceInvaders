@@ -11,7 +11,7 @@
 #define BULLET_HEIGHT (5 * 2)
 #define ALIEN_BULLETS_UPDATE_Y 5
 #define TANK_BULLET_UPDATE_Y (-ALIEN_BULLETS_UPDATE_Y)
-#define BULLET_MIN_Y 40
+#define BULLET_MIN_Y 45
 #define BULLET_MAX_Y 440
 
 extern const int bulletCross_3x5[];

@@ -7,7 +7,6 @@
  * TODO's:
  *   randomize alien bullets
  *   kill aliens (take input)
- *   bullets - destroy when reach limits (off screen or ground)
  *   erode bunkers (take input)
  */
 #include "render.h"
@@ -23,7 +22,7 @@ int findPixelValue(int x, int y, int col, int row, Sprite *sp);
 void drawGround();
 
 // Starting location in DDR where we will store the images that we display.
-#define FRAME_BUFFER_0_ADDR 0xC1000000
+#define FRAME_BUFFER_0_ADDR 0xC2000000
 
 static XAxiVdma videoDMAController;
 

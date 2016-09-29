@@ -12,7 +12,7 @@
 
 #define ALIENS_START_X 8
 #define ALIENS_START_Y 50
-#define ALIENS_COL 10
+#define ALIENS_COL 11
 #define ALIENS_ROW 5
 
 typedef enum {
@@ -51,5 +51,6 @@ typedef struct {
 Aliens initAliens(int x, int y);
 void drawAliens(int x, int y, Aliens *aliens);
 void updateAliens(Aliens *aliens);
-void killAlien(Aliens *aliens, int alien_index);
+void killAlien(Aliens *aliens, int row, int col);
+
 #endif /* ALIENS_H_ */
