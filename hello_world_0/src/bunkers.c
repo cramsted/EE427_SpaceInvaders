@@ -5,44 +5,51 @@
  *      Author: superman
  */
 #include "bunkers.h"
-#include "globals.h"
-#include "render.h"
-#include <string.h>
-#include <stdio.h>
+#include "globals.h" //access to the global Bunkers struct
+#include "render.h"	//edit_frameBuffer
+#include <string.h>	//memset
+#include <stdio.h>	//for debugging purposes
 
-#define BUNKER_HEIGHT (18*2)
-#define BUNKER_WIDTH (24*2)
-#define XBUNKER_PADDING (80)
-#define MAX_EROSION 4
+//values that determine the dimensions of the sprites on the screen
+#define BUNKER_HEIGHT (18*2)	//sprite height
+#define BUNKER_WIDTH (24*2)	//spirte width
+#define XBUNKER_PADDING (80)	//padding in the x direction of the bunker
+#define MAX_EROSION 4	//max erosion level
 
+//all the sprite structures defined in sprite_bit_maps.c
 extern const int bunker_24x18[];
 extern const int bunkerDamage0_6x6[];
 extern const int bunkerDamage1_6x6[];
 extern const int bunkerDamage2_6x6[];
 extern const int bunkerDamage3_6x6[];
 
+//one off versions of each sprite for drawing over bunkers with
 Sprite erosion_1;
 Sprite erosion_2;
 Sprite erosion_3;
 Sprite erosion_4;
 
+//used to change erosion level based on index using the erosion_e enum
 Sprite* erosion_sprites[] = { NULL, &erosion_1, &erosion_2, &erosion_3, &erosion_4 };
 
+//creates a bunker initialized with the passed in x,y
 Bunker initBunker(int x, int y) {
 	Bunker b;
-	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS);
+	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS); //sets erosion levels to 0
 	b.p = initPosition(x, y);
 	b.sp = initSprite(BUNKER_HEIGHT, BUNKER_WIDTH, GREEN, bunker_24x18);
 	return b;
 }
 
+//creates the bunkers block at the coordinate x,y
 Bunkers initBunkers(int x, int y) {
 	Bunkers b;
 	int row;
 	const int bunker_width = BUNKER_WIDTH + XBUNKER_PADDING;
-	for (row = 0; row < MAX_BUNKERS; row++) {
+	for (row = 0; row < MAX_BUNKERS; row++) { //populates bunkers array
 		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
 	}
+	//initializes all the erosion sprites
 	erosion_1 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
 			GREEN, bunkerDamage0_6x6);
 	erosion_2 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
@@ -54,6 +61,7 @@ Bunkers initBunkers(int x, int y) {
 	return b;
 }
 
+//draws the bunkers block at the specified x,y
 void drawBunkers(int x, int y) {
 	int row;
 	for (row = 0; row < MAX_BUNKERS; row++) {
@@ -62,6 +70,7 @@ void drawBunkers(int x, int y) {
 	}
 }
 
+//erodes a single seciton of a bunker based on the passed in row and col
 // param bunker selects which bunker to erode
 void erodeBunker(int bunker, int row, int col) {
 	// row and col must be valid
@@ -94,6 +103,8 @@ void erodeBunker(int bunker, int row, int col) {
 	edit_frameBuffer(sp, &p);
 }
 
+//erodes all the sections of the bunker at once by one erosion level
+// param bunker selects which bunker to erode
 void erodeWholeBunker(int bunker) {
 	int row;
 	int col;

@@ -10,13 +10,17 @@
 
 #include "sprites.h"
 
+//values for the dimensions of the screen
 #define SCREEN_HEIGHT 480
 #define SCREEN_WIDTH 640
 
+//sets up the video DMA controller
 void init_videoDMAController();
+//initializes the screen for a game
 void init();
+//switches between frame buffers
 void render();
+//for drawing sprites to the screen
 void edit_frameBuffer(Sprite *sp, Position *p);
 
 #endif /* RENDER_H_ */
-

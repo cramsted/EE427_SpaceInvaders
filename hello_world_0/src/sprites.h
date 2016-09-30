@@ -8,8 +8,9 @@
 #ifndef SPRITES_H_
 #define SPRITES_H_
 
-#include <stdint.h>
+#include <stdint.h> //used for uint8_t
 
+//y coordinate of the ground
 #define GROUND_START_Y 450
 
 //colors
@@ -22,7 +23,7 @@
 typedef struct {
 	int height;
 	int width;
-	union {
+	union { //used to make a single 32 bit int. Works well with our #defined colors
 		struct {
 			uint8_t red;
 			uint8_t green;
@@ -31,14 +32,17 @@ typedef struct {
 		} RGB;
 		uint32_t color;
 	} Color;
-	const int *sprite;
+	const int *sprite; //points to the actual sprite struct
 } Sprite;
 
+//struct for sprite positional data
 typedef struct {
 	int x;
 	int y;
 } Position;
 
+//initializes a sprite
 Sprite initSprite(int height, int width, uint32_t color, const int *sprite);
+//initializes and x,y coordinate
 Position initPosition(int x, int y);
 #endif /* SPRITES_H_ */

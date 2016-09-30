@@ -6,6 +6,7 @@
  */
 #include "globals.h"
 
+//global structs
 Tank tank;
 Aliens aliens;
 Bunkers bunkers;

@@ -3,11 +3,6 @@
  *
  *  Created on: Sep 23, 2016
  *      Author: superman
- *
- * TODO's:
- *   randomize alien bullets
- *   make aliens go all the way left when leftmost column is destroyed
- *     (update leftmost column)
  */
 #include "render.h"
 #include <stdio.h>
@@ -33,84 +28,50 @@ unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
 //	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR)
 //		+ SCREEN_WIDTH
 //			* SCREEN_HEIGHT;
+
+// init alien positions and draw them
+// init tank position and lives and draw it
+// init bunker positions and todo: erosion and draw them
+// init score (numbers)
 void init() {
-	// init alien positions and draw them
-	// init tank position and lives and draw it
-	// init bunker positions and todo: erosion and draw them
-	// todo: init score (numbers)
+
 	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 
-	tank = initTank(TANK_START_X, TANK_START_Y);
-	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);
+	tank = initTank(TANK_START_X, TANK_START_Y);	//creates tank struct
+	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
 
+	// TODO: marshall is this still valid?
 	// TODO: move this to aliens.c
 	int i;
-	for (i = 0; i < ALIENS_COL; i++) {
+	for (i = 0; i < ALIENS_COL; i++) {	//sets which aliens are on the front row of the alien block
 		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW-1][i];
 	}
 
-	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);
-	bullets = initBullets();
+	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);	//creates bunkers block
+	bullets = initBullets();	//creates bullets struct
 
-	initScore();
+	initScore();	//initializes and draws score
 	drawGround();
-	drawCharacters();
-	drawTank(TANK_START_X, &tank);
-	drawAliens(ALIENS_START_X, ALIENS_START_Y, &aliens);
-	drawBunkers(BUNKER_START_X, BUNKER_START_Y);
-	drawLives(&tank);
+	drawCharacters();	//draws words like 'score' and 'lives'
+	drawTank(TANK_START_X, &tank);	//draws the tank
+	drawAliens(ALIENS_START_X, ALIENS_START_Y, &aliens); 	//draws aliens block
+	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
+	drawLives(&tank); //draws the tank shaped lives
 	//	render(); //needed only for changing the index of the frame buffer
-
-
-//	tankPew(&tank, &bullets);
-//	alienPew(&aliens, &bullets);
-//	alienPew(&aliens, &bullets);
-//	alienPew(&aliens, &bullets);
-//	alienPew(&aliens, &bullets);
-//	for (i = 0; i < 20; i++) {
-//		updateBullets(&bullets);
-//		volatile int j = 0;
-//		while (j < 4000000) {
-//			j++;
-//		}
-//	}
-
-	// erode the bunkers
-//	int j, row, col;
-//	for (row = 0; row < 3; row++) {
-//		for (col = 0; col < 4; col++) {
-//			for (j = 0; j < 4; j++) { // 4 erosion levels
-//				erodeBunker(0, row, col);
-//				erodeBunker(1, row, col);
-//				erodeBunker(2, row, col);
-//				erodeBunker(3, row, col);
-//				volatile int delay = 0;
-//				while (delay++ < 1000000);
-//			}
-//		}
-//	}
-
-//	int j;
-//	for(j = 0; j < 10; j++){
-//		killAlien(&aliens.aliens[2][j]);
-//	}
-//	while (1) {
-//		updateAliens(&aliens);
-//		updateScore(10);
-//		volatile int delay = 0;
-//		while (delay++ < 2000000);
-//	}
 }
 
+//draws a horizonatal green line accross the bottom of the screen
 void drawGround() {
 	int col;
 	for (col = 0; col < SCREEN_WIDTH; col++) {
+		//the line is two pixel wide
 		framePointer0[GROUND_START_Y * SCREEN_WIDTH + col] = GREEN;
 		framePointer0[(GROUND_START_Y + 1) * SCREEN_WIDTH + col] = GREEN;
 	}
 }
 
-
+//switches beteen two different frame buffers
+//not currently in use
 void render() {
 	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, 0, //the 0 is the frame index
 			XAXIVDMA_READ)) {
@@ -118,29 +79,37 @@ void render() {
 	}
 }
 
+//changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at
 void edit_frameBuffer(Sprite *sp, Position *p) {
 	int maxRow = (p->y + sp->height);
 	int maxCol = (p->x + sp->width);
 	int row, col;
 	for (row = p->y; row < maxRow; row++) {
 		for (col = p->x; col < maxCol; col++) {
+			//if sprite value is 1 then it draws the sprite's color at that pixel
 			if (findPixelValue(p->x, p->y, col, row, sp)) {
 				framePointer0[row * SCREEN_WIDTH + col] = sp->Color.color;
-			} else {
-				framePointer0[row * SCREEN_WIDTH + col] = 0x00000000;
+			} else { //if sprite value is a 0 it draws black
+				framePointer0[row * SCREEN_WIDTH + col] = BLACK;
 			}
 		}
 	}
 
 }
 
+//based on the current x,y coordinate that the edit_frameBuffer function is on and based on the
+//x,y position of the sprite, the sprite is resized, and the pixel value at that row and col
+//is returned, 0 for black, 1 for with color
 int findPixelValue(int x, int y, int col, int row, Sprite *sp) {
+	//causes each pixel to be drawn twice
 	int xval = (col - x) >> 1;
 	int yval = (row - y) >> 1;
-	int mask = 1 << ((sp->width >> 1) - 1);
-	return (sp->sprite[yval] << xval) & mask;
+	int mask = 1 << ((sp->width >> 1) - 1);	//makes a mask that will cover the desired pixel
+	return (sp->sprite[yval] << xval) & mask; //returns pixel value
 }
 
+//This is part of Dr. Hutchings code
+//sets up the video DMA controller
 void init_videoDMAController() {
 	int Status; // Keep track of success/failure of system function calls.
 	XAxiVdma videoDMAController;

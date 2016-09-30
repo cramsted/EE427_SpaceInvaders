@@ -5,13 +5,8 @@
  *      Author: superman
  */
 #include "sprites.h"
-#include <stdio.h>
-#include <string.h>
 
-//Sprite dimensions
-
-
-
+//initializes a sprite
 Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
 	Sprite sp;
 	sp.Color.color = color;
@@ -21,11 +16,10 @@ Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
 	return sp;
 }
 
+//initializes and x,y coordinate
 Position initPosition(int x, int y) {
 	Position p;
 	p.x = x;
 	p.y = y;
 	return p;
 }
-
-

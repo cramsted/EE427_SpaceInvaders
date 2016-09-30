@@ -17,21 +17,21 @@
  */
 
 /*
- * helloworld.c: simple test application
+ * Space Invaders game
  */
 
-#include "platform.h"
-#include "render.h"
-#include "controls.h"
+#include "platform.h" //needed to setup the FPGA for drawing to a screen
+#include "render.h"	//needed for init()
+#include "controls.h"	//needed for readInput()
 
-void print(char *str);
+// void print(char *str);	//may not be necessary?
 
 int main() {
 	init_platform(); // Necessary for all programs.
 	init_videoDMAController(); //sets up video hardware
-	init();
+	init();	//initializes the screen to its starting point
 	while(1){
-		readInput();
+		readInput();	//waits for control input
 	}
 	cleanup_platform();
 

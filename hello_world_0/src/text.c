@@ -5,8 +5,8 @@
  *      Author: superman
  */
 #include "text.h"
-#include "render.h"
-#include <stdio.h>
+#include "render.h"	//needed for edit_frameBuffer
+#include <stdio.h> //for debugging
 
 extern const int s_8x5[];
 extern const int c_8x5[];
@@ -29,6 +29,7 @@ extern const int nine_8x5[];
 
 Score score;
 
+//funciton prototypes
 void initDigitSprites();
 void drawScore();
 

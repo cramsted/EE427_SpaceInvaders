@@ -41,9 +41,9 @@ typedef struct {
 Bunkers initBunkers(int x, int y);
 //draws the block of bunkers at position x,y
 void drawBunkers(int x, int y);
-//draws an erroded bunker sprite over a portion of the specified bunker
+//draws an eroded bunker sprite over a portion of the specified bunker
 void erodeBunker(int bunker, int row, int col);
-//errodes all the sections of the bunker
+//erodes all the sections of the bunker
 void erodeWholeBunker(int bunker);
 
 #endif /* BUNKERS_H_ */

@@ -13,11 +13,11 @@
 #include "tank.h"
 #include "aliens.h"
 #include "bullets.h"
-#include "text.h"
 
-extern Aliens aliens;
+//global structs
+extern Aliens aliens; //aliens block
 extern Tank tank;
-extern Bunkers bunkers;
-extern Bullets bullets;
+extern Bunkers bunkers; //bunkers block
+extern Bullets bullets; //bullets block
 
 #endif /* GLOBALS_H_ */
