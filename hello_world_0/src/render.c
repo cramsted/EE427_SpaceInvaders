@@ -40,8 +40,7 @@ void init() {
 	tank = initTank(TANK_START_X, TANK_START_Y);	//creates tank struct
 	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
 
-	// TODO: marshall is this still valid?
-	// TODO: move this to aliens.c
+	// TODO: move this to aliens.c. And, we need to adjust this as aliens are killed.
 	int i;
 	for (i = 0; i < ALIENS_COL; i++) {	//sets which aliens are on the front row of the alien block
 		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW-1][i];

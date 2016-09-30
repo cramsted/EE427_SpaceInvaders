@@ -144,10 +144,12 @@ void drawAliens(int x, int y, Aliens *aliens) {
 	}
 }
 
-//TODO: marshall
+// We want to find the leftmost column with living aliens
+// Used for bounds checking when the aliens are moving left
 int findStartAlienCol(Aliens *aliens) {
 	int i;
 	Alien *a;
+	// Simply loop through the top row of aliens to find an alive one
 	for (i = 0; i < ALIENS_COL; i++) {
 		a = &aliens->aliens[0][i];
 		if (a->status == alive) {
@@ -157,7 +159,7 @@ int findStartAlienCol(Aliens *aliens) {
 	return 0;
 }
 
-//TODO: marshall
+// Same as the findStartAlienCol, but used for bounds checking on the right
 int findEndAlienCol(Aliens *aliens) {
 	int i;
 	Alien *a;

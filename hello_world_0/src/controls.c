@@ -11,13 +11,12 @@
 int isDigit(char c);
 int getAlienNumber();
 
+// Get input from the user
+// The user enters in a number as a command, listed below.
 void readInput() {
 	char c;
 	int num;
-	//	xil_printf("enter: ");
 	c = getchar();
-
-	//	xil_printf("you entered %c\n\r", c);
 
 	if (!isDigit(c)) {
 		xil_printf("Invalid digit\n\r");
@@ -27,10 +26,10 @@ void readInput() {
 	// turn it into a digit
 	c -= '0';
 
-	//	char str[2];
-
 	switch (c) {
 	case 2: // kill alien
+		// Prompt the user to enter in an alien number
+		// Valid indices are in the range [0,54]
 		xil_printf("which alien number would you like to kill?\n\r");
 		num = getAlienNumber();
 		if (num >= 0 && num <= 54) {
@@ -56,6 +55,9 @@ void readInput() {
 		moveTankRight(&tank);
 		break;
 	case 7: // erode bunker
+		// Prompt the user for the bunker number
+		// Valid indices in the range [0,3]
+		// We can reuse the getAlienNumber function
 		xil_printf("which bunker would you like to erode?\n\r");
 		num = getAlienNumber();
 		if (num >= 0 && num < MAX_BUNKERS) {
@@ -73,6 +75,7 @@ void readInput() {
 	}
 }
 
+// We use this to validate the user's input
 int isDigit(char c) {
 	if (c < '0' || c > '9') {
 		return 0;
@@ -80,6 +83,10 @@ int isDigit(char c) {
 	return 1;
 }
 
+// Reads input from the user
+// This expects a one or two-digit number
+// It will return -1 if the input is invalid
+// Otherwise, it returns the number the user entered
 int getAlienNumber() {
 	char d10pos = getchar();
 	char d1pos = getchar();

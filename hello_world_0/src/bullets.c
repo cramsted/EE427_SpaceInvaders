@@ -107,8 +107,6 @@ void tankPew(Tank *tank, Bullets *bullets) {
 
 // Initialize and fire an alien bullet
 void alienPew(Aliens *aliens, Bullets *bullets) {
-	//TODO: marshall I don't know what this var does here or in the if statement at the end
-	static int alien_turn = 0;
 
 	//limits number of bullets aliens can have active at one time
 	if (aliens->numActiveBullets >= MAX_BULLETS) {
@@ -116,6 +114,7 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	}
 
 	// Find a random alien
+	int alien_turn = 0;
 	do {
 		alien_turn = rand() % ALIENS_COL;
 	} while (aliens->frontRowAliens[alien_turn]->status == dead);
@@ -138,8 +137,5 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	b->p.y = a->p.y + a->sp.height + 1;
 	b->active = 1;
 
-	if (++alien_turn >= ALIENS_COL) {
-		alien_turn = 0;
-	}
 	drawBullet(b, ALIEN_BULLETS_UPDATE_Y);
 }
