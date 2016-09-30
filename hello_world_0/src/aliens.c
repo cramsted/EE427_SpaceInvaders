@@ -5,57 +5,76 @@
  *      Author: superman
  */
 #include "aliens.h"
-#include "render.h"
-#include <stdio.h>
+#include "render.h"		//for access to the frame buffer
+#include <stdio.h>		//xil_printf for debugging purposes
 
-#define ALIEN_HEIGHT (8*2)
-#define ALIEN_WIDTH (12*2)
-#define XALIEN_PADDING (8)
-#define YALIEN_PADDING (16)
-#define ALIENS_SHIFT_X 20
-#define ALIENS_SHIFT_Y 16
-#define RIGHT_PADDING 8
+//values that determine the dimensions of the sprites on the screen
+#define ALIEN_HEIGHT (8*2)		//alien sprite height
+#define ALIEN_WIDTH (12*2)		//alien sprite width
+#define XALIEN_PADDING (8)		//padding between aliens in the x direction
+#define YALIEN_PADDING (16)		//padding between aliens in the y direction
+#define ALIENS_SHIFT_X 20			//number of pixels the aliens shift once in the x direction
+#define ALIENS_SHIFT_Y 16			//number of pixels the aliens shift once in the y direction
+#define RIGHT_PADDING 8				//padding for the max value the aliens can be drawn in
+															//in the x direciton
 
-extern const int saucer_16x7[];
-extern const int alien_explosion_12x10[];
-extern const int alien_top_in_12x8[];
-extern const int alien_top_out_12x8[];
-extern const int alien_middle_in_12x8[];
-extern const int alien_middle_out_12x8[];
-extern const int alien_bottom_in_12x8[];
-extern const int alien_bottom_out_12x8[];
+//all the sprite structures defined in sprite_bit_maps.c
+extern const int saucer_16x7[];								//saucer sprite, not used in this lab
+extern const int alien_explosion_12x10[];			//alien explosion spirte
+extern const int alien_top_in_12x8[];					//top row alien sprite with legs in
+extern const int alien_top_out_12x8[];				//top row alien sprite with legs out
+extern const int alien_middle_in_12x8[];			//middle row alien sprite with legs in
+extern const int alien_middle_out_12x8[];			//middle row alien sprite with legs out
+extern const int alien_bottom_in_12x8[];			//bottom row alien sprite with legs in
+extern const int alien_bottom_out_12x8[];			//bottom row alien sprite with legs out
 
+//struct of pointers to all alien sprites for easy reference by index value
 const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_middle_in_12x8, alien_middle_out_12x8, alien_bottom_in_12x8,
 		alien_bottom_out_12x8 };
 
+//function to initialize an alien struct
+//Note: this fucntion is exclusive to the aliens.c file
+//param x sets starting x position
+//param y sets starting y position
+//param alien_type_e sets the type and guise of the alien
+//sets the value of what row the alien will be in
 Alien initAlien(int x, int y, alien_type_e type, uint8_t row) {
 	Alien a;
-	a.status = alive;
-	a.row = row;
-	a.p = initPosition(x, y);
-	a.type = type;
+	a.status = alive;									//set life status
+	a.row = row;											//set row number
+	a.p = initPosition(x, y);					//set initial x,y position
+	a.type = type;										//set alien sprite type
+
+	//initializes the sprite to an alien
 	a.sp = initSprite(ALIEN_HEIGHT, ALIEN_WIDTH, WHITE, alien_sprites[type]);
 	return a;
 }
 
+//function to initialize an alien struct
+// param x sets starting x position
+//param y sets starting y position
 Aliens initAliens(int x, int y) {
 	Aliens a;
-	a.numActiveBullets = 0;
-	a.direction = right;
+	a.numActiveBullets = 0;					//inits the number of active alien bullets to 0
+	a.direction = right;						//starts alien block moving right on the screen
 	int row, col;
-	const int alien_width = ALIEN_WIDTH + XALIEN_PADDING;
-	const int alien_height = ALIEN_HEIGHT + YALIEN_PADDING;
+	const uint32_t alien_width = ALIEN_WIDTH + XALIEN_PADDING;			//width of of sprite plus padding
+	const uint32_t alien_height = ALIEN_HEIGHT + YALIEN_PADDING;		//height of sprite plus padding
+
+	//populates the aliens[][] struct with alien structs
 	for (row = 0; row < ALIENS_ROW; row++) {
 		for (col = 0; col < ALIENS_COL; col++) {
 			alien_type_e type;
-			if (row == 0) {
+			if (row == 0) {											//puts top aliens in top row
 				type = top_alien_in;
-			} else if (row >= 1 && row < 3) {
+			} else if (row >= 1 && row < 3) {		//puts middle aliens in middle row
 				type = middle_alien_in;
-			} else {
+			} else {														//puts bottom aliens in bottom row
 				type = bottom_alien_in;
 			}
+
+			//initializes the alien with the correct x,y coordinate and type
 			a.aliens[row][col] = initAlien(
 					ALIENS_START_X + (col * alien_width),
 					ALIENS_START_Y + (row * alien_height), type, row);
@@ -64,17 +83,20 @@ Aliens initAliens(int x, int y) {
 	return a;
 }
 
+//erases the passed in alien by changing it's sprite color to match the background
 void eraseAlien(Alien *alien) {
 	alien->sp.Color.color = BLACK;
-	edit_frameBuffer(&alien->sp, &alien->p);
+	edit_frameBuffer(&alien->sp, &alien->p);			//makes change in the frame buffer
 }
 
+//sets the status var of the alien at the passed in row and col as dead
 void killAlien(Aliens *aliens, int row, int col) {
-	Alien *alien = &aliens->aliens[row][col];
+	Alien *alien = &aliens->aliens[row][col];				//finds the alien
 	alien->status = dead;
-	eraseAlien(alien);
+	eraseAlien(alien);															//removes alien from the screen
 }
 
+//draws the block of aliens at the specified x,y coordinate on the screen
 void drawAliens(int x, int y, Aliens *aliens) {
 	int row, col;
 	if (aliens->direction == left) { // moving left
@@ -122,6 +144,7 @@ void drawAliens(int x, int y, Aliens *aliens) {
 	}
 }
 
+//TODO: marshall
 int findStartAlienCol(Aliens *aliens) {
 	int i;
 	Alien *a;
@@ -134,6 +157,7 @@ int findStartAlienCol(Aliens *aliens) {
 	return 0;
 }
 
+//TODO: marshall
 int findEndAlienCol(Aliens *aliens) {
 	int i;
 	Alien *a;
@@ -146,33 +170,27 @@ int findEndAlienCol(Aliens *aliens) {
 	return 0;
 }
 
+//moves the alien block a predetermined distance and direction
 void updateAliens(Aliens *aliens) {
 	// TODO: adjust alien x position when left column is destroyed
 	// by using leftColIndex for currx and curry
 	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
-	int leftColIndex = findStartAlienCol(aliens);
-	int rightColIndex = findEndAlienCol(aliens);
+	int leftColIndex = findStartAlienCol(aliens);	//finds the max value of the left most col
+	int rightColIndex = findEndAlienCol(aliens);	//finds the max value of the right most col
 	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
 	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
 	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex *
-			(aliens->aliens[0][0].sp.width + XALIEN_PADDING));
-
-//	xil_printf("startx = %d, endx = %d, "
-//			"currx = %d, curry = %d, "
-//			"left col index = %d, right col index = %d\n\r"
-//			, startx, endx, currx, curry, leftColIndex, rightColIndex);
+			(aliens->aliens[0][0].sp.width + XALIEN_PADDING));	//largest allowed x value
 
 	// state machine to determine which way to go
 	switch (aliens->direction) {
 	case left:
-//		xil_printf("going left.\n\r");
 		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
 		if (currx < startx) {
 			aliens->direction = down;
 		}
 		break;
 	case down:
-//		xil_printf("going down.\n\r");
 		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
 		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
 			aliens->direction = left;
@@ -181,7 +199,6 @@ void updateAliens(Aliens *aliens) {
 		}
 		break;
 	case right:
-//		xil_printf("going right.\n\r");
 		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
 		if (currx > endx) {
 			aliens->direction = down;
