@@ -23,13 +23,13 @@
 #include "platform.h" //needed to setup the FPGA for drawing to a screen
 #include "render.h"	//needed for init()
 #include "controls.h"	//needed for readInput()
-
-// void print(char *str);	//may not be necessary?
+#include "clock.h"
 
 int main() {
 	init_platform(); // Necessary for all programs.
 	init_videoDMAController(); //sets up video hardware
-	init();	//initializes the screen to its starting point
+	videoInit();	//initializes the screen to its starting point
+	clockInit();
 	while(1){
 		readInput();	//waits for control input
 	}

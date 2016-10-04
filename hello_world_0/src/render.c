@@ -33,7 +33,7 @@ unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
 // init tank position and lives and draw it
 // init bunker positions and todo: erosion and draw them
 // init score (numbers)
-void init() {
+void videoInit() {
 
 	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 

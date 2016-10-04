@@ -17,7 +17,7 @@
 //sets up the video DMA controller
 void init_videoDMAController();
 //initializes the screen for a game
-void init();
+void videoInit();
 //switches between frame buffers
 void render();
 //for drawing sprites to the screen

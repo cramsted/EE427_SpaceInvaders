@@ -1,0 +1,16 @@
+/*
+ * clock.c
+ *
+ *  Created on: Oct 4, 2016
+ *      Author: superman
+ */
+
+#include "xgpio.h"          // Provides access to PB GPIO driver.
+#include <stdio.h>          // xil_printf and so forth.
+#include "mb_interface.h"   // provides the microblaze interrupt enables, etc.
+#include "xintc_l.h"        // Provides handy macros for the interrupt controller.
+#include "clock.h"
+
+void clockInit() {
+
+}
