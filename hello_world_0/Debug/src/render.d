@@ -11,8 +11,8 @@ src/render.d src/render.o: ../src/render.c ../src/render.h \
   ../../hello_world_bsp_0/microblaze_0/include/xstatus.h \
   ../../hello_world_bsp_0/microblaze_0/include/xil_assert.h \
   ../../hello_world_bsp_0/microblaze_0/include/xparameters.h \
-  ../../hello_world_bsp_0/microblaze_0/include/xio.h ../src/globals.h \
-  ../src/bunkers.h ../src/tank.h ../src/aliens.h ../src/bullets.h
+  ../../hello_world_bsp_0/microblaze_0/include/xio.h ../src/aliens.h \
+  ../src/bullets.h ../src/tank.h ../src/bunkers.h ../src/text.h
 
 ../src/render.h:
 
@@ -42,12 +42,12 @@ src/render.d src/render.o: ../src/render.c ../src/render.h \
 
 ../../hello_world_bsp_0/microblaze_0/include/xio.h:
 
-../src/globals.h:
-
-../src/bunkers.h:
-
-../src/tank.h:
-
 ../src/aliens.h:
 
 ../src/bullets.h:
+
+../src/tank.h:
+
+../src/bunkers.h:
+
+../src/text.h:

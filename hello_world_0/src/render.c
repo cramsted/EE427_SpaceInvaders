@@ -10,7 +10,11 @@
 #include "xaxivdma.h"
 #include "xparameters.h"
 #include "xio.h"
-#include "globals.h"
+#include "aliens.h"
+#include "bullets.h"
+#include "bunkers.h"
+#include "tank.h"
+#include "text.h"
 
 //function prototypes
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);
@@ -31,7 +35,7 @@ unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
 
 // init alien positions and draw them
 // init tank position and lives and draw it
-// init bunker positions and todo: erosion and draw them
+// init bunker positions and erosion and draw them
 // init score (numbers)
 void videoInit() {
 

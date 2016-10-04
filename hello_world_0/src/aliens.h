@@ -56,6 +56,8 @@ typedef struct {
 	alien_direction_e direction;								//what direction the block of aliens is currently traveling in
 } Aliens;
 
+extern Aliens aliens;
+
 //function to initialize the alien block struct
 // param x sets starting x position
 //param y sets starting y position

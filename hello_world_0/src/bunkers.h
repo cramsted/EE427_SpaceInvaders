@@ -37,6 +37,8 @@ typedef struct {
 	Bunker bunkers[MAX_BUNKERS];
 } Bunkers;
 
+extern Bunkers bunkers;
+
 //creates a new block of bunkers set to position x,y
 Bunkers initBunkers(int x, int y);
 //draws the block of bunkers at position x,y

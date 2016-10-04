@@ -5,7 +5,6 @@
  *      Author: superman
  */
 #include "bunkers.h"
-#include "globals.h" //access to the global Bunkers struct
 #include "render.h"	//edit_frameBuffer
 #include <string.h>	//memset
 #include <stdio.h>	//for debugging purposes
@@ -31,6 +30,8 @@ Sprite erosion_4;
 
 //used to change erosion level based on index using the erosion_e enum
 Sprite* erosion_sprites[] = { NULL, &erosion_1, &erosion_2, &erosion_3, &erosion_4 };
+
+Bunkers bunkers;
 
 //creates a bunker initialized with the passed in x,y
 Bunker initBunker(int x, int y) {

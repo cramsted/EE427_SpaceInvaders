@@ -17,6 +17,8 @@
 //tank sprite
 extern const int tank_15x8[];
 
+Tank tank;
+
 //creates a tank struct initialized to position x,y
 Tank initTank(int x, int y) {
 	Tank t;

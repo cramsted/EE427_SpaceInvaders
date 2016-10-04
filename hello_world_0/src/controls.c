@@ -5,7 +5,10 @@
  *      Author: superman
  */
 #include "controls.h"
-#include "globals.h"
+#include "aliens.h"
+#include "bullets.h"
+#include "bunkers.h"
+#include "tank.h"
 #include <stdio.h>
 
 int isDigit(char c);

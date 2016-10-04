@@ -13,6 +13,7 @@
 #include "aliens.h"			//for accessing the aliens position
 
 #define MAX_BULLETS 5 // one for tank and four for aliens
+#define MAX_ALIEN_BULLETS 4
 
 //info needed to draw a bullet
 typedef struct {
@@ -25,6 +26,8 @@ typedef struct {
 typedef struct {
 	Bullet bullets[MAX_BULLETS]; //index 0 is the tank, all others are for aliens
 } Bullets;
+
+extern Bullets bullets;
 
 //updates the position of the bullets, depending on who fired them
 void updateBullets(Bullets *bullets);

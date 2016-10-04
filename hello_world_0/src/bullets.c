@@ -6,8 +6,8 @@
  */
 #include "bullets.h"
 #include "render.h"		//for edit_frameBuffer
+#include "aliens.h"
 #include <stdlib.h>
-#include <time.h>			//for random number generator
 
 //values that determine the dimensions of the sprites on the screen
 #define BULLET_WIDTH (3 * 2)	//sprite width
@@ -20,8 +20,8 @@
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int bulletCross_3x5[];
 extern const int bulletLightning_3x5[];
-//used for keeping track of number of active bullets fired by aliens
-extern Aliens aliens;
+
+Bullets bullets;
 
 //creates an initialized bullet struct
 Bullet initBullet(const int *sprite) {
@@ -33,9 +33,6 @@ Bullet initBullet(const int *sprite) {
 
 //creates the containing bullet struct
 Bullets initBullets() {
-	// seed random number generator
-	srand(time(NULL));
-
 	Bullets b;
 	int i;
 	for (i = 0; i < MAX_BULLETS; i++) {
@@ -109,7 +106,7 @@ void tankPew(Tank *tank, Bullets *bullets) {
 void alienPew(Aliens *aliens, Bullets *bullets) {
 
 	//limits number of bullets aliens can have active at one time
-	if (aliens->numActiveBullets >= MAX_BULLETS) {
+	if (aliens->numActiveBullets >= MAX_ALIEN_BULLETS) {
 		return;
 	}
 

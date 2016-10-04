@@ -25,6 +25,8 @@ typedef struct {
 	uint8_t lives;
 } Tank;
 
+extern Tank tank;
+
 //creates a tank struct initialized to position x,y
 Tank initTank(int x, int y);
 //draws a tank at position x. The y value is hard coded

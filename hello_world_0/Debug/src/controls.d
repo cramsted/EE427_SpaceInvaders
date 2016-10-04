@@ -1,17 +1,15 @@
 src/controls.d src/controls.o: ../src/controls.c ../src/controls.h \
-  ../src/globals.h ../src/sprites.h ../src/bunkers.h ../src/tank.h \
-  ../src/aliens.h ../src/bullets.h
+  ../src/aliens.h ../src/sprites.h ../src/bullets.h ../src/tank.h \
+  ../src/bunkers.h
 
 ../src/controls.h:
 
-../src/globals.h:
+../src/aliens.h:
 
 ../src/sprites.h:
 
-../src/bunkers.h:
+../src/bullets.h:
 
 ../src/tank.h:
 
-../src/aliens.h:
-
-../src/bullets.h:
+../src/bunkers.h:
