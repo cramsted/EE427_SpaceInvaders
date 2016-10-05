@@ -21,17 +21,20 @@
  * TODO's:
  *   - bullet collision detection / bunker degradation
  *   - aliens adjust when left column dies
- *   - automate movement and firing
  *   - adjust bottom row of aliens dying
  *   - score
  *   - implement how lives are updated
  *   - optimize drawing algorithm as needed
- *   - controls with push buttons
  *   - alien exploding
  *   - UFO appearing and exploding
  *   - tank exploding
- *   - basic refactoring/reorganizing, e.g. removing globals.c/h
+ *   - reorganizing: updating functions, removing struct pointers
  *   - CPU utilization
+ *
+ * Thursday@9:
+ *   - adjusting bottom row of aliens as they die
+ *   - bullet collision
+ *   - explosions
  */
 
 #include <stdint.h>
@@ -46,6 +49,14 @@
 #include "tank.h"
 #include "bullets.h"
 
+// took the average of 45 samples
+// the zero utilization count (excluding event handlers)
+// this ignores the overhead of the interrupts
+#define ZERO_UTILIZATION 4544399
+
+#define START_GAME_DELAY 100000
+#define EVENTS_ENABLED 1
+
 // Holds all pending events, where each event is a different bit
 uint32_t events = 0;
 
@@ -58,12 +69,15 @@ int main() {
 	timerInit();	//initializes buttons, the FIT timer, and interrupts
 
 	// short delay before things get going
-	volatile int delay = 100000;
+	volatile int delay = START_GAME_DELAY;
 	while (--delay);
+
+	uint32_t utilizationCounter = 0;
+	float utilization = 0;
 
 	// Events loop:
 	while(1){
-		if (events) {
+		if (events && EVENTS_ENABLED) {
 			// An event is pending...
 			if (events & LEFT_BTN_EVENT) {
 				// Move tank left
@@ -95,8 +109,21 @@ int main() {
 				events &= ~ALIENS_FIRE_EVENT;
 				alienPew(&aliens, &bullets);
 			}
+			if (events & HEARTBEAT_EVENT) {
+				// "Idle" event - calculate utilization
+				events &= ~HEARTBEAT_EVENT;
+				utilization = ((float)utilizationCounter / (float)ZERO_UTILIZATION);
+				xil_printf("%d\n\r", (uint32_t)(100*utilization));
+				utilizationCounter = 0;
+			}
 		} else {
-			// "Idle" event
+			++utilizationCounter;
+			// We used the following to get a baseline for utilization
+//			if (events & HEARTBEAT_EVENT) {
+//				events &= ~HEARTBEAT_EVENT;
+//				xil_printf("%d\n\r", utilizationCounter);
+//				utilizationCounter = 0;
+//			}
 		}
 //		readInput();	//waits for control input
 	}
