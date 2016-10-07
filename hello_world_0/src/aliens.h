@@ -67,6 +67,6 @@ void drawAliens(int x, int y, Aliens *aliens);
 //moves the alien block in the direction of alien_direction_e by a preset number of pixels
 void updateAliens(Aliens *aliens);
 //kills the alien at the specified row and col of the alien block
-void killAlien(Aliens *aliens, int row, int col);
+void killAlien(Alien *alien, int row, int col);
 
 #endif /* ALIENS_H_ */

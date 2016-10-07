@@ -44,7 +44,7 @@ Bunkers initBunkers(int x, int y);
 //draws the block of bunkers at position x,y
 void drawBunkers(int x, int y);
 //draws an eroded bunker sprite over a portion of the specified bunker
-void erodeBunker(int bunker, int row, int col);
+void erodeBunker(Bunker *b, int row, int col);
 //erodes all the sections of the bunker
 void erodeWholeBunker(int bunker);
 

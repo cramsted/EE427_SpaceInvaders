@@ -73,7 +73,7 @@ void drawBunkers(int x, int y) {
 
 //erodes a single seciton of a bunker based on the passed in row and col
 // param bunker selects which bunker to erode
-void erodeBunker(int bunker, int row, int col) {
+void erodeBunker(Bunker *b, int row, int col) {
 	// row and col must be valid
 	if (col < 0 || col > EROSION_COLS || row < 0 || row > EROSION_ROWS) {
 		return;
@@ -85,7 +85,6 @@ void erodeBunker(int bunker, int row, int col) {
 			return;
 		}
 	}
-	Bunker *b = &bunkers.bunkers[bunker];
 
 	b->erosionLevel[row][col]++;
 	if (b->erosionLevel[row][col] > MAX_EROSION)
@@ -107,11 +106,12 @@ void erodeBunker(int bunker, int row, int col) {
 //erodes all the sections of the bunker at once by one erosion level
 // param bunker selects which bunker to erode
 void erodeWholeBunker(int bunker) {
-	int row;
-	int col;
-	for (row = 0; row < EROSION_ROWS; row++) {
-		for (col = 0; col < EROSION_COLS; col++) {
-			erodeBunker(bunker, row, col);
-		}
-	}
+	return;
+//	int row;
+//	int col;
+//	for (row = 0; row < EROSION_ROWS; row++) {
+//		for (col = 0; col < EROSION_COLS; col++) {
+//			erodeBunker(bunker, row, col);
+//		}
+//	}
 }

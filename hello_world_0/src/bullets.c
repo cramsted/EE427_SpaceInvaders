@@ -7,6 +7,7 @@
 #include "bullets.h"
 #include "render.h"		//for edit_frameBuffer
 #include "aliens.h"
+#include "bunkers.h"
 #include <stdlib.h>
 
 //values that determine the dimensions of the sprites on the screen
@@ -16,17 +17,21 @@
 #define TANK_BULLET_UPDATE_Y (-ALIEN_BULLETS_UPDATE_Y)	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
 #define BULLET_MAX_Y 440	//max y position of a bullet
-
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int bulletCross_3x5[];
 extern const int bulletLightning_3x5[];
 
 Bullets bullets;
 
+static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
+		Position *spritePos);
+static void checkTankBulletCollisions();
+static void destroyBullet(Bullet *bullet);
+static void alienHit(Bullet *bullet);
 //creates an initialized bullet struct
 Bullet initBullet(const int *sprite) {
 	Bullet b;
-	b.active = 0;	//init to inactive
+	b.active = 0; //init to inactive
 	b.sp = initSprite(BULLET_HEIGHT, BULLET_WIDTH, WHITE, sprite);
 	return b;
 }
@@ -36,9 +41,9 @@ Bullets initBullets() {
 	Bullets b;
 	int i;
 	for (i = 0; i < MAX_BULLETS; i++) {
-		if (i & 1) {	//odd array index numbers have lightning sprites
+		if (i & 1) { //odd array index numbers have lightning sprites
 			b.bullets[i] = initBullet(bulletLightning_3x5);
-		} else {	//even array index number have cross sprites
+		} else { //even array index number have cross sprites
 			b.bullets[i] = initBullet(bulletCross_3x5);
 		}
 	}
@@ -55,7 +60,7 @@ void eraseBullet(Bullet *bullet) {
 void drawBullet(Bullet *bullet, int updateY) {
 	bullet->sp.Color.color = WHITE;
 	bullet->p.y += updateY;
-	edit_frameBuffer(&bullet->sp, &bullet->p);	//update frame buffer
+	edit_frameBuffer(&bullet->sp, &bullet->p); //update frame buffer
 }
 
 // Update all tank and alien bullet positions
@@ -87,12 +92,13 @@ void updateBullets(Bullets *bullets) {
 			}
 		}
 	}
+	checkTankBulletCollisions();
 }
 
 // Initialize and fire the tank bullet
 void tankPew(Tank *tank, Bullets *bullets) {
 	Bullet *b = &bullets->bullets[0];
-	if (b->active) {	//allows for only one tank bullet at a time
+	if (b->active) { //allows for only one tank bullet at a time
 		return;
 	}
 	//sets bullet position based on the current tank position
@@ -119,7 +125,7 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	aliens->numActiveBullets++;
 
 	// Find an inactive bullet
-	Bullet *b = (void*)0;
+	Bullet *b = (void*) 0;
 	Bullet *bulletList = bullets->bullets;
 	int i;
 	for (i = 1; i < MAX_BULLETS; i++) {
@@ -135,4 +141,92 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	b->active = 1;
 
 	drawBullet(b, ALIEN_BULLETS_UPDATE_Y);
+}
+
+void bunkerHit(Bullet *bullet) {
+	int i;
+	for (i = 0; i < MAX_BUNKERS; i++) {
+		Bunker *bunker = &bunkers.bunkers[i];
+		if (bulletCollidesWithSprite(bullet, &bunker->sp, &bunker->p)) {
+			erodeBunker(bunker, 0, 0); //TODO: compute the bunker section
+			destroyBullet(bullet);
+		}
+	}
+
+}
+
+static void alienHit(Bullet *bullet) {
+	int row, col;
+	for (row = 0; row < ALIENS_ROW; row++) {
+		for (col = 0; col < ALIENS_COL; col++) {
+			Alien *alien = &aliens.aliens[row][col];
+			if (bulletCollidesWithSprite(bullet, &alien->sp, &alien->p)) {
+				if (alien->status == alive) {
+					killAlien(alien, row, col); //TODO: alien explosion
+					destroyBullet(bullet);
+				}
+			}
+		}
+	}
+
+}
+
+static void tankHit(Bullet *bullet) {
+	if (bulletCollidesWithSprite(bullet, &tank.sp, &tank.p)) {
+		tankExplode(); //TODO: tank explosion
+		destroyBullet(bullet);
+
+	}
+}
+
+static void destroyBullet(Bullet *bullet) {
+	eraseBullet(bullet);
+	bullet->active = 0; //deactivates the bullet;
+}
+
+static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
+		Position *spritePos) {
+	if (!bullet->active) {
+		return 0; //false because the bullet is not on the screen
+	}
+	int spriteX = spritePos->x;
+	int spriteY = spritePos->y;
+	int spriteXMax = spriteX + sprite->width;
+	int spriteYMax = spriteY + sprite->height;
+	int bulletX = bullet->p.x;
+	int bulletY = bullet->p.y;
+	int bulletXMax = bulletX + BULLET_WIDTH;
+	int bulletYMax = bulletY + BULLET_HEIGHT;
+
+	//checks for overlapping on the left side of the bullet sprite
+	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
+		if ((bulletY >= spriteY) && (bulletY <= spriteYMax)) {
+			return 1; //true
+		}
+	}
+	//checks for overlapping on the right side of the bullet sprite
+	if ((bulletXMax >= spriteX) && (bulletXMax <= spriteXMax)) {
+		if ((bulletYMax >= spriteY) && (bulletYMax <= spriteYMax)) {
+			return 1; //true
+		}
+	}
+	return 0; //false
+}
+void checkTankBulletCollisions() {
+	Bullet *tankBullet = &bullets.bullets[0];
+	//check bunker
+	bunkerHit(tankBullet);
+	//check aliens
+	alienHit(tankBullet);
+}
+
+void checkAlienBulletCollisions() {
+	int i;
+	for (i = 1; i < MAX_BULLETS; i++) {
+		Bullet *alienBullet = &bullets.bullets[i];
+		//check bunker
+		bunkerHit(alienBullet);
+		//check tank
+		tankHit(alienBullet);
+	}
 }

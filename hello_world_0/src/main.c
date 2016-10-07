@@ -21,7 +21,6 @@
  * TODO's:
  *   - bullet collision detection / bunker degradation
  *   - aliens adjust when left column dies
- *   - adjust bottom row of aliens dying
  *   - score
  *   - implement how lives are updated
  *   - optimize drawing algorithm as needed
@@ -31,9 +30,6 @@
  *   - reorganizing: updating functions, removing struct pointers
  *   - CPU utilization
  *
- * Thursday@9:
- *   - adjusting bottom row of aliens as they die
- *   - bullet collision
  *   - explosions
  */
 
@@ -75,58 +71,61 @@ int main() {
 	uint32_t utilizationCounter = 0;
 	float utilization = 0;
 
+	while(1) {
+		readInput();	//waits for control input
+	}
+
 	// Events loop:
-	while(1){
-		if (events && EVENTS_ENABLED) {
-			// An event is pending...
-			if (events & LEFT_BTN_EVENT) {
-				// Move tank left
-				events &= ~LEFT_BTN_EVENT;
-				moveTankLeft(&tank);
-			}
-			if (events & RIGHT_BTN_EVENT) {
-				// Move tank right
-				events &= ~RIGHT_BTN_EVENT;
-				moveTankRight(&tank);
-			}
-			if (events & MIDDLE_BTN_EVENT) {
-				// Fire tank bullet
-				events &= ~MIDDLE_BTN_EVENT;
-				tankPew(&tank, &bullets);
-			}
-			if (events & BULLETS_REFRESH_EVENT) {
-				// Move bullets and do collision detecting
-				events &= ~BULLETS_REFRESH_EVENT;
-				updateBullets(&bullets);
-			}
-			if (events & ALIENS_REFRESH_EVENT) {
-				// Move aliens
-				events &= ~ALIENS_REFRESH_EVENT;
-				updateAliens(&aliens);
-			}
-			if (events & ALIENS_FIRE_EVENT) {
-				// Aliens fire a bullet
-				events &= ~ALIENS_FIRE_EVENT;
-				alienPew(&aliens, &bullets);
-			}
-			if (events & HEARTBEAT_EVENT) {
-				// "Idle" event - calculate utilization
-				events &= ~HEARTBEAT_EVENT;
-				utilization = ((float)utilizationCounter / (float)ZERO_UTILIZATION);
-				xil_printf("%d\n\r", (uint32_t)(100*utilization));
-				utilizationCounter = 0;
-			}
-		} else {
-			++utilizationCounter;
-			// We used the following to get a baseline for utilization
+//	while(1){
+//		if (events && EVENTS_ENABLED) {
+//			// An event is pending...
+//			if (events & LEFT_BTN_EVENT) {
+//				// Move tank left
+//				events &= ~LEFT_BTN_EVENT;
+//				moveTankLeft(&tank);
+//			}
+//			if (events & RIGHT_BTN_EVENT) {
+//				// Move tank right
+//				events &= ~RIGHT_BTN_EVENT;
+//				moveTankRight(&tank);
+//			}
+//			if (events & MIDDLE_BTN_EVENT) {
+//				// Fire tank bullet
+//				events &= ~MIDDLE_BTN_EVENT;
+//				tankPew(&tank, &bullets);
+//			}
+//			if (events & BULLETS_REFRESH_EVENT) {
+//				// Move bullets and do collision detecting
+//				events &= ~BULLETS_REFRESH_EVENT;
+//				updateBullets(&bullets);
+//			}
+//			if (events & ALIENS_REFRESH_EVENT) {
+//				// Move aliens
+//				events &= ~ALIENS_REFRESH_EVENT;
+//				updateAliens(&aliens);
+//			}
+//			if (events & ALIENS_FIRE_EVENT) {
+//				// Aliens fire a bullet
+//				events &= ~ALIENS_FIRE_EVENT;
+//				alienPew(&aliens, &bullets);
+//			}
 //			if (events & HEARTBEAT_EVENT) {
+//				// "Idle" event - calculate utilization
 //				events &= ~HEARTBEAT_EVENT;
-//				xil_printf("%d\n\r", utilizationCounter);
+//				utilization = ((float)utilizationCounter / (float)ZERO_UTILIZATION);
+//				xil_printf("%d\n\r", (uint32_t)(100*utilization));
 //				utilizationCounter = 0;
 //			}
-		}
-//		readInput();	//waits for control input
-	}
+//		} else {
+//			++utilizationCounter;
+//			// We used the following to get a baseline for utilization
+////			if (events & HEARTBEAT_EVENT) {
+////				events &= ~HEARTBEAT_EVENT;
+////				xil_printf("%d\n\r", utilizationCounter);
+////				utilizationCounter = 0;
+////			}
+//		}
+//	}
 
 	cleanup_platform();
 

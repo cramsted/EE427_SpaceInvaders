@@ -40,7 +40,7 @@ void readInput() {
 			// convert 0-54 to row/col
 			int row = num / ALIENS_COL;
 			int col = num % ALIENS_COL;
-			killAlien(&aliens, row, col);
+			killAlien(&aliens.aliens[row][col], row, col);
 		} else {
 			xil_printf("invalid input; enter a new command\n\r");
 		}

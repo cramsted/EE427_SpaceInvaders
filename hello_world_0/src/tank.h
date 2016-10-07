@@ -38,4 +38,6 @@ void drawLives(Tank *tank);
 void moveTankRight(Tank *tank);
 //redraws the tank sprite a predetermined distance to the left
 void moveTankLeft(Tank *tank);
+//sets the explosion sprite for the tank and erases a life
+void tankExplode();
 #endif /* TANK_H_ */

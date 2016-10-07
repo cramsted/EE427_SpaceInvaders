@@ -55,8 +55,15 @@ void moveTankLeft(Tank *tank){
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
+void tankExplode(){
+	// TODO: set explode sprite
+	// lose a life
+	// redraw lives
+}
+
 //draws the lives in the upper right hand corner of screen.
 //coordinate values are hard coded
+//TODO: use number of remaining lives to correctly draw
 void drawLives(Tank *tank) {
 	Tank life = initTank(LIFE_START_X, LIFE_START_Y); //creates a new tank life
 	int col;
