@@ -11,6 +11,8 @@
 #include "sprites.h"	//needed for the Sprite and Position structs
 
 //values that determine the dimensions of the sprites on the screen
+#define BUNKER_HEIGHT (18*2)//sprite height
+#define BUNKER_WIDTH (24*2)	//spirte width
 #define BUNKER_START_X 	110	//start x value of the bunkers block
 #define BUNKER_START_Y 	350	//start y value of all bunkers block
 #define MAX_BUNKERS 4	//max number of bunkers
@@ -29,7 +31,7 @@ typedef struct {
 	Position p;	//current x,y coordinate
 	Sprite sp;	//bunker sprite
 	//array to track the erosion level of the different sections of the bunker
-	uint8_t erosionLevel[EROSION_ROWS][EROSION_COLS];
+	erosion_e erosionLevel[EROSION_ROWS][EROSION_COLS];
 } Bunker;
 
 //containing struct for all of the bunkers

@@ -10,8 +10,6 @@
 #include <stdio.h>	//for debugging purposes
 
 //values that determine the dimensions of the sprites on the screen
-#define BUNKER_HEIGHT (18*2)	//sprite height
-#define BUNKER_WIDTH (24*2)	//spirte width
 #define XBUNKER_PADDING (80)	//padding in the x direction of the bunker
 #define MAX_EROSION 4	//max erosion level
 
@@ -36,8 +34,17 @@ Bunkers bunkers;
 //creates a bunker initialized with the passed in x,y
 Bunker initBunker(int x, int y) {
 	Bunker b;
-	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS); //sets erosion levels to 0
+	// Sets the erosion levels. Most are initially 0, but the middle two
+	// sections are the bottom row are initialized to gone because
+	// they are black sections of the bunker sprite anyway.
+	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS);
+	b.erosionLevel[EROSION_ROWS-1][1] = gone;
+	b.erosionLevel[EROSION_ROWS-1][2] = gone;
+
+	// Initialize the position
 	b.p = initPosition(x, y);
+
+	// Initialize the sprite
 	b.sp = initSprite(BUNKER_HEIGHT, BUNKER_WIDTH, GREEN, bunker_24x18);
 	return b;
 }
@@ -50,7 +57,7 @@ Bunkers initBunkers(int x, int y) {
 	for (row = 0; row < MAX_BUNKERS; row++) { //populates bunkers array
 		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
 	}
-	//initializes all the erosion sprites
+	// Initialize all the erosion sprites.
 	erosion_1 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,
 			GREEN, bunkerDamage0_6x6);
 	erosion_2 = initSprite(EROSION_HEIGHT_AND_WIDTH, EROSION_HEIGHT_AND_WIDTH,

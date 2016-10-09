@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "tank.h"
 #include "bullets.h"
+#include "bunkers.h"
 
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)

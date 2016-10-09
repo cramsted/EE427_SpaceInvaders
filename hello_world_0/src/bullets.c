@@ -23,6 +23,12 @@ extern const int bulletCross_3x5[];
 extern const int bulletLightning_3x5[];
 extern const int alien_explosion_12x8[];
 
+// Used for determining if which kind of bullet hit
+// This is the return value for bulletCollidesWithSprite
+typedef enum {
+	no_hit = 0, tank_bullet_hit = 1, alien_bullet_hit = 2
+} bullet_type_e;
+
 //the bullets object
 Bullets bullets;
 
@@ -169,16 +175,85 @@ static void drawBullet(Bullet *bullet, int updateY) {
 	editFrameBuffer(&bullet->sp, &bullet->p); //update frame buffer
 }
 
+// Figure out which section (row,col) of the bunker was hit
+// by a bullet. This depends on where the bullet hit, which
+// is given by bulletType: alien (bottom of the bullet hit),
+// or tank (top of the bullet). Return the section in row,col.
+static void computeBunkerSection(
+		Bullet *bullet,
+		bullet_type_e bulletType,
+		Bunker *bunker,
+		int *row,
+		int *col) {
+
+	// Temporary variables are easier to use.
+	int bulletX = bullet->p.x + bullet->sp.width / 2; // middle of the bullet
+	int bunkerX = bunker->p.x;
+	int bunkerY = bunker->p.y;
+	int bunkerSectionWidth = BUNKER_WIDTH / EROSION_COLS;
+	int bunkerSectionHeight = BUNKER_HEIGHT / EROSION_ROWS;
+
+	// Figure out the bunker section column with some simple math.
+	int i;
+	for (i = EROSION_COLS - 1; i >= 0; --i) {
+		if (bulletX >= bunkerX + i*bunkerSectionWidth) {
+			*col = i;
+			break;
+		}
+	}
+
+	// First, get the bulletY value.
+	// This is dependent on whether
+	// a tank bullet hit the bunker (top of the bullet hit) or
+	// an alien bullet hit the bunker (bottom of the bullet hit).
+	int bulletY;
+	if (bulletType == tank_bullet_hit) {
+		bulletY = bullet->p.y;
+	} else if (bulletType == alien_bullet_hit) {
+		bulletY = bullet->p.y + bullet->sp.height;
+	} else {
+		// If we get here, then we have a bug.
+		bulletY = 0;
+	}
+
+	// Now we can figure out the bunker section row with simple math.
+	for (i = EROSION_ROWS - 1; i >= 0; --i) {
+		if (bulletY >= bunkerY + i*bunkerSectionHeight) {
+			*row = i;
+			break;
+		}
+	}
+
+	return;
+}
+
 // Check if the bullet hit a bunker
 // Return 1 if true, else 0
 static int bunkerHit(Bullet *bullet) {
 	int i;
+	bullet_type_e bulletType;
+
+	// Check each bunker.
 	for (i = 0; i < MAX_BUNKERS; i++) {
 		Bunker *bunker = &bunkers.bunkers[i];
-		if (bulletCollidesWithSprite(bullet, &bunker->sp, &bunker->p)) {
-			erodeBunker(bunker, 0, 0); //TODO: compute the bunker section
-			destroyBullet(bullet);
-			return 1;
+
+		// Did the bullet hit this bunker?
+		bulletType = bulletCollidesWithSprite(bullet, &bunker->sp, &bunker->p);
+		if (bulletType != no_hit) {
+			// It was a hit; compute the bunker section
+			int row = 0, col = 0;
+			computeBunkerSection(bullet, bulletType, bunker, &row, &col);
+
+			// If the bullet collided with a part of the bunker that isn't
+			// all the way eroded, continue to erode the bunker.
+			// Otherwise, just let it pass through (no collision)
+			if (bunker->erosionLevel[row][col] != gone) {
+				erodeBunker(bunker, row, col);
+				destroyBullet(bullet);
+				return 1;
+			} else {
+				return 0;
+			}
 		}
 	}
 	return 0;
@@ -212,7 +287,7 @@ static int tankHit(Bullet *bullet) {
 }
 
 // check if a bullet hit a sprite
-// return 1 if true, 0 otherwise
+// return tank_bullet_hit or alien_bullet_hit if true, no_hit otherwise
 static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 		Position *spritePos) {
 	if (!bullet->active) {
@@ -227,19 +302,19 @@ static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 	int bulletXMax = bulletX + BULLET_WIDTH;
 	int bulletYMax = bulletY + BULLET_HEIGHT;
 
-	//checks for overlapping on the left side of the bullet sprite
+	//checks for overlapping on the top left of the bullet sprite
 	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
 		if ((bulletY >= spriteY) && (bulletY <= spriteYMax)) {
-			return 1; //true
+			return tank_bullet_hit;
 		}
 	}
-	//checks for overlapping on the right side of the bullet sprite
+	//checks for overlapping on the bottom right of the bullet sprite
 	if ((bulletXMax >= spriteX) && (bulletXMax <= spriteXMax)) {
 		if ((bulletYMax >= spriteY) && (bulletYMax <= spriteYMax)) {
-			return 1; //true
+			return alien_bullet_hit;
 		}
 	}
-	return 0; //false
+	return no_hit;
 }
 
 static void checkTankBulletCollisions() {
