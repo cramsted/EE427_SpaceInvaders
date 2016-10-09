@@ -42,14 +42,7 @@ void videoInit() {
 	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 
 	tank = initTank(TANK_START_X, TANK_START_Y);	//creates tank struct
-	aliens = initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
-
-	// TODO: move this to aliens.c. And, we need to adjust this as aliens are killed.
-	int i;
-	for (i = 0; i < ALIENS_COL; i++) {	//sets which aliens are on the front row of the alien block
-		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW-1][i];
-	}
-
+	initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);	//creates bunkers block
 	bullets = initBullets();	//creates bullets struct
 
@@ -59,7 +52,7 @@ void videoInit() {
 	drawTank(TANK_START_X, &tank);	//draws the tank
 	drawAliens(ALIENS_START_X, ALIENS_START_Y, &aliens); 	//draws aliens block
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
-	drawLives(&tank); //draws the tank shaped lives
+	drawLives(); //draws the tank shaped lives
 	//	render(); //needed only for changing the index of the frame buffer
 }
 
@@ -83,7 +76,7 @@ void render() {
 }
 
 //changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at
-void edit_frameBuffer(Sprite *sp, Position *p) {
+void editFrameBuffer(Sprite *sp, Position *p) {
 	int maxRow = (p->y + sp->height);
 	int maxCol = (p->x + sp->width);
 	int row, col;
@@ -97,7 +90,6 @@ void edit_frameBuffer(Sprite *sp, Position *p) {
 			}
 		}
 	}
-
 }
 
 //based on the current x,y coordinate that the edit_frameBuffer function is on and based on the
@@ -111,9 +103,9 @@ int findPixelValue(int x, int y, int col, int row, Sprite *sp) {
 	return (sp->sprite[yval] << xval) & mask; //returns pixel value
 }
 
-//This is part of Dr. Hutchings code
+//This is part of Dr. Hutchings's code
 //sets up the video DMA controller
-void init_videoDMAController() {
+void initVideoDMAController() {
 	int Status; // Keep track of success/failure of system function calls.
 	XAxiVdma videoDMAController;
 	// There are 3 steps to initializing the vdma driver and IP.

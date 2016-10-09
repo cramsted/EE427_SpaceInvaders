@@ -33,7 +33,7 @@ Tank initTank(int x, int y);
 void drawTank(int x, Tank *tank);
 //draws the lives in the upper right hand corner of screen.
 //coordinate values are hard coded
-void drawLives(Tank *tank);
+void drawLives();
 //redraws the tank sprite a predetermined distance to the right
 void moveTankRight(Tank *tank);
 //redraws the tank sprite a predetermined distance to the left

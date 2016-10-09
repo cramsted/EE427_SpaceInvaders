@@ -6,6 +6,7 @@
  */
 #include "tank.h"
 #include "render.h"
+#include <stdio.h>
 
 //values that determine the dimensions of the sprites on the screen
 #define TANK_HEIGHT (8*2)	//tank sprite height
@@ -14,9 +15,11 @@
 #define RIGHT_PADDING 4	//padding on right side of screen
 #define LEFT_PADDING RIGHT_PADDING //ditto for left side of screen
 
-//tank sprite
+//tank sprites
 extern const int tank_15x8[];
+extern const int tank_explosion_15x8[];
 
+//tank object
 Tank tank;
 
 //creates a tank struct initialized to position x,y
@@ -28,17 +31,17 @@ Tank initTank(int x, int y) {
 	return t;
 }
 
-//draws a tank at position x. The y value is hard coded
+//draws a tank at position x. The y position is fixed
 void drawTank(int x, Tank *tank) {
-	tank->sp.Color.color = BLACK;	//draws black over old tank position
-	edit_frameBuffer(&tank->sp, &tank->p);
+	tank->sp.Color.color = BLACK; //draws black over old tank position
+	editFrameBuffer(&tank->sp, &tank->p);
 	tank->sp.Color.color = GREEN;
 	tank->p.x = x;
-	edit_frameBuffer(&tank->sp, &tank->p);	//draws tank at new position
+	editFrameBuffer(&tank->sp, &tank->p); //draws tank at new position
 }
 
 //redraws the tank sprite a predetermined distance to the right
-void moveTankRight(Tank *tank){
+void moveTankRight(Tank *tank) {
 	int currentX = tank->p.x;
 	//checks if tank is at the max right value
 	if (currentX + PIXELS_PER_MOVE + TANK_WIDTH + RIGHT_PADDING > SCREEN_WIDTH)
@@ -47,7 +50,7 @@ void moveTankRight(Tank *tank){
 }
 
 //redraws the tank sprite a predetermined distance to the left
-void moveTankLeft(Tank *tank){
+void moveTankLeft(Tank *tank) {
 	int currentX = tank->p.x;
 	//checks if the tank is a the max left value
 	if (currentX - PIXELS_PER_MOVE - LEFT_PADDING < 0)
@@ -55,25 +58,36 @@ void moveTankLeft(Tank *tank){
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
-void tankExplode(){
-	// TODO: set explode sprite
+void tankExplode() {
+	// draw the tank explosion sprite
+	tank.sp.sprite = tank_explosion_15x8;
+	editFrameBuffer(&tank.sp, &tank.p);
+
+	// reset the tank sprite back to its normal sprite because
+	// we want to draw the normal tank when we resume gameplay
+	tank.sp.sprite = tank_15x8;
+
 	// lose a life
-	// redraw lives
+	if (tank.lives > 0) {
+		tank.lives--;
+
+		// Redrawing lives will automatically erase one from the screen.
+		drawLives();
+	}
 }
 
 //draws the lives in the upper right hand corner of screen.
-//coordinate values are hard coded
-//TODO: use number of remaining lives to correctly draw
-void drawLives(Tank *tank) {
+//coordinate values are fixed
+void drawLives() {
 	Tank life = initTank(LIFE_START_X, LIFE_START_Y); //creates a new tank life
 	int col;
 	for (col = 0; col < MAX_LIVES; col++) {
-		if (col < tank->lives) { //draws lives if the col num is less than the num of lives left
-			tank->sp.Color.color = GREEN;
+		if (col < tank.lives) { //draws lives if the col num is less than the num of lives left
+			life.sp.Color.color = GREEN;
 		} else {
-			tank->sp.Color.color = BLACK; //draws lives black if col num is >= num of lives left
+			life.sp.Color.color = BLACK; //draws lives black if col num is >= num of lives left
 		}
-		life.p.x = LIFE_START_X + (col * XLIFE_PADDING) + col * life.sp.width;	//calculates life x position
-		edit_frameBuffer(&life.sp, &life.p);	//updates frame buffer
+		life.p.x = LIFE_START_X + (col * XLIFE_PADDING) + col * life.sp.width; //calculates life x position
+		editFrameBuffer(&life.sp, &life.p); //updates frame buffer
 	}
 }

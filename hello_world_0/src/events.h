@@ -16,5 +16,10 @@
 #define ALIENS_REFRESH_EVENT	0x10
 #define ALIENS_FIRE_EVENT		0x20
 #define HEARTBEAT_EVENT			0x40
+#define ALIEN_DEATH_EVENT		0x80
+#define TANK_DEATH_EVENT		0x100
+
+void eventsLoop();
+void setEvent(int event);
 
 #endif /* EVENTS_H_ */

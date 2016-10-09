@@ -9,5 +9,6 @@
 #define TIMER_H_
 
 void timerInit();
+void setAlienExplosionCounter();
 
 #endif /* TIMER_H_ */

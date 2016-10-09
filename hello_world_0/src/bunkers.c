@@ -67,7 +67,7 @@ void drawBunkers(int x, int y) {
 	int row;
 	for (row = 0; row < MAX_BUNKERS; row++) {
 		Bunker *temp = &bunkers.bunkers[row];
-		edit_frameBuffer(&temp->sp, &temp->p);
+		editFrameBuffer(&temp->sp, &temp->p);
 	}
 }
 
@@ -98,9 +98,9 @@ void erodeBunker(Bunker *b, int row, int col) {
 	// erase and redraw
 	Sprite *sp = erosion_sprites[b->erosionLevel[row][col]];
 	sp->Color.color = BLACK;
-	edit_frameBuffer(sp, &p);
+	editFrameBuffer(sp, &p);
 	sp->Color.color = GREEN;
-	edit_frameBuffer(sp, &p);
+	editFrameBuffer(sp, &p);
 }
 
 //erodes all the sections of the bunker at once by one erosion level

@@ -14,12 +14,13 @@
 #include "timer.h"
 #include "events.h"
 
-// Timing/clock constants
+// Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
-#define BUTTON_POLL_COUNT 5 // 50 ms poll rate for buttons
-#define BULLETS_UPDATE_COUNT 3 // 30 ms refresh rate for bullets
-#define ALIENS_UPDATE_COUNT 70 // 500 ms refresh rate for aliens
-#define MAX_ALIENS_FIRE_COUNT 300 // once per second is slowest rate
+#define BUTTON_POLL_COUNT 5 // poll rate for buttons
+#define BULLETS_UPDATE_COUNT 3 // refresh rate for bullets
+#define ALIENS_UPDATE_COUNT 70 // refresh rate for aliens
+#define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
+#define ALIEN_EXPLOSION_COUNT 15 // time until an alien explosion sprite gets erased
 
 // appear about every 30 seconds
 // scuttle across the screen in 10-15 seconds
@@ -36,9 +37,9 @@ static uint32_t bulletsCounter;
 static uint32_t aliensCounter;
 static uint32_t aliensFire;
 static uint32_t heartbeatCounter;
+static uint32_t alienExplosionCounter;
 
 static XGpio gpPB;
-extern uint32_t events;
 
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
@@ -50,34 +51,40 @@ void timerInterruptHandler() {
 		// Read the buttons and queue the appropriate events
 		uint32_t buttons = XGpio_DiscreteRead(&gpPB, 1);
 		if (buttons & RIGHT_BUTTON) {
-			events |= RIGHT_BTN_EVENT;
+			setEvent(RIGHT_BTN_EVENT);
 		}
 		if (buttons & MIDDLE_BUTTON) {
-			events |= MIDDLE_BTN_EVENT;
+			setEvent(MIDDLE_BTN_EVENT);
 		}
 		if (buttons & LEFT_BUTTON) {
-			events |= LEFT_BTN_EVENT;
+			setEvent(LEFT_BTN_EVENT);
 		}
 	}
 
 	if (--bulletsCounter == 0) {
 		bulletsCounter = BULLETS_UPDATE_COUNT;
-		events |= BULLETS_REFRESH_EVENT;
+		setEvent(BULLETS_REFRESH_EVENT);
 	}
 
 	if (--aliensCounter == 0) {
 		aliensCounter = ALIENS_UPDATE_COUNT;
-		events |= ALIENS_REFRESH_EVENT;
+		setEvent(ALIENS_REFRESH_EVENT);
 	}
 
 	if (--aliensFire == 0) {
 		aliensFire = rand() % MAX_ALIENS_FIRE_COUNT + 1;
-		events |= ALIENS_FIRE_EVENT;
+		setEvent(ALIENS_FIRE_EVENT);
+	}
+
+	if(alienExplosionCounter != 0){
+		if(--alienExplosionCounter == 0){
+			setEvent(ALIEN_DEATH_EVENT);
+		}
 	}
 
 	if (--heartbeatCounter == 0) {
 		heartbeatCounter = ONE_SECOND_COUNT;
-		events |= HEARTBEAT_EVENT;
+		setEvent(HEARTBEAT_EVENT);
 	}
 }
 
@@ -110,4 +117,8 @@ void timerInit() {
 	aliensCounter = ALIENS_UPDATE_COUNT;
 	aliensFire = rand() % MAX_ALIENS_FIRE_COUNT + 1;
 	heartbeatCounter = ONE_SECOND_COUNT;
+}
+
+void setAlienExplosionCounter() {
+	alienExplosionCounter = ALIEN_EXPLOSION_COUNT;
 }

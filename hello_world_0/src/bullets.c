@@ -17,19 +17,29 @@
 #define TANK_BULLET_UPDATE_Y (-ALIEN_BULLETS_UPDATE_Y)	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
 #define BULLET_MAX_Y 440	//max y position of a bullet
+
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int bulletCross_3x5[];
 extern const int bulletLightning_3x5[];
+extern const int alien_explosion_12x8[];
 
+//the bullets object
 Bullets bullets;
 
+// function prototypes - see descriptions in function definitions
 static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 		Position *spritePos);
 static void checkTankBulletCollisions();
+static int checkAlienBulletCollisions(Bullet *bullet);
+static void eraseBullet(Bullet *bullet);
 static void destroyBullet(Bullet *bullet);
+static void drawBullet(Bullet *bullet, int updateY);
 static void alienHit(Bullet *bullet);
+static int bunkerHit(Bullet *bullet);
+static int tankHit(Bullet *bullet);
+
 //creates an initialized bullet struct
-Bullet initBullet(const int *sprite) {
+static Bullet initBullet(const int *sprite) {
 	Bullet b;
 	b.active = 0; //init to inactive
 	b.sp = initSprite(BULLET_HEIGHT, BULLET_WIDTH, WHITE, sprite);
@@ -50,25 +60,12 @@ Bullets initBullets() {
 	return b;
 }
 
-// Erase the bullet from the screen
-void eraseBullet(Bullet *bullet) {
-	bullet->sp.Color.color = BLACK;
-	edit_frameBuffer(&bullet->sp, &bullet->p);
-}
-
-// Update the bullet's y position and draw it on the screen
-void drawBullet(Bullet *bullet, int updateY) {
-	bullet->sp.Color.color = WHITE;
-	bullet->p.y += updateY;
-	edit_frameBuffer(&bullet->sp, &bullet->p); //update frame buffer
-}
-
 // Update all tank and alien bullet positions
 void updateBullets(Bullets *bullets) {
 	int i;
 	Bullet *b = bullets->bullets;
 
-	// tank bullet
+	// Move the tank bullet
 	if (b[0].active) {
 		eraseBullet(&b[0]);
 		// Delete the bullet if it has left the screen
@@ -77,22 +74,28 @@ void updateBullets(Bullets *bullets) {
 			return;
 		}
 		drawBullet(&b[0], TANK_BULLET_UPDATE_Y);
+		checkTankBulletCollisions();
 	}
 
-	// alien bullets
+	// Move the alien bullets
 	for (i = 1; i < MAX_BULLETS; i++) {
-		if (b[i].active) {
-			eraseBullet(&b[i]);
+		Bullet *alienBullet = &b[i];
+		if (alienBullet->active) {
+			eraseBullet(alienBullet);
 			// Delete the bullet if it has left the screen
-			if (b[i].p.y >= BULLET_MAX_Y) {
-				b[i].active = 0;
+			if (alienBullet->p.y >= BULLET_MAX_Y) {
+				destroyBullet(alienBullet);
 				aliens.numActiveBullets--;
 			} else {
-				drawBullet(&b[i], ALIEN_BULLETS_UPDATE_Y);
+				drawBullet(alienBullet, ALIEN_BULLETS_UPDATE_Y);
+				// If the bullet hits something, update the count of
+				// active alien bullets so additional bullets can be fired.
+				if (checkAlienBulletCollisions(alienBullet)) {
+					aliens.numActiveBullets--;
+				}
 			}
 		}
 	}
-	checkTankBulletCollisions();
 }
 
 // Initialize and fire the tank bullet
@@ -116,12 +119,15 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 		return;
 	}
 
-	// Find a random alien
-	int alien_turn = 0;
-	do {
-		alien_turn = rand() % ALIENS_COL;
-	} while (aliens->frontRowAliens[alien_turn]->status == dead);
-	Alien *a = aliens->frontRowAliens[alien_turn];
+	// Pick a random alien column
+	int alien_column = rand() % ALIENS_COL;
+
+	// If the whole column is dead, don't shoot, just return.
+	Alien *a = aliens->frontRowAliens[alien_column];
+	if(a->status == dead) {
+		return;
+	}
+
 	aliens->numActiveBullets++;
 
 	// Find an inactive bullet
@@ -143,16 +149,39 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	drawBullet(b, ALIEN_BULLETS_UPDATE_Y);
 }
 
-void bunkerHit(Bullet *bullet) {
+// Erase the bullet from the screen
+static void eraseBullet(Bullet *bullet) {
+	bullet->sp.Color.color = BLACK;
+	editFrameBuffer(&bullet->sp, &bullet->p);
+}
+
+// Erases, deactivates, and resets the bullet
+static void destroyBullet(Bullet *bullet) {
+	eraseBullet(bullet);
+	bullet->active = 0; //deactivates the bullet;
+	bullet->p.x = bullet->p.y = 0; //reset position
+}
+
+// Update the bullet's y position and draw it on the screen
+static void drawBullet(Bullet *bullet, int updateY) {
+	bullet->sp.Color.color = WHITE;
+	bullet->p.y += updateY;
+	editFrameBuffer(&bullet->sp, &bullet->p); //update frame buffer
+}
+
+// Check if the bullet hit a bunker
+// Return 1 if true, else 0
+static int bunkerHit(Bullet *bullet) {
 	int i;
 	for (i = 0; i < MAX_BUNKERS; i++) {
 		Bunker *bunker = &bunkers.bunkers[i];
 		if (bulletCollidesWithSprite(bullet, &bunker->sp, &bunker->p)) {
 			erodeBunker(bunker, 0, 0); //TODO: compute the bunker section
 			destroyBullet(bullet);
+			return 1;
 		}
 	}
-
+	return 0;
 }
 
 static void alienHit(Bullet *bullet) {
@@ -171,19 +200,19 @@ static void alienHit(Bullet *bullet) {
 
 }
 
-static void tankHit(Bullet *bullet) {
+// check if a bullet hit the tank
+// return 1 if true, else 0
+static int tankHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &tank.sp, &tank.p)) {
 		tankExplode(); //TODO: tank explosion
 		destroyBullet(bullet);
-
+		return 1;
 	}
+	return 0;
 }
 
-static void destroyBullet(Bullet *bullet) {
-	eraseBullet(bullet);
-	bullet->active = 0; //deactivates the bullet;
-}
-
+// check if a bullet hit a sprite
+// return 1 if true, 0 otherwise
 static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 		Position *spritePos) {
 	if (!bullet->active) {
@@ -212,7 +241,8 @@ static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 	}
 	return 0; //false
 }
-void checkTankBulletCollisions() {
+
+static void checkTankBulletCollisions() {
 	Bullet *tankBullet = &bullets.bullets[0];
 	//check bunker
 	bunkerHit(tankBullet);
@@ -220,13 +250,17 @@ void checkTankBulletCollisions() {
 	alienHit(tankBullet);
 }
 
-void checkAlienBulletCollisions() {
-	int i;
-	for (i = 1; i < MAX_BULLETS; i++) {
-		Bullet *alienBullet = &bullets.bullets[i];
-		//check bunker
-		bunkerHit(alienBullet);
-		//check tank
-		tankHit(alienBullet);
+// check if an alien bullet hits anything
+// return 1 if true, else 0
+static int checkAlienBulletCollisions(Bullet *alienBullet) {
+	//check if it hit the bunker
+	if (bunkerHit(alienBullet)) {
+		return 1;
 	}
+	//check if it hit the tank
+	if (tankHit(alienBullet)) {
+		return 1;
+	}
+	// it didn't hit anything
+	return 0;
 }

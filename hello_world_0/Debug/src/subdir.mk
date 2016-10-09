@@ -8,6 +8,7 @@ C_SRCS += \
 ../src/bullets.c \
 ../src/bunkers.c \
 ../src/controls.c \
+../src/events.c \
 ../src/main.c \
 ../src/platform.c \
 ../src/render.c \
@@ -26,6 +27,7 @@ OBJS += \
 ./src/bullets.o \
 ./src/bunkers.o \
 ./src/controls.o \
+./src/events.o \
 ./src/main.o \
 ./src/platform.o \
 ./src/render.o \
@@ -41,6 +43,7 @@ C_DEPS += \
 ./src/bullets.d \
 ./src/bunkers.d \
 ./src/controls.d \
+./src/events.d \
 ./src/main.d \
 ./src/platform.d \
 ./src/render.d \

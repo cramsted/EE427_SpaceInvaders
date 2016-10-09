@@ -43,7 +43,7 @@ void drawCharacters() {
 		Character s = initChar(
 				(SCORE_START_X + (CHARACTER_WIDTH + CHARACTER_PADDING) * i),
 				TEXT_START_Y, scoreArray[i], WHITE);
-		edit_frameBuffer(&s.sp, &s.p);
+		editFrameBuffer(&s.sp, &s.p);
 	}
 
 	const int *livesArray[] = { l_8x5, i_8x5, v_8x5, e_8x5, s_8x5 };
@@ -51,7 +51,7 @@ void drawCharacters() {
 		Character s = initChar(
 				(LIVES_START_X + (CHARACTER_WIDTH + CHARACTER_PADDING) * i),
 				TEXT_START_Y, livesArray[i], WHITE);
-		edit_frameBuffer(&s.sp, &s.p);
+		editFrameBuffer(&s.sp, &s.p);
 	}
 }
 
@@ -86,7 +86,7 @@ void drawScore() {
 	score.sp[3].sp.sprite = digitsArray[digit_four];
 	int i;
 	for (i = 0; i < MAX_SCORE_DIGITS; i++) {
-		edit_frameBuffer(&score.sp[i].sp, &score.sp[i].p);
+		editFrameBuffer(&score.sp[i].sp, &score.sp[i].p);
 	}
 }
 
