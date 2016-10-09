@@ -19,13 +19,10 @@
 /*
  * Space Invaders game
  * TODO's:
- *   - bullet collision detection / bunker degradation
  *   - aliens adjust when left column dies
- *   - implement how lives are updated
  *   - optimize drawing algorithm as needed
- *   - alien exploding
  *   - UFO appearing and exploding
- *   - tank exploding
+ *   - when tank explodes, briefly pause game, then redraw the tank and continue
  *   - reorganizing: updating functions, removing struct pointers
  *   - CPU utilization
  */

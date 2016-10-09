@@ -266,7 +266,7 @@ static void alienHit(Bullet *bullet) {
 			Alien *alien = &aliens.aliens[row][col];
 			if (bulletCollidesWithSprite(bullet, &alien->sp, &alien->p)) {
 				if (alien->status == alive) {
-					killAlien(alien, row, col); //TODO: alien explosion
+					killAlien(alien, row, col);
 					destroyBullet(bullet);
 				}
 			}
@@ -279,7 +279,7 @@ static void alienHit(Bullet *bullet) {
 // return 1 if true, else 0
 static int tankHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &tank.sp, &tank.p)) {
-		tankExplode(); //TODO: tank explosion
+		tankExplode();
 		destroyBullet(bullet);
 		return 1;
 	}

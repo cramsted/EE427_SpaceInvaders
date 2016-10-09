@@ -70,6 +70,14 @@ void eventsLoop() {
 				clearEvent(ALIEN_DEATH_EVENT);
 				eraseAlienExplosionSprite();
 			}
+			if (events & UFO_UPDATE_EVENT) {
+				clearEvent(UFO_UPDATE_EVENT);
+				// TODO: update the ufo. This could include
+				// checking to see if its on the screen:
+				// if it isn't, then update a counter, and make it
+				// appear when then counter expires;
+				// if it is, just update its position.
+			}
 			if (events & HEARTBEAT_EVENT) {
 				// "Idle" event - calculate utilization
 				events &= ~HEARTBEAT_EVENT;

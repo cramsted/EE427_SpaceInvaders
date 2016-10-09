@@ -22,9 +22,12 @@
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
 #define ALIEN_EXPLOSION_COUNT 15 // time until an alien explosion sprite gets erased
 
-// appear about every 30 seconds
+// UFO appears about every 25-30 seconds
+#define UFO_APPEAR_COUNT_MINIMUM 2000
+#define UFO_APPEAR_COUNT_MINIMUM 3000
+
 // scuttle across the screen in 10-15 seconds
-#define UFO_UPDATE_COUNT // TODO do this
+#define UFO_UPDATE_COUNT 3
 
 // Bit masks
 #define RIGHT_BUTTON 0x02
@@ -38,6 +41,7 @@ static uint32_t aliensCounter;
 static uint32_t aliensFire;
 static uint32_t heartbeatCounter;
 static uint32_t alienExplosionCounter;
+static uint32_t ufoUpdateCounter;
 
 static XGpio gpPB;
 
@@ -80,6 +84,10 @@ void timerInterruptHandler() {
 		if(--alienExplosionCounter == 0){
 			setEvent(ALIEN_DEATH_EVENT);
 		}
+	}
+
+	if (--ufoUpdateCounter == 0) {
+		setEvent(UFO_UPDATE_EVENT);
 	}
 
 	if (--heartbeatCounter == 0) {

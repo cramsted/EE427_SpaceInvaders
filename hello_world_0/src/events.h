@@ -18,6 +18,7 @@
 #define HEARTBEAT_EVENT			0x40
 #define ALIEN_DEATH_EVENT		0x80
 #define TANK_DEATH_EVENT		0x100
+#define UFO_UPDATE_EVENT		0x200
 
 void eventsLoop();
 void setEvent(int event);
