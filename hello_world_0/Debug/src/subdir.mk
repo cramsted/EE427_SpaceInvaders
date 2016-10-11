@@ -17,7 +17,8 @@ C_SRCS += \
 ../src/sprites.c \
 ../src/tank.c \
 ../src/text.c \
-../src/timer.c 
+../src/timer.c \
+../src/ufo.c 
 
 LD_SRCS += \
 ../src/lscript.ld 
@@ -36,7 +37,8 @@ OBJS += \
 ./src/sprites.o \
 ./src/tank.o \
 ./src/text.o \
-./src/timer.o 
+./src/timer.o \
+./src/ufo.o 
 
 C_DEPS += \
 ./src/aliens.d \
@@ -52,7 +54,8 @@ C_DEPS += \
 ./src/sprites.d \
 ./src/tank.d \
 ./src/text.d \
-./src/timer.d 
+./src/timer.d \
+./src/ufo.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

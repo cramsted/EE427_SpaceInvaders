@@ -1760,12 +1760,12 @@ GCLK           |    3.073|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 22.00 secs
-Total CPU time to Xst completion: 21.15 secs
+Total REAL time to Xst completion: 21.00 secs
+Total CPU time to Xst completion: 21.14 secs
  
 --> 
 
-Total memory usage is 349408 kilobytes
+Total memory usage is 345312 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   18 (   0 filtered)

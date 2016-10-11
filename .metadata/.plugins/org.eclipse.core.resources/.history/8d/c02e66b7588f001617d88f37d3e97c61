@@ -1,0 +1,22 @@
+/*
+ * ufo.c
+ *
+ *  Created on: Oct 10, 2016
+ *      Author: superman
+ */
+
+#include "ufo.h"
+
+UFO ufo;
+extern const int saucer_16x7;
+
+void initUfo(){
+	ufo.p = initPosition(UFO_STARTING_X, UFO_STARTING_Y);
+	ufo.sp =
+}
+//moves the ufo in the direction of ufo_direction_e by a preset number of pixels
+void updateUfo();
+//kills the ufo
+void killUfo();
+void drawUfo();
+void eraseUfoExplosionSprite();

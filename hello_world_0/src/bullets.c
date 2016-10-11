@@ -7,6 +7,7 @@
 #include "bullets.h"
 #include "render.h"		//for edit_frameBuffer
 #include "aliens.h"
+#include "events.h"
 #include "bunkers.h"
 #include <stdlib.h>
 
@@ -16,7 +17,7 @@
 #define ALIEN_BULLETS_UPDATE_Y 5	//alien bullet speed
 #define TANK_BULLET_UPDATE_Y (-ALIEN_BULLETS_UPDATE_Y)	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
-#define BULLET_MAX_Y 440	//max y position of a bullet
+#define BULLET_MAX_Y 435	//max y position of a bullet
 
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int bulletCross_3x5[];
@@ -279,7 +280,7 @@ static void alienHit(Bullet *bullet) {
 // return 1 if true, else 0
 static int tankHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &tank.sp, &tank.p)) {
-		tankExplode();
+		setEvent(TANK_DEATH_EVENT);
 		destroyBullet(bullet);
 		return 1;
 	}

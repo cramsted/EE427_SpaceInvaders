@@ -37,7 +37,7 @@
 #include "timer.h"
 #include "events.h"
 
-#define START_GAME_DELAY 10000000
+#define START_GAME_DELAY 30000000
 
 int main() {
 	// seed random number generator
@@ -45,12 +45,15 @@ int main() {
 	init_platform(); // Necessary for all programs.
 	initVideoDMAController(); //sets up video hardware
 	videoInit(); //initializes the screen to its starting point
-	timerInit(); //initializes buttons, the FIT timer, and interrupts
 
 	// short delay before things get going
 	volatile int delay = START_GAME_DELAY;
 	while (--delay)
 		;
+
+	//initializes buttons, the FIT timer, and interrupts
+	// Do this AFTER the delay so there's time to draw the screen
+	timerInit();
 
 //	while (1) {
 //		readInput(); //waits for control input

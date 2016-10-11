@@ -22,5 +22,7 @@
 
 void eventsLoop();
 void setEvent(int event);
-
+void enableEvents();
+void disableAndClearEvents();
+int eventsEnabled();
 #endif /* EVENTS_H_ */

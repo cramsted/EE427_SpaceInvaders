@@ -164,12 +164,12 @@ void drawAliens(int x, int y, Aliens *aliens) {
 			for (col = 0; col < ALIENS_COL; col++) {
 				Alien *temp = &aliens->aliens[row][col];
 
-				// erase the alien and update its position
-				eraseAlien(temp);
-				temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
-				temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
-
 				if (temp->status == alive) {
+					// erase the alien and update its position
+					eraseAlien(temp);
+					temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
+					temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
+
 					// change the type from out to in or vice versa
 					(temp->type & 1) ? temp->type-- : temp->type++;
 					temp->sp.sprite = alien_sprites[temp->type];
@@ -185,12 +185,12 @@ void drawAliens(int x, int y, Aliens *aliens) {
 			for (col = ALIENS_COL - 1; col >= 0; col--) {
 				Alien *temp = &aliens->aliens[row][col];
 
-				// erase the alien and update its position
-				eraseAlien(temp);
-				temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
-				temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
-
 				if (temp->status == alive) {
+					// erase the alien and update its position
+					eraseAlien(temp);
+					temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
+					temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
+
 					// change the type from out to in or vice versa
 					temp->type & 1 ? temp->type-- : temp->type++;
 					temp->sp.sprite = alien_sprites[temp->type];
@@ -221,12 +221,15 @@ int findStartAlienCol(Aliens *aliens) {
 
 // Same as the findStartAlienCol, but used for bounds checking on the right
 int findEndAlienCol(Aliens *aliens) {
-	int i;
+	int col, row;
 	Alien *a;
-	for (i = ALIENS_COL - 1; i >= 0; i--) {
-		a = &aliens->aliens[0][i];
-		if (a->status == alive) {
-			return i + 1;
+	for (col = ALIENS_COL - 1; col >= 0; col--) {
+		for( row = ALIENS_ROW - 1; row >= 0; row--){
+			a = &aliens->aliens[row][col];
+			if (a->status == alive) {
+				//the index is 1-11 because it is used when multiplying the width of the alien
+				return col + 1;
+			}
 		}
 	}
 	return 0;

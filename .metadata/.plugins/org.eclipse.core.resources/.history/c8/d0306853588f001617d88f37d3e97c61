@@ -1,0 +1,38 @@
+/*
+ * ufo.h
+ *
+ *  Created on: Oct 10, 2016
+ *      Author: superman
+ */
+
+#ifndef UFO_H_
+#define UFO_H_
+
+#include "sprites.h"
+
+#define UFO_SHIFT_X 5
+#define UFO_START_X 8
+#define UFO_START_Y 50
+
+typedef enum {
+	left = -UFO_SHIFT_X,
+	right = UFO_SHIFT_X
+}ufo_direction_e;
+
+typedef struct {
+	ufo_direction_e direction; //what direction the ufo is currently traveling in
+	Position p; //x,y position of the sprite
+	Sprite sp; //sprite object
+}UFO;
+
+extern UFO ufo;
+
+void initUfo();
+//moves the ufo in the direction of ufo_direction_e by a preset number of pixels
+void updateUfo(Aliens *aliens);
+//kills the ufo
+void killUfo(Alien *alien, int row, int col);
+void drawUfo(int x, int y, Aliens *aliens);
+void eraseUfoExplosionSprite();
+
+#endif /* UFO_H_ */

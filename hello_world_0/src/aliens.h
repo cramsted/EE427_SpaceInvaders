@@ -12,7 +12,7 @@
 
 //positional and size constraints on the aliens block
 #define ALIENS_START_X 8			//starting x position of the alien block
-#define ALIENS_START_Y 50			//starting y position of the alien block
+#define ALIENS_START_Y 75			//starting y position of the alien block
 #define ALIENS_COL 11					//number of aliens in a row
 #define ALIENS_ROW 5					//number of aliens in a column
 //custom variable set for easily changing the guise of any type of alien sprites

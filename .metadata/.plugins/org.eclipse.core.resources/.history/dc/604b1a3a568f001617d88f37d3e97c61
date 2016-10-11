@@ -1,0 +1,14 @@
+/*
+ * ufo.c
+ *
+ *  Created on: Oct 10, 2016
+ *      Author: superman
+ */
+
+#include "ufo.h"
+
+typedef struct {
+	alien_direction_e direction; //what direction the block of aliens is currently traveling in
+	Position p; //x,y position of the sprite
+	Sprite sp; //sprite object
+}UFO;
