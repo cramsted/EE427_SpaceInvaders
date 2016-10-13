@@ -105,7 +105,6 @@ void initAliens(int x, int y) {
 		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW - 1][i];
 	}
 
-	// Keeps track of how many aliens are killed
 	aliens.killCount = 0;
 }
 
@@ -150,6 +149,10 @@ void killAlien(Alien *alien, int row, int col) {
 	explodeAlien(alien); //removes alien from the screen
 	setAlienExplosionCounter();
 	aliens.killCount++;
+	if (aliens.killCount == ALIENS_ROW * ALIENS_COL) {
+		// end game
+
+	}
 
 	// adjust frontRowAliens, which keeps track of which aliens can fire a bullet
 	if (row != 0) {
@@ -288,16 +291,7 @@ void updateAliens() {
 	default:
 		break;
 	}
-
-	// End the game AFTER updating the aliens, which does ensure all sprites are
-	// erased, if all the aliens are dead.
-	if (aliens.killCount == ALIENS_ROW * ALIENS_COL) {
-		// end game
-		drawGameOver();
-		while (1);
-	}
 }
-
 static int alienCollidesWithBunker(int alienX, int alienY, Bunker *bunker) {
 	Position *spritePos = &bunker->p;
 	Sprite *sprite = &bunker->sp;

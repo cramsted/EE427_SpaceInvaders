@@ -150,12 +150,12 @@ void timerInterruptHandler() {
 		updateAliensFireCounter();
 		updateAlienExplosionCounter();
 		updateUfoUpdateCounter();
-		updateHeartbeatCounter();
 		updateUfoExplosionCounter();
 		updateUfoAppearanceCounter();
 	} else {
 		updateTankDeathCounter();
 	}
+	updateHeartbeatCounter();
 }
 
 // Main interrupt handler, queries the interrupt controller to see what peripheral

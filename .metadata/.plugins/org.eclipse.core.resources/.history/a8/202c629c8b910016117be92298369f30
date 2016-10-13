@@ -59,16 +59,17 @@ void moveTankLeft(Tank *tank) {
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
-#define DELAY 500000
+#define DELAY 100000
 inline void shortDelay() {
 	volatile int i = DELAY;
 	while (i--);
 }
 
 void tankExplode() {
+
 	// draw the tank explosion sprite
 	int i;
-	for (i = 10; i > 0; --i) {
+	for (i = 8; i > 0; --i) {
 		tank.sp.sprite = tank_explosion_15x8;
 		editFrameBuffer(&tank.sp, &tank.p);
 		shortDelay();

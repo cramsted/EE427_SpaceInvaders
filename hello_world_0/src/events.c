@@ -16,8 +16,7 @@
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)
 // this ignores the overhead of the interrupts
-#define ZERO_UTILIZATION 4544399
-#define EVENTS_ENABLED 1
+#define ZERO_UTILIZATION 5256055 // 4544399
 
 // Holds all pending events, where each event is a different bit
 uint32_t events = 0;
@@ -109,7 +108,7 @@ void heartbeatEvent() {
 		// "Idle" event - calculate utilization
 		clearEvent(HEARTBEAT_EVENT);
 		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
-//		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
+		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
 		utilizationCounter = 0;
 	}
 }
@@ -166,11 +165,11 @@ void eventsLoop() {
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization
-			//			if (events & HEARTBEAT_EVENT) {
-			//				events &= ~HEARTBEAT_EVENT;
-			//				xil_printf("%d\n\r", utilizationCounter);
-			//				utilizationCounter = 0;
-			//			}
+//			if (events & HEARTBEAT_EVENT) {
+//				events &= ~HEARTBEAT_EVENT;
+//				xil_printf("%d\n\r", utilizationCounter);
+//				utilizationCounter = 0;
+//			}
 		}
 	}
 }

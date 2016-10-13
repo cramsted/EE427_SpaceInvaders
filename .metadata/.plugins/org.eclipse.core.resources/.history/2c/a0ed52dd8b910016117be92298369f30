@@ -297,7 +297,6 @@ void updateAliens() {
 		while (1);
 	}
 }
-
 static int alienCollidesWithBunker(int alienX, int alienY, Bunker *bunker) {
 	Position *spritePos = &bunker->p;
 	Sprite *sprite = &bunker->sp;

@@ -18,7 +18,6 @@
 //tank sprites
 extern const int tank_15x8[];
 extern const int tank_explosion_15x8[];
-extern const int tank_explosion2[];
 
 //tank object
 Tank tank;
@@ -59,23 +58,17 @@ void moveTankLeft(Tank *tank) {
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
-#define DELAY 500000
 inline void shortDelay() {
-	volatile int i = DELAY;
+	volatile int i = 10000;
 	while (i--);
 }
 
 void tankExplode() {
+
 	// draw the tank explosion sprite
-	int i;
-	for (i = 10; i > 0; --i) {
-		tank.sp.sprite = tank_explosion_15x8;
-		editFrameBuffer(&tank.sp, &tank.p);
-		shortDelay();
-		tank.sp.sprite = tank_explosion2;
-		editFrameBuffer(&tank.sp, &tank.p);
-		shortDelay();
-	}
+	tank.sp.sprite = tank_explosion_15x8;
+	editFrameBuffer(&tank.sp, &tank.p);
+
 
 	// reset the tank sprite back to its normal sprite because
 	// we want to draw the normal tank when we resume gameplay
