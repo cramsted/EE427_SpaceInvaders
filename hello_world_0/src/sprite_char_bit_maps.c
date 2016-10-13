@@ -88,6 +88,36 @@ const int v_8x5[] =
 		packword8(0,0,0,1,1,0,0,0)
 };
 
+//letter g
+const int g_8x5[] =
+{
+		packword8(0,0,1,1,1,1,1,1),
+		packword8(1,1,0,0,0,0,0,0),
+		packword8(1,1,0,0,1,1,1,1),
+		packword8(1,1,0,0,0,0,1,1),
+		packword8(0,0,1,1,1,1,0,0)
+};
+
+//letter a
+const int a_8x5[] =
+{
+		packword8(0,0,1,1,1,1,0,0),
+		packword8(1,1,0,0,0,0,1,1),
+		packword8(1,1,1,1,1,1,1,1),
+		packword8(1,1,0,0,0,0,1,1),
+		packword8(1,1,0,0,0,0,1,1)
+};
+
+//letter m
+const int m_8x5[] =
+{
+		packword8(1,1,0,0,0,0,1,1),
+		packword8(1,1,1,0,0,1,1,1),
+		packword8(1,1,0,1,1,0,1,1),
+		packword8(1,1,0,0,0,0,1,1),
+		packword8(1,1,0,0,0,0,1,1)
+};
+
 //number 0
 const int zero_8x5[] =
 {

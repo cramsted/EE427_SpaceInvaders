@@ -30,7 +30,7 @@
 
 // scuttle across the screen in 10-15 seconds
 #define UFO_UPDATE_COUNT 6
-#define UFO_EXPLOSION_COUNT ALIEN_EXPLOSION_COUNT
+#define UFO_EXPLOSION_COUNT 50
 
 // Bit masks
 #define RIGHT_BUTTON 0x02

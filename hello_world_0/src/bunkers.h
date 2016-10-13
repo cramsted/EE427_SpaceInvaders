@@ -49,5 +49,6 @@ void drawBunkers(int x, int y);
 void erodeBunker(Bunker *b, int row, int col);
 //erodes all the sections of the bunker
 void destroyWholeBunker(Bunker *bunker);
-
+//erases a single section of the bunker
+void eraseBunkerSection(Bunker *b, int row, int col);
 #endif /* BUNKERS_H_ */

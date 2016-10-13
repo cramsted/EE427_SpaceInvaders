@@ -53,6 +53,8 @@ static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL };
 void eraseAlien(Alien *alien);
 void bunkerCollisionCheck(int alienX, int alienY);
 int aliensAtTank();
+void findAndErodeBunkerBlock(int x, int y, Bunker *temp);
+void checkPointCollision(int x, int y);
 //initialize an alien struct
 //param x sets starting x position
 //param y sets starting y position
@@ -141,7 +143,7 @@ void explodeAlien(Alien *alien) {
 
 //sets the status var of the alien at the passed in row and col as dead
 void killAlien(Alien *alien, int row, int col) {
-	alien->status = dead;
+	alien->status = exploded;
 	explodeAlien(alien); //removes alien from the screen
 	setAlienExplosionCounter();
 
@@ -175,7 +177,10 @@ void killAlien(Alien *alien, int row, int col) {
 }
 
 void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
-	if (alien->status == alive) {
+	if (alien->status == exploded) {
+		alien->status = dead;
+		eraseAlien(alien);
+	} else if (alien->status == alive) {
 		// erase the alien and update its position
 		eraseAlien(alien);
 		alien->p.x += xUpdate;
@@ -187,7 +192,8 @@ void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
 
 		//check to see if a bunker needs to be erased prior to drawing the aliens over it.
 		if ((alien->p.y + ALIEN_HEIGHT) >= BUNKER_START_Y) {
-			bunkerCollisionCheck(alien->p.x, alien->p.y);
+			checkPointCollision(alien->p.x, (alien->p.y + ALIEN_HEIGHT));
+			checkPointCollision((alien->p.x + ALIEN_WIDTH), (alien->p.y + ALIEN_HEIGHT));
 		}
 
 		// redraw the alien
@@ -262,6 +268,7 @@ void updateAliens() {
 	case down:
 		drawAliens(0, down);
 		if (aliensAtTank()) {
+			drawGameOver();
 			while (1)
 				;
 		}
@@ -316,15 +323,85 @@ void bunkerCollisionCheck(int alienX, int alienY) {
 }
 int aliensAtTank() {
 	int i, maxY = 0;
-	for (i = 0; i < ALIENS_COL; i++){
-		if(aliens.frontRowAliens[i]->status == alive){
-			if(maxY <= aliens.frontRowAliens[i]->p.y){
+	for (i = 0; i < ALIENS_COL; i++) {
+		if (aliens.frontRowAliens[i]->status == alive) {
+			if (maxY <= aliens.frontRowAliens[i]->p.y) {
 				maxY = aliens.frontRowAliens[i]->p.y;
 			}
 		}
 	}
-	if((maxY + ALIEN_HEIGHT) >= TANK_START_Y){
+	if ((maxY + ALIEN_HEIGHT) >= TANK_START_Y) {
 		return 1; //aliens have won
 	}
 	return 0; //aliens haven't won yet
+}
+
+// check if a bullet hit a sprite
+// return tank_bullet_hit or alien_bullet_hit if true, no_hit otherwise
+void alienCollidesWithBunkers(Alien *alien, Position *p) {
+	//check bottom left for collision
+	//if yes, erode that section of the bunker
+	//else
+	//	if (!bullet->active) {
+	//		return 0; //false because the bullet is not on the screen
+	//	}
+	//	int spriteX = spritePos->x;
+	//	int spriteY = spritePos->y;
+	//	int spriteXMax = spriteX + sprite->width;
+	//	int spriteYMax = spriteY + sprite->height;
+	//	int bulletX = bullet->p.x;
+	//	int bulletY = bullet->p.y;
+	//	int bulletXMax = bulletX + BULLET_WIDTH;
+	//	int bulletYMax = bulletY + BULLET_HEIGHT;
+	//
+	//	//checks for overlapping on the top left of the bullet sprite
+	//	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
+	//		if ((bulletY >= spriteY) && (bulletY <= spriteYMax)) {
+	//			return tank_bullet_hit;
+	//		}
+	//	}
+	//	//checks for overlapping on the bottom right of the bullet sprite
+	//	if ((bulletXMax >= spriteX) && (bulletXMax <= spriteXMax)) {
+	//		if ((bulletYMax >= spriteY) && (bulletYMax <= spriteYMax)) {
+	//			return alien_bullet_hit;
+	//		}
+	//	}
+	//	return no_hit;
+}
+
+void checkPointCollision(int x, int y) {
+	int i;
+	for (i = 0; i < MAX_BUNKERS; i++) {
+		Bunker *temp = &bunkers.bunkers[i];
+		int bunkerX = temp->p.x;
+		int bunkerY = temp->p.y;
+		int bunkerXMax = bunkerX + temp->sp.width;
+		int bunkerYMax = bunkerY + temp->sp.height;
+		//determine if the x,y point is inside the bunker
+		if ((x >= bunkerX) && (x <= bunkerXMax)) {
+			if ((y >= bunkerY) && (y <= bunkerYMax)) {
+				findAndErodeBunkerBlock(x, y, temp);
+			}
+		}
+	}
+}
+
+void findAndErodeBunkerBlock(int x, int y, Bunker *temp) {
+	int bunkerX = temp->p.x;
+	int bunkerY = temp->p.y;
+	//find the size of the erosion rows and cols in the bunker
+	int colSize = BUNKER_WIDTH / EROSION_COLS;
+	int rowSize = BUNKER_HEIGHT / EROSION_ROWS;
+	//test which block the x,y point is in
+	int row, col;
+	for (row = EROSION_ROWS - 1; row >= 0; row--) {
+		for (col = EROSION_COLS - 1; col >= 0; col--) {
+			if (x >= (bunkerX + colSize * col)) {
+				if (y >= (bunkerY + rowSize * row)) {
+					eraseBunkerSection(temp, row, col);
+					return;
+				}
+			}
+		}
+	}
 }

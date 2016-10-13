@@ -15,11 +15,10 @@
 //values that determine the dimensions of the sprites on the screen
 #define BULLET_WIDTH (3 * 2)	//sprite width
 #define BULLET_HEIGHT (5 * 2)	//sprite height
-#define ALIEN_BULLETS_UPDATE_Y 5	//alien bullet speed
-#define TANK_BULLET_UPDATE_Y (-ALIEN_BULLETS_UPDATE_Y)	//tank bullet speed
+#define ALIEN_BULLETS_UPDATE_Y 6	//alien bullet speed
+#define TANK_BULLET_UPDATE_Y -8	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
 #define BULLET_MAX_Y 435	//max y position of a bullet
-
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int bulletCross_3x5[];
 extern const int bulletLightning_3x5[];
@@ -45,6 +44,7 @@ static void drawBullet(Bullet *bullet, int updateY);
 static void alienHit(Bullet *bullet);
 static int bunkerHit(Bullet *bullet);
 static int tankHit(Bullet *bullet);
+static void ufoHit(Bullet *bullet);
 
 //creates an initialized bullet struct
 static Bullet initBullet(const int *sprite) {
@@ -132,7 +132,7 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 
 	// If the whole column is dead, don't shoot, just return.
 	Alien *a = aliens->frontRowAliens[alien_column];
-	if(a->status == dead) {
+	if (a->status == dead) {
 		return;
 	}
 
@@ -181,12 +181,8 @@ static void drawBullet(Bullet *bullet, int updateY) {
 // by a bullet. This depends on where the bullet hit, which
 // is given by bulletType: alien (bottom of the bullet hit),
 // or tank (top of the bullet). Return the section in row,col.
-static void computeBunkerSection(
-		Bullet *bullet,
-		bullet_type_e bulletType,
-		Bunker *bunker,
-		int *row,
-		int *col) {
+static void computeBunkerSection(Bullet *bullet, bullet_type_e bulletType,
+		Bunker *bunker, int *row, int *col) {
 
 	// Temporary variables are easier to use.
 	int bulletX = bullet->p.x + bullet->sp.width / 2; // middle of the bullet
@@ -198,7 +194,7 @@ static void computeBunkerSection(
 	// Figure out the bunker section column with some simple math.
 	int i;
 	for (i = EROSION_COLS - 1; i >= 0; --i) {
-		if (bulletX >= bunkerX + i*bunkerSectionWidth) {
+		if (bulletX >= bunkerX + i * bunkerSectionWidth) {
 			*col = i;
 			break;
 		}
@@ -220,7 +216,7 @@ static void computeBunkerSection(
 
 	// Now we can figure out the bunker section row with simple math.
 	for (i = EROSION_ROWS - 1; i >= 0; --i) {
-		if (bulletY >= bunkerY + i*bunkerSectionHeight) {
+		if (bulletY >= bunkerY + i * bunkerSectionHeight) {
 			*row = i;
 			break;
 		}
@@ -268,8 +264,8 @@ static void alienHit(Bullet *bullet) {
 			Alien *alien = &aliens.aliens[row][col];
 			if (bulletCollidesWithSprite(bullet, &alien->sp, &alien->p)) {
 				if (alien->status == alive) {
-					killAlien(alien, row, col);
 					destroyBullet(bullet);
+					killAlien(alien, row, col);
 				}
 			}
 		}
@@ -290,8 +286,12 @@ static int tankHit(Bullet *bullet) {
 
 static void ufoHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &ufo.sp, &ufo.p)) {
-		killUfo();
-		destroyBullet(bullet);
+		if (ufo.sp.Color.color != BLACK) {
+			//get rid of bullet before drawing the score otherwise it with draw
+			//over the score
+			destroyBullet(bullet);
+			killUfo();
+		}
 	}
 }
 

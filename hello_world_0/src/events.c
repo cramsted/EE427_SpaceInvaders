@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "tank.h"
 #include "bullets.h"
+#include "text.h"
 #include "bunkers.h"
 #include "ufo.h"
 
@@ -118,6 +119,7 @@ void tankDeathEvent() {
 		disableAndClearEvents();
 		tankExplode();
 		if (tank.lives == 0) {
+			drawGameOver();
 			while (1) {
 			} //the game ends here
 		}

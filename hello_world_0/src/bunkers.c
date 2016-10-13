@@ -122,6 +122,7 @@ void destroyWholeBunker(Bunker *bunker) {
 	setErosionLevel(bunker, gone);
 }
 
+
 void setErosionLevel(Bunker *bunker, erosion_e level){
 	int row, col;
 	for(row = 0; row < EROSION_ROWS; row++){
@@ -129,4 +130,30 @@ void setErosionLevel(Bunker *bunker, erosion_e level){
 			bunker->erosionLevel[row][col] = level;
 		}
 	}
+}
+
+void eraseBunkerSection(Bunker *b, int row, int col) {
+	// row and col must be valid
+	if (col < 0 || col > EROSION_COLS || row < 0 || row > EROSION_ROWS) {
+		return;
+	}
+
+	// don't erode the empty bunker section
+	if( row == 2){
+		if(col == 1 || col == 2){
+			return;
+		}
+	}
+
+	b->erosionLevel[row][col] = gone;
+
+	// get position
+	Position p;
+	p.x = b->p.x + (EROSION_HEIGHT_AND_WIDTH * col);
+	p.y = b->p.y + (EROSION_HEIGHT_AND_WIDTH * row);
+
+	// erase and redraw
+	Sprite *sp = erosion_sprites[b->erosionLevel[row][col]];
+	sp->Color.color = BLACK;
+	editFrameBuffer(sp, &p);
 }

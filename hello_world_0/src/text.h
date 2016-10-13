@@ -13,6 +13,9 @@
 //values that determine the dimensions of the sprites on the screen and max draw and coordinate values
 #define MAX_SCORE_DIGITS 4	//max score DIGITS_START_X
 #define MAX_CHARACTER_LETTERS 5 //longest string of chars that can be printed
+#define GAME_START_X 250		//start x value for the game text
+#define OVER_START_X 350		//start x value for the over text
+#define GAME_OVER_Y 250			//start y value for the game over text
 #define SCORE_START_X 20	//score starting x position
 #define DIGITS_START_X 160 //digits starting x position
 #define LIVES_START_X 350	//lives starting x position
@@ -42,9 +45,13 @@ typedef struct {
 Character initChar(int x, int y, const int *sprite, uint32_t color);
 //creates all the words at the top of the screen
 void drawCharacters();
+//draws the game over text
+void drawGameOver();
 //initializes and draws score
 void initScore();
 //updates the score by the passed in amount
 void updateScore(uint32_t points);
+//draws the point in the place of the ufo
+void drawUfoPoints(Position *p, int points, uint32_t color);
 
 #endif /* TEXT_H_ */

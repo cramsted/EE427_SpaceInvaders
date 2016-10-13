@@ -42,17 +42,17 @@ void videoInit() {
 
 	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 
-	tank = initTank(TANK_START_X, TANK_START_Y);	//creates tank struct
-	initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
-	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);	//creates bunkers block
-	bullets = initBullets();	//creates bullets struct
+	tank = initTank(TANK_START_X, TANK_START_Y); //creates tank struct
+	initAliens(ALIENS_START_X, ALIENS_START_Y); //creates aliens block struct
+	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y); //creates bunkers block
+	bullets = initBullets(); //creates bullets struct
 	initUfo();
 
-	initScore();	//initializes and draws score
+	initScore(); //initializes and draws score
 	drawGround();
-	drawCharacters();	//draws words like 'score' and 'lives'
-	drawTank(TANK_START_X, &tank);	//draws the tank
-	drawAliens(0, 0); 	//draws aliens block
+	drawCharacters(); //draws words like 'score' and 'lives'
+	drawTank(TANK_START_X, &tank); //draws the tank
+	drawAliens(0, 0); //draws aliens block
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
 	drawLives(); //draws the tank shaped lives
 	//	render(); //needed only for changing the index of the frame buffer
@@ -84,11 +84,12 @@ void editFrameBuffer(Sprite *sp, Position *p) {
 	int row, col;
 	for (row = p->y; row < maxRow; row++) {
 		for (col = p->x; col < maxCol; col++) {
+			unsigned int *temp = &framePointer0[row * SCREEN_WIDTH + col];
 			//if sprite value is 1 then it draws the sprite's color at that pixel
 			if (findPixelValue(p->x, p->y, col, row, sp)) {
-				framePointer0[row * SCREEN_WIDTH + col] = sp->Color.color;
+				*temp = sp->Color.color;
 			} else { //if sprite value is a 0 it draws black
-				framePointer0[row * SCREEN_WIDTH + col] = BLACK;
+				*temp = BLACK;
 			}
 		}
 	}
@@ -101,7 +102,7 @@ int findPixelValue(int x, int y, int col, int row, Sprite *sp) {
 	//causes each pixel to be drawn twice
 	int xval = (col - x) >> 1;
 	int yval = (row - y) >> 1;
-	int mask = 1 << ((sp->width >> 1) - 1);	//makes a mask that will cover the desired pixel
+	int mask = 1 << ((sp->width >> 1) - 1); //makes a mask that will cover the desired pixel
 	return (sp->sprite[yval] << xval) & mask; //returns pixel value
 }
 
