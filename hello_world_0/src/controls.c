@@ -64,7 +64,7 @@ void readInput() {
 		xil_printf("which bunker would you like to erode?\n\r");
 		num = getAlienNumber();
 		if (num >= 0 && num < MAX_BUNKERS) {
-			erodeWholeBunker(num);
+			destroyWholeBunker(&bunkers.bunkers[num]);
 		}
 		break;
 	case 8: // update alien position

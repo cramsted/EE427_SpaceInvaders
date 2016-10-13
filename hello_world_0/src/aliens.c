@@ -5,6 +5,8 @@
  *      Author: superman
  */
 #include "aliens.h"
+#include "bunkers.h"
+#include "tank.h"
 #include "render.h"		//for access to the frame buffer
 #include "text.h"		//for access to the function updateScore()
 #include <stdio.h>		//xil_printf for debugging purposes
@@ -26,6 +28,8 @@
 #define MIDDLE_ALIEN_POINTS 20
 #define BOTTOM_ALIEN_POINTS 10
 
+#define MAX_EXPLOSION_SPRITES 3
+
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int saucer_16x7[]; //saucer sprite, not used in this lab
 extern const int alien_explosion_12x10[]; //alien explosion spirte
@@ -43,12 +47,12 @@ const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_bottom_out_12x8 };
 
 Aliens aliens;
-
-Alien *explodedAlien = NULL;
+static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL };
 
 // Function prototypes
 void eraseAlien(Alien *alien);
-
+void bunkerCollisionCheck(int alienX, int alienY);
+int aliensAtTank();
 //initialize an alien struct
 //param x sets starting x position
 //param y sets starting y position
@@ -100,26 +104,39 @@ void initAliens(int x, int y) {
 	}
 }
 
+void addExplodedAlienSprite(Alien *alien) {
+	// Add the alien to the list of explosion sprites so they can be erased
+	uint8_t i;
+	for (i = 0; i < MAX_EXPLOSION_SPRITES; i++) {
+		if (explodedAliens[i] == NULL) {
+			explodedAliens[i] = alien;
+		}
+	}
+}
+
 //erases of an exploded alien sprite if it hasn't already been erased
 void eraseAlienExplosionSprite() {
-	if (explodedAlien != NULL) {
-		eraseAlien(explodedAlien);
-		explodedAlien = NULL;
+	uint8_t i;
+	for (i = 0; i < MAX_EXPLOSION_SPRITES; i++) {
+		if (explodedAliens[i] != NULL) {
+			eraseAlien(explodedAliens[i]);
+			explodedAliens[i] = NULL;
+		}
 	}
+
 }
 
 //erases the passed in alien by changing it's sprite color to match the background
 void eraseAlien(Alien *alien) {
 	alien->sp.Color.color = BLACK;
 	editFrameBuffer(&alien->sp, &alien->p); //makes change in the frame buffer
-	explodedAlien = NULL;
 }
 
 //draws an exploding alien sprite
 void explodeAlien(Alien *alien) {
 	alien->sp.sprite = alien_explosion_12x8;
 	editFrameBuffer(&alien->sp, &alien->p);
-	explodedAlien = alien;
+	addExplodedAlienSprite(alien);
 }
 
 //sets the status var of the alien at the passed in row and col as dead
@@ -168,6 +185,11 @@ void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
 		(alien->type & 1) ? alien->type-- : alien->type++;
 		alien->sp.sprite = alien_sprites[alien->type];
 
+		//check to see if a bunker needs to be erased prior to drawing the aliens over it.
+		if ((alien->p.y + ALIEN_HEIGHT) >= BUNKER_START_Y) {
+			bunkerCollisionCheck(alien->p.x, alien->p.y);
+		}
+
 		// redraw the alien
 		alien->sp.Color.color = WHITE;
 		editFrameBuffer(&alien->sp, &alien->p);
@@ -196,76 +218,6 @@ void drawAliens(int xUpdate, int yUpdate) {
 
 // We want to find the leftmost column with living aliens
 // Used for bounds checking when the aliens are moving left
-int findStartAlienCol(Aliens *aliens) {
-	int i;
-	Alien *a;
-	// Simply loop through the top row of aliens to find an alive one
-	for (i = 0; i < ALIENS_COL; i++) {
-		a = &aliens->aliens[0][i];
-		if (a->status == alive) {
-			return i;
-		}
-	}
-	return 0;
-}
-
-// Same as the findStartAlienCol, but used for bounds checking on the right
-int findEndAlienCol(Aliens *aliens) {
-	int col, row;
-	Alien *a;
-	for (col = ALIENS_COL - 1; col >= 0; col--) {
-		for (row = ALIENS_ROW - 1; row >= 0; row--) {
-			a = &aliens->aliens[row][col];
-			if (a->status == alive) {
-				//the index is 1-11 because it is used when multiplying the width of the alien
-				return col + 1;
-			}
-		}
-	}
-	return 0;
-}
-
-////moves the alien block a predetermined distance and direction
-//void updateAliens(Aliens *aliens) {
-//	// TODO: adjust alien x position when left column is destroyed
-//	// by using leftColIndex for currx and curry
-//	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
-//	int leftColIndex = findStartAlienCol(aliens); //finds the max value of the left most col
-//	int rightColIndex = findEndAlienCol(aliens); //finds the max value of the right most col
-//	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
-//	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
-//	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex
-//			* (aliens->aliens[0][0].sp.width + XALIEN_PADDING)); //largest allowed x value
-//
-//	xil_printf("endx: %d, currentX: %d, currentY: %d, direction: %d\n\r", endx,
-//			currx, curry, aliens->direction);
-//	// state machine to determine which way to go
-//	switch (aliens->direction) {
-//	case left:
-//		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
-//		if (currx < startx) {
-//			aliens->direction = down;
-//		}
-//		break;
-//	case down:
-//		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
-//		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
-//			aliens->direction = left;
-//		} else { // on the left side, go right
-//			aliens->direction = right;
-//		}
-//		break;
-//	case right:
-//		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
-//		if (currx > endx) {
-//			aliens->direction = down;
-//		}
-//		break;
-//	default:
-//		break;
-//	}
-//}
-
 Position aliensLeftBlockPosition() {
 	int row, col;
 	for (col = 0; col < ALIENS_COL; col++) {
@@ -277,6 +229,7 @@ Position aliensLeftBlockPosition() {
 	return initPosition(ALIENS_START_X, ALIENS_START_Y);
 }
 
+// Same as the aliensLeftBlockPosition, but used for bounds checking on the right
 Position aliensRightBlockPosition() {
 	int row, col;
 	for (col = ALIENS_COL - 1; col >= 0; col--) {
@@ -288,15 +241,9 @@ Position aliensRightBlockPosition() {
 	return initPosition(ALIENS_START_X, ALIENS_START_Y);
 }
 
-/*
- * update the aliens
- * 	know the change in x and y
- * 		depends on the direction and where they currently are
- * 		iteratively update all the aliens
- * 		possibly change directions
- */
+//moves the alien block a predetermined distance and direction
 void updateAliens() {
-	Position pLeft, pRight, p;
+	Position p;
 	switch (aliens.direction) {
 	case left:
 		drawAliens(left, 0);
@@ -314,6 +261,10 @@ void updateAliens() {
 		break;
 	case down:
 		drawAliens(0, down);
+		if (aliensAtTank()) {
+			while (1)
+				;
+		}
 		p = aliensLeftBlockPosition();
 		if (p.y < MAX_Y) {
 			if (p.x < LEFT_SCREEN_X) {
@@ -326,4 +277,54 @@ void updateAliens() {
 	default:
 		break;
 	}
+}
+static int alienCollidesWithBunker(int alienX, int alienY, Bunker *bunker) {
+	Position *spritePos = &bunker->p;
+	Sprite *sprite = &bunker->sp;
+	int spriteX = spritePos->x;
+	int spriteY = spritePos->y;
+	int spriteXMax = spriteX + sprite->width;
+	int spriteYMax = spriteY + sprite->height;
+	int alienXMax = alienX + ALIEN_WIDTH;
+	int alienYMax = alienY + ALIEN_HEIGHT;
+
+	//checks for overlapping on the bottom left of the alien sprite
+	if ((alienX >= spriteX) && (alienX <= spriteXMax)) {
+		if ((alienYMax >= spriteY) && (alienYMax <= spriteYMax)) {
+			return 1;
+		}
+	}
+
+	//checks for overlapping on the bottom right of the alien sprite
+	if ((alienXMax >= spriteX) && (alienXMax <= spriteXMax)) {
+		if ((alienYMax >= spriteY) && (alienYMax <= spriteYMax)) {
+			return 1;
+		}
+	}
+	return 0; //bunker miss
+}
+
+void bunkerCollisionCheck(int alienX, int alienY) {
+	int i;
+	for (i = 0; i < MAX_BUNKERS; i++) {
+		if (bunkers.bunkers[i].sp.Color.color != BLACK) {
+			if (alienCollidesWithBunker(alienX, alienY, &bunkers.bunkers[i])) {
+				destroyWholeBunker(&bunkers.bunkers[i]);
+			}
+		}
+	}
+}
+int aliensAtTank() {
+	int i, maxY = 0;
+	for (i = 0; i < ALIENS_COL; i++){
+		if(aliens.frontRowAliens[i]->status == alive){
+			if(maxY <= aliens.frontRowAliens[i]->p.y){
+				maxY = aliens.frontRowAliens[i]->p.y;
+			}
+		}
+	}
+	if((maxY + ALIEN_HEIGHT) >= TANK_START_Y){
+		return 1; //aliens have won
+	}
+	return 0; //aliens haven't won yet
 }

@@ -31,13 +31,16 @@ Sprite* erosion_sprites[] = { NULL, &erosion_1, &erosion_2, &erosion_3, &erosion
 
 Bunkers bunkers;
 
+//function prototypes
+void setErosionLevel(Bunker *bunker, erosion_e level);
+
 //creates a bunker initialized with the passed in x,y
 Bunker initBunker(int x, int y) {
 	Bunker b;
 	// Sets the erosion levels. Most are initially 0, but the middle two
 	// sections are the bottom row are initialized to gone because
 	// they are black sections of the bunker sprite anyway.
-	memset(b.erosionLevel, none, EROSION_ROWS * EROSION_COLS);
+	setErosionLevel(&b, none);
 	b.erosionLevel[EROSION_ROWS-1][1] = gone;
 	b.erosionLevel[EROSION_ROWS-1][2] = gone;
 
@@ -110,15 +113,20 @@ void erodeBunker(Bunker *b, int row, int col) {
 	editFrameBuffer(sp, &p);
 }
 
-//erodes all the sections of the bunker at once by one erosion level
-// param bunker selects which bunker to erode
-void erodeWholeBunker(int bunker) {
-	return;
-//	int row;
-//	int col;
-//	for (row = 0; row < EROSION_ROWS; row++) {
-//		for (col = 0; col < EROSION_COLS; col++) {
-//			erodeBunker(bunker, row, col);
-//		}
-//	}
+// Erase the bunker.
+// Also set the erosion levels to gone because we don't want bullets
+// colliding with and eroding the bunker after it is destroyed.
+void destroyWholeBunker(Bunker *bunker) {
+	bunker->sp.Color.color = BLACK;
+	editFrameBuffer(&bunker->sp, &bunker->p);
+	setErosionLevel(bunker, gone);
+}
+
+void setErosionLevel(Bunker *bunker, erosion_e level){
+	int row, col;
+	for(row = 0; row < EROSION_ROWS; row++){
+		for(col = 0; col < EROSION_COLS; col++){
+			bunker->erosionLevel[row][col] = level;
+		}
+	}
 }
