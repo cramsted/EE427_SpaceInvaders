@@ -17,7 +17,7 @@
 
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
-#define BUTTON_POLL_COUNT 5 // poll rate for buttons
+#define BUTTON_POLL_COUNT 4 // poll rate for buttons
 #define BULLETS_UPDATE_COUNT 3 // refresh rate for bullets
 #define ALIENS_UPDATE_COUNT 70 // refresh rate for aliens
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
@@ -25,11 +25,11 @@
 #define TANK_DEATH_COUNT 150
 
 // UFO appears about every 25-30 seconds
-#define UFO_APPEAR_COUNT_MINIMUM 2000
-#define UFO_APPEAR_COUNT_MAXIMUM 3000
+#define UFO_APPEAR_COUNT_MINIMUM 1500
+#define UFO_APPEAR_COUNT_MAXIMUM 2000
 
 // scuttle across the screen in 10-15 seconds
-#define UFO_UPDATE_COUNT 3
+#define UFO_UPDATE_COUNT 6
 #define UFO_EXPLOSION_COUNT ALIEN_EXPLOSION_COUNT
 
 // Bit masks
@@ -176,7 +176,9 @@ void resetCounters() {
 	aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
 	heartbeatCounter = ONE_SECOND_COUNT;
 	tankDeathCounter = TANK_DEATH_COUNT;
+	ufoUpdateCounter = UFO_UPDATE_COUNT;
 	resetUfoAppearanceCounter();
+
 }
 
 void timerInit() {
@@ -209,6 +211,6 @@ void setUfoExplosionCounter() {
 }
 
 void resetUfoAppearanceCounter() {
-	int temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM)
+	int temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM);
 	ufoAppearCounter = UFO_APPEAR_COUNT_MINIMUM + (rand() % temp);
 }

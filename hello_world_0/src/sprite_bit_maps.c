@@ -54,7 +54,7 @@ const int ufo_explosion_16x7[] =
 	packword16(1,1,0,1,1,0,1,1,0,1,1,0,1,0,0,0),
 	packword16(0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0),
 	packword16(0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0)
-}
+};
 
 const int alien_explosion_12x10[] =
 {

@@ -24,8 +24,8 @@ typedef enum {
 } ufo_status_e;
 
 typedef enum {
-	left = -UFO_SHIFT_X,
-	right = UFO_SHIFT_X
+	ufo_left = -UFO_SHIFT_X,
+	ufo_right = UFO_SHIFT_X
 }ufo_direction_e;
 
 typedef struct {

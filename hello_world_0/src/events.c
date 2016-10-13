@@ -32,7 +32,7 @@ void clearEvent(int event) {
 	events &= ~event;
 }
 
-void leftButtonEvent(){
+void leftButtonEvent() {
 	if (events & LEFT_BTN_EVENT) {
 		// Move tank left
 		clearEvent(LEFT_BTN_EVENT);
@@ -40,7 +40,7 @@ void leftButtonEvent(){
 	}
 }
 
-void rightButtonEvent(){
+void rightButtonEvent() {
 	if (events & RIGHT_BTN_EVENT) {
 		// Move tank right
 		clearEvent(RIGHT_BTN_EVENT);
@@ -48,7 +48,7 @@ void rightButtonEvent(){
 	}
 }
 
-void middleButtonEvent(){
+void middleButtonEvent() {
 	if (events & MIDDLE_BTN_EVENT) {
 		// Fire tank bullet
 		clearEvent(MIDDLE_BTN_EVENT);
@@ -56,7 +56,7 @@ void middleButtonEvent(){
 	}
 }
 
-void bulletRefreshEvent(){
+void bulletRefreshEvent() {
 	if (events & BULLETS_REFRESH_EVENT) {
 		// Move bullets and do collision detecting
 		clearEvent(BULLETS_REFRESH_EVENT);
@@ -64,7 +64,7 @@ void bulletRefreshEvent(){
 	}
 }
 
-void aliensRefreshEvent(){
+void aliensRefreshEvent() {
 	if (events & ALIENS_REFRESH_EVENT) {
 		// Move aliens
 		clearEvent(ALIENS_REFRESH_EVENT);
@@ -72,7 +72,7 @@ void aliensRefreshEvent(){
 	}
 }
 
-void aliensFireEvent(){
+void aliensFireEvent() {
 	if (events & ALIENS_FIRE_EVENT) {
 		// Aliens fire a bullet
 		clearEvent(ALIENS_FIRE_EVENT);
@@ -80,7 +80,7 @@ void aliensFireEvent(){
 	}
 }
 
-void alienDeathEvent(){
+void alienDeathEvent() {
 	if (events & ALIEN_DEATH_EVENT) {
 		// Erases a dead alien explosion from the screen
 		clearEvent(ALIEN_DEATH_EVENT);
@@ -88,57 +88,59 @@ void alienDeathEvent(){
 	}
 }
 
-void ufoUpdateEvent(){
+void ufoUpdateEvent() {
 	if (events & UFO_UPDATE_EVENT) {
 		clearEvent(UFO_UPDATE_EVENT);
 		updateUfo();
 	}
 }
 
-void ufoExplosionEvent(){
+void ufoExplosionEvent() {
 	if (events & UFO_EXPLOSION_EVENT) {
 		clearEvent(UFO_EXPLOSION_EVENT);
 		ufoDisapear();
 	}
 }
 
-void heartbeatEvent(){
+void heartbeatEvent() {
 	float utilization = 0;
 	if (events & HEARTBEAT_EVENT) {
 		// "Idle" event - calculate utilization
 		clearEvent(HEARTBEAT_EVENT);
-		utilization = ((float) utilizationCounter
-				/ (float) ZERO_UTILIZATION);
+		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
 		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
 		utilizationCounter = 0;
 	}
 }
 
-void tankDeathEvent(){
-	if(events & TANK_DEATH_EVENT){
+void tankDeathEvent() {
+	if (events & TANK_DEATH_EVENT) {
 		disableAndClearEvents();
 		tankExplode();
-		if(tank.lives == 0){
-			while(1){} //the game ends here
+		if (tank.lives == 0) {
+			while (1) {
+			} //the game ends here
 		}
 	}
 }
 
 // call a function to draw the ufo at the top-left/right of the screen
-void ufoAppearEvent(){
-	clearEvent(UFO_APPEAR_EVENT);
-	ufoAppear();
+void ufoAppearEvent() {
+	if (events & UFO_APPEAR_EVENT) {
+		clearEvent(UFO_APPEAR_EVENT);
+		ufoAppear();
+	}
 }
 
-int eventsEnabled(){
+int eventsEnabled() {
 	return enabled;
 }
 
-void enableEvents(){
+void enableEvents() {
 	enabled = 1;
 }
 
-void disableAndClearEvents(){
+void disableAndClearEvents() {
 	enabled = 0;
 	events = 0;
 }

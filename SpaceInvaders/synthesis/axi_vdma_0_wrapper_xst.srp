@@ -3617,7 +3617,6 @@ Moving files to output directory...
 Finished moving files to output directory
 Successfully generated unit 'axi_vdma_0_wrapper_fifo_generator_v8_3'.
 
-End of process call...
 
 =========================================================================
 *                       Advanced HDL Synthesis                          *
@@ -6863,12 +6862,12 @@ s_axi_lite_aclk|    4.419|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 112.00 secs
-Total CPU time to Xst completion: 112.42 secs
+Total REAL time to Xst completion: 117.00 secs
+Total CPU time to Xst completion: 117.39 secs
  
 --> 
 
-Total memory usage is 343804 kilobytes
+Total memory usage is 347072 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings : 2796 (   0 filtered)

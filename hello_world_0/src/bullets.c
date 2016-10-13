@@ -9,6 +9,7 @@
 #include "aliens.h"
 #include "events.h"
 #include "bunkers.h"
+#include "ufo.h"
 #include <stdlib.h>
 
 //values that determine the dimensions of the sprites on the screen
@@ -289,7 +290,8 @@ static int tankHit(Bullet *bullet) {
 
 static void ufoHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &ufo.sp, &ufo.p)) {
-		setEvent(UFO_EXPLOSION_EVENT);
+		killUfo();
+		destroyBullet(bullet);
 	}
 }
 

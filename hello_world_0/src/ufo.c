@@ -8,6 +8,10 @@
 #include "ufo.h"
 #include "timer.h"
 #include "render.h"
+#include "text.h"
+#include <stdio.h>
+
+#define UFO_POINTS 100
 
 UFO ufo;
 extern const int saucer_16x7[];
@@ -15,9 +19,9 @@ extern const int ufo_explosion_16x7[];
 
 // Initialize the ufo in the chosen position
 void initUfo() {
-	ufo.p = initPosition(UFO_START_X, UFO_START_Y);
+	ufo.p = initPosition(UFO_START_X_LEFT, UFO_START_Y);
 	ufo.sp = initSprite(UFO_HEIGHT, UFO_WIDTH, RED, saucer_16x7);
-	ufo.direction = right;
+	ufo.direction = ufo_right;
 	ufo.status = inactive;
 }
 
@@ -45,15 +49,7 @@ void killUfo() {
 
 	// set a timer to wait to erase the explosion
 	setUfoExplosionCounter();
-}
-
-// Erase the ufo,
-// Update its position (the amount of pixels is embedded in the direction)
-// Redraw
-void drawUfo() {
-	eraseUfo();
-	ufo.p.x += ufo.direction;
-	editFrameBuffer(&ufo.sp, &ufo.p);
+	updateScore(UFO_POINTS);
 }
 
 void eraseUfo() {
@@ -64,8 +60,19 @@ void eraseUfo() {
 	resetUfoAppearanceCounter();
 }
 
+// Erase the ufo,
+// Update its position (the amount of pixels is embedded in the direction)
+// Redraw
+void drawUfo() {
+	eraseUfo();
+	ufo.sp.Color.color = RED;
+	ufo.p.x += ufo.direction;
+	editFrameBuffer(&ufo.sp, &ufo.p);
+}
+
+
 void ufoDisapear() {
-	(ufo.direction == right) ? (ufo.direction = left) : (ufo.direction = right);
+	(ufo.direction == ufo_right) ? (ufo.direction = ufo_left) : (ufo.direction = ufo_right);
 	eraseUfo();
 	ufo.status = inactive;
 }
@@ -73,8 +80,8 @@ void ufoDisapear() {
 // Draw the UFO at the correct position, with the correct sprite
 // Make it active
 void ufoAppear() {
-	
-	if (ufo.direction == right) {
+	xil_printf("a wild ufo appears!");
+	if (ufo.direction == ufo_right) {
 		// draw at the top-left
 		ufo.p = initPosition(UFO_START_X_LEFT, UFO_START_Y);
 	} else {
