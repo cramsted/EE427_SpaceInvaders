@@ -10,5 +10,7 @@
 
 void timerInit();
 void setAlienExplosionCounter();
+void setUfoExplosionCounter();
+void resetUfoAppearanceCounter();
 
 #endif /* TIMER_H_ */

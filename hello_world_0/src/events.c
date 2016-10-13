@@ -10,6 +10,7 @@
 #include "tank.h"
 #include "bullets.h"
 #include "bunkers.h"
+#include "ufo.h"
 
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)
@@ -22,6 +23,7 @@ uint32_t events = 0;
 uint32_t enabled = 1; //1 for enabled, 0 for diabled
 //used to calculate the utilization of the processor
 uint32_t utilizationCounter = 0;
+
 void setEvent(int event) {
 	events |= event;
 }
@@ -37,6 +39,7 @@ void leftButtonEvent(){
 		moveTankLeft(&tank);
 	}
 }
+
 void rightButtonEvent(){
 	if (events & RIGHT_BTN_EVENT) {
 		// Move tank right
@@ -44,6 +47,7 @@ void rightButtonEvent(){
 		moveTankRight(&tank);
 	}
 }
+
 void middleButtonEvent(){
 	if (events & MIDDLE_BTN_EVENT) {
 		// Fire tank bullet
@@ -51,6 +55,7 @@ void middleButtonEvent(){
 		tankPew(&tank, &bullets);
 	}
 }
+
 void bulletRefreshEvent(){
 	if (events & BULLETS_REFRESH_EVENT) {
 		// Move bullets and do collision detecting
@@ -58,6 +63,7 @@ void bulletRefreshEvent(){
 		updateBullets(&bullets);
 	}
 }
+
 void aliensRefreshEvent(){
 	if (events & ALIENS_REFRESH_EVENT) {
 		// Move aliens
@@ -65,6 +71,7 @@ void aliensRefreshEvent(){
 		updateAliens(&aliens);
 	}
 }
+
 void aliensFireEvent(){
 	if (events & ALIENS_FIRE_EVENT) {
 		// Aliens fire a bullet
@@ -72,6 +79,7 @@ void aliensFireEvent(){
 		alienPew(&aliens, &bullets);
 	}
 }
+
 void alienDeathEvent(){
 	if (events & ALIEN_DEATH_EVENT) {
 		// Erases a dead alien explosion from the screen
@@ -79,16 +87,21 @@ void alienDeathEvent(){
 		eraseAlienExplosionSprite();
 	}
 }
+
 void ufoUpdateEvent(){
 	if (events & UFO_UPDATE_EVENT) {
 		clearEvent(UFO_UPDATE_EVENT);
-		// TODO: update the ufo. This could include
-		// checking to see if its on the screen:
-		// if it isn't, then update a counter, and make it
-		// appear when then counter expires;
-		// if it is, just update its position.
+		updateUfo();
 	}
 }
+
+void ufoExplosionEvent(){
+	if (events & UFO_EXPLOSION_EVENT) {
+		clearEvent(UFO_EXPLOSION_EVENT);
+		ufoDisapear();
+	}
+}
+
 void heartbeatEvent(){
 	float utilization = 0;
 	if (events & HEARTBEAT_EVENT) {
@@ -111,9 +124,16 @@ void tankDeathEvent(){
 	}
 }
 
+// call a function to draw the ufo at the top-left/right of the screen
+void ufoAppearEvent(){
+	clearEvent(UFO_APPEAR_EVENT);
+	ufoAppear();
+}
+
 int eventsEnabled(){
 	return enabled;
 }
+
 void enableEvents(){
 	enabled = 1;
 }
@@ -122,10 +142,11 @@ void disableAndClearEvents(){
 	enabled = 0;
 	events = 0;
 }
+
 void eventsLoop() {
 	while (1) {
 		if (events && enabled) {
-			// An event is pending...
+			// An event is pending. Check all events round-robin style.
 			leftButtonEvent();
 			rightButtonEvent();
 			middleButtonEvent();
@@ -134,8 +155,10 @@ void eventsLoop() {
 			aliensFireEvent();
 			alienDeathEvent();
 			ufoUpdateEvent();
-			heartbeatEvent();
 			tankDeathEvent();
+			ufoAppearEvent();
+			ufoExplosionEvent();
+			heartbeatEvent();
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization

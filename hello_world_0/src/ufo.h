@@ -10,11 +10,19 @@
 
 #include "sprites.h"
 
-#define UFO_SHIFT_X 5
-#define UFO_START_X 8
-#define UFO_START_Y 50
 #define UFO_WIDTH (16 * 2)
 #define UFO_HEIGHT (7 * 2)
+#define UFO_SHIFT_X 5
+#define UFO_PADDING 8
+#define UFO_START_X_LEFT UFO_PADDING
+#define UFO_START_X_RIGHT (640-UFO_PADDING-UFO_WIDTH)
+#define UFO_START_Y 50
+
+typedef enum {
+	inactive,
+	active
+} ufo_status_e;
+
 typedef enum {
 	left = -UFO_SHIFT_X,
 	right = UFO_SHIFT_X
@@ -22,6 +30,7 @@ typedef enum {
 
 typedef struct {
 	ufo_direction_e direction; //what direction the ufo is currently traveling in
+	ufo_status_e status;
 	Position p; //x,y position of the sprite
 	Sprite sp; //sprite object
 }UFO;
@@ -35,5 +44,7 @@ void updateUfo();
 void killUfo();
 void drawUfo();
 void eraseUfoExplosionSprite();
+void ufoAppear();
+void ufoDisapear();
 
 #endif /* UFO_H_ */

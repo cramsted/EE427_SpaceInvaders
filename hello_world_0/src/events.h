@@ -19,10 +19,13 @@
 #define ALIEN_DEATH_EVENT		0x80
 #define TANK_DEATH_EVENT		0x100
 #define UFO_UPDATE_EVENT		0x200
+#define UFO_APPEAR_EVENT		0x400
+#define UFO_EXPLOSION_EVENT		0x800
 
 void eventsLoop();
 void setEvent(int event);
 void enableEvents();
 void disableAndClearEvents();
 int eventsEnabled();
+
 #endif /* EVENTS_H_ */

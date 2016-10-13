@@ -45,6 +45,7 @@ void videoInit() {
 	initAliens(ALIENS_START_X, ALIENS_START_Y);	//creates aliens block struct
 	bunkers = initBunkers(BUNKER_START_X, BUNKER_START_Y);	//creates bunkers block
 	bullets = initBullets();	//creates bullets struct
+	initUfo();
 
 	initScore();	//initializes and draws score
 	drawGround();

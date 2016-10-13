@@ -287,6 +287,12 @@ static int tankHit(Bullet *bullet) {
 	return 0;
 }
 
+static void ufoHit(Bullet *bullet) {
+	if (bulletCollidesWithSprite(bullet, &ufo.sp, &ufo.p)) {
+		setEvent(UFO_EXPLOSION_EVENT);
+	}
+}
+
 // check if a bullet hit a sprite
 // return tank_bullet_hit or alien_bullet_hit if true, no_hit otherwise
 static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
@@ -324,6 +330,8 @@ static void checkTankBulletCollisions() {
 	bunkerHit(tankBullet);
 	//check aliens
 	alienHit(tankBullet);
+	//check ufo
+	ufoHit(tankBullet);
 }
 
 // check if an alien bullet hits anything

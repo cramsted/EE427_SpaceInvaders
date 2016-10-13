@@ -22,7 +22,6 @@
  *   - aliens adjust when left column dies
  *   - optimize drawing algorithm as needed
  *   - UFO appearing and exploding
- *   - when tank explodes, briefly pause game, then redraw the tank and continue
  *   - reorganizing: updating functions, removing struct pointers
  *   - CPU utilization
  */

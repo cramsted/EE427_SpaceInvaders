@@ -45,6 +45,17 @@ const int saucer_16x7[] =
 	packword16(0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0)
 };
 
+const int ufo_explosion_16x7[] =
+{
+	packword16(0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0),
+	packword16(0,0,0,0,1,0,0,0,1,1,1,0,1,0,0,0),
+	packword16(0,0,0,0,1,1,0,1,0,1,1,0,0,1,0,0),
+	packword16(0,1,1,0,1,1,0,0,0,0,1,0,0,1,1,0),
+	packword16(1,1,0,1,1,0,1,1,0,1,1,0,1,0,0,0),
+	packword16(0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0),
+	packword16(0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0)
+}
+
 const int alien_explosion_12x10[] =
 {
 	packword12(0,0,0,0,0,0,1,0,0,0,0,0),
@@ -133,14 +144,14 @@ const int alien_bottom_out_12x8[] =
 
 const int alien_explosion_12x8[] =
 {
-		packword12(0,0,0,0,1,1,0,0,0,0,0,0),
-		packword12(0,1,1,1,1,0,1,1,0,1,1,0),
-		packword12(0,0,0,1,0,1,0,1,0,1,1,0),
-		packword12(0,1,0,0,1,1,0,0,0,1,0,0),
-		packword12(0,1,1,1,1,0,1,1,0,1,1,0),
-		packword12(0,0,0,1,0,1,0,1,0,1,1,0),
-		packword12(0,1,0,0,1,1,0,0,0,0,0,0),
-		packword12(1,0,0,1,0,1,0,1,0,1,1,0)
+	packword12(0,0,0,0,1,1,0,0,0,0,0,0),
+	packword12(0,1,1,1,1,0,1,1,0,1,1,0),
+	packword12(0,0,0,1,0,1,0,1,0,1,1,0),
+	packword12(0,1,0,0,1,1,0,0,0,1,0,0),
+	packword12(0,1,1,1,1,0,1,1,0,1,1,0),
+	packword12(0,0,0,1,0,1,0,1,0,1,1,0),
+	packword12(0,1,0,0,1,1,0,0,0,0,0,0),
+	packword12(1,0,0,1,0,1,0,1,0,1,1,0)
 };
 
 const int tank_15x8[] =
@@ -231,17 +242,17 @@ const int bunkerDamage3_6x6[] = {
 };
 
 const int bulletCross_3x5[] = {
-		packword3(0,1,0),
-		packword3(0,1,0),
-		packword3(1,1,1),
-		packword3(0,1,0),
-		packword3(0,1,0)
+	packword3(0,1,0),
+	packword3(0,1,0),
+	packword3(1,1,1),
+	packword3(0,1,0),
+	packword3(0,1,0)
 };
 
 const int bulletLightning_3x5[] = {
-		packword3(0,1,0),
-		packword3(1,0,0),
-		packword3(0,1,0),
-		packword3(0,0,1),
-		packword3(0,1,0)
+	packword3(0,1,0),
+	packword3(1,0,0),
+	packword3(0,1,0),
+	packword3(0,0,1),
+	packword3(0,1,0)
 };

@@ -45,4 +45,5 @@ typedef struct {
 Sprite initSprite(int height, int width, uint32_t color, const int *sprite);
 //initializes and x,y coordinate
 Position initPosition(int x, int y);
+
 #endif /* SPRITES_H_ */

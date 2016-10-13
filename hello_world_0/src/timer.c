@@ -23,12 +23,14 @@
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
 #define ALIEN_EXPLOSION_COUNT 15 // time until an alien explosion sprite gets erased
 #define TANK_DEATH_COUNT 150
+
 // UFO appears about every 25-30 seconds
 #define UFO_APPEAR_COUNT_MINIMUM 2000
-#define UFO_APPEAR_COUNT_MINIMUM 3000
+#define UFO_APPEAR_COUNT_MAXIMUM 3000
 
 // scuttle across the screen in 10-15 seconds
 #define UFO_UPDATE_COUNT 3
+#define UFO_EXPLOSION_COUNT ALIEN_EXPLOSION_COUNT
 
 // Bit masks
 #define RIGHT_BUTTON 0x02
@@ -46,6 +48,8 @@ static uint32_t aliensFireCounter;
 static uint32_t heartbeatCounter;
 static uint32_t alienExplosionCounter;
 static uint32_t ufoUpdateCounter;
+static uint32_t ufoAppearCounter;
+static uint32_t ufoExplosionCounter;
 static uint32_t tankDeathCounter;
 
 static XGpio gpPB;
@@ -66,24 +70,28 @@ void updateButtonCounter() {
 		}
 	}
 }
+
 void updateBulletsCounter() {
 	if (--bulletsCounter == 0) {
 		bulletsCounter = BULLETS_UPDATE_COUNT;
 		setEvent(BULLETS_REFRESH_EVENT);
 	}
 }
+
 void updateAliensCounter() {
 	if (--aliensCounter == 0) {
 		aliensCounter = ALIENS_UPDATE_COUNT;
 		setEvent(ALIENS_REFRESH_EVENT);
 	}
 }
+
 void updateAliensFireCounter() {
 	if (--aliensFireCounter == 0) {
 		aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
 		setEvent(ALIENS_FIRE_EVENT);
 	}
 }
+
 void updateAlienExplosionCounter() {
 	if (alienExplosionCounter != 0) {
 		if (--alienExplosionCounter == 0) {
@@ -91,17 +99,36 @@ void updateAlienExplosionCounter() {
 		}
 	}
 }
+
 void updateUfoUpdateCounter() {
 	if (--ufoUpdateCounter == 0) {
+		ufoUpdateCounter = UFO_UPDATE_COUNT;
 		setEvent(UFO_UPDATE_EVENT);
 	}
 }
+
+void updateUfoExplosionCounter() {
+	if (ufoExplosionCounter != 0) {
+		if (--ufoExplosionCounter == 0) {
+			setEvent(UFO_EXPLOSION_EVENT);
+		}
+	}
+}
+
+void updateUfoAppearanceCounter() {
+	if (--ufoAppearCounter == 0) {
+		resetUfoAppearanceCounter();
+		setEvent(UFO_APPEAR_EVENT);
+	}
+}
+
 void updateHeartbeatCounter() {
 	if (--heartbeatCounter == 0) {
 		heartbeatCounter = ONE_SECOND_COUNT;
 		setEvent(HEARTBEAT_EVENT);
 	}
 }
+
 void updateTankDeathCounter() {
 	if (--tankDeathCounter == 0) {
 		enableEvents();
@@ -111,6 +138,7 @@ void updateTankDeathCounter() {
 		}
 	}
 }
+
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
@@ -123,6 +151,8 @@ void timerInterruptHandler() {
 		updateAlienExplosionCounter();
 		updateUfoUpdateCounter();
 		updateHeartbeatCounter();
+		updateUfoExplosionCounter();
+		updateUfoAppearanceCounter();
 	} else {
 		updateTankDeathCounter();
 	}
@@ -146,6 +176,7 @@ void resetCounters() {
 	aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
 	heartbeatCounter = ONE_SECOND_COUNT;
 	tankDeathCounter = TANK_DEATH_COUNT;
+	resetUfoAppearanceCounter();
 }
 
 void timerInit() {
@@ -171,4 +202,13 @@ void setAlienExplosionCounter() {
 	// whichever is less
 	alienExplosionCounter = ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ?
 			ALIEN_EXPLOSION_COUNT : aliensCounter - 1;
+}
+
+void setUfoExplosionCounter() {
+	ufoExplosionCounter = UFO_EXPLOSION_COUNT;
+}
+
+void resetUfoAppearanceCounter() {
+	int temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM)
+	ufoAppearCounter = UFO_APPEAR_COUNT_MINIMUM + (rand() % temp);
 }
