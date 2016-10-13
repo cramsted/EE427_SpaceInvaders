@@ -80,7 +80,7 @@ void ufoDisapear() {
 // Draw the UFO at the correct position, with the correct sprite
 // Make it active
 void ufoAppear() {
-	xil_printf("a wild ufo appears!");
+//	xil_printf("a wild ufo appears!");
 	if (ufo.direction == ufo_right) {
 		// draw at the top-left
 		ufo.p = initPosition(UFO_START_X_LEFT, UFO_START_Y);

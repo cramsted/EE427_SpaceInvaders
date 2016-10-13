@@ -11,7 +11,7 @@
 //values that determine the dimensions of the sprites on the screen
 #define TANK_HEIGHT (8*2)	//tank sprite height
 #define TANK_WIDTH (15*2)	//tank sprite width
-#define PIXELS_PER_MOVE 4	//tank move rate
+#define PIXELS_PER_MOVE 3	//tank move rate
 #define RIGHT_PADDING 4	//padding on right side of screen
 #define LEFT_PADDING RIGHT_PADDING //ditto for left side of screen
 

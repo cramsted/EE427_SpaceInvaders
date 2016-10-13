@@ -20,8 +20,10 @@
  * Space Invaders game
  * TODO's:
  *   - aliens adjust when left column dies
+ *   - alien explosion doesn't always erase
+ *   - alien block freezes
+ *   - aliens collide with bunkers - destroy the bunkers
  *   - optimize drawing algorithm as needed
- *   - UFO appearing and exploding
  *   - reorganizing: updating functions, removing struct pointers
  *   - CPU utilization
  */

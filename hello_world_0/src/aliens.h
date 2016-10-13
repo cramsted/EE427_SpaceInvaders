@@ -15,6 +15,8 @@
 #define ALIENS_START_Y 75			//starting y position of the alien block
 #define ALIENS_COL 11					//number of aliens in a row
 #define ALIENS_ROW 5					//number of aliens in a column
+#define ALIENS_SHIFT_X 10		//number of pixels the aliens shift once in the x direction
+#define ALIENS_SHIFT_Y 16		//number of pixels the aliens shift once in the y direction
 //custom variable set for easily changing the guise of any type of alien sprites
 typedef enum {
 	top_alien_in = 0, // 0
@@ -27,7 +29,9 @@ typedef enum {
 
 //possible directions of movement for the alien block
 typedef enum {
-	left, down, right
+	left = -ALIENS_SHIFT_X,
+	down = ALIENS_SHIFT_Y,
+	right = ALIENS_SHIFT_X
 } alien_direction_e;
 
 //possible life statuses of alien structs
@@ -59,10 +63,10 @@ extern Aliens aliens;
 //param y sets starting y position
 void initAliens(int x, int y);
 //moves the alien block in the direction of alien_direction_e by a preset number of pixels
-void updateAliens(Aliens *aliens);
+void updateAliens();
 //kills the alien at the specified row and col of the alien block
 void killAlien(Alien *alien, int row, int col);
-void drawAliens(int x, int y, Aliens *aliens);
+void drawAliens(int xUpdate, int yUpdate);
 void eraseAlienExplosionSprite();
 
 #endif /* ALIENS_H_ */

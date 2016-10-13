@@ -12,7 +12,7 @@
 
 #define UFO_WIDTH (16 * 2)
 #define UFO_HEIGHT (7 * 2)
-#define UFO_SHIFT_X 5
+#define UFO_SHIFT_X 4
 #define UFO_PADDING 8
 #define UFO_START_X_LEFT UFO_PADDING
 #define UFO_START_X_RIGHT (640-UFO_PADDING-UFO_WIDTH)

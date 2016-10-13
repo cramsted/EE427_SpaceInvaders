@@ -15,11 +15,12 @@
 #define ALIEN_WIDTH (12*2)		//alien sprite width
 #define XALIEN_PADDING (8)		//padding between aliens in the x direction
 #define YALIEN_PADDING (16)		//padding between aliens in the y direction
-#define ALIENS_SHIFT_X 10		//number of pixels the aliens shift once in the x direction
-#define ALIENS_SHIFT_Y 16		//number of pixels the aliens shift once in the y direction
-#define RIGHT_PADDING 8			//padding for the max value the aliens can be drawn in
-//the x direciton
-
+#define RIGHT_PADDING 12			//padding for the max value the aliens can be drawn in the x direciton
+#define ALIENS_BLOCK_WIDTH ((ALIEN_WIDTH + XALIEN_PADDING) * ALIENS_COL)
+#define MAX_X (SCREEN_WIDTH - RIGHT_PADDING - ALIEN_WIDTH) //fix me!
+#define MIN_X RIGHT_PADDING
+#define MAX_Y 400
+#define LEFT_SCREEN_X (SCREEN_WIDTH >> 2)
 //point values for different alien types
 #define TOP_ALIEN_POINTS 40
 #define MIDDLE_ALIEN_POINTS 20
@@ -156,49 +157,38 @@ void killAlien(Alien *alien, int row, int col) {
 	}
 }
 
+void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
+	if (alien->status == alive) {
+		// erase the alien and update its position
+		eraseAlien(alien);
+		alien->p.x += xUpdate;
+		alien->p.y += yUpdate;
+
+		// change the type from out to in or vice versa
+		(alien->type & 1) ? alien->type-- : alien->type++;
+		alien->sp.sprite = alien_sprites[alien->type];
+
+		// redraw the alien
+		alien->sp.Color.color = WHITE;
+		editFrameBuffer(&alien->sp, &alien->p);
+	}
+}
+
 //draws the block of aliens at the specified x,y coordinate on the screen
-void drawAliens(int x, int y, Aliens *aliens) {
+void drawAliens(int xUpdate, int yUpdate) {
 	int row, col;
-	if (aliens->direction == left) { // moving left
+	if (aliens.direction == left) { // moving left
 		for (row = 0; row < ALIENS_ROW; row++) {
 			for (col = 0; col < ALIENS_COL; col++) {
-				Alien *temp = &aliens->aliens[row][col];
-
-				if (temp->status == alive) {
-					// erase the alien and update its position
-					eraseAlien(temp);
-					temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
-					temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
-
-					// change the type from out to in or vice versa
-					(temp->type & 1) ? temp->type-- : temp->type++;
-					temp->sp.sprite = alien_sprites[temp->type];
-
-					// redraw the alien
-					temp->sp.Color.color = WHITE;
-					editFrameBuffer(&temp->sp, &temp->p);
-				}
+				Alien *temp = &aliens.aliens[row][col];
+				drawAlien(xUpdate, yUpdate, temp);
 			}
 		}
 	} else { // moving right or down
 		for (row = ALIENS_ROW - 1; row >= 0; row--) {
 			for (col = ALIENS_COL - 1; col >= 0; col--) {
-				Alien *temp = &aliens->aliens[row][col];
-
-				if (temp->status == alive) {
-					// erase the alien and update its position
-					eraseAlien(temp);
-					temp->p.x = x + (temp->sp.width + XALIEN_PADDING) * col;
-					temp->p.y = y + (temp->sp.height + YALIEN_PADDING) * row;
-
-					// change the type from out to in or vice versa
-					temp->type & 1 ? temp->type-- : temp->type++;
-					temp->sp.sprite = alien_sprites[temp->type];
-
-					// redraw the alien
-					temp->sp.Color.color = WHITE;
-					editFrameBuffer(&temp->sp, &temp->p);
-				}
+				Alien *temp = &aliens.aliens[row][col];
+				drawAlien(xUpdate, yUpdate, temp);
 			}
 		}
 	}
@@ -224,7 +214,7 @@ int findEndAlienCol(Aliens *aliens) {
 	int col, row;
 	Alien *a;
 	for (col = ALIENS_COL - 1; col >= 0; col--) {
-		for( row = ALIENS_ROW - 1; row >= 0; row--){
+		for (row = ALIENS_ROW - 1; row >= 0; row--) {
 			a = &aliens->aliens[row][col];
 			if (a->status == alive) {
 				//the index is 1-11 because it is used when multiplying the width of the alien
@@ -235,38 +225,102 @@ int findEndAlienCol(Aliens *aliens) {
 	return 0;
 }
 
-//moves the alien block a predetermined distance and direction
-void updateAliens(Aliens *aliens) {
-	// TODO: adjust alien x position when left column is destroyed
-	// by using leftColIndex for currx and curry
-	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
-	int leftColIndex = findStartAlienCol(aliens); //finds the max value of the left most col
-	int rightColIndex = findEndAlienCol(aliens); //finds the max value of the right most col
-	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
-	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
-	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex
-			* (aliens->aliens[0][0].sp.width + XALIEN_PADDING)); //largest allowed x value
+////moves the alien block a predetermined distance and direction
+//void updateAliens(Aliens *aliens) {
+//	// TODO: adjust alien x position when left column is destroyed
+//	// by using leftColIndex for currx and curry
+//	int startx = ALIENS_START_X + XALIEN_PADDING + ALIENS_SHIFT_X;
+//	int leftColIndex = findStartAlienCol(aliens); //finds the max value of the left most col
+//	int rightColIndex = findEndAlienCol(aliens); //finds the max value of the right most col
+//	int currx = aliens->aliens[0][0].p.x; // use [0][leftColIndex]
+//	int curry = aliens->aliens[0][0].p.y; // use [0][leftColIndex]
+//	int endx = SCREEN_WIDTH - RIGHT_PADDING - ALIENS_SHIFT_X - (rightColIndex
+//			* (aliens->aliens[0][0].sp.width + XALIEN_PADDING)); //largest allowed x value
+//
+//	xil_printf("endx: %d, currentX: %d, currentY: %d, direction: %d\n\r", endx,
+//			currx, curry, aliens->direction);
+//	// state machine to determine which way to go
+//	switch (aliens->direction) {
+//	case left:
+//		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
+//		if (currx < startx) {
+//			aliens->direction = down;
+//		}
+//		break;
+//	case down:
+//		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
+//		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
+//			aliens->direction = left;
+//		} else { // on the left side, go right
+//			aliens->direction = right;
+//		}
+//		break;
+//	case right:
+//		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
+//		if (currx > endx) {
+//			aliens->direction = down;
+//		}
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
-	// state machine to determine which way to go
-	switch (aliens->direction) {
-	case left:
-		drawAliens(currx - ALIENS_SHIFT_X, curry, aliens);
-		if (currx < startx) {
-			aliens->direction = down;
+Position aliensLeftBlockPosition() {
+	int row, col;
+	for (col = 0; col < ALIENS_COL; col++) {
+		for (row = 0; row < ALIENS_ROW; row++) {
+			if (aliens.aliens[row][col].status == alive)
+				return aliens.aliens[row][col].p;
 		}
-		break;
-	case down:
-		drawAliens(currx, curry + ALIENS_SHIFT_Y, aliens);
-		if (currx > (SCREEN_WIDTH >> 2)) { // on right side, go left
-			aliens->direction = left;
-		} else { // on the left side, go right
-			aliens->direction = right;
+	}
+	return initPosition(ALIENS_START_X, ALIENS_START_Y);
+}
+
+Position aliensRightBlockPosition() {
+	int row, col;
+	for (col = ALIENS_COL - 1; col >= 0; col--) {
+		for (row = ALIENS_ROW - 1; row >= 0; row--) {
+			if (aliens.aliens[row][col].status == alive)
+				return aliens.aliens[row][col].p;
+		}
+	}
+	return initPosition(ALIENS_START_X, ALIENS_START_Y);
+}
+
+/*
+ * update the aliens
+ * 	know the change in x and y
+ * 		depends on the direction and where they currently are
+ * 		iteratively update all the aliens
+ * 		possibly change directions
+ */
+void updateAliens() {
+	Position pLeft, pRight, p;
+	switch (aliens.direction) {
+	case left:
+		drawAliens(left, 0);
+		p = aliensLeftBlockPosition();
+		if (p.x < MIN_X) {
+			aliens.direction = down;
 		}
 		break;
 	case right:
-		drawAliens(currx + ALIENS_SHIFT_X, curry, aliens);
-		if (currx > endx) {
-			aliens->direction = down;
+		drawAliens(right, 0);
+		p = aliensRightBlockPosition();
+		if (p.x > MAX_X) {
+			aliens.direction = down;
+		}
+		break;
+	case down:
+		drawAliens(0, down);
+		p = aliensLeftBlockPosition();
+		if (p.y < MAX_Y) {
+			if (p.x < LEFT_SCREEN_X) {
+				aliens.direction = right;
+			} else {
+				aliens.direction = left;
+			}
 		}
 		break;
 	default:

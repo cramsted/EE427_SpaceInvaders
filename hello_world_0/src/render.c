@@ -13,6 +13,7 @@
 #include "aliens.h"
 #include "bullets.h"
 #include "bunkers.h"
+#include "ufo.h"
 #include "tank.h"
 #include "text.h"
 
@@ -51,7 +52,7 @@ void videoInit() {
 	drawGround();
 	drawCharacters();	//draws words like 'score' and 'lives'
 	drawTank(TANK_START_X, &tank);	//draws the tank
-	drawAliens(ALIENS_START_X, ALIENS_START_Y, &aliens); 	//draws aliens block
+	drawAliens(0, 0); 	//draws aliens block
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
 	drawLives(); //draws the tank shaped lives
 	//	render(); //needed only for changing the index of the frame buffer

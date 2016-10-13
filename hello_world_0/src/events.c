@@ -108,7 +108,7 @@ void heartbeatEvent() {
 		// "Idle" event - calculate utilization
 		clearEvent(HEARTBEAT_EVENT);
 		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
-		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
+//		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
 		utilizationCounter = 0;
 	}
 }
