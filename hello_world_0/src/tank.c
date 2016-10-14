@@ -59,22 +59,27 @@ void moveTankLeft(Tank *tank) {
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
+//does pauses the game for a moment so the tank's explosion sprite can be displayed uniterrupted
 #define DELAY 500000
 inline void shortDelay() {
 	volatile uint32_t i = DELAY;
+	//loop to decrement the counter
 	while (i--);
 }
 
+//draws the two tank explosion sprites and then pauses the game for a second
 void tankExplode() {
 	// draw the tank explosion sprite
 	uint32_t i;
 	for (i = 10; i > 0; --i) {
+		//draw first explosion sprite
 		tank.sp.sprite = tank_explosion_15x8;
 		editFrameBuffer(&tank.sp, &tank.p);
-		shortDelay();
+		shortDelay();	//pauses the game
+		//draw second explosion sprite
 		tank.sp.sprite = tank_explosion2;
 		editFrameBuffer(&tank.sp, &tank.p);
-		shortDelay();
+		shortDelay(); //pauses the game
 	}
 
 	// reset the tank sprite back to its normal sprite because
