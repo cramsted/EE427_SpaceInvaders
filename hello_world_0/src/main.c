@@ -48,7 +48,7 @@ int main() {
 	videoInit(); //initializes the screen to its starting point
 
 	// short delay before things get going
-	volatile int delay = START_GAME_DELAY;
+	volatile uint32_t delay = START_GAME_DELAY;
 	while (--delay)
 		;
 
@@ -56,6 +56,7 @@ int main() {
 	// Do this AFTER the delay so there's time to draw the screen
 	timerInit();
 
+//test code from lab3
 //	while (1) {
 //		readInput(); //waits for control input
 //	}

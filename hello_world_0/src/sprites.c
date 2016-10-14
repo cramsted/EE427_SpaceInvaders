@@ -7,7 +7,7 @@
 #include "sprites.h"
 
 //initializes a sprite
-Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
+Sprite initSprite(uint32_t height, uint32_t width, uint32_t color, const uint32_t *sprite) {
 	Sprite sp;
 	sp.Color.color = color;
 	sp.height = height;
@@ -17,7 +17,7 @@ Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
 }
 
 //initializes and x,y coordinate
-Position initPosition(int x, int y) {
+Position initPosition(uint32_t x, uint32_t y) {
 	Position p;
 	p.x = x;
 	p.y = y;
