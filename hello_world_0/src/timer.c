@@ -40,7 +40,9 @@
 // initializes the following counters
 void resetCounters();
 
-// global variables
+// global variables - these counters are updated in the FIT ISR handler
+// to keep track of various timing that needs to happen throughout the game
+// The variable names explain the function.
 static uint32_t buttonCounter;
 static uint32_t bulletsCounter;
 static uint32_t aliensCounter;
@@ -52,8 +54,19 @@ static uint32_t ufoAppearCounter;
 static uint32_t ufoExplosionCounter;
 static uint32_t tankDeathCounter;
 
+// A handle for reading the state of the push buttons
 static XGpio gpPB;
 
+// The following update<counterName> functions all do similar work:
+// they decrement a counter; when the counter expires,
+// they set the appropriate event and reset the counter
+// They are called by the FIT ISR handler.
+// They are what makes the game engine (events loop) run.
+
+// Decrement the button counter
+// When it expires, reset the counter, read the buttons,
+// and set button events for whichever buttons were pressed
+// The buttons make the tank move and make the tank fire
 void updateButtonCounter() {
 	if (--buttonCounter == 0) {
 		buttonCounter = BUTTON_POLL_COUNT;
@@ -71,6 +84,7 @@ void updateButtonCounter() {
 	}
 }
 
+// Sets the update bullets event to make the bullets move
 void updateBulletsCounter() {
 	if (--bulletsCounter == 0) {
 		bulletsCounter = BULLETS_UPDATE_COUNT;
@@ -78,6 +92,7 @@ void updateBulletsCounter() {
 	}
 }
 
+// The aliens refresh event makes the aliens move
 void updateAliensCounter() {
 	if (--aliensCounter == 0) {
 		aliensCounter = ALIENS_UPDATE_COUNT;
@@ -85,6 +100,9 @@ void updateAliensCounter() {
 	}
 }
 
+// The aliens fire event makes an alien fire a missile
+// We use the rand function to make the timing between shots
+// pseudo-random
 void updateAliensFireCounter() {
 	if (--aliensFireCounter == 0) {
 		aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
@@ -92,6 +110,7 @@ void updateAliensFireCounter() {
 	}
 }
 
+// The alien death event erases an exploded alien sprite
 void updateAlienExplosionCounter() {
 	if (alienExplosionCounter != 0) {
 		if (--alienExplosionCounter == 0) {
@@ -100,6 +119,7 @@ void updateAlienExplosionCounter() {
 	}
 }
 
+// The UFO update event makes the UFO move
 void updateUfoUpdateCounter() {
 	if (--ufoUpdateCounter == 0) {
 		ufoUpdateCounter = UFO_UPDATE_COUNT;
@@ -107,6 +127,7 @@ void updateUfoUpdateCounter() {
 	}
 }
 
+// The UFO explosion event erases the points text that appears when the UFO dies
 void updateUfoExplosionCounter() {
 	if (ufoExplosionCounter != 0) {
 		if (--ufoExplosionCounter == 0) {
@@ -115,6 +136,7 @@ void updateUfoExplosionCounter() {
 	}
 }
 
+// The UFO appear event makes the UFO appear on the screen
 void updateUfoAppearanceCounter() {
 	if (--ufoAppearCounter == 0) {
 		resetUfoAppearanceCounter();
@@ -122,6 +144,7 @@ void updateUfoAppearanceCounter() {
 	}
 }
 
+// The heartbeat event is used for utilization
 void updateHeartbeatCounter() {
 	if (--heartbeatCounter == 0) {
 		heartbeatCounter = ONE_SECOND_COUNT;
@@ -129,10 +152,15 @@ void updateHeartbeatCounter() {
 	}
 }
 
+// The tank death counter makes the game wait in a paused
+// state before re-enabling events and redrawing the tank
+// so the game will resume.
 void updateTankDeathCounter() {
 	if (--tankDeathCounter == 0) {
 		enableEvents();
 		tankDeathCounter = TANK_DEATH_COUNT;
+        
+        // Only redraw the tank if the player has more lives to use
 		if (tank.lives != 0) {
 			drawTank(tank.p.x, &tank);
 		}
@@ -142,7 +170,8 @@ void updateTankDeathCounter() {
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
-	// reset the counter
+	// reset the counter.
+    // Most of these counters should only update if events are enabled.
 	if (eventsEnabled()) {
 		updateButtonCounter();
 		updateBulletsCounter();
@@ -153,8 +182,10 @@ void timerInterruptHandler() {
 		updateUfoExplosionCounter();
 		updateUfoAppearanceCounter();
 	} else {
+        // This counter is updated while events are disabled - it will re-enable events when it expires.
 		updateTankDeathCounter();
 	}
+    // The heartbeat counter will always update - used for utilization
 	updateHeartbeatCounter();
 }
 
@@ -162,13 +193,14 @@ void timerInterruptHandler() {
 // fired the interrupt and then dispatches the corresponding interrupt handler.
 void interrupt_handler_dispatcher(void* ptr) {
 	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
-	// Check the FIT interrupt first.
+	// Clear the interrupt and call the FIT ISR handler
 	if (intc_status & XPAR_FIT_TIMER_0_INTERRUPT_MASK) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
 		timerInterruptHandler();
 	}
 }
 
+// Resets all counters that are updated by the FIT ISR handler
 void resetCounters() {
 	buttonCounter = BUTTON_POLL_COUNT;
 	bulletsCounter = BULLETS_UPDATE_COUNT;
@@ -206,11 +238,15 @@ void setAlienExplosionCounter() {
 			ALIEN_EXPLOSION_COUNT : aliensCounter - 1;
 }
 
+// See header file
 void setUfoExplosionCounter() {
 	ufoExplosionCounter = UFO_EXPLOSION_COUNT;
 }
 
+// See header file
+// We use rand and a minimum value to make the UFO appear somewhat randomly,
+// within a certain amount of time
 void resetUfoAppearanceCounter() {
-	int temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM);
+	uint32_t temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM);
 	ufoAppearCounter = UFO_APPEAR_COUNT_MINIMUM + (rand() % temp);
 }
