@@ -17,8 +17,8 @@ if __name__ == '__main__':
     with open("Output.txt", "w") as text_file:
         print("#include <stdint.h>\n\r", file=text_file)
         print("// %s \n\r" % args.file_name, file=text_file)
-        print("int32_t soundRate = %d" % soundRate, file=text_file)
-        print("int32_t soundFrames = %d" % bitStream.size, file=text_file)
+        print("int32_t soundRate = %d;" % soundRate, file=text_file)
+        print("int32_t soundFrames = %d;" % bitStream.size, file=text_file)
         print("int32_t sound[] = {", file=text_file)
         for i in range(0, bitStream.size):
             # for j in range(0, 10):
