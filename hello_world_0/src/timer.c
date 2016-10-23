@@ -14,6 +14,8 @@
 #include "timer.h"
 #include "tank.h"
 #include "events.h"
+#include "audio_files/tankExplosion.h"
+#include "xac97_l.h"
 
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
@@ -139,6 +141,26 @@ void updateTankDeathCounter() {
 	}
 }
 
+static int32_t *currentAddress;
+void playAudio() {
+	int iMax = 100;
+	int32_t* endBlock = (getTankExplosionSound()
+			+ (getTankExplosionSoundFrames() * sizeof(int32_t)));
+	if (currentAddress + 100 > endBlock) {
+		iMax =  endBlock - currentAddress;
+		currentAddress = getTankExplosionSound();
+	}
+
+	//		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *currentAddress);
+	//		currentAddress++;
+
+	int i;
+	for (i = 0; i < iMax; i++) {
+		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *(currentAddress+i));
+	}
+	currentAddress += 100;
+}
+
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
@@ -156,6 +178,7 @@ void timerInterruptHandler() {
 		updateTankDeathCounter();
 	}
 	updateHeartbeatCounter();
+	playAudio();
 }
 
 // Main interrupt handler, queries the interrupt controller to see what peripheral
@@ -196,14 +219,17 @@ void timerInit() {
 
 	// Need to initialize counters for anything to happen
 	resetCounters();
+
+	currentAddress = getTankExplosionSound();
 }
 
 void setAlienExplosionCounter() {
 	// In order to make sure the alien gets erased before the rest of the aliens move,
 	// make this counter either its regular value or the counter for moving the aliens - 1,
 	// whichever is less
-	alienExplosionCounter = ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ?
-			ALIEN_EXPLOSION_COUNT : aliensCounter - 1;
+	alienExplosionCounter
+			= ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ? ALIEN_EXPLOSION_COUNT
+					: aliensCounter - 1;
 }
 
 void setUfoExplosionCounter() {

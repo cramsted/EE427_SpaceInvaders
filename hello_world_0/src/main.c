@@ -37,6 +37,8 @@
 #include "controls.h"	//needed for readInput()
 #include "timer.h"
 #include "events.h"
+#include "xac97_l.h"
+#include "xparameters.h"
 
 #define START_GAME_DELAY 30000000
 
@@ -44,6 +46,25 @@ int main() {
 	// seed random number generator
 	srand(time(NULL));
 	init_platform(); // Necessary for all programs.
+
+	XAC97_HardReset(XPAR_AXI_AC97_0_BASEADDR); //resets the sound controller
+	XAC97_InitAudio(XPAR_AXI_AC97_0_BASEADDR, AC97_ANALOG_LOOPBACK);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, AC97_VOL_MID);
+//	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR + AC97_ExtendedAudioStat, AC97_EXTENDED_AUDIO_CONTROL_VRA);
+	XAC97_mSetAC97RegisterData(XPAR_AXI_AC97_0_BASEADDR + AC97_ExtendedAudioStat, AC97_EXTENDED_AUDIO_CONTROL_VRA);
+//	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR + AC97_PCM_DAC_Rate, AC97_PCM_RATE_11025_HZ);
+
+
+	XAC97_mSetAC97RegisterData(XPAR_AXI_AC97_0_BASEADDR + AC97_PCM_DAC_Rate, AC97_PCM_RATE_11025_HZ);
+	timerInit();
+
+	while (1) {
+
+	}
+
+	/*
 	initVideoDMAController(); //sets up video hardware
 	videoInit(); //initializes the screen to its starting point
 
@@ -61,7 +82,9 @@ int main() {
 //	}
 
 	eventsLoop();
+	 */
 	cleanup_platform();
 
 	return 0;
 }
+

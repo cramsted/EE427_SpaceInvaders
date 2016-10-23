@@ -1,0 +1,25 @@
+/*
+ * ufoNoise.h
+ *
+ *  Created on: Oct 22, 2016
+ *      Author: superman
+ */
+
+#ifndef UFONOISE_H_
+#define UFONOISE_H_
+#include <stdint.h>
+
+
+int32_t getUfoNoiseSoundRate(){
+	return soundRate;
+}
+
+int32_t getUfoNoiseSoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getUfoNoiseSound(){
+	return sound;
+}
+
+#endif /* UFONOISE_H_ */

@@ -1,10 +1,10 @@
 #include <stdint.h>
-
+#include "tankExplosion.h"
 // boom_x.wav 
 
-int32_t soundRate = 11025;
-int32_t soundFrames = 12746;
-int32_t sound[] = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
+static int32_t soundRate = 11025;
+static int32_t soundFrames = 12746;
+static int32_t sound[] = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
 		128, 129, 130, 130, 128, 128, 128, 128, 128, 128, 128, 125, 127, 127,
 		128, 128, 127, 128, 128, 128, 128, 128, 128, 128, 128, 128, 127, 126,
 		126, 126, 126, 125, 126, 126, 126, 126, 126, 125, 126, 125, 126, 126,
@@ -869,3 +869,15 @@ int32_t sound[] = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
 		128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
 		128, 128, 129, 128, 129, 130, 130, 130, 129, 128, 128, 128, 128, 128,
 		128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128 };
+
+int32_t getTankExplosionSoundRate(){
+	return soundRate;
+}
+
+int32_t getTankExplosionSoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getTankExplosionSound(){
+	return sound;
+}

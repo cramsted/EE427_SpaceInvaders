@@ -1,10 +1,10 @@
 #include <stdint.h>
-
+#include "alienMovement2.h"
 // fastinvader2.wav 
 
-int32_t soundRate = 11025;
-int32_t soundFrames = 1042;
-int32_t sound[] = { 128, 128, 116, 94, 71, 54, 31, 20, 9, 20, 31, 48, 65, 88,
+static int32_t soundRate = 11025;
+static int32_t soundFrames = 1042;
+static int32_t sound[] = { 128, 128, 116, 94, 71, 54, 31, 20, 9, 20, 31, 48, 65, 88,
 		105, 128, 139, 161, 178, 190, 207, 218, 229, 240, 252, 252, 252, 255,
 		255, 252, 252, 252, 240, 240, 229, 224, 212, 207, 201, 184, 184, 173,
 		161, 150, 144, 128, 128, 122, 111, 99, 94, 82, 77, 65, 60, 54, 54, 71,
@@ -71,3 +71,15 @@ int32_t sound[] = { 128, 128, 116, 94, 71, 54, 31, 20, 9, 20, 31, 48, 65, 88,
 		116, 122, 116, 111, 116, 116, 111, 111, 116, 111, 116, 111, 116, 111,
 		111, 111, 116, 111, 116, 111, 116, 111, 111, 116, 111, 111, 111, 111,
 		111, 116 };
+
+int32_t getAienMovement_2_SoundRate(){
+	return soundRate;
+}
+
+int32_t getAienMovement_2_SoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getAienMovement_2_Sound(){
+	return sound;
+}

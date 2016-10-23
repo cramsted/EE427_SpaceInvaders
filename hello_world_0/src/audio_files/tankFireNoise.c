@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "tankFireNoise.h"
 
 // phasesr2.wav 
 
-int32_t soundRate = 11025;
-int32_t soundFrames = 1802;
-int32_t sound[] = { 255, 162, 102, 101, 46, 7, 47, 59, 111, 150, 160, 176, 163,
+static int32_t soundRate = 11025;
+static int32_t soundFrames = 1802;
+static int32_t sound[] = { 255, 162, 102, 101, 46, 7, 47, 59, 111, 150, 160, 176, 163,
 		226, 220, 199, 157, 120, 74, 95, 31, 13, 47, 64, 116, 155, 162, 171,
 		181, 246, 207, 194, 142, 102, 84, 70, 8, 31, 53, 92, 138, 156, 174,
 		162, 223, 226, 201, 167, 124, 79, 95, 18, 18, 47, 71, 119, 154, 170,
@@ -121,3 +122,15 @@ int32_t sound[] = { 255, 162, 102, 101, 46, 7, 47, 59, 111, 150, 160, 176, 163,
 		191, 147, 103, 91, 10, 13, 45, 68, 127, 158, 163, 174, 254, 212, 200,
 		154, 101, 90, 42, 5, 42, 67, 119, 148, 166, 164, 238, 223, 202, 174,
 		112, 96, 78, 0, 34, 54, 99, 143, 160, 166, 183, 250, 207 };
+
+int32_t getTankFireNoiseSoundRate(){
+	return soundRate;
+}
+
+int32_t getTankFireNoiseSoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getTankFireNoiseSound(){
+	return sound;
+}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="20" version="2.0">
+<workbench progressCount="21" version="2.0">
 <workbenchAdvisor/>
 <window height="1160" maximized="true" width="960" x="978" y="68">
 <fastViewData fastViewLocation="1024"/>
@@ -32,74 +32,13 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
-<part id="3"/>
-<part id="4"/>
-<part id="5"/>
-<part id="6"/>
-<part id="7"/>
-</presentation>
-</folder>
-</info>
-<info part="org.eclipse.ui.internal.EditorStack@606bdd1f" ratio="0.5246753" ratioLeft="808" ratioRight="732" relationship="2" relative="DefaultEditorWorkbook">
-<folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-<part id="2"/>
-<part id="1"/>
-<part id="3"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="timer.c" partName="timer.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/timer.c" title="timer.c" tooltip="hello_world_0/src/timer.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/timer.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4112" selectionTopPixel="2057"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="events.c" partName="events.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/events.c" title="events.c" tooltip="hello_world_0/src/events.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/events.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3734" selectionTopPixel="1528"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="bunkers.h" partName="bunkers.h" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/bunkers.h" title="bunkers.h" tooltip="hello_world_0/src/bunkers.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/bunkers.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1658" selectionTopPixel="66"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="bullets.c" partName="bullets.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/bullets.c" title="bullets.c" tooltip="hello_world_0/src/bullets.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/bullets.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5666" selectionTopPixel="3058"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="aliens.h" partName="aliens.h" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/aliens.h" title="aliens.h" tooltip="hello_world_0/src/aliens.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/aliens.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="334" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="text.h" partName="text.h" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/text.h" title="text.h" tooltip="hello_world_0/src/text.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/text.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1417" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tank.c" partName="tank.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/tank.c" title="tank.c" tooltip="hello_world_0/src/tank.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/tank.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1811" selectionTopPixel="935"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sprite_bit_maps.c" partName="sprite_bit_maps.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/sprite_bit_maps.c" title="sprite_bit_maps.c" tooltip="hello_world_0/src/sprite_bit_maps.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/sprite_bit_maps.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6588" selectionTopPixel="2550"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="events.h" partName="events.h" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/events.h" title="events.h" tooltip="hello_world_0/src/events.h" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/events.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="514" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="bunkers.c" partName="bunkers.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/bunkers.c" title="bunkers.c" tooltip="hello_world_0/src/bunkers.c" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/bunkers.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2" selectionTopPixel="0"/>
-</editor>
-<editor focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="aliens.c" partName="aliens.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/aliens.c" title="aliens.c" tooltip="hello_world_0/src/aliens.c" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/aliens.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9410" selectionTopPixel="4401"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="controls.c" partName="controls.c" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/controls.c" title="controls.c" tooltip="hello_world_0/src/controls.c" workbook="org.eclipse.ui.internal.EditorStack@606bdd1f">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/controls.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1554" selectionTopPixel="748"/>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="xac97_l.h" partName="xac97_l.h" path="C:/Users/superman/Desktop/EE427_SpaceInvaders/hello_world_0/src/xac97_l.h" title="xac97_l.h" tooltip="hello_world_0/src/xac97_l.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/hello_world_0/src/xac97_l.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="13115" selectionTopPixel="3993"/>
 </editor>
 </editors>
 <views>
@@ -161,11 +100,7 @@
 <view id="org.eclipse.cdt.make.ui.views.MakeView" partName="Make Target"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Errors"/>
-</expanded>
-<columnWidths org.eclipse.ui.ide.locationField="64" org.eclipse.ui.ide.markerType="94" org.eclipse.ui.ide.pathField="124" org.eclipse.ui.ide.resourceField="94" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
+<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -183,7 +118,7 @@
 </viewState>
 </view>
 </views>
-<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.eclipse.cdt.ui.CPerspective">
+<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.eclipse.cdt.ui.CPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.cdt.internal.ui.CPerspectiveFactory" id="org.eclipse.cdt.ui.CPerspective" label="C/C++"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -273,7 +208,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.10680128" ratioLeft="201" ratioRight="1681" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottom" ratio="0.8536122" ratioLeft="898" ratioRight="154" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.76140684" ratioLeft="801" ratioRight="251" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -411,164 +346,176 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/aliens.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/aliens.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/bunkers.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/bunkers.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/bullets.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/events.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/text.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/tank.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/sprite_bit_maps.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/aliens.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/alienMovement1.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/timer.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/text.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/tank.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/sprite_bit_maps.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/bunkers.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/controls.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/alienMovement2.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/alienMovement4.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/alienMovemnt3.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/explosionAlien.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/tankExplosion.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/tankFireNoise.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/audio_files/ufoNoise.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/xac97_l.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/hello_world_0/src/xac97_l.c"/>
 </editors>
 <item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="2156" y="0"/>
-</item>
-<item historyLabel="aliens.h" index="0">
-<position info="not_deleted" x="265" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="12858" y="0"/>
-</item>
-<item historyLabel="bullets.c" index="4">
-<position info="not_deleted" x="8257" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="6960" y="0"/>
-</item>
-<item historyLabel="bullets.c" index="4">
-<position info="not_deleted" x="5666" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="6734" y="0"/>
-</item>
-<item historyLabel="aliens.h" index="0">
-<position info="not_deleted" x="874" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="13035" y="0"/>
-</item>
-<item historyLabel="bunkers.c" index="2">
-<position info="not_deleted" x="4222" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="13008" y="0"/>
-</item>
-<item historyLabel="bunkers.c" index="2">
-<position info="not_deleted" x="3918" y="47"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="12978" y="0"/>
-</item>
-<item historyLabel="bunkers.c" index="2">
-<position info="not_deleted" x="2" y="0"/>
-</item>
-<item historyLabel="bunkers.h" index="3">
-<position info="not_deleted" x="1658" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="12463" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="2218" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="3449" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="2175" y="14"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="3448" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="2492" y="0"/>
-</item>
-<item historyLabel="bunkers.h" index="3">
-<position info="not_deleted" x="1658" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="2492" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
 <position/>
-</item>
-<item historyLabel="timer.c" index="6">
-<position info="not_deleted" x="4112" y="0"/>
-</item>
-<item historyLabel="events.c" index="5">
-<position info="not_deleted" x="3734" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position info="not_deleted" x="11996" y="0"/>
 </item>
 <item historyLabel="aliens.c" index="1">
 <position/>
 </item>
-<item historyLabel="aliens.h" index="0">
-<position info="not_deleted" x="1865" y="0"/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position/>
-</item>
-<item historyLabel="text.h" index="7">
+<item historyLabel="text.h" index="2">
 <position info="not_deleted" x="1417" y="0"/>
 </item>
-<item historyLabel="aliens.c" index="1">
-<position/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position/>
-</item>
-<item historyLabel="aliens.c" index="1">
-<position/>
-</item>
-<item historyLabel="text.h" index="7">
-<position info="not_deleted" x="1417" y="0"/>
-</item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1766" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1808" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1808" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1995" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="2069" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="2085" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="580" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="582" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1832" y="0"/>
 </item>
-<item historyLabel="sprite_bit_maps.c" index="9">
+<item historyLabel="sprite_bit_maps.c" index="4">
 <position info="not_deleted" x="6588" y="0"/>
 </item>
-<item historyLabel="tank.c" index="8">
+<item historyLabel="tank.c" index="3">
 <position info="not_deleted" x="1811" y="0"/>
 </item>
 <item historyLabel="aliens.c" index="1">
 <position info="not_deleted" x="9410" y="0"/>
 </item>
-<item active="true" historyLabel="aliens.h" index="0">
-<position info="not_deleted" x="1865" y="0"/>
+<item historyLabel="aliens.h" index="0">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="aliens.h" index="0">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="alienMovement1.c" index="6">
+<position/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="aliens.h" index="0">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="timer.c" index="7">
+<position info="not_deleted" x="4112" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="timer.c" index="7">
+<position info="not_deleted" x="4112" y="0"/>
+</item>
+<item historyLabel="text.h" index="8">
+<position info="not_deleted" x="1417" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="text.h" index="8">
+<position info="not_deleted" x="1417" y="0"/>
+</item>
+<item historyLabel="tank.c" index="9">
+<position info="not_deleted" x="1811" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="tank.c" index="9">
+<position info="not_deleted" x="1811" y="0"/>
+</item>
+<item historyLabel="sprite_bit_maps.c" index="10">
+<position info="not_deleted" x="6588" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="sprite_bit_maps.c" index="10">
+<position info="not_deleted" x="6588" y="0"/>
+</item>
+<item historyLabel="aliens.c" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="bunkers.c" index="11">
+<position info="not_deleted" x="2" y="0"/>
+</item>
+<item historyLabel="controls.c" index="12">
+<position info="not_deleted" x="1554" y="0"/>
+</item>
+<item historyLabel="alienMovement1.c" index="6">
+<position info="not_deleted" x="69" y="0"/>
+</item>
+<item historyLabel="alienMovement2.c" index="13">
+<position info="not_deleted" x="69" y="0"/>
+</item>
+<item historyLabel="alienMovement4.c" index="14">
+<position info="not_deleted" x="69" y="0"/>
+</item>
+<item historyLabel="alienMovemnt3.c" index="15">
+<position info="not_deleted" x="69" y="0"/>
+</item>
+<item historyLabel="explosionAlien.c" index="16">
+<position info="not_deleted" x="68" y="0"/>
+</item>
+<item historyLabel="alienMovemnt3.c" index="15">
+<position info="not_deleted" x="69" y="0"/>
+</item>
+<item historyLabel="tankExplosion.c" index="17">
+<position info="not_deleted" x="63" y="0"/>
+</item>
+<item historyLabel="tankFireNoise.c" index="18">
+<position info="not_deleted" x="65" y="0"/>
+</item>
+<item historyLabel="ufoNoise.c" index="19">
+<position info="not_deleted" x="61" y="0"/>
+</item>
+<item historyLabel="xac97_l.h" index="20">
+<position info="not_deleted" x="13115" y="0"/>
+</item>
+<item historyLabel="xac97_l.c" index="21">
+<position info="not_deleted" x="4218" y="0"/>
+</item>
+<item active="true" historyLabel="xac97_l.h" index="20">
+<position info="not_deleted" x="13115" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -591,6 +538,36 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xac97_l.c" tooltip="hello_world_0/src/xac97_l.c">
+<persistable path="/hello_world_0/src/xac97_l.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="xac97_l.h" tooltip="hello_world_0/src/xac97_l.h">
+<persistable path="/hello_world_0/src/xac97_l.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ufoNoise.c" tooltip="hello_world_0/src/audio_files/ufoNoise.c">
+<persistable path="/hello_world_0/src/audio_files/ufoNoise.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tankFireNoise.c" tooltip="hello_world_0/src/audio_files/tankFireNoise.c">
+<persistable path="/hello_world_0/src/audio_files/tankFireNoise.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tankExplosion.c" tooltip="hello_world_0/src/audio_files/tankExplosion.c">
+<persistable path="/hello_world_0/src/audio_files/tankExplosion.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="explosionAlien.c" tooltip="hello_world_0/src/audio_files/explosionAlien.c">
+<persistable path="/hello_world_0/src/audio_files/explosionAlien.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="alienMovemnt3.c" tooltip="hello_world_0/src/audio_files/alienMovemnt3.c">
+<persistable path="/hello_world_0/src/audio_files/alienMovemnt3.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="alienMovement4.c" tooltip="hello_world_0/src/audio_files/alienMovement4.c">
+<persistable path="/hello_world_0/src/audio_files/alienMovement4.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="alienMovement2.c" tooltip="hello_world_0/src/audio_files/alienMovement2.c">
+<persistable path="/hello_world_0/src/audio_files/alienMovement2.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="alienMovement1.c" tooltip="hello_world_0/src/audio_files/alienMovement1.c">
+<persistable path="/hello_world_0/src/audio_files/alienMovement1.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sprite_bit_maps.c" tooltip="hello_world_0/src/sprite_bit_maps.c">
 <persistable path="/hello_world_0/src/sprite_bit_maps.c"/>
 </file>
@@ -605,36 +582,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bullets.c" tooltip="hello_world_0/src/bullets.c">
 <persistable path="/hello_world_0/src/bullets.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bunkers.h" tooltip="hello_world_0/src/bunkers.h">
-<persistable path="/hello_world_0/src/bunkers.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bunkers.c" tooltip="hello_world_0/src/bunkers.c">
-<persistable path="/hello_world_0/src/bunkers.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="render.c" tooltip="hello_world_0/src/render.c">
-<persistable path="/hello_world_0/src/render.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sprite_char_bit_maps.c" tooltip="hello_world_0/src/sprite_char_bit_maps.c">
-<persistable path="/hello_world_0/src/sprite_char_bit_maps.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="text.c" tooltip="hello_world_0/src/text.c">
-<persistable path="/hello_world_0/src/text.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ufo.c" tooltip="hello_world_0/src/ufo.c">
-<persistable path="/hello_world_0/src/ufo.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ufo.h" tooltip="hello_world_0/src/ufo.h">
-<persistable path="/hello_world_0/src/ufo.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="events.c" tooltip="hello_world_0/src/events.c">
-<persistable path="/hello_world_0/src/events.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="aliens.c" tooltip="hello_world_0/src/aliens.c">
-<persistable path="/hello_world_0/src/aliens.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="aliens.h" tooltip="hello_world_0/src/aliens.h">
-<persistable path="/hello_world_0/src/aliens.h"/>
 </file>
 </mruList>
 </workbench>

@@ -1,10 +1,10 @@
 #include <stdint.h>
-
+#include "alienMovement4.h"
 // fastinvader4.wav 
 
-int32_t soundRate = 11025;
-int32_t soundFrames = 1098;
-int32_t sound[] = { 133, 133, 128, 133, 128, 128, 133, 133, 139, 133, 128, 133,
+static int32_t soundRate = 11025;
+static int32_t soundFrames = 1098;
+static int32_t sound[] = { 133, 133, 128, 133, 128, 128, 133, 133, 139, 133, 128, 133,
 		133, 133, 133, 133, 128, 133, 133, 128, 133, 128, 133, 133, 133, 122,
 		99, 77, 54, 31, 20, 9, 15, 26, 43, 60, 88, 99, 128, 139, 161, 184, 201,
 		218, 229, 240, 246, 255, 255, 255, 255, 255, 255, 255, 255, 252, 252,
@@ -74,3 +74,15 @@ int32_t sound[] = { 133, 133, 128, 133, 128, 128, 133, 133, 139, 133, 128, 133,
 		111, 116, 111, 116, 111, 111, 116, 111, 111, 116, 111, 116, 111, 111,
 		116, 111, 105, 111, 116, 111, 111, 116, 111, 116, 111, 111, 116, 111,
 		116, 111, 105, 116 };
+
+int32_t getAienMovement_4_SoundRate(){
+	return soundRate;
+}
+
+int32_t getAienMovement_4_SoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getAienMovement_4_Sound(){
+	return sound;
+}

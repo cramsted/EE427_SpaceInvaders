@@ -2783,3 +2783,128 @@ Command-line arguments:  -data C:\Users\superman\Desktop\EE427_SpaceInvaders -os
 !MESSAGE Could not find view: org.eclipse.ui.internal.introview
 !SUBENTRY 1 unknown 0 0 2016-10-20 21:22:47.428
 !MESSAGE OK
+!SESSION 2016-10-22 15:48:05.750 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 4 4 2016-10-22 15:48:22.736
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2016-10-22 15:48:23.594
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2016-10-22 15:48:23.594
+!MESSAGE Unable to restore perspective: Workspace - C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2016-10-22 15:48:23.594
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2016-10-22 15:48:23.594
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2016-10-22 15:48:23.594
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2016-10-22 15:48:23.594
+!MESSAGE OK
+
+!ENTRY org.eclipse.cdt.core 2 0 2016-10-22 17:39:02.264
+!MESSAGE Formatting problem(s)
+!SUBENTRY 1 org.eclipse.cdt.core 2 0 2016-10-22 17:39:02.264
+!MESSAGE [86/1] unexpected token type, expecting:13, actual:null
+!STACK 0
+org.eclipse.cdt.internal.formatter.AbortFormatting: [86/1] unexpected token type, expecting:13, actual:null
+	at org.eclipse.cdt.internal.formatter.Scribe.printNextToken(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.Scribe.printNextToken(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.formatClosingBrace(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.formatBlock(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.visit(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.formatDeclaration(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.visit(Unknown Source)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.visit(Unknown Source)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CodeFormatterVisitor.format(Unknown Source)
+	at org.eclipse.cdt.internal.formatter.CCodeFormatter.format(Unknown Source)
+	at org.eclipse.cdt.internal.corext.util.CodeFormatterUtil.format(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.CFormattingStrategy.format(Unknown Source)
+	at org.eclipse.jface.text.formatter.MultiPassContentFormatter.formatMaster(MultiPassContentFormatter.java:193)
+	at org.eclipse.jface.text.formatter.MultiPassContentFormatter.format(MultiPassContentFormatter.java:142)
+	at org.eclipse.jface.text.source.SourceViewer.doOperation(SourceViewer.java:966)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.doOperation(ProjectionViewer.java:1451)
+	at org.eclipse.cdt.internal.ui.editor.CSourceViewer.doOperation(Unknown Source)
+	at org.eclipse.cdt.internal.ui.editor.CEditor$AdaptedSourceViewer.doOperation(Unknown Source)
+	at org.eclipse.ui.texteditor.TextOperationAction$1.run(TextOperationAction.java:131)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.texteditor.TextOperationAction.run(TextOperationAction.java:129)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:498)
+	at org.eclipse.ui.commands.ActionHandler.execute(ActionHandler.java:185)
+	at org.eclipse.ui.internal.handlers.LegacyHandlerWrapper.execute(LegacyHandlerWrapper.java:109)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.executeCommand(WorkbenchKeyboard.java:468)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.press(WorkbenchKeyboard.java:786)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.processKeyEvent(WorkbenchKeyboard.java:885)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.filterKeySequenceBindings(WorkbenchKeyboard.java:567)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.access$3(WorkbenchKeyboard.java:508)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard$KeyDownFilter.handleEvent(WorkbenchKeyboard.java:123)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1253)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1077)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1062)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1103)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1099)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1508)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4270)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:345)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4162)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:341)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2459)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3655)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:620)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)

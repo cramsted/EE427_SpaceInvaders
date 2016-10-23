@@ -2,9 +2,9 @@
 
 // explosion_x.wav 
 
-int32_t soundRate = 11025;
-int32_t soundFrames = 15987;
-int32_t sound[] = { 155, 161, 168, 164, 160, 153, 185, 206, 176, 181, 177, 232,
+static int32_t soundRate = 11025;
+static int32_t soundFrames = 15987;
+static int32_t sound[] = { 155, 161, 168, 164, 160, 153, 185, 206, 176, 181, 177, 232,
 		227, 207, 200, 181, 182, 168, 160, 168, 169, 158, 133, 169, 195, 195,
 		191, 187, 174, 162, 144, 130, 122, 129, 93, 37, 38, 24, 9, 8, 12, 30,
 		5, 41, 40, 58, 90, 129, 170, 152, 140, 166, 186, 182, 189, 203, 211,
@@ -1091,3 +1091,15 @@ int32_t sound[] = { 155, 161, 168, 164, 160, 153, 185, 206, 176, 181, 177, 232,
 		128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
 		128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128,
 		128, 128 };
+
+int32_t getExplosionAlienSoundRate(){
+	return soundRate;
+}
+
+int32_t getExplosionAlienSoundFrames(){
+	return soundFrames;
+}
+
+int32_t* getExplosionAlienSound(){
+	return sound;
+}
