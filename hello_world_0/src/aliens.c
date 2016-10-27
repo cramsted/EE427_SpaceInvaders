@@ -129,7 +129,6 @@ void eraseAlienExplosionSprite() {
 			explodedAliens[i] = NULL;
 		}
 	}
-
 }
 
 //erases the passed in alien by changing it's sprite color to match the background
@@ -143,6 +142,7 @@ void explodeAlien(Alien *alien) {
 	alien->sp.sprite = alien_explosion_12x8;
 	editFrameBuffer(&alien->sp, &alien->p);
 	addExplodedAlienSprite(alien);
+	setAudioEvent(AUDIO_EXPLOSION_ALIEN);
 }
 
 //sets the status var of the alien at the passed in row and col as dead

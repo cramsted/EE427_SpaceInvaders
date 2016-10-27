@@ -1,4 +1,5 @@
 /*
+ *
  * audio.c
  *
  *  Created on: Oct 26, 2016
@@ -22,6 +23,9 @@
 #define ALIEN_MOVEMENT_2 2
 #define ALIEN_MOVEMENT_3 3
 #define ALIEN_MOVEMENT_4 4
+
+#define NORMAL 0
+#define END_OF_BUFFER 1
 
 #define DUPLICATE_LOWER_2_BYTES(data) (data |= data << 16)
 
@@ -102,7 +106,9 @@ void clearAudioEvent(uint32_t event) {
     audioEvents &= ~event;
 }
 
-void fillAudioBuffer(Sound *sound) {
+//Return a 1 if we reached end of the buffer
+//Otherwise, return a zero
+int32_t fillAudioBuffer(Sound *sound) {
     //maximum of bytes ever put in the FIFO
     int32_t iMax = BUFFER_FILL_RATE;
     int32_t end = 0;
@@ -127,7 +133,9 @@ void fillAudioBuffer(Sound *sound) {
     if (end) {
         // Reset index of the sound buffer back to zero
         sound->currentPosition = 0;
+        return END_OF_BUFFER;
     }
+    return NORMAL;
 }
 
 uint32_t eventPending(uint32_t event) {
@@ -135,25 +143,28 @@ uint32_t eventPending(uint32_t event) {
 }
 
 void playAudio() {
-    xil_printf("%d | ", audioEvents);
-    static int32_t alienMovementNumber = 1;
-        if (eventPending(AUDIO_ALIEN_MOVEMENT)) {
+    static int32_t alienMovementNumber = ALIEN_MOVEMENT_1;
+    if (eventPending(AUDIO_ALIEN_MOVEMENT)) {
         switch (alienMovementNumber) {
         case ALIEN_MOVEMENT_1:
-            fillAudioBuffer(&alienMovement1);
-            alienMovementNumber = ALIEN_MOVEMENT_2;
+            if (fillAudioBuffer(&alienMovement1) == END_OF_BUFFER) {
+                alienMovementNumber = ALIEN_MOVEMENT_2;
+            }
             break;
         case ALIEN_MOVEMENT_2:
-            fillAudioBuffer(&alienMovement2);
-            alienMovementNumber = ALIEN_MOVEMENT_3;
+            if (fillAudioBuffer(&alienMovement2) == END_OF_BUFFER) {
+                alienMovementNumber = ALIEN_MOVEMENT_3;
+            }
             break;
         case ALIEN_MOVEMENT_3:
-            fillAudioBuffer(&alienMovement3);
-            alienMovementNumber = ALIEN_MOVEMENT_4;
+            if (fillAudioBuffer(&alienMovement3) == END_OF_BUFFER) {
+                alienMovementNumber = ALIEN_MOVEMENT_4;
+            }
             break;
         case ALIEN_MOVEMENT_4:
-            fillAudioBuffer(&alienMovement4);
-            alienMovementNumber = ALIEN_MOVEMENT_1;
+            if (fillAudioBuffer(&alienMovement4) == END_OF_BUFFER) {
+                alienMovementNumber = ALIEN_MOVEMENT_1;
+            }
             break;
         default:
             break;
