@@ -32,7 +32,7 @@ typedef struct {
 		} RGB;
 		uint32_t color;
 	} Color;
-	const int *sprite; //points to the actual sprite struct
+	const int32_t *sprite; //points to the actual sprite struct
 } Sprite;
 
 //struct for sprite positional data
@@ -42,7 +42,7 @@ typedef struct {
 } Position;
 
 //initializes a sprite
-Sprite initSprite(int height, int width, uint32_t color, const int *sprite);
+Sprite initSprite(int32_t height, int32_t width, uint32_t color, const int32_t *sprite);
 //initializes and x,y coordinate
 Position initPosition(int x, int y);
 

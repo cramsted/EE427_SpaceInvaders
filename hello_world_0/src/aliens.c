@@ -11,6 +11,7 @@
 #include "text.h"		//for access to the function updateScore()
 #include <stdio.h>		//xil_printf for debugging purposes
 #include "timer.h"
+#include "audio_files/audio.h"
 
 //values that determine the dimensions of the sprites on the screen
 #define ALIEN_HEIGHT (8*2)		//alien sprite height
@@ -253,6 +254,7 @@ Position aliensRightBlockPosition() {
 
 //moves the alien block a predetermined distance and direction
 void updateAliens() {
+    setAudioEvent(AUDIO_ALIEN_MOVEMENT);
 	Position p;
 	switch (aliens.direction) {
 	case left:

@@ -7,7 +7,7 @@
 #include "sprites.h"
 
 //initializes a sprite
-Sprite initSprite(int height, int width, uint32_t color, const int *sprite) {
+Sprite initSprite(int32_t height, int32_t width, uint32_t color, const int32_t *sprite) {
 	Sprite sp;
 	sp.Color.color = color;
 	sp.height = height;

@@ -6,6 +6,7 @@
  */
 #include "tank.h"
 #include "render.h"
+#include "audio_files/audio.h"
 #include <stdio.h>
 
 //values that determine the dimensions of the sprites on the screen
@@ -66,7 +67,9 @@ inline void shortDelay() {
 }
 
 void tankExplode() {
-	// draw the tank explosion sprite
+    setAudioEvent(AUDIO_TANK_EXPLOSION);
+
+    // draw the tank explosion sprite
 	int i;
 	for (i = 10; i > 0; --i) {
 		tank.sp.sprite = tank_explosion_15x8;

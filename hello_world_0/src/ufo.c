@@ -9,6 +9,7 @@
 #include "timer.h"
 #include "render.h"
 #include "text.h"
+#include "audio_files/audio.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -38,10 +39,12 @@ void updateUfo() {
 	// collision with bullets is done in bullet.c
 	if (ufo.status == active) {
 		drawUfo();
+		setAudioEvent(AUDIO_UFO_NOISE);
 
 		// If the ufo is off the screen, make it disappear
 		if ((ufo.p.x >= UFO_START_X_RIGHT) || ufo.p.x <= UFO_START_X_LEFT) {
 			ufoDisapear();
+			clearAudioEvent(AUDIO_UFO_NOISE);
 		}
 	}
 }
@@ -49,6 +52,8 @@ void updateUfo() {
 //kills the ufo
 void killUfo() {
 	eraseUfo();
+	clearAudioEvent(AUDIO_UFO_NOISE);
+	setAudioEvent(AUDIO_EXPLOSION_ALIEN);
 	ufo.status = inactive;
 	ufoPoints = rand() % UFO_MAX_POINTS;
 	drawUfoPoints(&ufo.p, ufoPoints, RED);

@@ -28,7 +28,6 @@
  *   - CPU utilization
  */
 
-#include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
@@ -37,36 +36,34 @@
 #include "controls.h"	//needed for readInput()
 #include "timer.h"
 #include "events.h"
-#include "xac97_l.h"
 #include "xparameters.h"
 #include "audio_files/audio.h"
 
 #define START_GAME_DELAY 30000000
 
 int main() {
-	// seed random number generator
-	srand(time(NULL));
-	init_platform(); // Necessary for all programs.
-	initAudio();
-	initVideoDMAController(); //sets up video hardware
-	videoInit(); //initializes the screen to its starting point
+    // seed random number generator
+    srand(time(NULL));
+    init_platform(); // Necessary for all programs.
+    initAudio();
+    initVideoDMAController(); //sets up video hardware
+    videoInit(); //initializes the screen to its starting point
 
-	// short delay before things get going
-	volatile int delay = START_GAME_DELAY;
-	while (--delay)
-		;
+    // short delay before things get going
+    volatile int delay = START_GAME_DELAY;
+    while (--delay)
+        ;
 
-	//initializes buttons, the FIT timer, and interrupts
-	// Do this AFTER the delay so there's time to draw the screen
-	timerInit();
+    //initializes buttons, the FIT timer, and interrupts
+    // Do this AFTER the delay so there's time to draw the screen
+    timerInit();
 
-	//	while (1) {
-	//		readInput(); //waits for control input
-	//	}
+    //	while (1) {
+    //		readInput(); //waits for control input
+    //	}
 
-	eventsLoop();
-	cleanup_platform();
+    eventsLoop();
+    cleanup_platform();
 
-	return 0;
+    return 0;
 }
-

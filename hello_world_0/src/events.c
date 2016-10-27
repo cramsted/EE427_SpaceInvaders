@@ -104,14 +104,17 @@ void ufoExplosionEvent() {
 }
 
 void heartbeatEvent() {
-	float utilization = 0;
-	if (events & HEARTBEAT_EVENT) {
-		// "Idle" event - calculate utilization
-		clearEvent(HEARTBEAT_EVENT);
-		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
-		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
-		utilizationCounter = 0;
-	}
+    // TODO: remove the return and uncomment
+    return;
+
+//	float utilization = 0;
+//	if (events & HEARTBEAT_EVENT) {
+//		// "Idle" event - calculate utilization
+//		clearEvent(HEARTBEAT_EVENT);
+//		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
+//		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
+//		utilizationCounter = 0;
+//	}
 }
 
 void tankDeathEvent() {

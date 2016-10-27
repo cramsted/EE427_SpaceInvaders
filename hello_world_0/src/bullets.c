@@ -10,7 +10,9 @@
 #include "events.h"
 #include "bunkers.h"
 #include "ufo.h"
+#include "audio_files/audio.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 //values that determine the dimensions of the sprites on the screen
 #define BULLET_WIDTH (3 * 2)	//sprite width
@@ -112,6 +114,9 @@ void tankPew(Tank *tank, Bullets *bullets) {
 	if (b->active) { //allows for only one tank bullet at a time
 		return;
 	}
+	//queues the tank fire noise to play
+	setAudioEvent(AUDIO_TANK_FIRE_NOISE);
+	xil_printf("tank noise\n\r");
 	//sets bullet position based on the current tank position
 	b->p.x = tank->p.x + (tank->sp.width / 2) - (b->sp.width / 2);
 	b->p.y = tank->p.y - b->sp.height - 1;
