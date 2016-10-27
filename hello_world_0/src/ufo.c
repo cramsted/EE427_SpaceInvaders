@@ -14,20 +14,28 @@
 
 #define UFO_MAX_POINTS 350
 
+// The UFO object
 UFO ufo;
-extern const int saucer_16x7[];
-extern const int ufo_explosion_16x7[];
+
+// UFO sprites
+extern const uint32_t saucer_16x7[];
+extern const uint32_t ufo_explosion_16x7[];
 
 //funciton prototypes
 void eraseUfo();
 
-int ufoPoints;
+// Gets changed whenever the UFO is killed; keeps track of how many points the UFO is worth
+uint32_t ufoPoints;
 
 // Initialize the ufo in the chosen position
 void initUfo() {
 	ufo.p = initPosition(UFO_START_X_LEFT, UFO_START_Y);
 	ufo.sp = initSprite(UFO_HEIGHT, UFO_WIDTH, RED, saucer_16x7);
+    
+    // We're starting on the left side of the screen, so begin going right
 	ufo.direction = ufo_right;
+    
+    // The UFO shouldn't start out drawn on the screen
 	ufo.status = inactive;
 }
 
@@ -46,7 +54,13 @@ void updateUfo() {
 	}
 }
 
-//kills the ufo
+// Kills the ufo - involves:
+//  erasing the UFO,
+//  making the UFO be inactive (so it can't be shot again),
+//  assigning random points,
+//  drawing the points on the screen where the UFO was,
+//  setting a counter that, when it expires, will cause the points to be erased,
+//  and updating the score
 void killUfo() {
 	eraseUfo();
 	ufo.status = inactive;
@@ -58,6 +72,7 @@ void killUfo() {
 	updateScore(ufoPoints);
 }
 
+// Erase the UFO from the screen
 void eraseUfo() {
 	ufo.sp.Color.color = BLACK;
 	editFrameBuffer(&ufo.sp, &ufo.p);
@@ -76,6 +91,9 @@ void drawUfo() {
 	editFrameBuffer(&ufo.sp, &ufo.p);
 }
 
+// Called when the UFO exits the screen; we make the UFO
+// switch directions, erase the UFO, and make it inactive
+// (so it can't be shot again)
 void ufoDisapear() {
 	(ufo.direction == ufo_right) ? (ufo.direction = ufo_left) : (ufo.direction
 			= ufo_right);

@@ -14,11 +14,11 @@
 #define MAX_EROSION 4	//max erosion level
 
 //all the sprite structures defined in sprite_bit_maps.c
-extern const int bunker_24x18[];
-extern const int bunkerDamage0_6x6[];
-extern const int bunkerDamage1_6x6[];
-extern const int bunkerDamage2_6x6[];
-extern const int bunkerDamage3_6x6[];
+extern const uint32_t bunker_24x18[];
+extern const uint32_t bunkerDamage0_6x6[];
+extern const uint32_t bunkerDamage1_6x6[];
+extern const uint32_t bunkerDamage2_6x6[];
+extern const uint32_t bunkerDamage3_6x6[];
 
 //one off versions of each sprite for drawing over bunkers with
 Sprite erosion_1;
@@ -35,7 +35,7 @@ Bunkers bunkers;
 void setErosionLevel(Bunker *bunker, erosion_e level);
 
 //creates a bunker initialized with the passed in x,y
-Bunker initBunker(int x, int y) {
+Bunker initBunker(uint32_t x, uint32_t y) {
 	Bunker b;
 	// Sets the erosion levels. Most are initially 0, but the middle two
 	// sections are the bottom row are initialized to gone because
@@ -53,10 +53,10 @@ Bunker initBunker(int x, int y) {
 }
 
 //creates the bunkers block at the coordinate x,y
-Bunkers initBunkers(int x, int y) {
+Bunkers initBunkers(uint32_t x, uint32_t y) {
 	Bunkers b;
-	int row;
-	const int bunker_width = BUNKER_WIDTH + XBUNKER_PADDING;
+	uint32_t row;
+	const uint32_t bunker_width = BUNKER_WIDTH + XBUNKER_PADDING;
 	for (row = 0; row < MAX_BUNKERS; row++) { //populates bunkers array
 		b.bunkers[row] = initBunker(BUNKER_START_X + (row * bunker_width), y);
 	}
@@ -73,8 +73,8 @@ Bunkers initBunkers(int x, int y) {
 }
 
 //draws the bunkers block at the specified x,y
-void drawBunkers(int x, int y) {
-	int row;
+void drawBunkers(uint32_t x, uint32_t y) {
+	uint32_t row;
 	for (row = 0; row < MAX_BUNKERS; row++) {
 		Bunker *temp = &bunkers.bunkers[row];
 		editFrameBuffer(&temp->sp, &temp->p);
@@ -83,7 +83,7 @@ void drawBunkers(int x, int y) {
 
 //erodes a single seciton of a bunker based on the passed in row and col
 // param bunker selects which bunker to erode
-void erodeBunker(Bunker *b, int row, int col) {
+void erodeBunker(Bunker *b, uint32_t row, uint32_t col) {
 	// row and col must be valid
 	if (col < 0 || col > EROSION_COLS || row < 0 || row > EROSION_ROWS) {
 		return;
@@ -122,9 +122,11 @@ void destroyWholeBunker(Bunker *bunker) {
 	setErosionLevel(bunker, gone);
 }
 
-
+//test code
+//sets an entire bunker to a single erosion level
 void setErosionLevel(Bunker *bunker, erosion_e level){
-	int row, col;
+	uint32_t row, col;
+	//goes through the erosionLevel array and sets them all to the passed in level
 	for(row = 0; row < EROSION_ROWS; row++){
 		for(col = 0; col < EROSION_COLS; col++){
 			bunker->erosionLevel[row][col] = level;
@@ -132,7 +134,9 @@ void setErosionLevel(Bunker *bunker, erosion_e level){
 	}
 }
 
-void eraseBunkerSection(Bunker *b, int row, int col) {
+//sets the erosionLevel status to gone and then erases the bunker at the
+//specified row and col
+void eraseBunkerSection(Bunker *b, uint32_t row, uint32_t col) {
 	// row and col must be valid
 	if (col < 0 || col > EROSION_COLS || row < 0 || row > EROSION_ROWS) {
 		return;
@@ -145,6 +149,7 @@ void eraseBunkerSection(Bunker *b, int row, int col) {
 		}
 	}
 
+	//sets the erosion level to 'gone'
 	b->erosionLevel[row][col] = gone;
 
 	// get position

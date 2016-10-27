@@ -6,16 +6,16 @@
  */
 #include "render.h"
 #include <stdio.h>
-#include "sprites.h"
+#include "sprites.h"		//for access to sprite structs
 #include "xaxivdma.h"
 #include "xparameters.h"
 #include "xio.h"
-#include "aliens.h"
-#include "bullets.h"
-#include "bunkers.h"
-#include "ufo.h"
-#include "tank.h"
-#include "text.h"
+#include "aliens.h"			//for access to alien initializers
+#include "bullets.h"		//for access to bullet initializer
+#include "bunkers.h"		//for access to bunkers initializers
+#include "ufo.h"				//for access to ufo initializer
+#include "tank.h"				//for access to tank initializer
+#include "text.h"				//for access to text related initializers
 
 //function prototypes
 int findPixelValue(int x, int y, int col, int row, Sprite *sp);

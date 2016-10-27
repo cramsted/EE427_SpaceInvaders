@@ -6,10 +6,10 @@
  */
 #include "bullets.h"
 #include "render.h"		//for edit_frameBuffer
-#include "aliens.h"
-#include "events.h"
-#include "bunkers.h"
-#include "ufo.h"
+#include "aliens.h"		//for alien struct and functions
+#include "events.h"		//for event setters
+#include "bunkers.h"	//for bunker struct and functions
+#include "ufo.h"			//for ufo struct and functions
 #include <stdlib.h>
 
 //values that determine the dimensions of the sprites on the screen
@@ -19,10 +19,11 @@
 #define TANK_BULLET_UPDATE_Y -8	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
 #define BULLET_MAX_Y 435	//max y position of a bullet
+
 //all the sprite structures defined in sprite_bit_maps.c
-extern const int bulletCross_3x5[];
-extern const int bulletLightning_3x5[];
-extern const int alien_explosion_12x8[];
+extern const uint32_t bulletCross_3x5[];
+extern const uint32_t bulletLightning_3x5[];
+extern const uint32_t alien_explosion_12x8[];
 
 // Used for determining if which kind of bullet hit
 // This is the return value for bulletCollidesWithSprite
@@ -34,20 +35,20 @@ typedef enum {
 Bullets bullets;
 
 // function prototypes - see descriptions in function definitions
-static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
+static uint32_t bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 		Position *spritePos);
 static void checkTankBulletCollisions();
-static int checkAlienBulletCollisions(Bullet *bullet);
+static uint32_t checkAlienBulletCollisions(Bullet *bullet);
 static void eraseBullet(Bullet *bullet);
 static void destroyBullet(Bullet *bullet);
-static void drawBullet(Bullet *bullet, int updateY);
+static void drawBullet(Bullet *bullet, uint32_t updateY);
 static void alienHit(Bullet *bullet);
-static int bunkerHit(Bullet *bullet);
-static int tankHit(Bullet *bullet);
+static uint32_t bunkerHit(Bullet *bullet);
+static uint32_t tankHit(Bullet *bullet);
 static void ufoHit(Bullet *bullet);
 
 //creates an initialized bullet struct
-static Bullet initBullet(const int *sprite) {
+static Bullet initBullet(const uint32_t *sprite) {
 	Bullet b;
 	b.active = 0; //init to inactive
 	b.sp = initSprite(BULLET_HEIGHT, BULLET_WIDTH, WHITE, sprite);
@@ -57,7 +58,7 @@ static Bullet initBullet(const int *sprite) {
 //creates the containing bullet struct
 Bullets initBullets() {
 	Bullets b;
-	int i;
+	uint32_t i;
 	for (i = 0; i < MAX_BULLETS; i++) {
 		if (i & 1) { //odd array index numbers have lightning sprites
 			b.bullets[i] = initBullet(bulletLightning_3x5);
@@ -70,7 +71,7 @@ Bullets initBullets() {
 
 // Update all tank and alien bullet positions
 void updateBullets(Bullets *bullets) {
-	int i;
+	uint32_t i;
 	Bullet *b = bullets->bullets;
 
 	// Move the tank bullet
@@ -128,7 +129,7 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	}
 
 	// Pick a random alien column
-	int alien_column = rand() % ALIENS_COL;
+	uint32_t alien_column = rand() % ALIENS_COL;
 
 	// If the whole column is dead, don't shoot, just return.
 	Alien *a = aliens->frontRowAliens[alien_column];
@@ -141,7 +142,7 @@ void alienPew(Aliens *aliens, Bullets *bullets) {
 	// Find an inactive bullet
 	Bullet *b = (void*) 0;
 	Bullet *bulletList = bullets->bullets;
-	int i;
+	uint32_t i;
 	for (i = 1; i < MAX_BULLETS; i++) {
 		if (!bulletList[i].active) {
 			b = &bulletList[i];
@@ -171,7 +172,7 @@ static void destroyBullet(Bullet *bullet) {
 }
 
 // Update the bullet's y position and draw it on the screen
-static void drawBullet(Bullet *bullet, int updateY) {
+static void drawBullet(Bullet *bullet, uint32_t updateY) {
 	bullet->sp.Color.color = WHITE;
 	bullet->p.y += updateY;
 	editFrameBuffer(&bullet->sp, &bullet->p); //update frame buffer
@@ -182,17 +183,17 @@ static void drawBullet(Bullet *bullet, int updateY) {
 // is given by bulletType: alien (bottom of the bullet hit),
 // or tank (top of the bullet). Return the section in row,col.
 static void computeBunkerSection(Bullet *bullet, bullet_type_e bulletType,
-		Bunker *bunker, int *row, int *col) {
+		Bunker *bunker, uint32_t *row, uint32_t *col) {
 
 	// Temporary variables are easier to use.
-	int bulletX = bullet->p.x + bullet->sp.width / 2; // middle of the bullet
-	int bunkerX = bunker->p.x;
-	int bunkerY = bunker->p.y;
-	int bunkerSectionWidth = BUNKER_WIDTH / EROSION_COLS;
-	int bunkerSectionHeight = BUNKER_HEIGHT / EROSION_ROWS;
+	uint32_t bulletX = bullet->p.x + bullet->sp.width / 2; // middle of the bullet
+	uint32_t bunkerX = bunker->p.x;
+	uint32_t bunkerY = bunker->p.y;
+	uint32_t bunkerSectionWidth = BUNKER_WIDTH / EROSION_COLS;
+	uint32_t bunkerSectionHeight = BUNKER_HEIGHT / EROSION_ROWS;
 
 	// Figure out the bunker section column with some simple math.
-	int i;
+	uint32_t i;
 	for (i = EROSION_COLS - 1; i >= 0; --i) {
 		if (bulletX >= bunkerX + i * bunkerSectionWidth) {
 			*col = i;
@@ -204,7 +205,7 @@ static void computeBunkerSection(Bullet *bullet, bullet_type_e bulletType,
 	// This is dependent on whether
 	// a tank bullet hit the bunker (top of the bullet hit) or
 	// an alien bullet hit the bunker (bottom of the bullet hit).
-	int bulletY;
+	uint32_t bulletY;
 	if (bulletType == tank_bullet_hit) {
 		bulletY = bullet->p.y;
 	} else if (bulletType == alien_bullet_hit) {
@@ -227,8 +228,8 @@ static void computeBunkerSection(Bullet *bullet, bullet_type_e bulletType,
 
 // Check if the bullet hit a bunker
 // Return 1 if true, else 0
-static int bunkerHit(Bullet *bullet) {
-	int i;
+static uint32_t bunkerHit(Bullet *bullet) {
+	uint32_t i;
 	bullet_type_e bulletType;
 
 	// Check each bunker.
@@ -239,7 +240,7 @@ static int bunkerHit(Bullet *bullet) {
 		bulletType = bulletCollidesWithSprite(bullet, &bunker->sp, &bunker->p);
 		if (bulletType != no_hit) {
 			// It was a hit; compute the bunker section
-			int row = 0, col = 0;
+			uint32_t row = 0, col = 0;
 			computeBunkerSection(bullet, bulletType, bunker, &row, &col);
 
 			// If the bullet collided with a part of the bunker that isn't
@@ -257,12 +258,16 @@ static int bunkerHit(Bullet *bullet) {
 	return 0;
 }
 
+//checks if an aliens sprite has been hit
 static void alienHit(Bullet *bullet) {
-	int row, col;
+	uint32_t row, col;
+	//iterates through the array of aliens
 	for (row = 0; row < ALIENS_ROW; row++) {
 		for (col = 0; col < ALIENS_COL; col++) {
 			Alien *alien = &aliens.aliens[row][col];
+			//checks if the bullet and alien sprites are colliding
 			if (bulletCollidesWithSprite(bullet, &alien->sp, &alien->p)) {
+				//kills the alien if it is alive, ignores it otherwise
 				if (alien->status == alive) {
 					destroyBullet(bullet);
 					killAlien(alien, row, col);
@@ -275,7 +280,8 @@ static void alienHit(Bullet *bullet) {
 
 // check if a bullet hit the tank
 // return 1 if true, else 0
-static int tankHit(Bullet *bullet) {
+static uint32_t tankHit(Bullet *bullet) {
+	//checks if the bullet and tank sprites are colliding
 	if (bulletCollidesWithSprite(bullet, &tank.sp, &tank.p)) {
 		setEvent(TANK_DEATH_EVENT);
 		destroyBullet(bullet);
@@ -284,6 +290,7 @@ static int tankHit(Bullet *bullet) {
 	return 0;
 }
 
+//checks if the bullet and ufo sprites are colliding
 static void ufoHit(Bullet *bullet) {
 	if (bulletCollidesWithSprite(bullet, &ufo.sp, &ufo.p)) {
 		if (ufo.sp.Color.color != BLACK) {
@@ -297,19 +304,20 @@ static void ufoHit(Bullet *bullet) {
 
 // check if a bullet hit a sprite
 // return tank_bullet_hit or alien_bullet_hit if true, no_hit otherwise
-static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
+static uint32_t bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 		Position *spritePos) {
 	if (!bullet->active) {
 		return 0; //false because the bullet is not on the screen
 	}
-	int spriteX = spritePos->x;
-	int spriteY = spritePos->y;
-	int spriteXMax = spriteX + sprite->width;
-	int spriteYMax = spriteY + sprite->height;
-	int bulletX = bullet->p.x;
-	int bulletY = bullet->p.y;
-	int bulletXMax = bulletX + BULLET_WIDTH;
-	int bulletYMax = bulletY + BULLET_HEIGHT;
+	//min and max x,y values of the bullet and sprite
+	uint32_t spriteX = spritePos->x;
+	uint32_t spriteY = spritePos->y;
+	uint32_t spriteXMax = spriteX + sprite->width;
+	uint32_t spriteYMax = spriteY + sprite->height;
+	uint32_t bulletX = bullet->p.x;
+	uint32_t bulletY = bullet->p.y;
+	uint32_t bulletXMax = bulletX + BULLET_WIDTH;
+	uint32_t bulletYMax = bulletY + BULLET_HEIGHT;
 
 	//checks for overlapping on the top left of the bullet sprite
 	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
@@ -326,6 +334,7 @@ static int bulletCollidesWithSprite(Bullet *bullet, Sprite *sprite,
 	return no_hit;
 }
 
+//checks if the tank bullet has struck an alien, bunker or ufo
 static void checkTankBulletCollisions() {
 	Bullet *tankBullet = &bullets.bullets[0];
 	//check bunker
@@ -338,7 +347,7 @@ static void checkTankBulletCollisions() {
 
 // check if an alien bullet hits anything
 // return 1 if true, else 0
-static int checkAlienBulletCollisions(Bullet *alienBullet) {
+static uint32_t checkAlienBulletCollisions(Bullet *alienBullet) {
 	//check if it hit the bunker
 	if (bunkerHit(alienBullet)) {
 		return 1;

@@ -16,7 +16,8 @@
 #define BUNKER_START_X 	110	//start x value of the bunkers block
 #define BUNKER_START_Y 	350	//start y value of all bunkers block
 #define MAX_BUNKERS 4	//max number of bunkers
-//the bunker sprite has been divided into a grid with these dimensions
+
+//the bunker sprite has been divided into a grid with these dimensions so that it can be degraded in discrete chunks
 #define EROSION_COLS 	4
 #define EROSION_ROWS	3
 #define EROSION_HEIGHT_AND_WIDTH (6*2)	//erosion block dimentions
@@ -42,13 +43,13 @@ typedef struct {
 extern Bunkers bunkers;
 
 //creates a new block of bunkers set to position x,y
-Bunkers initBunkers(int x, int y);
+Bunkers initBunkers(uint32_t x, uint32_t y);
 //draws the block of bunkers at position x,y
-void drawBunkers(int x, int y);
+void drawBunkers(uint32_t x, uint32_t y);
 //draws an eroded bunker sprite over a portion of the specified bunker
-void erodeBunker(Bunker *b, int row, int col);
+void erodeBunker(Bunker *b, uint32_t row, uint32_t col);
 //erodes all the sections of the bunker
 void destroyWholeBunker(Bunker *bunker);
 //erases a single section of the bunker
-void eraseBunkerSection(Bunker *b, int row, int col);
+void eraseBunkerSection(Bunker *b, uint32_t row, uint32_t col);
 #endif /* BUNKERS_H_ */

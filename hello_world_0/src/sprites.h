@@ -21,8 +21,8 @@
 
 //meta data for the sprites
 typedef struct {
-	int height;
-	int width;
+	uint32_t height;
+	uint32_t width;
 	union { //used to make a single 32 bit int. Works well with our #defined colors
 		struct {
 			uint8_t red;
@@ -32,18 +32,18 @@ typedef struct {
 		} RGB;
 		uint32_t color;
 	} Color;
-	const int *sprite; //points to the actual sprite struct
+	const uint32_t *sprite; //points to the actual sprite struct
 } Sprite;
 
 //struct for sprite positional data
 typedef struct {
-	int x;
-	int y;
+	uint32_t x;
+	uint32_t y;
 } Position;
 
 //initializes a sprite
-Sprite initSprite(int height, int width, uint32_t color, const int *sprite);
+Sprite initSprite(uint32_t height, uint32_t width, uint32_t color, const uint32_t *sprite);
 //initializes and x,y coordinate
-Position initPosition(int x, int y);
+Position initPosition(uint32_t x, uint32_t y);
 
 #endif /* SPRITES_H_ */

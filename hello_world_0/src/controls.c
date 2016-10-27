@@ -11,14 +11,15 @@
 #include "tank.h"
 #include <stdio.h>
 
-int isDigit(char c);
-int getAlienNumber();
+uint32_t isDigit(char c);
+uint32_t getAlienNumber();
 
+//test code from lab 3
 // Get input from the user
 // The user enters in a number as a command, listed below.
 void readInput() {
 	char c;
-	int num;
+	uint32_t num;
 	c = getchar();
 
 	if (!isDigit(c)) {
@@ -38,8 +39,8 @@ void readInput() {
 		if (num >= 0 && num <= 54) {
 			xil_printf("kill alien %d\n\r", num);
 			// convert 0-54 to row/col
-			int row = num / ALIENS_COL;
-			int col = num % ALIENS_COL;
+			uint32_t row = num / ALIENS_COL;
+			uint32_t col = num % ALIENS_COL;
 			killAlien(&aliens.aliens[row][col], row, col);
 		} else {
 			xil_printf("invalid input; enter a new command\n\r");
@@ -79,7 +80,7 @@ void readInput() {
 }
 
 // We use this to validate the user's input
-int isDigit(char c) {
+uint32_t isDigit(char c) {
 	if (c < '0' || c > '9') {
 		return 0;
 	}
@@ -90,7 +91,7 @@ int isDigit(char c) {
 // This expects a one or two-digit number
 // It will return -1 if the input is invalid
 // Otherwise, it returns the number the user entered
-int getAlienNumber() {
+uint32_t getAlienNumber() {
 	char d10pos = getchar();
 	char d1pos = getchar();
 	if (!isDigit(d10pos))
