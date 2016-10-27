@@ -47,18 +47,19 @@ int main() {
 	// seed random number generator
 	srand(time(NULL));
 	init_platform(); // Necessary for all programs.
-	initAudio();
+//	initAudio();
 	initVideoDMAController(); //sets up video hardware
 	videoInit(); //initializes the screen to its starting point
 
 	// short delay before things get going
-	volatile uint32_t delay = START_GAME_DELAY;
-	while (--delay)
-		;
+//	volatile uint32_t delay = START_GAME_DELAY;
+//	while (--delay)
+//		;
+	while(1);
 
 	//initializes buttons, the FIT timer, and interrupts
 	// Do this AFTER the delay so there's time to draw the screen
-	timerInit();
+//	timerInit();
 
 //test code from lab3
 //	while (1) {
