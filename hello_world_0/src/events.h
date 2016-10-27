@@ -21,6 +21,7 @@
 #define UFO_UPDATE_EVENT		0x200
 #define UFO_APPEAR_EVENT		0x400
 #define UFO_EXPLOSION_EVENT		0x800
+#define AUDIO_EVENT				0x1000
 
 void eventsLoop();
 void setEvent(int event);

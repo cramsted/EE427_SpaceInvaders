@@ -172,7 +172,7 @@ void interrupt_handler_dispatcher(void* ptr) {
 	}
 	if (intc_status & XPAR_AXI_AC97_0_INTERRUPT_MASK) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
-		playAudio();
+		setEvent(AUDIO_EVENT);
 	}
 
 }

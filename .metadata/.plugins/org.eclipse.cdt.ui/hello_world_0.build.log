@@ -2,10 +2,30 @@
 **** Build of configuration Debug for project hello_world_0 ****
 
 make all 
-Building file: ../src/audio_files/audio.c
+Building file: ../src/aliens.c
 Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/audio_files/audio.d" -MT"src/audio_files/audio.d" -o"src/audio_files/audio.o" "../src/audio_files/audio.c"
-Finished building: ../src/audio_files/audio.c
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/aliens.d" -MT"src/aliens.d" -o"src/aliens.o" "../src/aliens.c"
+Finished building: ../src/aliens.c
+' '
+Building file: ../src/bullets.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/bullets.d" -MT"src/bullets.d" -o"src/bullets.o" "../src/bullets.c"
+Finished building: ../src/bullets.c
+' '
+Building file: ../src/controls.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/controls.d" -MT"src/controls.d" -o"src/controls.o" "../src/controls.c"
+Finished building: ../src/controls.c
+' '
+Building file: ../src/events.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/events.d" -MT"src/events.d" -o"src/events.o" "../src/events.c"
+Finished building: ../src/events.c
+' '
+Building file: ../src/render.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/render.d" -MT"src/render.d" -o"src/render.o" "../src/render.c"
+Finished building: ../src/render.c
 ' '
 Building target: hello_world_0.elf
 Invoking: MicroBlaze gcc linker
@@ -15,7 +35,7 @@ Finished building target: hello_world_0.elf
 Invoking: MicroBlaze Print Size
 mb-size hello_world_0.elf  |tee "hello_world_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  54520	 247932	  10284	 312736	  4c5a0	hello_world_0.elf
+  54608	 247932	  10284	 312824	  4c5f8	hello_world_0.elf
 Finished building: hello_world_0.elf.size
 ' '
 Invoking: Xilinx ELF Check

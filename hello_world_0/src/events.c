@@ -12,6 +12,7 @@
 #include "text.h"
 #include "bunkers.h"
 #include "ufo.h"
+#include "audio_files/audio.h"
 
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)
@@ -133,6 +134,13 @@ void ufoAppearEvent() {
 	}
 }
 
+void audioEvent() {
+	if (events & AUDIO_EVENT) {
+		clearEvent(AUDIO_EVENT);
+		playAudio();
+	}
+}
+
 int eventsEnabled() {
 	return enabled;
 }
@@ -162,6 +170,7 @@ void eventsLoop() {
 			ufoAppearEvent();
 			ufoExplosionEvent();
 			heartbeatEvent();
+			audioEvent();
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization
