@@ -143,22 +143,19 @@ void updateTankDeathCounter() {
 
 static int32_t *currentAddress;
 void playAudio() {
-	int iMax = 100;
+	int iMax = 128;
 	int32_t* endBlock = (getTankExplosionSound()
-			+ (getTankExplosionSoundFrames() * sizeof(int32_t)));
-	if (currentAddress + 100 > endBlock) {
-		iMax =  endBlock - currentAddress;
+			+ (getTankExplosionSoundFrames()));
+	if (currentAddress + iMax > endBlock) {
+		iMax = endBlock - currentAddress;
 		currentAddress = getTankExplosionSound();
 	}
-
-	//		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *currentAddress);
-	//		currentAddress++;
 
 	int i;
 	for (i = 0; i < iMax; i++) {
 		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *(currentAddress+i));
 	}
-	currentAddress += 100;
+	currentAddress += iMax;
 }
 
 // This is invoked in response to a timer interrupt every 10 ms.
@@ -178,7 +175,7 @@ void timerInterruptHandler() {
 		updateTankDeathCounter();
 	}
 	updateHeartbeatCounter();
-	playAudio();
+
 }
 
 // Main interrupt handler, queries the interrupt controller to see what peripheral
@@ -190,6 +187,11 @@ void interrupt_handler_dispatcher(void* ptr) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
 		timerInterruptHandler();
 	}
+	if (intc_status & XPAR_AXI_AC97_0_INTERRUPT_MASK) {
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
+		playAudio();
+	}
+
 }
 
 void resetCounters() {
@@ -213,7 +215,7 @@ void timerInit() {
 
 	// Initialize interrupts - only have the FIT interrupt
 	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
-	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
+	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
 	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
 	microblaze_enable_interrupts();
 

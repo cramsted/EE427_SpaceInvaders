@@ -2908,3 +2908,73 @@ org.eclipse.cdt.internal.formatter.AbortFormatting: [86/1] unexpected token type
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)
+!SESSION 2016-10-26 19:01:02.713 -----------------------------------------------
+eclipse.buildId=Release 13.4 Build SDK_O.87xd
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-10-26 19:01:15.161
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 4 4 2016-10-26 19:01:17.049
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2016-10-26 19:01:18.437
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2016-10-26 19:01:18.437
+!MESSAGE Unable to restore perspective: Workspace - C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2016-10-26 19:01:18.437
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2016-10-26 19:01:18.437
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2016-10-26 19:01:18.437
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2016-10-26 19:01:18.437
+!MESSAGE OK
+
+!ENTRY org.eclipse.cdt.ui 4 0 2016-10-26 19:34:46.991
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [Element xac97_l.h does not exist.]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(Unknown Source)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(Unknown Source)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(Unknown Source)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(Unknown Source)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2016-10-26 19:34:46.991
+!MESSAGE Element xac97_l.h does not exist.
