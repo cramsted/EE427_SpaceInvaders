@@ -4,6 +4,9 @@
  *  Created on: Sep 24, 2016
  *      Author: superman
  */
+
+#include <stdint.h>
+
 //macros for the sprite pixel arrays
 #define packword32(b31,b30,b29,b28,b27,b26,b25,b24,b23,b22,b21,b20,b19,b18,b17,b16,b15,b14,b13,b12,b11,b10,b9,b8,b7,b6,b5,b4,b3,b2,b1,b0) \
 ((b31 << 31) | (b30 << 30) | (b29 << 29) | (b28 << 28) | (b27 << 27) | (b26 << 26) | (b25 << 25) | (b24 << 24) |						  \

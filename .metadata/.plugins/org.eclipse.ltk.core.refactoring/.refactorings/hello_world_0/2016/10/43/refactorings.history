@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;hello_world_0/src/audio_files/alienMovemnt3.c&apos; to &apos;alienMovement3.c&apos;" description="Rename resource &apos;alienMovemnt3.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/audio_files/alienMovemnt3.c" name="alienMovement3.c" stamp="1477175348396" updateReferences="true"/>
-</session>

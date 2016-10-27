@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;hello_world_0/src/globals.c&apos;" deleteContents="false" description="Delete resource &apos;hello_world_0/src/globals.c&apos;" element1="/hello_world_0/src/globals.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1475622232649"/>&#x0A;<refactoring comment="Delete resource &apos;hello_world_0/src/globals.h&apos;" deleteContents="false" description="Delete resource &apos;hello_world_0/src/globals.h&apos;" element1="/hello_world_0/src/globals.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1475622234677"/>
-</session>

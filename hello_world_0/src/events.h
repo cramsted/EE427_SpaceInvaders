@@ -8,6 +8,8 @@
 #ifndef EVENTS_H_
 #define EVENTS_H_
 
+#include <stdint.h>
+
 // Different kinds of events
 #define LEFT_BTN_EVENT			0x01
 #define RIGHT_BTN_EVENT			0x02

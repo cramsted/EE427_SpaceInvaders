@@ -6,7 +6,7 @@
  */
 #include "aliens.h"
 #include "bunkers.h"	//for when the aliens touch the bunkers
-#include ".h"			//for ending the game when the aliens get to the
+//#include "tank.h"		//for ending the game when the aliens get to the bottom
 #include "render.h"		//for access to the frame buffer
 #include "text.h"		//for access to the function updateScore()
 #include <stdio.h>		//xil_printf for debugging purposes
@@ -43,7 +43,7 @@ extern const uint32_t alien_bottom_out_12x8[]; //bottom row alien sprite with le
 extern const uint32_t alien_explosion_12x8[]; //exploding alien sprite
 
 //struct of pointers to all alien sprites for easy reference by index value
-const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
+const uint32_t* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_middle_in_12x8, alien_middle_out_12x8, alien_bottom_in_12x8,
 		alien_bottom_out_12x8 };
 
@@ -52,8 +52,8 @@ static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL }; //st
 
 // Function prototypes - see descriptions in function definitions
 void eraseAlien(Alien *alien);
-void bunkerCollisionCheck(uint32_talienX, uint32_t alienY);
-uint32_t aliensAt();
+void bunkerCollisionCheck(uint32_t alienX, uint32_t alienY);
+uint32_t aliensAtBottom();
 void findAndErodeBunkerBlock(uint32_t x, uint32_t y, Bunker *temp);
 void checkPointCollision(uint32_t x, uint32_t y);
 
@@ -284,7 +284,7 @@ void updateAliens() {
 	case down:
 		drawAliens(0, down);
 		//checks if the aliens have reached the tank
-		if (aliensAt()) {
+		if (aliensAtBottom()) {
 			//ends the game and writes 'game over' to the screen
 			drawGameOver();
 			while (1);
@@ -357,7 +357,7 @@ void bunkerCollisionCheck(uint32_t alienX, uint32_t alienY) {
 }
 
 //checks if the aliens have reached the bottom of the screen
-uint32_t aliensAt() {
+uint32_t aliensAtBottom() {
 	uint32_t i, maxY = 0;
 	//checks the array that keeps track of the aliens on the front row
 	for (i = 0; i < ALIENS_COL; i++) {
