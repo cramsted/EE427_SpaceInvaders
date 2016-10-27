@@ -38,6 +38,8 @@
 #define RIGHT_BUTTON 0x02
 #define MIDDLE_BUTTON 0x01
 #define LEFT_BUTTON 0x08
+#define TOP_BUTTON 0x10
+#define BOTTOM_BUTTON 0x04
 
 // initializes the following counters
 void resetCounters();
@@ -69,6 +71,12 @@ void updateButtonCounter() {
         }
         if (buttons & LEFT_BUTTON) {
             setEvent(LEFT_BTN_EVENT);
+        }
+        if (buttons & TOP_BUTTON) {
+            increaseVolume();
+        }
+        if (buttons & BOTTOM_BUTTON) {
+            decreaseVolume();
         }
     }
 }

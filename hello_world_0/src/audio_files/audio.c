@@ -27,6 +27,13 @@
 #define NORMAL 0
 #define END_OF_BUFFER 1
 
+#define VOL_MAX     AC97_VOL_MAX
+#define VOL_START   0x0404
+#define VOL_MID     AC97_VOL_MID
+#define VOL_MIN     AC97_VOL_MIN
+#define VOL_MUTE    AC97_VOL_MUTE
+#define VOL_CHANGE  0x0101
+
 #define DUPLICATE_LOWER_2_BYTES(data) (data |= data << 16)
 
 #define BUFFER_FILL_RATE 128
@@ -39,6 +46,7 @@ typedef struct {
 } Sound;
 
 uint32_t audioEvents = 0;
+uint16_t volume;
 
 //sound structs
 Sound alienMovement1;
@@ -117,7 +125,6 @@ int32_t fillAudioBuffer(Sound *sound) {
         iMax = sound->soundFrames - sound->currentPosition;
         // Clear the audio event so it doesn't play again.
         clearAudioEvent(sound->event);
-        xil_printf("clear audio %d\n\r", sound->event);
         end = 1;
     }
 
@@ -144,7 +151,16 @@ uint32_t eventPending(uint32_t event) {
 
 void playAudio() {
     static int32_t alienMovementNumber = ALIEN_MOVEMENT_1;
-    if (eventPending(AUDIO_ALIEN_MOVEMENT)) {
+    if (eventPending(AUDIO_TANK_FIRE_NOISE)) {
+        fillAudioBuffer(&tankFireNoise);
+    } else if (eventPending(AUDIO_TANK_EXPLOSION)) {
+        fillAudioBuffer(&tankExplosion);
+    } else if (eventPending(AUDIO_EXPLOSION_ALIEN)) {
+        fillAudioBuffer(&explosionAlien);
+    } else if (eventPending(AUDIO_UFO_NOISE)) {
+        fillAudioBuffer(&ufoNoise);
+    } else if (eventPending(AUDIO_ALIEN_MOVEMENT)) {
+        xil_printf("moveAlienSound\n\r");
         switch (alienMovementNumber) {
         case ALIEN_MOVEMENT_1:
             if (fillAudioBuffer(&alienMovement1) == END_OF_BUFFER) {
@@ -169,16 +185,37 @@ void playAudio() {
         default:
             break;
         }
-    } else if (eventPending(AUDIO_TANK_FIRE_NOISE)) {
-        fillAudioBuffer(&tankFireNoise);
-    } else if (eventPending(AUDIO_TANK_EXPLOSION)) {
-        fillAudioBuffer(&tankExplosion);
-    } else if (eventPending(AUDIO_EXPLOSION_ALIEN)) {
-        fillAudioBuffer(&explosionAlien);
-    } else if (eventPending(AUDIO_UFO_NOISE)) {
-        fillAudioBuffer(&ufoNoise);
     } else {
         fillAudioBuffer(&noSound);
+    }
+}
+
+void clearAudio() {
+    clearAudioEvent(AUDIO_ALL_EVENTS);
+    playAudio();
+}
+
+void writeVolume() {
+    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, volume);
+    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, volume);
+    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, volume);
+    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCBeepVol, volume);
+    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCMOutVol, volume);
+}
+
+void increaseVolume() {
+    // Only change volume if it doesn't go above the max allowed value
+    if (volume - VOL_CHANGE >= VOL_MAX) {
+        volume -= VOL_CHANGE;
+        writeVolume();
+    }
+}
+
+void decreaseVolume() {
+    // Only change volume if it doesn't go above the max allowed value
+    if (volume + VOL_CHANGE <= VOL_MIN) {
+        volume += VOL_CHANGE;
+        writeVolume();
     }
 }
 
@@ -194,11 +231,8 @@ void initAudio() {
     XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCM_DAC_Rate,
             AC97_PCM_RATE_11025_HZ);
     //set the volumes
-    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, AC97_VOL_MID);
-    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, AC97_VOL_MID);
-    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, AC97_VOL_MID);
-    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCBeepVol, AC97_VOL_MID);
-    XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCMOutVol, AC97_VOL_MID);
+    volume = VOL_START;
+    writeVolume();
     //clear the audio FIFO buffer
     XAC97_ClearFifos(XPAR_AXI_AC97_0_BASEADDR);
     //set the control bit to allow IN_FIFO interrupts
