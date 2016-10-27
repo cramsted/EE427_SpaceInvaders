@@ -39,7 +39,7 @@
 #include "events.h"
 #include "xac97_l.h"
 #include "xparameters.h"
-#include "audio_files/tankExplosion.h"
+#include "audio_files/audio.h"
 
 #define START_GAME_DELAY 30000000
 
@@ -47,64 +47,24 @@ int main() {
 	// seed random number generator
 	srand(time(NULL));
 	init_platform(); // Necessary for all programs.
+	initAudio();
+	initVideoDMAController(); //sets up video hardware
+	videoInit(); //initializes the screen to its starting point
 
-	XAC97_HardReset(XPAR_AXI_AC97_0_BASEADDR); //resets the sound controller
-	XAC97_AwaitCodecReady(XPAR_AXI_AC97_0_BASEADDR);
-	//	XAC97_InitAudio(XPAR_AXI_AC97_0_BASEADDR, AC97_ANALOG_LOOPBACK);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_ExtendedAudioStat,
-			AC97_EXTENDED_AUDIO_CONTROL_VRA);
-	//	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR + AC97_PCM_DAC_Rate, AC97_PCM_RATE_11025_HZ);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCM_DAC_Rate,
-			AC97_PCM_RATE_11025_HZ);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, AC97_VOL_MID);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, AC97_VOL_MID);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, AC97_VOL_MID);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCBeepVol, AC97_VOL_MID);
-	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCMOutVol, AC97_VOL_MID);
-	XAC97_ClearFifos(XPAR_AXI_AC97_0_BASEADDR);
-	//set the control bit to allow IN_FIFO interupts
-	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR, AC97_ENABLE_IN_FIFO_INTERRUPT);
+	// short delay before things get going
+	volatile int delay = START_GAME_DELAY;
+	while (--delay)
+		;
 
-	//	Xuint32 controlReg = XAC97_ReadReg(XPAR_AXI_AC97_0_BASEADDR, AC97_CONTROL_OFFSET);
-	//	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_CONTROL_OFFSET, controlReg | AC97_ENABLE_IN_FIFO_INTERRUPT);
-
-
+	//initializes buttons, the FIT timer, and interrupts
+	// Do this AFTER the delay so there's time to draw the screen
 	timerInit();
 
-//	int32_t *startAddress = getTankExplosionSound();
-//	int32_t *endAddress = startAddress + getTankExplosionSoundFrames();
-//	int i = 0;
+	//	while (1) {
+	//		readInput(); //waits for control input
+	//	}
 
-	while (1) {
-//		int32_t data = *(startAddress + i);
-//		data |= (data << 16);
-//		XAC97_WriteFifo(XPAR_AXI_AC97_0_BASEADDR, data);
-//
-//		i++;
-//		if ((startAddress + i) >= endAddress) {
-//			i = 0;
-//		}
-	}
-
-	/*
-	 initVideoDMAController(); //sets up video hardware
-	 videoInit(); //initializes the screen to its starting point
-
-	 // short delay before things get going
-	 volatile int delay = START_GAME_DELAY;
-	 while (--delay)
-	 ;
-
-	 //initializes buttons, the FIT timer, and interrupts
-	 // Do this AFTER the delay so there's time to draw the screen
-	 timerInit();
-
-	 //	while (1) {
-	 //		readInput(); //waits for control input
-	 //	}
-
-	 eventsLoop();
-	 */
+	eventsLoop();
 	cleanup_platform();
 
 	return 0;

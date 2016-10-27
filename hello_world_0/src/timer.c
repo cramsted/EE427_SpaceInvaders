@@ -141,23 +141,6 @@ void updateTankDeathCounter() {
 	}
 }
 
-static int32_t *currentAddress;
-void playAudio() {
-	int iMax = 128;
-	int32_t* endBlock = (getTankExplosionSound()
-			+ (getTankExplosionSoundFrames()));
-	if (currentAddress + iMax > endBlock) {
-		iMax = endBlock - currentAddress;
-		currentAddress = getTankExplosionSound();
-	}
-
-	int i;
-	for (i = 0; i < iMax; i++) {
-		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *(currentAddress+i));
-	}
-	currentAddress += iMax;
-}
-
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
@@ -221,8 +204,6 @@ void timerInit() {
 
 	// Need to initialize counters for anything to happen
 	resetCounters();
-
-	currentAddress = getTankExplosionSound();
 }
 
 void setAlienExplosionCounter() {

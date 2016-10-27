@@ -2,20 +2,20 @@
 **** Build of configuration Debug for project hello_world_0 ****
 
 make all 
-Building file: ../src/main.c
+Building file: ../src/audio_files/audio.c
 Invoking: MicroBlaze gcc compiler
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/main.d" -MT"src/main.d" -o"src/main.o" "../src/main.c"
-Finished building: ../src/main.c
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -I../../hello_world_bsp_0/microblaze_0/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -MMD -MP -MF"src/audio_files/audio.d" -MT"src/audio_files/audio.d" -o"src/audio_files/audio.o" "../src/audio_files/audio.c"
+Finished building: ../src/audio_files/audio.c
 ' '
 Building target: hello_world_0.elf
 Invoking: MicroBlaze gcc linker
-mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../hello_world_bsp_0/microblaze_0/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -o"hello_world_0.elf"  ./src/aliens.o ./src/bullets.o ./src/bunkers.o ./src/controls.o ./src/events.o ./src/main.o ./src/platform.o ./src/render.o ./src/sprite_bit_maps.o ./src/sprite_char_bit_maps.o ./src/sprites.o ./src/tank.o ./src/text.o ./src/timer.o ./src/ufo.o ./src/xac97_l.o  ./src/audio_files/alienMovement1.o ./src/audio_files/alienMovement2.o ./src/audio_files/alienMovement3.o ./src/audio_files/alienMovement4.o ./src/audio_files/alienMovemnt3.o ./src/audio_files/explosionAlien.o ./src/audio_files/tankExplosion.o ./src/audio_files/tankFireNoise.o ./src/audio_files/ufoNoise.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../hello_world_bsp_0/microblaze_0/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.20.b -mno-xl-soft-mul -o"hello_world_0.elf"  ./src/aliens.o ./src/bullets.o ./src/bunkers.o ./src/controls.o ./src/events.o ./src/main.o ./src/platform.o ./src/render.o ./src/sprite_bit_maps.o ./src/sprite_char_bit_maps.o ./src/sprites.o ./src/tank.o ./src/text.o ./src/timer.o ./src/ufo.o ./src/xac97_l.o  ./src/audio_files/alienMovement1.o ./src/audio_files/alienMovement2.o ./src/audio_files/alienMovement3.o ./src/audio_files/alienMovement4.o ./src/audio_files/alienMovemnt3.o ./src/audio_files/audio.o ./src/audio_files/explosionAlien.o ./src/audio_files/tankExplosion.o ./src/audio_files/tankFireNoise.o ./src/audio_files/ufoNoise.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 Finished building target: hello_world_0.elf
 ' '
 Invoking: MicroBlaze Print Size
 mb-size hello_world_0.elf  |tee "hello_world_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  52628	 247928	  10128	 310684	  4bd9c	hello_world_0.elf
+  54520	 247932	  10284	 312736	  4c5a0	hello_world_0.elf
 Finished building: hello_world_0.elf.size
 ' '
 Invoking: Xilinx ELF Check

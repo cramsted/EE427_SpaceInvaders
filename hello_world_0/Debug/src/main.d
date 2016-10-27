@@ -5,7 +5,7 @@ src/main.d src/main.o: ../src/main.c ../src/platform.h \
   ../../hello_world_bsp_0/microblaze_0/include/xio.h \
   ../../hello_world_bsp_0/microblaze_0/include/xbasic_types.h \
   ../../hello_world_bsp_0/microblaze_0/include/xparameters.h \
-  ../src/audio_files/tankExplosion.h
+  ../src/audio_files/audio.h
 
 ../src/platform.h:
 
@@ -31,4 +31,4 @@ src/main.d src/main.o: ../src/main.c ../src/platform.h \
 
 ../../hello_world_bsp_0/microblaze_0/include/xparameters.h:
 
-../src/audio_files/tankExplosion.h:
+../src/audio_files/audio.h:

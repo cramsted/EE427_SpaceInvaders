@@ -1,0 +1,93 @@
+/*
+ * audio.c
+ *
+ *  Created on: Oct 26, 2016
+ *      Author: superman
+ */
+#include "audio.h"
+#include "../xac97_l.h"
+#include "xparameters.h"
+#define TANK_EXPLOSION	0x1
+#define TANK_FIRE_NOISE	0x2
+#define UFO_NOISE		0x4
+#define EXPLOSION_ALIEN	0x8
+#define ALIEN_MOVEMENT	0x10
+
+#define BUFFER_FILL_RATE 128
+typedef struct {
+	int32_t soundRate;
+	int32_t soundFrames;
+	int32_t *audioFile;
+	int32_t currentPosition;
+	int32_t event;
+} Sound;
+
+uint32_t audioEvents = 0;
+
+Sound initSound(int32_t soundRate, int32_t soundFrames, int32_t *audioFile,
+		int32_t event) {
+	Sound sound;
+	sound.soundRate = soundRate;
+	sound.soundFrames = soundFrames;
+	sound.audioFile = audioFile;
+	sound.currentPosition = 0;
+	sound.event = event;
+	return sound;
+}
+
+void initSounds() {
+
+}
+void setAudioEvent(uint32_t event) {
+	audioEvents |= event;
+}
+
+void clearAudioEvent(uint32_t event) {
+	audioEvents &= ~event;
+}
+
+void fillAudioBuffer(Sound *sound) {
+	//maximum of bytes ever put in the FIFO
+	int iMax = BUFFER_FILL_RATE;
+	// Make sure we don't overflow
+	if (sound->currentPosition + iMax > sound->soundFrames) {
+		iMax = sound->soundFrames - sound->currentPosition;
+		// Reset index of the sound buffer back to zero
+		sound->currentPosition = 0;
+		// Clear the audio event so it doesn't play again.
+		clearAudioEvent(sound->event);
+	}
+
+	int i;
+	for (i = 0; i < iMax; i++) {
+		XAC97_mSetInFifoData(XPAR_AXI_AC97_0_BASEADDR, *(sound->audioFile+i));
+	}
+	sound->currentPosition += iMax;
+}
+
+void playAudio() {
+
+}
+
+void initAudio() {
+	//resets the sound controller
+	XAC97_HardReset(XPAR_AXI_AC97_0_BASEADDR);
+	//waits until the codec can be written to
+	XAC97_AwaitCodecReady(XPAR_AXI_AC97_0_BASEADDR);
+	//enable different audio rates
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_ExtendedAudioStat,
+			AC97_EXTENDED_AUDIO_CONTROL_VRA);
+	//set to desired audio rate
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCM_DAC_Rate,
+			AC97_PCM_RATE_11025_HZ);
+	//set the volumes
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVolMono, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCBeepVol, AC97_VOL_MID);
+	XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_PCMOutVol, AC97_VOL_MID);
+	//clear the audio FIFO buffer
+	XAC97_ClearFifos(XPAR_AXI_AC97_0_BASEADDR);
+	//set the control bit to allow IN_FIFO interupts
+	XAC97_mSetControl(XPAR_AXI_AC97_0_BASEADDR, AC97_ENABLE_IN_FIFO_INTERRUPT);
+}
