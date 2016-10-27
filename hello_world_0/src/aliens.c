@@ -31,18 +31,18 @@
 #define MAX_EXPLOSION_SPRITES 3
 
 //all the sprite structures defined in sprite_bit_maps.c
-extern const int saucer_16x7[]; //saucer sprite, not used in this lab
-extern const int alien_explosion_12x10[]; //alien explosion spirte
-extern const int alien_top_in_12x8[]; //top row alien sprite with legs in
-extern const int alien_top_out_12x8[]; //top row alien sprite with legs out
-extern const int alien_middle_in_12x8[]; //middle row alien sprite with legs in
-extern const int alien_middle_out_12x8[]; //middle row alien sprite with legs out
-extern const int alien_bottom_in_12x8[]; //bottom row alien sprite with legs in
-extern const int alien_bottom_out_12x8[]; //bottom row alien sprite with legs out
-extern const int alien_explosion_12x8[]; //exploding alien sprite
+extern const int32_t saucer_16x7[]; //saucer sprite, not used in this lab
+extern const int32_t alien_explosion_12x10[]; //alien explosion spirte
+extern const int32_t alien_top_in_12x8[]; //top row alien sprite with legs in
+extern const int32_t alien_top_out_12x8[]; //top row alien sprite with legs out
+extern const int32_t alien_middle_in_12x8[]; //middle row alien sprite with legs in
+extern const int32_t alien_middle_out_12x8[]; //middle row alien sprite with legs out
+extern const int32_t alien_bottom_in_12x8[]; //bottom row alien sprite with legs in
+extern const int32_t alien_bottom_out_12x8[]; //bottom row alien sprite with legs out
+extern const int32_t alien_explosion_12x8[]; //exploding alien sprite
 
 //struct of pointers to all alien sprites for easy reference by index value
-const int* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
+const int32_t* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_middle_in_12x8, alien_middle_out_12x8, alien_bottom_in_12x8,
 		alien_bottom_out_12x8 };
 
@@ -51,16 +51,16 @@ static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL };
 
 // Function prototypes
 void eraseAlien(Alien *alien);
-void bunkerCollisionCheck(int alienX, int alienY);
-int aliensAtTank();
-void findAndErodeBunkerBlock(int x, int y, Bunker *temp);
-void checkPointCollision(int x, int y);
+void bunkerCollisionCheck(int32_t alienX, int32_t alienY);
+int32_t aliensAtTank();
+void findAndErodeBunkerBlock(int32_t x, int32_t y, Bunker *temp);
+void checkPointCollision(int32_t x, int32_t y);
 //initialize an alien struct
 //param x sets starting x position
 //param y sets starting y position
 //param type sets the type and guise of the alien
 //param row sets the row the alien will be in
-static void initAlien(int x, int y, int row, int col, alien_type_e type) {
+static void initAlien(int32_t x, int32_t y, int32_t row, int32_t col, alien_type_e type) {
 	Alien *a = &aliens.aliens[row][col];
 	a->status = alive; //set life status
 	a->p = initPosition(x, y); //set initial x,y position
@@ -73,10 +73,10 @@ static void initAlien(int x, int y, int row, int col, alien_type_e type) {
 //function to initialize an alien struct
 // param x sets starting x position
 //param y sets starting y position
-void initAliens(int x, int y) {
+void initAliens(int32_t x, int32_t y) {
 	aliens.numActiveBullets = 0; //inits the number of active alien bullets to 0
 	aliens.direction = right; //starts alien block moving right on the screen
-	int row, col;
+	int32_t row, col;
 	const uint32_t alien_width = ALIEN_WIDTH + XALIEN_PADDING; //width of of sprite plus padding
 	const uint32_t alien_height = ALIEN_HEIGHT + YALIEN_PADDING; //height of sprite plus padding
 
@@ -100,7 +100,7 @@ void initAliens(int x, int y) {
 
 	// Create a list of pointers to aliens that are on the front row
 	// so it's easy to keep track of which aliens can fire a bullet.
-	int i;
+	int32_t i;
 	for (i = 0; i < ALIENS_COL; i++) { //sets which aliens are on the front row of the alien block
 		aliens.frontRowAliens[i] = &aliens.aliens[ALIENS_ROW - 1][i];
 	}
@@ -145,7 +145,7 @@ void explodeAlien(Alien *alien) {
 }
 
 //sets the status var of the alien at the passed in row and col as dead
-void killAlien(Alien *alien, int row, int col) {
+void killAlien(Alien *alien, int32_t row, int32_t col) {
 	alien->status = exploded;
 	explodeAlien(alien); //removes alien from the screen
 	setAlienExplosionCounter();
@@ -154,7 +154,7 @@ void killAlien(Alien *alien, int row, int col) {
 	// adjust frontRowAliens, which keeps track of which aliens can fire a bullet
 	if (row != 0) {
 		//makes sure that the alien next in line is alive
-		int i = row - 1;
+		int32_t i = row - 1;
 		while ((aliens.aliens[i][col].status == dead) && (i > 0)) {
 			i--;
 		}
@@ -180,7 +180,7 @@ void killAlien(Alien *alien, int row, int col) {
 	}
 }
 
-void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
+void drawAlien(int32_t xUpdate, int32_t yUpdate, Alien *alien) {
 	if (alien->status == exploded) {
 		alien->status = dead;
 		eraseAlien(alien);
@@ -207,8 +207,8 @@ void drawAlien(int xUpdate, int yUpdate, Alien *alien) {
 }
 
 //draws the block of aliens at the specified x,y coordinate on the screen
-void drawAliens(int xUpdate, int yUpdate) {
-	int row, col;
+void drawAliens(int32_t xUpdate, int32_t yUpdate) {
+	int32_t row, col;
 	if (aliens.direction == left) { // moving left
 		for (row = 0; row < ALIENS_ROW; row++) {
 			for (col = 0; col < ALIENS_COL; col++) {
@@ -229,7 +229,7 @@ void drawAliens(int xUpdate, int yUpdate) {
 // We want to find the leftmost column with living aliens
 // Used for bounds checking when the aliens are moving left
 Position aliensLeftBlockPosition() {
-	int row, col;
+	int32_t row, col;
 	for (col = 0; col < ALIENS_COL; col++) {
 		for (row = 0; row < ALIENS_ROW; row++) {
 			if (aliens.aliens[row][col].status == alive)
@@ -241,7 +241,7 @@ Position aliensLeftBlockPosition() {
 
 // Same as the aliensLeftBlockPosition, but used for bounds checking on the right
 Position aliensRightBlockPosition() {
-	int row, col;
+	int32_t row, col;
 	for (col = ALIENS_COL - 1; col >= 0; col--) {
 		for (row = ALIENS_ROW - 1; row >= 0; row--) {
 			if (aliens.aliens[row][col].status == alive)
@@ -298,15 +298,15 @@ void updateAliens() {
 	}
 }
 
-static int alienCollidesWithBunker(int alienX, int alienY, Bunker *bunker) {
+static int32_t alienCollidesWithBunker(int32_t alienX, int32_t alienY, Bunker *bunker) {
 	Position *spritePos = &bunker->p;
 	Sprite *sprite = &bunker->sp;
-	int spriteX = spritePos->x;
-	int spriteY = spritePos->y;
-	int spriteXMax = spriteX + sprite->width;
-	int spriteYMax = spriteY + sprite->height;
-	int alienXMax = alienX + ALIEN_WIDTH;
-	int alienYMax = alienY + ALIEN_HEIGHT;
+	int32_t spriteX = spritePos->x;
+	int32_t spriteY = spritePos->y;
+	int32_t spriteXMax = spriteX + sprite->width;
+	int32_t spriteYMax = spriteY + sprite->height;
+	int32_t alienXMax = alienX + ALIEN_WIDTH;
+	int32_t alienYMax = alienY + ALIEN_HEIGHT;
 
 	//checks for overlapping on the bottom left of the alien sprite
 	if ((alienX >= spriteX) && (alienX <= spriteXMax)) {
@@ -324,8 +324,8 @@ static int alienCollidesWithBunker(int alienX, int alienY, Bunker *bunker) {
 	return 0; //bunker miss
 }
 
-void bunkerCollisionCheck(int alienX, int alienY) {
-	int i;
+void bunkerCollisionCheck(int32_t alienX, int32_t alienY) {
+	int32_t i;
 	for (i = 0; i < MAX_BUNKERS; i++) {
 		if (bunkers.bunkers[i].sp.Color.color != BLACK) {
 			if (alienCollidesWithBunker(alienX, alienY, &bunkers.bunkers[i])) {
@@ -334,8 +334,8 @@ void bunkerCollisionCheck(int alienX, int alienY) {
 		}
 	}
 }
-int aliensAtTank() {
-	int i, maxY = 0;
+int32_t aliensAtTank() {
+	int32_t i, maxY = 0;
 	for (i = 0; i < ALIENS_COL; i++) {
 		if (aliens.frontRowAliens[i]->status == alive) {
 			if (maxY <= aliens.frontRowAliens[i]->p.y) {
@@ -358,14 +358,14 @@ void alienCollidesWithBunkers(Alien *alien, Position *p) {
 	//	if (!bullet->active) {
 	//		return 0; //false because the bullet is not on the screen
 	//	}
-	//	int spriteX = spritePos->x;
-	//	int spriteY = spritePos->y;
-	//	int spriteXMax = spriteX + sprite->width;
-	//	int spriteYMax = spriteY + sprite->height;
-	//	int bulletX = bullet->p.x;
-	//	int bulletY = bullet->p.y;
-	//	int bulletXMax = bulletX + BULLET_WIDTH;
-	//	int bulletYMax = bulletY + BULLET_HEIGHT;
+	//	int32_t spriteX = spritePos->x;
+	//	int32_t spriteY = spritePos->y;
+	//	int32_t spriteXMax = spriteX + sprite->width;
+	//	int32_t spriteYMax = spriteY + sprite->height;
+	//	int32_t bulletX = bullet->p.x;
+	//	int32_t bulletY = bullet->p.y;
+	//	int32_t bulletXMax = bulletX + BULLET_WIDTH;
+	//	int32_t bulletYMax = bulletY + BULLET_HEIGHT;
 	//
 	//	//checks for overlapping on the top left of the bullet sprite
 	//	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
@@ -382,14 +382,14 @@ void alienCollidesWithBunkers(Alien *alien, Position *p) {
 	//	return no_hit;
 }
 
-void checkPointCollision(int x, int y) {
-	int i;
+void checkPointCollision(int32_t x, int32_t y) {
+	int32_t i;
 	for (i = 0; i < MAX_BUNKERS; i++) {
 		Bunker *temp = &bunkers.bunkers[i];
-		int bunkerX = temp->p.x;
-		int bunkerY = temp->p.y;
-		int bunkerXMax = bunkerX + temp->sp.width;
-		int bunkerYMax = bunkerY + temp->sp.height;
+		int32_t bunkerX = temp->p.x;
+		int32_t bunkerY = temp->p.y;
+		int32_t bunkerXMax = bunkerX + temp->sp.width;
+		int32_t bunkerYMax = bunkerY + temp->sp.height;
 		//determine if the x,y point is inside the bunker
 		if ((x >= bunkerX) && (x <= bunkerXMax)) {
 			if ((y >= bunkerY) && (y <= bunkerYMax)) {
@@ -399,14 +399,14 @@ void checkPointCollision(int x, int y) {
 	}
 }
 
-void findAndErodeBunkerBlock(int x, int y, Bunker *temp) {
-	int bunkerX = temp->p.x;
-	int bunkerY = temp->p.y;
+void findAndErodeBunkerBlock(int32_t x, int32_t y, Bunker *temp) {
+	int32_t bunkerX = temp->p.x;
+	int32_t bunkerY = temp->p.y;
 	//find the size of the erosion rows and cols in the bunker
-	int colSize = BUNKER_WIDTH / EROSION_COLS;
-	int rowSize = BUNKER_HEIGHT / EROSION_ROWS;
+	int32_t colSize = BUNKER_WIDTH / EROSION_COLS;
+	int32_t rowSize = BUNKER_HEIGHT / EROSION_ROWS;
 	//test which block the x,y point is in
-	int row, col;
+	int32_t row, col;
 	for (row = EROSION_ROWS - 1; row >= 0; row--) {
 		for (col = EROSION_COLS - 1; col >= 0; col--) {
 			if (x >= (bunkerX + colSize * col)) {

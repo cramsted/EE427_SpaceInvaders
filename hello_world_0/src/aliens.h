@@ -63,12 +63,12 @@ extern Aliens aliens;
 //function to initialize the alien block struct
 //param x sets starting x position
 //param y sets starting y position
-void initAliens(int x, int y);
+void initAliens(int32_t x, int32_t y);
 //moves the alien block in the direction of alien_direction_e by a preset number of pixels
 void updateAliens();
 //kills the alien at the specified row and col of the alien block
-void killAlien(Alien *alien, int row, int col);
-void drawAliens(int xUpdate, int yUpdate);
+void killAlien(Alien *alien, int32_t row, int32_t col);
+void drawAliens(int32_t xUpdate, int32_t yUpdate);
 void eraseAlienExplosionSprite();
 
 #endif /* ALIENS_H_ */
