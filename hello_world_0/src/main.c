@@ -16,18 +16,6 @@
  *
  */
 
-/*
- * Space Invaders game
- * TODO's:
- *   - aliens adjust when left column dies
- *   - alien explosion doesn't always erase
- *   - alien block freezes
- *   - aliens collide with bunkers - destroy the bunkers
- *   - optimize drawing algorithm as needed
- *   - reorganizing: updating functions, removing struct pointers
- *   - CPU utilization
- */
-
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
@@ -45,7 +33,7 @@ int main() {
     // seed random number generator
     srand(time(NULL));
     init_platform(); // Necessary for all programs.
-    initAudio();
+    initAudio(); // Initialize the AC97 audio controller
     initVideoDMAController(); //sets up video hardware
     videoInit(); //initializes the screen to its starting point
 
@@ -62,7 +50,10 @@ int main() {
     //		readInput(); //waits for control input
     //	}
 
+    // This spins in a while(1) loop, polling the events variable.
     eventsLoop();
+    
+    // Obligatory clean-up. The program will never actually get here.
     cleanup_platform();
 
     return 0;

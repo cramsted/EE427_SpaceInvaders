@@ -8,7 +8,7 @@
 #ifndef TANK_H_
 #define TANK_H_
 
-#include "sprites.h"
+#include "sprites.h" 	//needed for the tank struct
 
 //values that determine the dimensions of the sprites on the screen and their starting positions
 #define TANK_START_X 305	//tank start x position
@@ -28,9 +28,9 @@ typedef struct {
 extern Tank tank;
 
 //creates a tank struct initialized to position x,y
-Tank initTank(int x, int y);
+Tank initTank(int32_t x, int32_t y);
 //draws a tank at position x. The y value is hard coded
-void drawTank(int x, Tank *tank);
+void drawTank(int32_t x, Tank *tank);
 //draws the lives in the upper right hand corner of screen.
 //coordinate values are hard coded
 void drawLives();
@@ -40,4 +40,5 @@ void moveTankRight(Tank *tank);
 void moveTankLeft(Tank *tank);
 //sets the explosion sprite for the tank and erases a life
 void tankExplode();
+
 #endif /* TANK_H_ */

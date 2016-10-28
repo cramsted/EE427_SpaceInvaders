@@ -42,7 +42,7 @@ typedef struct {
 } Score;
 
 //creates a character struct
-Character initChar(int x, int y, const int *sprite, uint32_t color);
+Character initChar(int32_t x, int32_t y, const int32_t *sprite, uint32_t color);
 //creates all the words at the top of the screen
 void drawCharacters();
 //draws the game over text
@@ -52,6 +52,6 @@ void initScore();
 //updates the score by the passed in amount
 void updateScore(uint32_t points);
 //draws the point in the place of the ufo
-void drawUfoPoints(Position *p, int points, uint32_t color);
+void drawUfoPoints(Position *p, int32_t points, uint32_t color);
 
 #endif /* TEXT_H_ */

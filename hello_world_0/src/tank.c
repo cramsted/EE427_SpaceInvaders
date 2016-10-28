@@ -17,15 +17,15 @@
 #define LEFT_PADDING RIGHT_PADDING //ditto for left side of screen
 
 //tank sprites
-extern const int tank_15x8[];
-extern const int tank_explosion_15x8[];
-extern const int tank_explosion2[];
+extern const int32_t tank_15x8[];
+extern const int32_t tank_explosion_15x8[];
+extern const int32_t tank_explosion2[];
 
 //tank object
 Tank tank;
 
 //creates a tank struct initialized to position x,y
-Tank initTank(int x, int y) {
+Tank initTank(int32_t x, int32_t y) {
 	Tank t;
 	t.lives = MAX_LIVES;
 	t.p = initPosition(x, y);
@@ -34,7 +34,7 @@ Tank initTank(int x, int y) {
 }
 
 //draws a tank at position x. The y position is fixed
-void drawTank(int x, Tank *tank) {
+void drawTank(int32_t x, Tank *tank) {
 	tank->sp.Color.color = BLACK; //draws black over old tank position
 	editFrameBuffer(&tank->sp, &tank->p);
 	tank->sp.Color.color = GREEN;
@@ -44,7 +44,7 @@ void drawTank(int x, Tank *tank) {
 
 //redraws the tank sprite a predetermined distance to the right
 void moveTankRight(Tank *tank) {
-	int currentX = tank->p.x;
+	int32_t currentX = tank->p.x;
 	//checks if tank is at the max right value
 	if (currentX + PIXELS_PER_MOVE + TANK_WIDTH + RIGHT_PADDING > SCREEN_WIDTH)
 		return;
@@ -53,24 +53,27 @@ void moveTankRight(Tank *tank) {
 
 //redraws the tank sprite a predetermined distance to the left
 void moveTankLeft(Tank *tank) {
-	int currentX = tank->p.x;
+	int32_t currentX = tank->p.x;
 	//checks if the tank is a the max left value
 	if (currentX - PIXELS_PER_MOVE - LEFT_PADDING < 0)
 		return;
 	drawTank(currentX - PIXELS_PER_MOVE, tank);
 }
 
+//this pauses the game for a moment so the tank's explosion sprite can be displayed uniterrupted
 #define DELAY 500000
 inline void shortDelay() {
-	volatile int i = DELAY;
+	volatile int32_t i = DELAY;
 	while (i--);
 }
 
+//draws the two tank explosion sprites and then pauses the game for a second
 void tankExplode() {
+    // queue up the tank explosion sound so it will play
     setAudioEvent(AUDIO_TANK_EXPLOSION);
 
     // draw the tank explosion sprite
-	int i;
+	int32_t i;
 	for (i = 10; i > 0; --i) {
 		tank.sp.sprite = tank_explosion_15x8;
 		editFrameBuffer(&tank.sp, &tank.p);
@@ -97,7 +100,7 @@ void tankExplode() {
 //coordinate values are fixed
 void drawLives() {
 	Tank life = initTank(LIFE_START_X, LIFE_START_Y); //creates a new tank life
-	int col;
+	int32_t col;
 	for (col = 0; col < MAX_LIVES; col++) {
 		if (col < tank.lives) { //draws lives if the col num is less than the num of lives left
 			life.sp.Color.color = GREEN;

@@ -6,19 +6,19 @@
  */
 #include "render.h"
 #include <stdio.h>
-#include "sprites.h"
+#include "sprites.h"    //for access to sprite structs
 #include "xaxivdma.h"
 #include "xparameters.h"
 #include "xio.h"
-#include "aliens.h"
-#include "bullets.h"
-#include "bunkers.h"
-#include "ufo.h"
-#include "tank.h"
-#include "text.h"
+#include "aliens.h"     //for access to alien initializers
+#include "bullets.h"    //for access to bullet initializer
+#include "bunkers.h"    //for access to bunkers initializers
+#include "ufo.h"        //for access to ufo initializer
+#include "tank.h"       //for access to tank initializer
+#include "text.h"       //for access to text related initializers
 
 //function prototypes
-int findPixelValue(int x, int y, int col, int row, Sprite *sp);
+int32_t findPixelValue(int32_t x, int32_t y, int32_t col, int32_t row, Sprite *sp);
 void drawGround();
 
 // Starting location in DDR where we will store the images that we display.
@@ -29,8 +29,8 @@ static XAxiVdma videoDMAController;
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
-unsigned int * framePointer0 = (unsigned int *) FRAME_BUFFER_0_ADDR;
-//	unsigned int * framePointer1 = ((unsigned int *) FRAME_BUFFER_0_ADDR)
+unsigned int32_t * framePointer0 = (unsigned int32_t *) FRAME_BUFFER_0_ADDR;
+//	unsigned int32_t * framePointer1 = ((unsigned int32_t *) FRAME_BUFFER_0_ADDR)
 //		+ SCREEN_WIDTH
 //			* SCREEN_HEIGHT;
 
@@ -60,7 +60,7 @@ void videoInit() {
 
 //draws a horizonatal green line accross the bottom of the screen
 void drawGround() {
-	int col;
+	int32_t col;
 	for (col = 0; col < SCREEN_WIDTH; col++) {
 		//the line is two pixel wide
 		framePointer0[GROUND_START_Y * SCREEN_WIDTH + col] = GREEN;
@@ -79,12 +79,12 @@ void render() {
 
 //changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at
 void editFrameBuffer(Sprite *sp, Position *p) {
-	int maxRow = (p->y + sp->height);
-	int maxCol = (p->x + sp->width);
-	int row, col;
+	int32_t maxRow = (p->y + sp->height);
+	int32_t maxCol = (p->x + sp->width);
+	int32_t row, col;
 	for (row = p->y; row < maxRow; row++) {
 		for (col = p->x; col < maxCol; col++) {
-			unsigned int *temp = &framePointer0[row * SCREEN_WIDTH + col];
+			unsigned int32_t *temp = &framePointer0[row * SCREEN_WIDTH + col];
 			//if sprite value is 1 then it draws the sprite's color at that pixel
 			if (findPixelValue(p->x, p->y, col, row, sp)) {
 				*temp = sp->Color.color;
@@ -98,18 +98,18 @@ void editFrameBuffer(Sprite *sp, Position *p) {
 //based on the current x,y coordinate that the edit_frameBuffer function is on and based on the
 //x,y position of the sprite, the sprite is resized, and the pixel value at that row and col
 //is returned, 0 for black, 1 for with color
-int findPixelValue(int x, int y, int col, int row, Sprite *sp) {
+int32_t findPixelValue(int32_t x, int32_t y, int32_t col, int32_t row, Sprite *sp) {
 	//causes each pixel to be drawn twice
-	int xval = (col - x) >> 1;
-	int yval = (row - y) >> 1;
-	int mask = 1 << ((sp->width >> 1) - 1); //makes a mask that will cover the desired pixel
+	int32_t xval = (col - x) >> 1;
+	int32_t yval = (row - y) >> 1;
+	int32_t mask = 1 << ((sp->width >> 1) - 1); //makes a mask that will cover the desired pixel
 	return (sp->sprite[yval] << xval) & mask; //returns pixel value
 }
 
 //This is part of Dr. Hutchings's code
 //sets up the video DMA controller
 void initVideoDMAController() {
-	int Status; // Keep track of success/failure of system function calls.
+	int32_t Status; // Keep track of success/failure of system function calls.
 	XAxiVdma videoDMAController;
 	// There are 3 steps to initializing the vdma driver and IP.
 	// Step 1: lookup the memory structure that is used to access the vdma driver.
