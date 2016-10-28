@@ -45,8 +45,8 @@ typedef struct {
     int32_t event;
 } Sound;
 
-uint32_t audioEvents = 0;
-uint16_t volume;
+uint32_t audioEvents = 0; //audio events buffer
+uint16_t volume;    //
 
 //sound structs
 Sound alienMovement1;
@@ -98,6 +98,7 @@ void initSounds() {
     ufoNoise = initSound(getUfoNoiseSoundRate(), getUfoNoiseSoundFrames(),
             getUfoNoiseSound(), AUDIO_UFO_NOISE);
     int32_t i;
+    //creates the empty sound buffer
     for (i = 0; i < BUFFER_FILL_RATE; i++) {
         noAudio[i] = BUFFER_FILL_RATE;
     }
@@ -150,17 +151,23 @@ uint32_t eventPending(uint32_t event) {
 }
 
 void playAudio() {
+    //keeps track of what alien movement sound will be played next
     static int32_t alienMovementNumber = ALIEN_MOVEMENT_1;
-    if (eventPending(AUDIO_TANK_FIRE_NOISE)) {
+
+    //priority determined by the position the event check for sound 
+    if (eventPending(AUDIO_TANK_FIRE_NOISE)) { //priority 1
         fillAudioBuffer(&tankFireNoise);
-    } else if (eventPending(AUDIO_TANK_EXPLOSION)) {
+    } else if (eventPending(AUDIO_TANK_EXPLOSION)) { //priority 2
         fillAudioBuffer(&tankExplosion);
-    } else if (eventPending(AUDIO_EXPLOSION_ALIEN)) {
+    } else if (eventPending(AUDIO_EXPLOSION_ALIEN)) { //priority 3
         fillAudioBuffer(&explosionAlien);
-    } else if (eventPending(AUDIO_UFO_NOISE)) {
+    } else if (eventPending(AUDIO_UFO_NOISE)) { //priority 4
         fillAudioBuffer(&ufoNoise);
-    } else if (eventPending(AUDIO_ALIEN_MOVEMENT)) {
-        xil_printf("moveAlienSound\n\r");
+    } else if (eventPending(AUDIO_ALIEN_MOVEMENT)) { //priority 5
+        // xil_printf("moveAlienSound\n\r");
+
+        //fills the audio buffer with the appropriate sound, and then changes the 
+        //sound to the next one in the sequence
         switch (alienMovementNumber) {
         case ALIEN_MOVEMENT_1:
             if (fillAudioBuffer(&alienMovement1) == END_OF_BUFFER) {
@@ -186,15 +193,17 @@ void playAudio() {
             break;
         }
     } else {
+        //plays where there is no sound
         fillAudioBuffer(&noSound);
     }
 }
 
 void clearAudio() {
-    clearAudioEvent(AUDIO_ALL_EVENTS);
-    playAudio();
+    clearAudioEvent(AUDIO_ALL_EVENTS);//clears all events
+    playAudio(); //fills the buffer with no sound
 }
 
+//sets all of the volume controls to their default values
 void writeVolume() {
     XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_MasterVol, volume);
     XAC97_WriteReg(XPAR_AXI_AC97_0_BASEADDR, AC97_AuxOutVol, volume);
@@ -207,7 +216,7 @@ void increaseVolume() {
     // Only change volume if it doesn't go above the max allowed value
     if (volume - VOL_CHANGE >= VOL_MAX) {
         volume -= VOL_CHANGE;
-        writeVolume();
+        writeVolume(); //set volume
     }
 }
 
@@ -215,7 +224,7 @@ void decreaseVolume() {
     // Only change volume if it doesn't go above the max allowed value
     if (volume + VOL_CHANGE <= VOL_MIN) {
         volume += VOL_CHANGE;
-        writeVolume();
+        writeVolume(); //set volume
     }
 }
 
