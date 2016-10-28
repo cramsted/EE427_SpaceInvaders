@@ -38,11 +38,11 @@
 
 #define BUFFER_FILL_RATE 128
 typedef struct {
-    int32_t soundRate;
-    int32_t soundFrames;
-    int32_t *audioFile;
-    int32_t currentPosition;
-    int32_t event;
+    int32_t soundRate;  //rate that the sound plays at
+    int32_t soundFrames; //how many sound bytes there are to play
+    int32_t *audioFile; //pointer to the array of sound bytes
+    int32_t currentPosition;    //furthest point of the sound array that has been loaded into the FIFO
+    int32_t event;  //what event the sound is associated with
 } Sound;
 
 uint32_t audioEvents = 0; //audio events buffer

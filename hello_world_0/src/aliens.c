@@ -5,7 +5,7 @@
  *      Author: superman
  */
 #include "aliens.h"
-#include "bunkers.h"
+#include "bunkers.h"	//for when the aliens touch the bunkers
 #include "tank.h"
 #include "render.h"		//for access to the frame buffer
 #include "text.h"		//for access to the function updateScore()
@@ -19,17 +19,18 @@
 #define XALIEN_PADDING (8)		//padding between aliens in the x direction
 #define YALIEN_PADDING (16)		//padding between aliens in the y direction
 #define RIGHT_PADDING 12			//padding for the max value the aliens can be drawn in the x direciton
-#define ALIENS_BLOCK_WIDTH ((ALIEN_WIDTH + XALIEN_PADDING) * ALIENS_COL)
-#define MAX_X (SCREEN_WIDTH - RIGHT_PADDING - ALIEN_WIDTH) //fix me!
-#define MIN_X RIGHT_PADDING
-#define MAX_Y 400
-#define LEFT_SCREEN_X (SCREEN_WIDTH >> 2)
+#define ALIENS_BLOCK_WIDTH ((ALIEN_WIDTH + XALIEN_PADDING) * ALIENS_COL)	//size of the alien block
+#define MAX_X (SCREEN_WIDTH - RIGHT_PADDING - ALIEN_WIDTH) //max x value that the alien block can travel to
+#define MIN_X RIGHT_PADDING //min x value that the alien block can travel to
+#define MAX_Y 400	//max y value that the alien block can travel to
+#define LEFT_SCREEN_X (SCREEN_WIDTH >> 2) 	//value for determining if the alien block is hitting the left edge of the screen
+
 //point values for different alien types
 #define TOP_ALIEN_POINTS 40
 #define MIDDLE_ALIEN_POINTS 20
 #define BOTTOM_ALIEN_POINTS 10
 
-#define MAX_EXPLOSION_SPRITES 3
+#define MAX_EXPLOSION_SPRITES 3	//largest number of aliens allowed to be exploding at once
 
 //all the sprite structures defined in sprite_bit_maps.c
 extern const int32_t saucer_16x7[]; //saucer sprite, not used in this lab
@@ -47,15 +48,17 @@ const int32_t* alien_sprites[] = { alien_top_in_12x8, alien_top_out_12x8,
 		alien_middle_in_12x8, alien_middle_out_12x8, alien_bottom_in_12x8,
 		alien_bottom_out_12x8 };
 
-Aliens aliens;
-static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL };
+Aliens aliens;	//alien block object
+static Alien *explodedAliens[MAX_EXPLOSION_SPRITES] = { NULL, NULL, NULL };//stores the current aliens that are displaying the explosion sprite
 
-// Function prototypes
+
+// Function prototypes - see descriptions in function definitions
 void eraseAlien(Alien *alien);
 void bunkerCollisionCheck(int32_t alienX, int32_t alienY);
 int32_t aliensAtTank();
 void findAndErodeBunkerBlock(int32_t x, int32_t y, Bunker *temp);
 void checkPointCollision(int32_t x, int32_t y);
+
 //initialize an alien struct
 //param x sets starting x position
 //param y sets starting y position
@@ -110,6 +113,8 @@ void initAliens(int32_t x, int32_t y) {
 	aliens.killCount = 0;
 }
 
+
+//adds an alien to the explodedAlien buffer
 void addExplodedAlienSprite(Alien *alien) {
 	// Add the alien to the list of explosion sprites so they can be erased
 	uint8_t i;
@@ -122,6 +127,7 @@ void addExplodedAlienSprite(Alien *alien) {
 
 //erases of an exploded alien sprite if it hasn't already been erased
 void eraseAlienExplosionSprite() {
+	// Add the alien to the list of explosion sprites so they can be erased
 	uint8_t i;
 	for (i = 0; i < MAX_EXPLOSION_SPRITES; i++) {
 		if (explodedAliens[i] != NULL) {
@@ -142,7 +148,7 @@ void explodeAlien(Alien *alien) {
 	alien->sp.sprite = alien_explosion_12x8;
 	editFrameBuffer(&alien->sp, &alien->p);
 	addExplodedAlienSprite(alien);
-	setAudioEvent(AUDIO_EXPLOSION_ALIEN);
+	setAudioEvent(AUDIO_EXPLOSION_ALIEN); //plays the alien explosion sound
 }
 
 //sets the status var of the alien at the passed in row and col as dead
@@ -181,7 +187,9 @@ void killAlien(Alien *alien, int32_t row, int32_t col) {
 	}
 }
 
+//draws a passed in alien at the designated x,y coordinate
 void drawAlien(int32_t xUpdate, int32_t yUpdate, Alien *alien) {
+	//checks if the alien is currently exploding. If so, it set the alien to dead
 	if (alien->status == exploded) {
 		alien->status = dead;
 		eraseAlien(alien);
@@ -233,10 +241,12 @@ Position aliensLeftBlockPosition() {
 	int32_t row, col;
 	for (col = 0; col < ALIENS_COL; col++) {
 		for (row = 0; row < ALIENS_ROW; row++) {
+			//finds and returns furthest left most alive alien
 			if (aliens.aliens[row][col].status == alive)
 				return aliens.aliens[row][col].p;
 		}
 	}
+	//if no aliens are alive, then the upper left coordinate of the alien block is returned
 	return initPosition(ALIENS_START_X, ALIENS_START_Y);
 }
 
@@ -256,28 +266,34 @@ Position aliensRightBlockPosition() {
 void updateAliens() {
     setAudioEvent(AUDIO_ALIEN_MOVEMENT);
 	Position p;
+	//takes the current direction the alien block is moving as input
 	switch (aliens.direction) {
 	case left:
 		drawAliens(left, 0);
+		//finds the position of the left most alien and checks that it isn't past the min x value
 		p = aliensLeftBlockPosition();
 		if (p.x < MIN_X) {
-			aliens.direction = down;
+			aliens.direction = down;//shifts the aliens down
 		}
 		break;
 	case right:
 		drawAliens(right, 0);
+		//finds the position of the right most alien and checks that it isn't past the max x value
 		p = aliensRightBlockPosition();
 		if (p.x > MAX_X) {
-			aliens.direction = down;
+			aliens.direction = down; //shifts the aliens down
 		}
 		break;
 	case down:
 		drawAliens(0, down);
+		//checks if the aliens have reached the tank
 		if (aliensAtTank()) {
+			//ends the game and writes 'game over' to the screen
 			drawGameOver();
 			while (1)
 				;
 		}
+		//determins where the alien block is on the screen an then sets it's direction appropriately
 		p = aliensLeftBlockPosition();
 		if (p.y < MAX_Y) {
 			if (p.x < LEFT_SCREEN_X) {
@@ -300,13 +316,17 @@ void updateAliens() {
 	}
 }
 
+//returns 1 if the passed in x,y coordinate is inside the passed in bunker bit map; returns 0 otherwise
 static int32_t alienCollidesWithBunker(int32_t alienX, int32_t alienY, Bunker *bunker) {
+	//pointers to the bunkers position and sprite for convenience.
 	Position *spritePos = &bunker->p;
 	Sprite *sprite = &bunker->sp;
+	//calculates the max and min x,y values of the tank sprite
 	int32_t spriteX = spritePos->x;
 	int32_t spriteY = spritePos->y;
 	int32_t spriteXMax = spriteX + sprite->width;
 	int32_t spriteYMax = spriteY + sprite->height;
+	//calculates the max values of the alien sprite. Min values are not needed since they are passed in.
 	int32_t alienXMax = alienX + ALIEN_WIDTH;
 	int32_t alienYMax = alienY + ALIEN_HEIGHT;
 
@@ -326,6 +346,7 @@ static int32_t alienCollidesWithBunker(int32_t alienX, int32_t alienY, Bunker *b
 	return 0; //bunker miss
 }
 
+//checks if an alien has collided with a bunker
 void bunkerCollisionCheck(int32_t alienX, int32_t alienY) {
 	int32_t i;
 	for (i = 0; i < MAX_BUNKERS; i++) {
@@ -336,11 +357,14 @@ void bunkerCollisionCheck(int32_t alienX, int32_t alienY) {
 		}
 	}
 }
+
+//checks if the aliens have reached the tank
 int32_t aliensAtTank() {
 	int32_t i, maxY = 0;
 	for (i = 0; i < ALIENS_COL; i++) {
 		if (aliens.frontRowAliens[i]->status == alive) {
 			if (maxY <= aliens.frontRowAliens[i]->p.y) {
+				//finds the max y value of the alien block
 				maxY = aliens.frontRowAliens[i]->p.y;
 			}
 		}
@@ -351,43 +375,13 @@ int32_t aliensAtTank() {
 	return 0; //aliens haven't won yet
 }
 
-// check if a bullet hit a sprite
-// return tank_bullet_hit or alien_bullet_hit if true, no_hit otherwise
-void alienCollidesWithBunkers(Alien *alien, Position *p) {
-	//check bottom left for collision
-	//if yes, erode that section of the bunker
-	//else
-	//	if (!bullet->active) {
-	//		return 0; //false because the bullet is not on the screen
-	//	}
-	//	int32_t spriteX = spritePos->x;
-	//	int32_t spriteY = spritePos->y;
-	//	int32_t spriteXMax = spriteX + sprite->width;
-	//	int32_t spriteYMax = spriteY + sprite->height;
-	//	int32_t bulletX = bullet->p.x;
-	//	int32_t bulletY = bullet->p.y;
-	//	int32_t bulletXMax = bulletX + BULLET_WIDTH;
-	//	int32_t bulletYMax = bulletY + BULLET_HEIGHT;
-	//
-	//	//checks for overlapping on the top left of the bullet sprite
-	//	if ((bulletX >= spriteX) && (bulletX <= spriteXMax)) {
-	//		if ((bulletY >= spriteY) && (bulletY <= spriteYMax)) {
-	//			return tank_bullet_hit;
-	//		}
-	//	}
-	//	//checks for overlapping on the bottom right of the bullet sprite
-	//	if ((bulletXMax >= spriteX) && (bulletXMax <= spriteXMax)) {
-	//		if ((bulletYMax >= spriteY) && (bulletYMax <= spriteYMax)) {
-	//			return alien_bullet_hit;
-	//		}
-	//	}
-	//	return no_hit;
-}
 
+//checks if the passed in x,y value is inside of a bunkers boundaries
 void checkPointCollision(int32_t x, int32_t y) {
 	int32_t i;
 	for (i = 0; i < MAX_BUNKERS; i++) {
 		Bunker *temp = &bunkers.bunkers[i];
+		//find boundaries of the bunker
 		int32_t bunkerX = temp->p.x;
 		int32_t bunkerY = temp->p.y;
 		int32_t bunkerXMax = bunkerX + temp->sp.width;
@@ -401,6 +395,7 @@ void checkPointCollision(int32_t x, int32_t y) {
 	}
 }
 
+//erodes the appropriate bunker block based on the passed in x,y value
 void findAndErodeBunkerBlock(int32_t x, int32_t y, Bunker *temp) {
 	int32_t bunkerX = temp->p.x;
 	int32_t bunkerY = temp->p.y;

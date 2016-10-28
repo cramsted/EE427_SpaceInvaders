@@ -67,6 +67,7 @@ inline void shortDelay() {
 }
 
 void tankExplode() {
+	//plays the tank explosion sound 
     setAudioEvent(AUDIO_TANK_EXPLOSION);
 
     // draw the tank explosion sprite
