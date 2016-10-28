@@ -17,8 +17,8 @@
 
 //info needed to draw a bullet
 typedef struct {
-	Position p;	// x,y position
-	Sprite sp;	// bullet sprite
+	Position p;			// x,y position
+	Sprite sp;			// bullet sprite
 	uint8_t active; 	// 0 inactive, 1 is active
 } Bullet;
 

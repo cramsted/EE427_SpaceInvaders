@@ -23,10 +23,16 @@
 #define UFO_EXPLOSION_EVENT		0x800
 #define AUDIO_EVENT				0x1000
 
+// Check all events round-robin style.
+// if there are no events, it runs the utilization counter
 void eventsLoop();
+//sets the passed in event
 void setEvent(int event);
+//returns 1 if events are enabled, 0 otherwise
 void enableEvents();
+//disables and clears all events
 void disableAndClearEvents();
+//returns 1 if events are enabled, 0 otherwise
 int eventsEnabled();
 
 #endif /* EVENTS_H_ */
