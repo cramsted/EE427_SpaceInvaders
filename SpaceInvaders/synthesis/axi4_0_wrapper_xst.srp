@@ -2493,7 +2493,6 @@ Moving files to output directory...
 Finished moving files to output directory
 Successfully generated unit 'axi4_0_wrapper_fifo_generator_v8_4'.
 
-End of process call...
 
 =========================================================================
 *                       Advanced HDL Synthesis                          *
@@ -3339,12 +3338,12 @@ axi4_0/si_converter_bank/gen_conv_slot[2].clock_conv_inst/S_AXI_ACLK|    1.913| 
 =========================================================================
 
 
-Total REAL time to Xst completion: 100.00 secs
-Total CPU time to Xst completion: 100.03 secs
+Total REAL time to Xst completion: 89.00 secs
+Total CPU time to Xst completion: 89.63 secs
  
 --> 
 
-Total memory usage is 288244 kilobytes
+Total memory usage is 328660 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :  365 (   0 filtered)
