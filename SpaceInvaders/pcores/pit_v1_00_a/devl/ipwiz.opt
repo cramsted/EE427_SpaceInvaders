@@ -1,0 +1,9 @@
+-batch 
+-create pit 
+-ver 1.00.a 
+-dir "C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders" 
+-lang vhdl 
+-bus axi4lite s 
+-reg 2 
+-xps 
+-driver 

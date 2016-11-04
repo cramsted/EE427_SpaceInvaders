@@ -23,7 +23,9 @@ WARNING:EDK - INFO:Security:51 - The XILINXD_LICENSE_FILE environment variable
    qualify for Xilinx software updates or new releases.
 
 
-Parse C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/system.mhs ...
+Parse
+C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/system.mhs
+...
 
 Read MPD definitions ...
 WARNING:EDK:3605 - Use of the repository located at
@@ -66,7 +68,7 @@ INFO:EDK:4130 - IPNAME: axi_s6_ddrx, INSTANCE:MCB_DDR2 - tcl is overriding
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_s6_ddrx_v1_05_a\
    data\axi_s6_ddrx_v2_1_0.mpd line 237 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
-   PARAMETER C_NUM_INTR_INPUTS value to 4 -
+   PARAMETER C_NUM_INTR_INPUTS value to 5 -
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_intc_v1_01_a\dat
    a\axi_intc_v2_1_0.mpd line 80 
 
@@ -96,6 +98,7 @@ Address Map for Processor microblaze_0
   (0x41200000-0x4120ffff) axi_intc_0	axi4lite_0
   (0x41400000-0x4140ffff) debug_module	axi4lite_0
   (0x41c00000-0x41c0ffff) axi_timer_0	axi4lite_0
+  (0x7bc00000-0x7bc0ffff) pit_0	axi4lite_0
   (0x7e200000-0x7e20ffff) axi_vdma_0	axi4lite_0
   (0x7e220000-0x7e22ffff) axi_hdmi_0	axi4lite_0
   (0x7e240000-0x7e24ffff) axi_ac97_0	axi4lite_0
@@ -119,7 +122,7 @@ Checking platform address map ...
 Checking platform configuration ...
 IPNAME: lmb_v10, INSTANCE: microblaze_0_ilmb - 1 master(s) : 1 slave(s) 
 IPNAME: lmb_v10, INSTANCE: microblaze_0_dlmb - 1 master(s) : 1 slave(s) 
-IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 9 slave(s) 
+IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 10 slave(s) 
 IPNAME: axi_interconnect, INSTANCE: axi4_0 - 3 master(s) : 1 slave(s) 
 
 Checking port drivers...
@@ -129,8 +132,8 @@ WARNING:EDK:4180 - PORT: bscan_tdo1, CONNECTOR: bscan_tdo1 - No driver found.
    _v2_1_0.mpd line 239 
 WARNING:EDK:4181 - PORT: axi4lite_0_M_AXI_ACLK_pin, CONNECTOR: axi4lite_0_M_ACLK
    - floating connection -
-   C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line
-   39 
+   C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.
+   mhs line 39 
 WARNING:EDK:4181 - PORT: bscan_tdi, CONNECTOR: bscan_tdi - floating connection -
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\mdm_v2_00_b\data\mdm
    _v2_1_0.mpd line 232 
@@ -172,8 +175,8 @@ WARNING:EDK:4181 - PORT: s2mm_prmry_reset_out_n, CONNECTOR: S2MM_RESET_OUT_N -
    a\axi_vdma_v2_1_0.mpd line 224 
 WARNING:EDK:4181 - PORT: M_AXIS_S2MM_ACLK, CONNECTOR: M_AXIS_S2MM_ACLK_int -
    floating connection -
-   C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line
-   246 
+   C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.
+   mhs line 246 
 
 Performing Clock DRCs...
 
@@ -250,7 +253,7 @@ INFO:EDK:4130 - IPNAME: axi_s6_ddrx, INSTANCE:MCB_DDR2 - tcl is overriding
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_s6_ddrx_v1_05_a\
    data\axi_s6_ddrx_v2_1_0.mpd line 230 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
-   PARAMETER C_KIND_OF_INTR value to 0b11111111111111111111111111111001 -
+   PARAMETER C_KIND_OF_INTR value to 0b11111111111111111111111111110010 -
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_intc_v1_01_a\dat
    a\axi_intc_v2_1_0.mpd line 81 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
@@ -311,18 +314,18 @@ Managing cache ...
 
 Elaborating instances ...
 IPNAME:bram_block INSTANCE:microblaze_0_bram_block -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 111
-- elaborating IP
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 111 - elaborating IP
 IPNAME:clock_generator INSTANCE:clock_generator_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 159
-- elaborating IP
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 159 - elaborating IP
 ClkGen elaborate status: PASSED
 ----------------------------------------
 
 Writing HDL for elaborated instances ...
 
 Inserting wrapper level ...
-Completion time: 1.00 seconds
+Completion time: 0.00 seconds
 
 Constructing platform-level connectivity ...
 Completion time: 0.00 seconds
@@ -339,98 +342,101 @@ INFO:EDK:4211 - The following instances are synthesized with XST. The MPD option
    IMP_NETLIST=TRUE indicates that a NGC file is to be produced using XST
    synthesis. IMP_NETLIST=FALSE (default) instances are not synthesized. 
 INSTANCE:proc_sys_reset_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 66 -
-Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 66 - Running XST synthesis
 INSTANCE:microblaze_0_ilmb -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 79 -
-Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 79 - Running XST synthesis
 INSTANCE:microblaze_0_i_bram_ctrl -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 86 -
-Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 86 - Running XST synthesis
 INSTANCE:microblaze_0_dlmb -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 95 -
-Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 95 - Running XST synthesis
 INSTANCE:microblaze_0_d_bram_ctrl -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 102
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 102 - Running XST synthesis
 INSTANCE:microblaze_0_bram_block -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 111
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 111 - Running XST synthesis
 INSTANCE:microblaze_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 118
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 118 - Running XST synthesis
 INSTANCE:debug_module -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 146
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 146 - Running XST synthesis
 INSTANCE:clock_generator_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 159
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 159 - Running XST synthesis
 INSTANCE:axi_vdma_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 181
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 181 - Running XST synthesis
 INSTANCE:push_buttons_5bits -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 201
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 201 - Running XST synthesis
 INSTANCE:axi_hdmi_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 216
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 216 - Running XST synthesis
 INSTANCE:axi_ac97_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 250
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 250 - Running XST synthesis
 INSTANCE:axi4lite_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 265
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 265 - Running XST synthesis
 INSTANCE:axi4_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 273
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 273 - Running XST synthesis
 INSTANCE:rs232_uart_1 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 280
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 280 - Running XST synthesis
 INSTANCE:mcb_ddr2 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 295
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 295 - Running XST synthesis
 INSTANCE:digilent_quadspi_cntlr -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 343
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 343 - Running XST synthesis
 INSTANCE:axi_intc_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 355
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 355 - Running XST synthesis
 INSTANCE:axi_timer_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 366
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 366 - Running XST synthesis
 INSTANCE:fit_timer_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 376
-- Running XST synthesis
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 376 - Running XST synthesis
+INSTANCE:pit_0 -
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 384 - Running XST synthesis
 
 Running NGCBUILD ...
 IPNAME:microblaze_0_ilmb_wrapper INSTANCE:microblaze_0_ilmb -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 79 -
-Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 79 - Running NGCBUILD
 IPNAME:microblaze_0_dlmb_wrapper INSTANCE:microblaze_0_dlmb -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 95 -
-Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 95 - Running NGCBUILD
 IPNAME:microblaze_0_wrapper INSTANCE:microblaze_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 118
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 118 - Running NGCBUILD
 IPNAME:clock_generator_0_wrapper INSTANCE:clock_generator_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 159
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 159 - Running NGCBUILD
 IPNAME:axi_vdma_0_wrapper INSTANCE:axi_vdma_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 181
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 181 - Running NGCBUILD
 IPNAME:axi4lite_0_wrapper INSTANCE:axi4lite_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 265
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 265 - Running NGCBUILD
 IPNAME:axi4_0_wrapper INSTANCE:axi4_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 273
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 273 - Running NGCBUILD
 IPNAME:mcb_ddr2_wrapper INSTANCE:mcb_ddr2 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 295
-- Running NGCBUILD
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 295 - Running NGCBUILD
 INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
    If any constraint needs to be overridden, this should be done by modifying
    the data/system.ucf file.
 
 Rebuilding cache ...
 
-Total run time: 447.00 seconds
+Total run time: 450.00 seconds

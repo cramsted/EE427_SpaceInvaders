@@ -17,7 +17,7 @@ Sprite initSprite(int32_t height, int32_t width, uint32_t color, const int32_t *
 }
 
 //initializes and x,y coordinate
-Position initPosition(int x, int y) {
+Position initPosition(int32_t x, int32_t y) {
 	Position p;
 	p.x = x;
 	p.y = y;

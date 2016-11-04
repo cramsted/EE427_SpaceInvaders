@@ -29,7 +29,7 @@ TABLE OF CONTENTS
 ---- Source Parameters
 Input Format                       : MIXED
 Input File Name                    : "proc_sys_reset_0_wrapper_xst.prj"
-Verilog Include Directory          : {"C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
+Verilog Include Directory          : {"C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
 
 ---- Target Parameters
 Target Device                      : xc6slx45csg324-3
@@ -69,7 +69,7 @@ Parsing architecture <imp> of entity <sequence>.
 Parsing VHDL file "C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/proc_sys_reset_v3_00_a/hdl/vhdl/proc_sys_reset.vhd" into library proc_sys_reset_v3_00_a
 Parsing entity <proc_sys_reset>.
 Parsing architecture <imp> of entity <proc_sys_reset>.
-Parsing VHDL file "C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\hdl\proc_sys_reset_0_wrapper.vhd" into library work
+Parsing VHDL file "C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\hdl\proc_sys_reset_0_wrapper.vhd" into library work
 Parsing entity <proc_sys_reset_0_wrapper>.
 Parsing architecture <STRUCTURE> of entity <proc_sys_reset_0_wrapper>.
 
@@ -95,7 +95,7 @@ Elaborating entity <upcnt_n> (architecture <imp>) with generics from library <pr
 =========================================================================
 
 Synthesizing Unit <proc_sys_reset_0_wrapper>.
-    Related source file is "c:/users/superman/desktop/ee427_spaceinvaders/spaceinvaders/hdl/proc_sys_reset_0_wrapper.vhd".
+    Related source file is "c:/users/superman/desktop/cramshall/ee427_spaceinvaders/spaceinvaders/hdl/proc_sys_reset_0_wrapper.vhd".
     Summary:
 	no macro.
 Unit <proc_sys_reset_0_wrapper> synthesized.
@@ -470,8 +470,8 @@ Slowest_sync_clk|    2.646|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 6.80 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.51 secs
  
 --> 
 

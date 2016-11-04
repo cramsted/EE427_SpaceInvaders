@@ -29,7 +29,7 @@ TABLE OF CONTENTS
 ---- Source Parameters
 Input Format                       : MIXED
 Input File Name                    : "push_buttons_5bits_wrapper_xst.prj"
-Verilog Include Directory          : {"C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
+Verilog Include Directory          : {"C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
 
 ---- Target Parameters
 Target Device                      : xc6slx45csg324-3
@@ -609,7 +609,7 @@ Parsing architecture <IMP> of entity <gpio_core>.
 Parsing VHDL file "C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_gpio_v1_01_b/hdl/vhdl/axi_gpio.vhd" into library axi_gpio_v1_01_b
 Parsing entity <axi_gpio>.
 Parsing architecture <imp> of entity <axi_gpio>.
-Parsing VHDL file "C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\hdl\push_buttons_5bits_wrapper.vhd" into library work
+Parsing VHDL file "C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\hdl\push_buttons_5bits_wrapper.vhd" into library work
 Parsing entity <push_buttons_5bits_wrapper>.
 Parsing architecture <STRUCTURE> of entity <push_buttons_5bits_wrapper>.
 
@@ -684,7 +684,7 @@ WARNING:HDLCompiler:634 - "C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pco
 =========================================================================
 
 Synthesizing Unit <push_buttons_5bits_wrapper>.
-    Related source file is "c:/users/superman/desktop/ee427_spaceinvaders/spaceinvaders/hdl/push_buttons_5bits_wrapper.vhd".
+    Related source file is "c:/users/superman/desktop/cramshall/ee427_spaceinvaders/spaceinvaders/hdl/push_buttons_5bits_wrapper.vhd".
     Summary:
 	no macro.
 Unit <push_buttons_5bits_wrapper> synthesized.
@@ -1464,8 +1464,8 @@ S_AXI_ACLK     |    3.037|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 8.39 secs
+Total REAL time to Xst completion: 9.00 secs
+Total CPU time to Xst completion: 8.24 secs
  
 --> 
 

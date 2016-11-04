@@ -6,8 +6,8 @@ xc6slx45csg324-3 -intstyle silent -i -sd .. axi4lite_0_wrapper.ngc
 ../axi4lite_0_wrapper
 
 Reading NGO file
-"C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/implementation/axi4
-lite_0_wrapper/axi4lite_0_wrapper.ngc" ...
+"C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/implement
+ation/axi4lite_0_wrapper/axi4lite_0_wrapper.ngc" ...
 
 Partition Implementation Status
 -------------------------------

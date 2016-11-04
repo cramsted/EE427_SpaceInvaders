@@ -9,6 +9,7 @@
 #include "timer.h"
 #include "render.h"
 #include "text.h"
+#include "audio_files/audio.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,7 +31,7 @@ uint32_t ufoPoints;
 // Initialize the ufo in the chosen position
 void initUfo() {
 	ufo.p = initPosition(UFO_START_X_LEFT, UFO_START_Y);
-	ufo.sp = initSprite(UFO_HEIGHT, UFO_WIDTH, RED, saucer_16x7);
+	ufo.sp = initSprite(UFO_HEIGHT, UFO_WIDTH, RED, (int32_t*)saucer_16x7);
     
     // We're starting on the left side of the screen, so begin going right
 	ufo.direction = ufo_right;
@@ -126,6 +127,6 @@ void ufoAppear() {
 		ufo.p = initPosition(UFO_START_X_RIGHT, UFO_START_Y);
 	}
 	ufo.status = active;
-	ufo.sp.sprite = saucer_16x7;
+	ufo.sp.sprite = (int32_t*)saucer_16x7;
 	drawUfo();
 }
