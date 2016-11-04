@@ -117,7 +117,7 @@ void tankPew(Tank *tank, Bullets *bullets) {
 	}
 	//queues the tank fire noise to play
 	setAudioEvent(AUDIO_TANK_FIRE_NOISE);
-	xil_printf("tank noise\n\r");
+//	xil_printf("tank noise\n\r");
 	//sets bullet position based on the current tank position
 	b->p.x = tank->p.x + (tank->sp.width / 2) - (b->sp.width / 2);
 	b->p.y = tank->p.y - b->sp.height - 1;

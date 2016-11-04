@@ -22,6 +22,7 @@
 #define UFO_APPEAR_EVENT		0x400
 #define UFO_EXPLOSION_EVENT		0x800
 #define AUDIO_EVENT				0x1000
+#define UART_EVENT				0x2000
 
 // Check all events round-robin style.
 // if there are no events, it runs the utilization counter

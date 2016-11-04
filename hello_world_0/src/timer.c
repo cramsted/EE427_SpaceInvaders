@@ -16,10 +16,12 @@
 #include "events.h"
 #include "audio_files/audio.h" // For access to our API for plaing audio
 #include "xac97_l.h"
+#include "pit.h"
 
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
 #define BUTTON_POLL_COUNT 4 // poll rate for buttons
+#define UART_POLL_COUNT 4 // poll rate for buttons
 #define BULLETS_UPDATE_COUNT 3 // refresh rate for bullets
 #define ALIENS_UPDATE_COUNT 70 // refresh rate for aliens
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
@@ -57,6 +59,7 @@ static uint32_t ufoUpdateCounter;
 static uint32_t ufoAppearCounter;
 static uint32_t ufoExplosionCounter;
 static uint32_t tankDeathCounter;
+static uint32_t uartCounter;
 
 // A handle for reading the state of the push buttons
 static XGpio gpPB;
@@ -178,6 +181,12 @@ void updateTankDeathCounter() {
     }
 }
 
+void updateUartPollCounter(){
+    if (--uartCounter == 0) {
+    	uartCounter = UART_POLL_COUNT;
+        setEvent(UART_EVENT);
+    }
+}
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
@@ -192,6 +201,7 @@ void timerInterruptHandler() {
 		updateUfoUpdateCounter();
 		updateUfoExplosionCounter();
 		updateUfoAppearanceCounter();
+		updateUartPollCounter();
 	} else {
         // This counter is updated while events are disabled - it will re-enable events when it expires.
 		updateTankDeathCounter();
@@ -205,8 +215,8 @@ void timerInterruptHandler() {
 void interrupt_handler_dispatcher(void* ptr) {
     int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
     // Check the FIT interrupt first.
-    if (intc_status & XPAR_FIT_TIMER_0_INTERRUPT_MASK) {
-        XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
+    if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
+        XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
         timerInterruptHandler();
     }
     // Check the AC97 (sound chip) interrupt. Queue up the audio event if it did interrupt so that
@@ -226,6 +236,7 @@ void resetCounters() {
     heartbeatCounter = ONE_SECOND_COUNT;
     tankDeathCounter = TANK_DEATH_COUNT;
     ufoUpdateCounter = UFO_UPDATE_COUNT;
+    uartCounter  = UART_POLL_COUNT;
     resetUfoAppearanceCounter();
 }
 
@@ -238,10 +249,11 @@ void timerInit() {
 
     // Initialize interrupts - only have the FIT interrupt
     microblaze_register_handler(interrupt_handler_dispatcher, NULL);
-    XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
+    XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
     XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
     microblaze_enable_interrupts();
-
+	pitInit(PIT_INITIAL_DELAY);
+	pitStart();
     // Need to initialize counters for anything to happen
     resetCounters();
 }
