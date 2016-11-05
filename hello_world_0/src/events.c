@@ -121,20 +121,21 @@ void ufoExplosionEvent() {
 		ufoDisapear();
 	}
 }
+
 //increments a counter that runs anytime there are no events
 void heartbeatEvent() {
-	// TODO: remove the return and uncomment
-	return;
-
-	//	float utilization = 0;
-	//	if (events & HEARTBEAT_EVENT) {
-	//		// "Idle" event - calculate utilization
-	//		clearEvent(HEARTBEAT_EVENT);
-	//		utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
-	//		xil_printf("%d\n\r", (uint32_t) (100 * utilization));
-	//		utilizationCounter = 0;
-	//	}
+	//		float utilization = 0;
+	if (events & HEARTBEAT_EVENT) {
+		// "Idle" event - calculate utilization
+		clearEvent(HEARTBEAT_EVENT);
+		// TODO: remove the return and uncomment
+		return;
+		//			utilization = ((float) utilizationCounter / (float) ZERO_UTILIZATION);
+		//			xil_printf("%d\n\r", (uint32_t) (100 * utilization));
+		//			utilizationCounter = 0;
+	}
 }
+
 //kills the tank and possibly ends game
 void tankDeathEvent() {
 	if (events & TANK_DEATH_EVENT) {
@@ -158,6 +159,7 @@ void ufoAppearEvent() {
 		ufoAppear();
 	}
 }
+
 //plays audion if an audio event has been triggered
 void audioEvent() {
 	if (events & AUDIO_EVENT) {
@@ -171,26 +173,27 @@ void uartEvent() {
 		clearEvent(UART_EVENT);
 
 		static char str[MAX_STRING_SIZE];
-
 		static int i = 0;
 
 		// Get input until they press enter
-
-		//		str[i] = getchar();
-		uint8_t data;// = Xil_In8(XPAR_RS232_UART_1_BASEADDR);
+		uint8_t data;
 		uint32_t bytesReceived = XUartLite_Recv(&uart, &data, 1);
 		if (bytesReceived == 0) {
 			return;
+		} else {
+			str[i] = data;
+			xil_printf("received: %c\n\r", str[i]);
+//			xil_printf("string so far: %s\n\r", str);
 		}
-		str[i] = data;
-//		xil_printf("%c", str[i]);
+
 		if (str[i] == '\r') {
+			int j;
 			i = 0;
 
 			uint32_t delayNumber = 0;
 			uint32_t length = strlen(str);
-			for (i = length - 2; i >= 0; i--) {
-				uint32_t ch = str[i];
+			for (j = length - 2; j >= 0; j--) {
+				uint32_t ch = str[j];
 				if (ch == '\r') {
 					break;
 				}
@@ -199,17 +202,16 @@ void uartEvent() {
 					delayNumber = 0;
 					break;
 				}
-				//			xil_printf("character:%c ", ch);
+//				xil_printf("\n\rcharacter:%c ", ch);
 				ch -= '0';
-				//			xil_printf("number:%d ", ch);
-				delayNumber += ch * power(10, length - i - 2);
-				//			xil_printf("delay number: %d\n\r", delayNumber);
+//				xil_printf("number:%d ", ch);
+				delayNumber += ch * power(10, length - j - 2);
+//				xil_printf("delay number: %d\n\r", delayNumber);
 			}
-			//		xil_printf("\n\ryou typed %s\n\r", str);
-//			xil_printf("%d\n\r", delayNumber);
+//			xil_printf("\n\r You typed %s\n\r", str);
+			xil_printf("\n\r Delay number = %d\n\r", delayNumber);
 			pitSetDelay(delayNumber);
 			memset(str, 0, sizeof(str));
-			XUartLite_ResetFifos(&uart);
 		} else {
 			i++;
 		}
@@ -220,10 +222,12 @@ void uartEvent() {
 int eventsEnabled() {
 	return enabled;
 }
+
 //enables events
 void enableEvents() {
 	enabled = 1;
 }
+
 //disables and clears all events
 void disableAndClearEvents() {
 	enabled = 0;
@@ -235,6 +239,7 @@ void disableAndClearEvents() {
 void eventsLoop() {
 	XUartLite_Initialize(&uart, XPAR_UARTLITE_1_DEVICE_ID);
 	XUartLite_ResetFifos(&uart);
+	pitSetDelay(PIT_INITIAL_DELAY);
 	while (1) {
 		if (events && enabled) {
 			// An event is pending. Check all events round-robin style.

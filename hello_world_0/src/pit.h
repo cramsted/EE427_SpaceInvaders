@@ -10,7 +10,7 @@
 #include <stdint.h>
 
 #define XPAR_PIT_0_BASEADDR 0x7bc00000
-#define PIT_INITIAL_DELAY 1000000
+#define PIT_INITIAL_DELAY 999999
 
 void pitInit(uint32_t delay);
 void pitEnableInterrupt();
