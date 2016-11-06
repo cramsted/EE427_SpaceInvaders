@@ -172,45 +172,45 @@ void uartEvent() {
 	if (events & UART_EVENT) {
 		clearEvent(UART_EVENT);
 
-		static char str[MAX_STRING_SIZE];
+		static char str[MAX_STRING_SIZE];     //character buffer
 		static int i = 0;
 
 		// Get input until they press enter
 		uint8_t data;
-		uint32_t bytesReceived = XUartLite_Recv(&uart, &data, 1);
-		if (bytesReceived == 0) {
+		uint32_t bytesReceived = XUartLite_Recv(&uart, &data, 1); //try to retrieve one char
+		if (bytesReceived == 0) { //check if char was received
 			return;
 		} else {
 			str[i] = data;
 			xil_printf("received: %c\n\r", str[i]);
-//			xil_printf("string so far: %s\n\r", str);
 		}
 
+        //looks for end of the string
 		if (str[i] == '\r') {
 			int j;
 			i = 0;
 
 			uint32_t delayNumber = 0;
-			uint32_t length = strlen(str);
+			uint32_t length = strlen(str); //get length of the char buffer
 			for (j = length - 2; j >= 0; j--) {
 				uint32_t ch = str[j];
-				if (ch == '\r') {
+				if (ch == '\r') {  //looks for the end of the input
 					break;
 				}
+                //check input for numbers
 				if (!isDigit(ch)) {
 					xil_printf("You suck at numb3r5!\n\r");
 					delayNumber = 0;
 					break;
 				}
-//				xil_printf("\n\rcharacter:%c ", ch);
+                //convert the char to a digit of the correct power of ten
 				ch -= '0';
-//				xil_printf("number:%d ", ch);
 				delayNumber += ch * power(10, length - j - 2);
-//				xil_printf("delay number: %d\n\r", delayNumber);
 			}
-//			xil_printf("\n\r You typed %s\n\r", str);
 			xil_printf("\n\r Delay number = %d\n\r", delayNumber);
+            //change the delay
 			pitSetDelay(delayNumber);
+            //reset the char buffer
 			memset(str, 0, sizeof(str));
 		} else {
 			i++;
@@ -277,6 +277,8 @@ static int32_t isDigit(char c) {
 	return 1;
 }
 
+//replication of the math.pow function
+//format is base^exp
 static uint32_t power(uint32_t base, int32_t exp) {
 	uint32_t i;
 	uint32_t result = 1;
