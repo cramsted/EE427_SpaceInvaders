@@ -61,6 +61,7 @@
  PORT axi_ac97_0_SData_Out_pin = axi_ac97_0_SData_Out, DIR = O
  PORT axi_ac97_0_AC97Reset_n_pin = axi_ac97_0_AC97Reset_n, DIR = O
  PORT Push_Buttons_5Bits_TRI_I = Push_Buttons_5Bits_TRI_I, DIR = I, VEC = [0:4]
+ PORT capacitive_buttons_0_CAP_SENSORS_pin = net_capacitive_buttons_0_CAP_SENSORS_pin, DIR = I, VEC = [5:0]
 
 
 BEGIN proc_sys_reset
@@ -389,5 +390,15 @@ BEGIN pit
  BUS_INTERFACE S_AXI = axi4lite_0
  PORT S_AXI_ACLK = clk_100_0000MHzPLL0
  PORT pit_intr = pit_0_pit_intr
+END
+
+BEGIN capacitive_buttons
+ PARAMETER INSTANCE = capacitive_buttons_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_BASEADDR = 0x7ee00000
+ PARAMETER C_HIGHADDR = 0x7ee0ffff
+ BUS_INTERFACE S_AXI = axi4lite_0
+ PORT S_AXI_ACLK = clk_100_0000MHzPLL0
+ PORT CAP_SENSORS = net_capacitive_buttons_0_CAP_SENSORS_pin
 END
 

@@ -1,0 +1,15 @@
+##############################################################################
+## Filename:          C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders/drivers/capacitive_buttons_v1_00_a/data/capacitive_buttons_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Thu Nov 17 20:12:37 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER capacitive_buttons
+
+  OPTION supported_peripherals = (capacitive_buttons);
+  OPTION depends = (common_v1_00_a);
+  OPTION copyfiles = all;
+
+END DRIVER

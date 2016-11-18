@@ -71,11 +71,79 @@ WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
    Please make sure that the directory specified exists.
 WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
    Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
+WARNING:EDK:1687 - Invalid path specified for ModuleSearchPath in XMP file.
+   Please make sure that the directory specified exists.
 
 Checking platform configuration ...
 IPNAME: lmb_v10, INSTANCE: microblaze_0_ilmb - 1 master(s) : 1 slave(s) 
 IPNAME: lmb_v10, INSTANCE: microblaze_0_dlmb - 1 master(s) : 1 slave(s) 
-IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 10 slave(s) 
+IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 11 slave(s) 
 IPNAME: axi_interconnect, INSTANCE: axi4_0 - 3 master(s) : 1 slave(s) 
 
 Checking port drivers...
@@ -129,7 +197,7 @@ WARNING:EDK:4181 - PORT: s2mm_prmry_reset_out_n, CONNECTOR: S2MM_RESET_OUT_N -
 WARNING:EDK:4181 - PORT: M_AXIS_S2MM_ACLK, CONNECTOR: M_AXIS_S2MM_ACLK_int -
    floating connection -
    C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.
-   mhs line 246 
+   mhs line 247 
 
 Performing Clock DRCs...
 

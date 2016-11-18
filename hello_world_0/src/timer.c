@@ -17,6 +17,7 @@
 #include "audio_files/audio.h" // For access to our API for plaing audio
 #include "xac97_l.h"
 #include "pit.h"
+#include "capsense.h"
 
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
@@ -42,6 +43,14 @@
 #define LEFT_BUTTON 0x08
 #define TOP_BUTTON 0x10
 #define BOTTOM_BUTTON 0x04
+
+// Capactive Sensor Bit Masks
+#define RIGHT_CAP 0x01
+#define LEFT_CAP 0x02
+#define MIDDLE_CAP 0x04
+#define UP_CAP 0x08
+#define DOWN_CAP 0x10
+#define UNUSED_CAP 0x20
 
 // initializes the following counters
 void resetCounters();
@@ -93,6 +102,23 @@ void updateButtonCounter() {
         }
         if (buttons & BOTTOM_BUTTON) {
             decreaseVolume();
+        }
+
+        uint32_t capButtons = capsenseRead();
+        if (capButtons & RIGHT_CAP) {
+        	setEvent(RIGHT_BTN_EVENT);
+        }
+        if (capButtons & LEFT_CAP) {
+        	setEvent(LEFT_BTN_EVENT);
+        }
+        if (capButtons & MIDDLE_CAP) {
+        	setEvent(MIDDLE_BTN_EVENT);
+        }
+        if (capButtons & UP_CAP) {
+        	increaseVolume();
+        }
+        if (capButtons & DOWN_CAP) {
+        	decreaseVolume();
         }
     }
 }

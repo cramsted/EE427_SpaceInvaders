@@ -26,6 +26,15 @@ NET Push_Buttons_5Bits_TRI_I[4] LOC = "F5"  |  IOSTANDARD = "LVCMOS18";
 # additional constraints
 #
 
+# Capacitive Sensor Buttons
+NET capacitive_buttons_0_CAP_SENSORS_pin[0] LOC = "U16"  |  IOSTANDARD = "LVCMOS33"; # IO1
+NET capacitive_buttons_0_CAP_SENSORS_pin[1] LOC = "U15"  |  IOSTANDARD = "LVCMOS33"; # IO2
+NET capacitive_buttons_0_CAP_SENSORS_pin[2] LOC = "U13"  |  IOSTANDARD = "LVCMOS33"; # IO3
+NET capacitive_buttons_0_CAP_SENSORS_pin[3] LOC = "M11"  |  IOSTANDARD = "LVCMOS33"; # IO4
+NET capacitive_buttons_0_CAP_SENSORS_pin[4] LOC = "R11"  |  IOSTANDARD = "LVCMOS33"; # IO5
+NET capacitive_buttons_0_CAP_SENSORS_pin[5] LOC = "T12"  |  IOSTANDARD = "LVCMOS33"; # IO6
+
+
 ################AXI_AC97 CONSTRAINTS########################
 Net axi_ac97_0_Bit_Clk_pin LOC = L13 | IOSTANDARD = LVCMOS33;
 Net axi_ac97_0_SData_In_pin LOC = T18 | IOSTANDARD = LVCMOS33;

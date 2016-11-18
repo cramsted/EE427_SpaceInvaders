@@ -1067,7 +1067,7 @@ pit_0/USER_LOGIC_I/state_reg[1]_PWR_53_o_Mux_87_o|         |         |    2.219|
 
 
 Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 7.11 secs
+Total CPU time to Xst completion: 7.36 secs
  
 --> 
 
