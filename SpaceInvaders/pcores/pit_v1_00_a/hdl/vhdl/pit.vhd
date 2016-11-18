@@ -35,7 +35,7 @@
 -- Filename:          pit.vhd
 -- Version:           1.00.a
 -- Description:       Top level design, instantiates library components and user logic.
--- Date:              Thu Nov 03 20:11:49 2016 (by Create and Import Peripheral Wizard)
+-- Date:              Thu Nov 03 20:07:26 2016 (by Create and Import Peripheral Wizard)
 -- VHDL Standard:     VHDL'93
 ------------------------------------------------------------------------------
 -- Naming Conventions:
@@ -138,7 +138,7 @@ entity pit is
   (
     -- ADD USER PORTS BELOW THIS LINE ------------------
     --USER ports added here
-	pit_intr : out std_logic;
+    pit_intr : out std_logic;       --pit interrupt signal
     -- ADD USER PORTS ABOVE THIS LINE ------------------
 
     -- DO NOT EDIT BELOW THIS LINE ---------------------
@@ -303,7 +303,7 @@ begin
     (
       -- MAP USER PORTS BELOW THIS LINE ------------------
       --USER ports mapped here
-	  pit_intr => pit_intr,
+      pit_intr => pit_intr,        --pit interrupt port
       -- MAP USER PORTS ABOVE THIS LINE ------------------
 
       Bus2IP_Clk                     => ipif_Bus2IP_Clk,

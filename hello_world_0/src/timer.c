@@ -16,8 +16,8 @@
 #include "events.h"
 #include "audio_files/audio.h" // For access to our API for plaing audio
 #include "xac97_l.h"
-#include "pit.h"
 #include "capsense.h"
+#include "pit.h"                //for access to the PIT timer API
 
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
@@ -207,6 +207,7 @@ void updateTankDeathCounter() {
     }
 }
 
+//sets the event that causes the uart buffer to be polled.
 void updateUartPollCounter(){
     if (--uartCounter == 0) {
     	uartCounter = UART_POLL_COUNT;

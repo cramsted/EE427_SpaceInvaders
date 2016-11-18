@@ -26,7 +26,7 @@
 -- Filename:          user_logic.vhd
 -- Version:           1.00.a
 -- Description:       User logic.
--- Date:              Thu Nov 03 20:11:49 2016 (by Create and Import Peripheral Wizard)
+-- Date:              Thu Nov 03 20:07:26 2016 (by Create and Import Peripheral Wizard)
 -- VHDL Standard:     VHDL'93
 ------------------------------------------------------------------------------
 -- Naming Conventions:
@@ -98,7 +98,7 @@ entity user_logic is
   (
     -- ADD USER PORTS BELOW THIS LINE ------------------
     --USER ports added here
-	 pit_intr : out std_logic;
+    pit_intr : out std_logic;   -- pit interrupt signal
     -- ADD USER PORTS ABOVE THIS LINE ------------------
 
     -- DO NOT EDIT BELOW THIS LINE ---------------------
@@ -131,12 +131,18 @@ end entity user_logic;
 architecture IMP of user_logic is
 
   --USER signal declarations added here, as needed for user logic
-signal count : unsigned (31 downto 0); 
-	signal delay_reg : std_logic_vector (31 downto 0);
-	signal ctrl_reg : STD_LOGIC_VECTOR (31 downto 0); 
-	type states is (load,run,waiting,init); 
-	signal state_reg : states := init; 
-	signal intr : std_logic := '0'; 
+  signal count : unsigned (31 downto 0);                   --register that contains the counter
+  signal delay_reg : std_logic_vector (31 downto 0);       --register for the delay value of the register
+  signal ctrl_reg : STD_LOGIC_VECTOR (31 downto 0);        --register with the control bits for the pit 
+  type states is (load,run,waiting,init);                  --states for the counter
+                                                           --load is for when the delay value is being loaded in
+                                                           --run is when the counter is counting down
+                                                           --waiting is when the counter has finished counting down but is not able to reload
+                                                           --init is a dummy state to ensure that the interrupt fires for a full clock cycle
+  signal state_reg : states := init;                       --register containing the current state
+  signal intr : std_logic := '0';                          --interrupt signal that acts as a buffer to the interrupt 
+
+
   ------------------------------------------
   -- Signals for user logic slave model s/w accessible register example
   ------------------------------------------
@@ -151,73 +157,75 @@ signal count : unsigned (31 downto 0);
 begin
 
   --USER logic implementation added here
-counter: process (Bus2IP_Clk, Bus2IP_Resetn)
-		begin
-			-- Default values
-			pit_intr <= intr;
-			delay_reg <= slv_reg0;
-			ctrl_reg <= slv_reg1;
-		
-			-- Reset? (low asserted)
-			if Bus2IP_Resetn = '0' then 
-				count <= (others => '1'); 
-				delay_reg <= (others => '0'); 
-				ctrl_reg <= (others => '0');
-				intr <= '0'; 
-				state_reg <= init;
-			
-			-- No reset, do normal counter execution.
-			else
-				case (state_reg) is
-					
-					-- An extra clock cycle for delay_reg to get loaded
-					when init =>
-							state_reg <= load; 
+  counter: process (Bus2IP_Clk, Bus2IP_Resetn)
+    begin
+      -- Default values
+      pit_intr <= intr;        --interrupt bit connected to external interrupt signal
+      delay_reg <= slv_reg0;   --delay register connected to inout bus
+      ctrl_reg <= slv_reg1;    --control register connected to input bus
+    
+      -- Checks for reset (low asserted)
+      if Bus2IP_Resetn = '0' then 
+        --default values
+        count <= (others => '1'); 
+        delay_reg <= (others => '0'); 
+        ctrl_reg <= (others => '0');
+        intr <= '0'; 
+        state_reg <= init;
+      
+      -- No reset, do normal counter execution.
+      else
+        case (state_reg) is
+          
+          -- An extra clock cycle for delay_reg to get loaded
+          when init =>
+              state_reg <= load; 
 
-					-- Load the counter value from the delay register on the first cycle.
-					when load =>
-						if (Bus2IP_Resetn = '1') then 
-							count <= unsigned(delay_reg); 
-							state_reg <= run;
-						end if;
-			
-					-- Update the counter: decrement when nonzero; when zero, go back to load.
-					when run =>
-						if rising_edge(Bus2IP_Clk) then
-							intr <= '0'; 
-							-- If counter is enabled
-							if ctrl_reg(0) = '1' then
-								-- If the counter needs to be reset (counter is 0)
-								if (count = 0) then
-									if ctrl_reg(2) = '1' then
-										state_reg <= load;
-									else
-										state_reg <= waiting; 
-									end if; 
-									-- Fire the interrupt if interrupts are enabled
-									if ctrl_reg(1) = '1' then
-										intr <= '1';
-									end if;
-								-- Otherwise, decrement the counter
-								else
-									count  <= count - 1; 
-								end if;
-							-- Counter is not enabled; keep it at the same value
-							else
-								count <= count; 
-							end if;
-						end if;
-					
-					-- Wait for reload bit to go high
-					when waiting =>
-						intr <= '0';
-						if ctrl_reg(2) = '1' then
-							state_reg <= load; 
-						end if; 
-						
-				end case; 
-			end if; 
-	end process counter; 
+          -- Load the counter value from the delay register on the first cycle.
+          when load =>
+            if (Bus2IP_Resetn = '1') then 
+              count <= unsigned(delay_reg); 
+              state_reg <= run;
+            end if;
+      
+          -- Update the counter: decrement when nonzero; when zero, go back to load.
+          when run =>
+            if rising_edge(Bus2IP_Clk) then
+              intr <= '0'; 
+              -- If counter is enabled
+              if ctrl_reg(0) = '1' then
+                -- If the counter needs to be reset (counter is 0)
+                if (count = 0) then
+                  if ctrl_reg(2) = '1' then
+                    state_reg <= load;
+                  else
+                    state_reg <= waiting; 
+                  end if; 
+                  -- Fire the interrupt if interrupts are enabled
+                  if ctrl_reg(1) = '1' then
+                    intr <= '1';
+                  end if;
+                -- Otherwise, decrement the counter
+                else
+                  count  <= count - 1; 
+                end if;
+              -- Counter is not enabled; keep it at the same value
+              else
+                count <= count; 
+              end if;
+            end if;
+          
+          -- Wait for reload bit to go high
+          when waiting =>
+            intr <= '0';
+            if ctrl_reg(2) = '1' then
+              state_reg <= load; 
+            end if; 
+            
+        end case; 
+      end if; 
+  end process counter; 
+
 
   ------------------------------------------
   -- Example code to read/write user logic slave model s/w accessible registers
