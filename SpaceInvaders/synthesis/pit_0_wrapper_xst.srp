@@ -452,12 +452,12 @@ Elaborating entity <pselect_f> (architecture <imp>) with generics from library <
 INFO:HDLCompiler:679 - "C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_lite_ipif_v1_01_a/hdl/vhdl/slave_attachment.vhd" Line 412. Case statement is complete. others clause is never selected
 
 Elaborating entity <user_logic> (architecture <IMP>) with generics from library <pit_v1_00_a>.
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 157: intr should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 158: slv_reg0 should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 159: slv_reg1 should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 171: state_reg should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 180: delay_reg should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 214: ctrl_reg should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 163: intr should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 164: slv_reg0 should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 165: slv_reg1 should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 178: state_reg should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 187: delay_reg should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/superman/Desktop/cramshall/EE427_SpaceInvaders/SpaceInvaders/pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd" Line 221: ctrl_reg should be on the sensitivity list of the process
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -604,9 +604,9 @@ WARNING:Xst:37 - Detected unknown constraint/property "sigis". This constraint/p
     Found 32-bit register for signal <slv_reg0>.
     Found 32-bit register for signal <slv_reg1>.
     Found 1-bit register for signal <GND_18_o_Bus2IP_Clk_DFF_46_q>.
-    Found 32-bit subtractor for signal <GND_18_o_GND_18_o_sub_5_OUT<31:0>> created at line 203.
-    Found 1-bit 4-to-1 multiplexer for signal <state_reg[1]_PWR_53_o_Mux_87_o> created at line 171.
-    Found 32-bit 4-to-1 multiplexer for signal <slv_ip2bus_data> created at line 278.
+    Found 32-bit subtractor for signal <GND_18_o_GND_18_o_sub_5_OUT<31:0>> created at line 210.
+    Found 1-bit 4-to-1 multiplexer for signal <state_reg[1]_PWR_53_o_Mux_87_o> created at line 178.
+    Found 32-bit 4-to-1 multiplexer for signal <slv_ip2bus_data> created at line 286.
 WARNING:Xst:737 - Found 1-bit latch for signal <count<30>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <count<29>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <count<28>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -1066,8 +1066,8 @@ pit_0/USER_LOGIC_I/state_reg[1]_PWR_53_o_Mux_87_o|         |         |    2.219|
 =========================================================================
 
 
-Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 7.36 secs
+Total REAL time to Xst completion: 8.00 secs
+Total CPU time to Xst completion: 7.14 secs
  
 --> 
 

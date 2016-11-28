@@ -375,6 +375,9 @@ line 377 - Copying cache implementation netlist
 IPNAME:pit INSTANCE:pit_0 -
 C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
 line 385 - Copying cache implementation netlist
+IPNAME:capacitive_buttons INSTANCE:capacitive_buttons_0 -
+C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\system.mhs
+line 395 - Copying cache implementation netlist
 
 Elaborating instances ...
 IPNAME:bram_block INSTANCE:microblaze_0_bram_block -
@@ -389,10 +392,10 @@ ClkGen elaborate status: PASSED
 Writing HDL for elaborated instances ...
 
 Inserting wrapper level ...
-Completion time: 0.00 seconds
+Completion time: 1.00 seconds
 
 Constructing platform-level connectivity ...
-Completion time: 1.00 seconds
+Completion time: 0.00 seconds
 
 Writing (top-level) BMM ...
 
@@ -428,4 +431,4 @@ INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
 
 Rebuilding cache ...
 
-Total run time: 41.00 seconds
+Total run time: 43.00 seconds
