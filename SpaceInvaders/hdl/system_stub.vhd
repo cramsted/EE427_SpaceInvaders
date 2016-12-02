@@ -59,7 +59,8 @@ entity system_stub is
     axi_ac97_0_SData_Out_pin : out std_logic;
     axi_ac97_0_AC97Reset_n_pin : out std_logic;
     Push_Buttons_5Bits_TRI_I : in std_logic_vector(0 to 4);
-    capacitive_buttons_0_CAP_SENSORS_pin : in std_logic_vector(5 downto 0)
+    capacitive_buttons_0_CAP_SENSORS_pin : in std_logic_vector(5 downto 0);
+    switches_GPIO_IO_I_pin : in std_logic_vector(7 downto 0)
   );
 end system_stub;
 
@@ -117,7 +118,8 @@ architecture STRUCTURE of system_stub is
       axi_ac97_0_SData_Out_pin : out std_logic;
       axi_ac97_0_AC97Reset_n_pin : out std_logic;
       Push_Buttons_5Bits_TRI_I : in std_logic_vector(0 to 4);
-      capacitive_buttons_0_CAP_SENSORS_pin : in std_logic_vector(5 downto 0)
+      capacitive_buttons_0_CAP_SENSORS_pin : in std_logic_vector(5 downto 0);
+      switches_GPIO_IO_I_pin : in std_logic_vector(7 downto 0)
     );
   end component;
 
@@ -178,7 +180,8 @@ begin
       axi_ac97_0_SData_Out_pin => axi_ac97_0_SData_Out_pin,
       axi_ac97_0_AC97Reset_n_pin => axi_ac97_0_AC97Reset_n_pin,
       Push_Buttons_5Bits_TRI_I => Push_Buttons_5Bits_TRI_I,
-      capacitive_buttons_0_CAP_SENSORS_pin => capacitive_buttons_0_CAP_SENSORS_pin
+      capacitive_buttons_0_CAP_SENSORS_pin => capacitive_buttons_0_CAP_SENSORS_pin,
+      switches_GPIO_IO_I_pin => switches_GPIO_IO_I_pin
     );
 
 end architecture STRUCTURE;

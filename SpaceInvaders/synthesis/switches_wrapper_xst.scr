@@ -3,10 +3,10 @@ run
 -netlist_hierarchy as_optimized
 -opt_level 1
 -p xc6slx45csg324-3
--top microblaze_0_dlmb_wrapper
+-top switches_wrapper
 -ifmt MIXED
--ifn microblaze_0_dlmb_wrapper_xst.prj
--ofn ../implementation/microblaze_0_dlmb_wrapper.ngc
+-ifn switches_wrapper_xst.prj
+-ofn ../implementation/switches_wrapper.ngc
 -hierarchy_separator /
 -iobuf NO
 -sd {../implementation}

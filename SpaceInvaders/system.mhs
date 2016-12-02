@@ -62,6 +62,7 @@
  PORT axi_ac97_0_AC97Reset_n_pin = axi_ac97_0_AC97Reset_n, DIR = O
  PORT Push_Buttons_5Bits_TRI_I = Push_Buttons_5Bits_TRI_I, DIR = I, VEC = [0:4]
  PORT capacitive_buttons_0_CAP_SENSORS_pin = net_capacitive_buttons_0_CAP_SENSORS_pin, DIR = I, VEC = [5:0]
+ PORT switches_GPIO_IO_I_pin = net_switches_GPIO_IO_I_pin, DIR = I, VEC = [7:0]
 
 
 BEGIN proc_sys_reset
@@ -360,7 +361,7 @@ BEGIN axi_intc
  PARAMETER C_HIGHADDR = 0x4120ffff
  BUS_INTERFACE S_AXI = axi4lite_0
  PORT S_AXI_ACLK = clk_100_0000MHzPLL0
- PORT Intr = axi_ac97_0_Interrupt & axi_timer_0_Interrupt & Push_Buttons_5Bits_IP2INTC_Irpt & fit_timer_0_Interrupt & pit_0_pit_intr
+ PORT Intr = axi_ac97_0_Interrupt & axi_timer_0_Interrupt & Push_Buttons_5Bits_IP2INTC_Irpt & fit_timer_0_Interrupt & pit_0_pit_intr & switches_IP2INTC_Irpt
  PORT Irq = axi_intc_0_Irq
 END
 
@@ -400,5 +401,18 @@ BEGIN capacitive_buttons
  BUS_INTERFACE S_AXI = axi4lite_0
  PORT S_AXI_ACLK = clk_100_0000MHzPLL0
  PORT CAP_SENSORS = net_capacitive_buttons_0_CAP_SENSORS_pin
+END
+
+BEGIN axi_gpio
+ PARAMETER INSTANCE = switches
+ PARAMETER HW_VER = 1.01.b
+ PARAMETER C_INTERRUPT_PRESENT = 1
+ PARAMETER C_GPIO_WIDTH = 8
+ PARAMETER C_BASEADDR = 0x40040000
+ PARAMETER C_HIGHADDR = 0x4004ffff
+ BUS_INTERFACE S_AXI = axi4lite_0
+ PORT S_AXI_ACLK = clk_100_0000MHzPLL0
+ PORT IP2INTC_Irpt = switches_IP2INTC_Irpt
+ PORT GPIO_IO_I = net_switches_GPIO_IO_I_pin
 END
 

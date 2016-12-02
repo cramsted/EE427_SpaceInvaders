@@ -167,7 +167,7 @@ begin
       -- Checks for reset (low asserted)
       if Bus2IP_Resetn = '0' then 
         --default values
-        count <= (others => '1'); 
+        count <= (others => '0'); 
         delay_reg <= (others => '0'); 
         ctrl_reg <= (others => '0');
         intr <= '0'; 
