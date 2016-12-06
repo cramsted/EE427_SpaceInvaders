@@ -16,7 +16,6 @@
 #include "ufo.h"        //for access to ufo initializer
 #include "tank.h"       //for access to tank initializer
 #include "text.h"       //for access to text related initializers
-#include "screen_capture.h"	//for access to screen capture related initializers
 #include <stdint.h>
 
 //function prototypes
@@ -33,8 +32,17 @@ static XAxiVdma videoDMAController;
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
 uint32_t * framePointer0 = (uint32_t *) FRAME_BUFFER_0_ADDR;
-uint32_t * screenShotPointer = ((uint32_t *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH * SCREEN_HEIGHT;
+uint32_t * framePointer1 = ((uint32_t *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH * SCREEN_HEIGHT;
 
+// which frame buffer to draw from
+// 0 is framPointer0, 1 is framePointer1
+uint8_t frame = 0;
+
+//changes which frame is in use.
+//Valid inputs are 0(normal) and 1(screen shot)
+void changeFrame(uint8_t x){
+	frame = x;
+}
 // init alien positions and draw them
 // init tank position and lives and draw it
 // init bunker positions and erosion and draw them
@@ -56,10 +64,8 @@ void videoInit() {
 	drawAliens(0, 0); //draws aliens block
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
 	drawLives(); //draws the tank shaped lives
-	//	render(); //needed only for changing the index of the frame buffer
+	render(); //needed only for changing the index of the frame buffer
 
-	//enables the screen capture hardware
-	void initScreenCapture();
 }
 
 //draws a horizonatal green line accross the bottom of the screen
@@ -75,9 +81,19 @@ void drawGround() {
 //switches beteen two different frame buffers
 //not currently in use
 void render() {
-	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, 0, //the 0 is the frame index
+	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, frame,
 			XAXIVDMA_READ)) {
 		xil_printf("vdma parking failed\n\r");
+	}
+}
+
+void screen_shot(){
+	int32_t row, col;
+	for(row = 0; row < SCREEN_HEIGHT; row++){
+		for(col = 0; col < SCREEN_WIDTH; col++){
+			uint32_t *temp = &framePointer0[row * SCREEN_WIDTH + col];
+			 &framePointer1[row * SCREEN_WIDTH + col] = *temp;
+		}
 	}
 }
 
@@ -165,7 +181,7 @@ void initVideoDMAController() {
 	// is where you will write your video data. The vdma IP/driver then streams it to the HDMI
 	// IP.
 	myFrameBuffer.FrameStoreStartAddr[0] = FRAME_BUFFER_0_ADDR;
-	//	myFrameBuffer.FrameStoreStartAddr[1] = FRAME_BUFFER_0_ADDR + 4 * SCREEN_WIDTH * SCREEN_HEIGHT;
+	myFrameBuffer.FrameStoreStartAddr[1] = FRAME_BUFFER_0_ADDR + 4 * SCREEN_WIDTH * SCREEN_HEIGHT;
 
 	if (XST_FAILURE == XAxiVdma_DmaSetBufferAddr(&videoDMAController,
 			XAXIVDMA_READ, myFrameBuffer.FrameStoreStartAddr)) {

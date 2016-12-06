@@ -228,7 +228,7 @@ uint8_t SW_6_d1 = 0;
 uint8_t SW_5_d1 = 0;
 
 //Polls the switches.
-//Only sends events if a switch has moved from low to high
+//Only sends events if a switch has changed value
 void updateSwitchPollCounter(){
 	if(--switchCounter == 0){
 		//resets switch poll counter
@@ -240,11 +240,21 @@ void updateSwitchPollCounter(){
 		//checks if the switches have moved from low to high
 		if((switches & SW_6) && !(SW_6_d1)){
 			SW_6_d1 = switches & SW_6;	//saves the last value of the switch
-			setEvent(SW_6_EVENT);	//set the event
+			setEvent(SW_6_ON_EVENT);	//set the event
 		}
-		if(switches & SW_5 && !(SW_5_d1)){
+		if((switches & SW_5) && !(SW_5_d1)){
 			SW_5_d1 = switches & SW_5;	//saves the last value of the switch
-			setEvent(SW_5_EVENT);
+			setEvent(SW_5_ON_EVENT);
+		}
+
+		//checks if the switches have moved from high to low
+		if(!(switches & SW_6) && (SW_6_d1)){
+			SW_6_d1 = switches & SW_6;	//saves the last value of the switch
+			setEvent(SW_6_OFF_EVENT);	//set the event
+		}
+		if(!(switches & SW_5) && (SW_5_d1)){
+			SW_5_d1 = switches & SW_5;	//saves the last value of the switch
+			setEvent(SW_5_OFF_EVENT);
 		}
 	}
 }

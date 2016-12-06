@@ -22,5 +22,7 @@ void videoInit();
 void render();
 //for drawing sprites to the screen
 void editFrameBuffer(Sprite *sp, Position *p);
+//changes which frame is in use.
+void changeFrame(uint8_t x);
 
 #endif /* RENDER_H_ */

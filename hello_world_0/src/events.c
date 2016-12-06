@@ -12,19 +12,23 @@
 #include "text.h"           //for access to ufo explosion score thing
 #include "bunkers.h"        //for access to bunker functions
 #include "ufo.h"            //for access to ufo functions
-#include "screen_capture.h" //for access to screen capture functions
 #include "audio_files/audio.h"  //for access to the sound event setters and clearing fucntions
 #include "pit.h"
 #include <string.h>
 #include "xparameters.h"
 #include "xil_io.h"
 #include "xuartlite.h"
+#include "render.h"
 
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)
 // this ignores the overhead of the interrupts
 #define ZERO_UTILIZATION 5256055 // 4544399
 #define MAX_STRING_SIZE 80
+
+//values for turning on/off the screen shot frame buffer
+#define SCREEN_SHOT_ON 1
+#define SCREEN_SHOT_OFF 0
 
 // Holds all pending events, where each event is a different bit
 uint32_t events = 0;
@@ -219,20 +223,34 @@ void uartEvent() {
 	}
 }
 
-// event on switch 6
-void switch_6_Event(){
-	if (events & SW_6_EVENT){
-		clearEvent(SW_6_EVENT);
+// switch 6 has been turned on
+void switch_6_on_Event(){
+	if (events & SW_6_ON_EVENT){
+		clearEvent(SW_6_ON_EVENT);
 	}
 }
 
-// event on switch 5
-void switch_5_Event(){
-	if (events & SW_5_EVENT){
-		clearEvent(SW_5_EVENT);
+// switch 6 has been turned off
+void switch_6_off_Event(){
+	if (events & SW_6_OFF_EVENT){
+		clearEvent(SW_6_OFF_EVENT);
+	}
+}
+// switch 5 has been turned on
+void switch_5_on_Event(){
+	if (events & SW_5_ON_EVENT){
+		clearEvent(SW_5_ON_EVENT);
+		changeFrame(SCREEN_SHOT_ON);
 	}
 }
 
+// switch 5 has been turned off
+void switch_5_off_Event(){
+	if (events & SW_5_OFF_EVENT){
+		clearEvent(SW_5_OFF_EVENT);
+		changeFrame(SCREEN_SHOT_OFF);
+	}
+}
 //returns 1 if events are enabled, 0 otherwise
 int eventsEnabled() {
 	return enabled;
@@ -272,8 +290,10 @@ void eventsLoop() {
 			heartbeatEvent();
 			audioEvent();
 			uartEvent();
-			switch_6_Event();
-			switch_5_Event();
+			switch_6_on_Event();
+			switch_6_off_Event();
+			switch_5_on_Event();
+			switch_5_off_Event();
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization
