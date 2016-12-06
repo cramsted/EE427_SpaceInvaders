@@ -12,6 +12,7 @@
 #include "text.h"           //for access to ufo explosion score thing
 #include "bunkers.h"        //for access to bunker functions
 #include "ufo.h"            //for access to ufo functions
+#include "screen_capture.h" //for access to screen capture functions
 #include "audio_files/audio.h"  //for access to the sound event setters and clearing fucntions
 #include "pit.h"
 #include <string.h>
@@ -218,6 +219,20 @@ void uartEvent() {
 	}
 }
 
+// event on switch 6
+void switch_6_Event(){
+	if (events & SW_6_EVENT){
+		clearEvent(SW_6_EVENT);
+	}
+}
+
+// event on switch 5
+void switch_5_Event(){
+	if (events & SW_5_EVENT){
+		clearEvent(SW_5_EVENT);
+	}
+}
+
 //returns 1 if events are enabled, 0 otherwise
 int eventsEnabled() {
 	return enabled;
@@ -257,6 +272,8 @@ void eventsLoop() {
 			heartbeatEvent();
 			audioEvent();
 			uartEvent();
+			switch_6_Event();
+			switch_5_Event();
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization

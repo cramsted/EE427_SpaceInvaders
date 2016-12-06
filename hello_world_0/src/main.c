@@ -38,9 +38,9 @@ int main() {
     videoInit(); //initializes the screen to its starting point
 
     // short delay before things get going
-//    volatile int delay = START_GAME_DELAY;
-//    while (--delay)
-//        ;
+    volatile int delay = START_GAME_DELAY;
+    while (--delay)
+        ;
 
     //initializes buttons, the FIT timer, and interrupts
     // Do this AFTER the delay so there's time to draw the screen

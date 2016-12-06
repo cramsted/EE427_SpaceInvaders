@@ -16,6 +16,7 @@
 #include "ufo.h"        //for access to ufo initializer
 #include "tank.h"       //for access to tank initializer
 #include "text.h"       //for access to text related initializers
+#include "screen_capture.h"	//for access to screen capture related initializers
 #include <stdint.h>
 
 //function prototypes
@@ -27,13 +28,12 @@ void drawGround();
 
 static XAxiVdma videoDMAController;
 
+
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
 uint32_t * framePointer0 = (uint32_t *) FRAME_BUFFER_0_ADDR;
-//	unsigned int32_t * framePointer1 = ((unsigned int32_t *) FRAME_BUFFER_0_ADDR)
-//		+ SCREEN_WIDTH
-//			* SCREEN_HEIGHT;
+uint32_t * screenShotPointer = ((uint32_t *) FRAME_BUFFER_0_ADDR) + SCREEN_WIDTH * SCREEN_HEIGHT;
 
 // init alien positions and draw them
 // init tank position and lives and draw it
@@ -57,6 +57,9 @@ void videoInit() {
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
 	drawLives(); //draws the tank shaped lives
 	//	render(); //needed only for changing the index of the frame buffer
+
+	//enables the screen capture hardware
+	void initScreenCapture();
 }
 
 //draws a horizonatal green line accross the bottom of the screen

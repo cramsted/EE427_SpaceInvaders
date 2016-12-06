@@ -28,6 +28,7 @@
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
 #define ALIEN_EXPLOSION_COUNT 15 // time until an alien explosion sprite gets erased
 #define TANK_DEATH_COUNT 150
+#define SWITCH_POLL_COUNT 5
 
 // UFO appears about every 25-30 seconds
 #define UFO_APPEAR_COUNT_MINIMUM 1500
@@ -52,6 +53,10 @@
 #define DOWN_CAP 0x10
 #define UNUSED_CAP 0x20
 
+// Switch bit mask
+#define SW_6 0x40
+#define SW_5 0x20
+
 // initializes the following counters
 void resetCounters();
 
@@ -69,9 +74,11 @@ static uint32_t ufoAppearCounter;
 static uint32_t ufoExplosionCounter;
 static uint32_t tankDeathCounter;
 static uint32_t uartCounter;
+static uint32_t switchCounter;
 
 // A handle for reading the state of the push buttons
 static XGpio gpPB;
+static XGpio gpSW;
 
 // The following update<counterName> functions all do similar work:
 // they decrement a counter; when the counter expires,
@@ -103,7 +110,7 @@ void updateButtonCounter() {
         if (buttons & BOTTOM_BUTTON) {
             decreaseVolume();
         }
-
+        //for use with the capacitive touch buttons
         uint32_t capButtons = capsenseRead();
         if (capButtons & RIGHT_CAP) {
         	setEvent(RIGHT_BTN_EVENT);
@@ -214,6 +221,33 @@ void updateUartPollCounter(){
         setEvent(UART_EVENT);
     }
 }
+
+// last read values of the switches
+// used to check for changes in value
+uint8_t SW_6_d1 = 0;
+uint8_t SW_5_d1 = 0;
+
+//Polls the switches.
+//Only sends events if a switch has moved from low to high
+void updateSwitchPollCounter(){
+	if(--switchCounter == 0){
+		//resets switch poll counter
+		switchCounter = SWITCH_POLL_COUNT;
+		//reads the switch values
+		uint32_t switches = XGpio_DiscreteRead(&gpSW, 1);
+		xil_printf("switch vals: %x\r\n", switches);
+
+		//checks if the switches have moved from low to high
+		if((switches & SW_6) && !(SW_6_d1)){
+			SW_6_d1 = switches & SW_6;	//saves the last value of the switch
+			setEvent(SW_6_EVENT);	//set the event
+		}
+		if(switches & SW_5 && !(SW_5_d1)){
+			SW_5_d1 = switches & SW_5;	//saves the last value of the switch
+			setEvent(SW_5_EVENT);
+		}
+	}
+}
 // This is invoked in response to a timer interrupt every 10 ms.
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
@@ -229,6 +263,7 @@ void timerInterruptHandler() {
 		updateUfoExplosionCounter();
 		updateUfoAppearanceCounter();
 		updateUartPollCounter();
+		updateSwitchPollCounter();
 	} else {
         // This counter is updated while events are disabled - it will re-enable events when it expires.
 		updateTankDeathCounter();
@@ -252,6 +287,12 @@ void interrupt_handler_dispatcher(void* ptr) {
         XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
         setEvent(AUDIO_EVENT);
     }
+    //not working for some reason....
+//    if (intc_status & XPAR_SWITCHES_IP2INTC_IRPT_MASK) {
+//    	xil_printf("switch interrupt");
+//    	XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_SWITCHES_IP2INTC_IRPT_MASK);
+//    	setEvent(SWITCH_EVENT);
+//    }
 }
 
 // Resets all counters that are updated by the FIT ISR handler
@@ -264,15 +305,20 @@ void resetCounters() {
     tankDeathCounter = TANK_DEATH_COUNT;
     ufoUpdateCounter = UFO_UPDATE_COUNT;
     uartCounter  = UART_POLL_COUNT;
+    switchCounter = SWITCH_POLL_COUNT;
     resetUfoAppearanceCounter();
 }
 
 void timerInit() {
     // Initialize the GPIO peripherals.
-    int32_t success;
-    success = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
+    int32_t buttons;
+    buttons = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
     // Set the push button peripheral to be inputs.
     XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
+    int32_t switches;
+	switches = XGpio_Initialize(&gpSW, XPAR_SWITCHES_DEVICE_ID);
+	// Set the push button peripheral to be inputs.
+	XGpio_SetDataDirection(&gpSW, 1, 0x0000001F);
 
     // Initialize interrupts - only have the FIT interrupt
     microblaze_register_handler(interrupt_handler_dispatcher, NULL);
