@@ -39,5 +39,6 @@ void enableEvents();
 void disableAndClearEvents();
 //returns 1 if events are enabled, 0 otherwise
 int eventsEnabled();
-
+//returns if the system is paused due to a screen shot being taken
+int screenShotEnabled();
 #endif /* EVENTS_H_ */

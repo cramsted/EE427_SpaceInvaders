@@ -18,7 +18,6 @@
 #include "xac97_l.h"
 #include "capsense.h"
 #include "pit.h"                //for access to the PIT timer API
-
 // Timing/clock constants - multiply by 10 to get time in milliseconds
 #define ONE_SECOND_COUNT 100 // timer ticks in one second
 #define BUTTON_POLL_COUNT 4 // poll rate for buttons
@@ -91,135 +90,135 @@ static XGpio gpSW;
 // and set button events for whichever buttons were pressed
 // The buttons make the tank move and make the tank fire
 void updateButtonCounter() {
-    if (--buttonCounter == 0) {
-        buttonCounter = BUTTON_POLL_COUNT;
-        // Read the buttons and queue the appropriate events
-        uint32_t buttons = XGpio_DiscreteRead(&gpPB, 1);
-        if (buttons & RIGHT_BUTTON) {
-            setEvent(RIGHT_BTN_EVENT);
-        }
-        if (buttons & MIDDLE_BUTTON) {
-            setEvent(MIDDLE_BTN_EVENT);
-        }
-        if (buttons & LEFT_BUTTON) {
-            setEvent(LEFT_BTN_EVENT);
-        }
-        if (buttons & TOP_BUTTON) {
-            increaseVolume();
-        }
-        if (buttons & BOTTOM_BUTTON) {
-            decreaseVolume();
-        }
-        //for use with the capacitive touch buttons
-        uint32_t capButtons = capsenseRead();
-        if (capButtons & RIGHT_CAP) {
-        	setEvent(RIGHT_BTN_EVENT);
-        }
-        if (capButtons & LEFT_CAP) {
-        	setEvent(LEFT_BTN_EVENT);
-        }
-        if (capButtons & MIDDLE_CAP) {
-        	setEvent(MIDDLE_BTN_EVENT);
-        }
-        if (capButtons & UP_CAP) {
-        	increaseVolume();
-        }
-        if (capButtons & DOWN_CAP) {
-        	decreaseVolume();
-        }
-    }
+	if (--buttonCounter == 0) {
+		buttonCounter = BUTTON_POLL_COUNT;
+		// Read the buttons and queue the appropriate events
+		uint32_t buttons = XGpio_DiscreteRead(&gpPB, 1);
+		if (buttons & RIGHT_BUTTON) {
+			setEvent(RIGHT_BTN_EVENT);
+		}
+		if (buttons & MIDDLE_BUTTON) {
+			setEvent(MIDDLE_BTN_EVENT);
+		}
+		if (buttons & LEFT_BUTTON) {
+			setEvent(LEFT_BTN_EVENT);
+		}
+		if (buttons & TOP_BUTTON) {
+			increaseVolume();
+		}
+		if (buttons & BOTTOM_BUTTON) {
+			decreaseVolume();
+		}
+		//for use with the capacitive touch buttons
+		uint32_t capButtons = capsenseRead();
+		if (capButtons & RIGHT_CAP) {
+			setEvent(RIGHT_BTN_EVENT);
+		}
+		if (capButtons & LEFT_CAP) {
+			setEvent(LEFT_BTN_EVENT);
+		}
+		if (capButtons & MIDDLE_CAP) {
+			setEvent(MIDDLE_BTN_EVENT);
+		}
+		if (capButtons & UP_CAP) {
+			increaseVolume();
+		}
+		if (capButtons & DOWN_CAP) {
+			decreaseVolume();
+		}
+	}
 }
 
 // Sets the update bullets event to make the bullets move
 void updateBulletsCounter() {
-    if (--bulletsCounter == 0) {
-        bulletsCounter = BULLETS_UPDATE_COUNT;
-        setEvent(BULLETS_REFRESH_EVENT);
-    }
+	if (--bulletsCounter == 0) {
+		bulletsCounter = BULLETS_UPDATE_COUNT;
+		setEvent(BULLETS_REFRESH_EVENT);
+	}
 }
 
 // The aliens refresh event makes the aliens move
 void updateAliensCounter() {
-    if (--aliensCounter == 0) {
-        aliensCounter = ALIENS_UPDATE_COUNT;
-        setEvent(ALIENS_REFRESH_EVENT);
-    }
+	if (--aliensCounter == 0) {
+		aliensCounter = ALIENS_UPDATE_COUNT;
+		setEvent(ALIENS_REFRESH_EVENT);
+	}
 }
 
 // The aliens fire event makes an alien fire a missile
 // We use the rand function to make the timing between shots
 // pseudo-random
 void updateAliensFireCounter() {
-    if (--aliensFireCounter == 0) {
-        aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
-        setEvent(ALIENS_FIRE_EVENT);
-    }
+	if (--aliensFireCounter == 0) {
+		aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
+		setEvent(ALIENS_FIRE_EVENT);
+	}
 }
 
 // The alien death event erases an exploded alien sprite
 void updateAlienExplosionCounter() {
-    if (alienExplosionCounter != 0) {
-        if (--alienExplosionCounter == 0) {
-            setEvent(ALIEN_DEATH_EVENT);
-        }
-    }
+	if (alienExplosionCounter != 0) {
+		if (--alienExplosionCounter == 0) {
+			setEvent(ALIEN_DEATH_EVENT);
+		}
+	}
 }
 
 // The UFO explosion event erases the points text that appears when the UFO dies
 void updateUfoUpdateCounter() {
-    if (--ufoUpdateCounter == 0) {
-        ufoUpdateCounter = UFO_UPDATE_COUNT;
-        setEvent(UFO_UPDATE_EVENT);
-    }
+	if (--ufoUpdateCounter == 0) {
+		ufoUpdateCounter = UFO_UPDATE_COUNT;
+		setEvent(UFO_UPDATE_EVENT);
+	}
 }
 
 // The UFO appear event makes the UFO appear on the screen
 void updateUfoExplosionCounter() {
-    if (ufoExplosionCounter != 0) {
-        if (--ufoExplosionCounter == 0) {
-            setEvent(UFO_EXPLOSION_EVENT);
-        }
-    }
+	if (ufoExplosionCounter != 0) {
+		if (--ufoExplosionCounter == 0) {
+			setEvent(UFO_EXPLOSION_EVENT);
+		}
+	}
 }
 
 // The heartbeat event is used for utilization
 void updateUfoAppearanceCounter() {
-    if (--ufoAppearCounter == 0) {
-        resetUfoAppearanceCounter();
-        setEvent(UFO_APPEAR_EVENT);
-    }
+	if (--ufoAppearCounter == 0) {
+		resetUfoAppearanceCounter();
+		setEvent(UFO_APPEAR_EVENT);
+	}
 }
 
 // The tank death counter makes the game wait in a paused
 // state before re-enabling events and redrawing the tank
 // so the game will resume.
 void updateHeartbeatCounter() {
-    if (--heartbeatCounter == 0) {
-        heartbeatCounter = ONE_SECOND_COUNT;
-        setEvent(HEARTBEAT_EVENT);
-    }
+	if (--heartbeatCounter == 0) {
+		heartbeatCounter = ONE_SECOND_COUNT;
+		setEvent(HEARTBEAT_EVENT);
+	}
 }
 
 // The tank death counter makes the game wait in a paused
 // state before re-enabling events and redrawing the tank
 // so the game will resume.
 void updateTankDeathCounter() {
-    playAudio(); // This causes the next frame of the tank death audio to be written to the AC97.
-    if (--tankDeathCounter == 0) {
-        enableEvents();
-        tankDeathCounter = TANK_DEATH_COUNT;
-        if (tank.lives != 0) {
-            drawTank(tank.p.x, &tank);
-        }
-    }
+	playAudio(); // This causes the next frame of the tank death audio to be written to the AC97.
+	if (--tankDeathCounter == 0) {
+		enableEvents();
+		tankDeathCounter = TANK_DEATH_COUNT;
+		if (tank.lives != 0) {
+			drawTank(tank.p.x, &tank);
+		}
+	}
 }
 
 //sets the event that causes the uart buffer to be polled.
-void updateUartPollCounter(){
-    if (--uartCounter == 0) {
-    	uartCounter = UART_POLL_COUNT;
-        setEvent(UART_EVENT);
-    }
+void updateUartPollCounter() {
+	if (--uartCounter == 0) {
+		uartCounter = UART_POLL_COUNT;
+		setEvent(UART_EVENT);
+	}
 }
 
 // last read values of the switches
@@ -229,31 +228,29 @@ uint8_t SW_5_d1 = 0;
 
 //Polls the switches.
 //Only sends events if a switch has changed value
-void updateSwitchPollCounter(){
-	if(--switchCounter == 0){
+void updateSwitchPollCounter() {
+	if (--switchCounter == 0) {
 		//resets switch poll counter
 		switchCounter = SWITCH_POLL_COUNT;
 		//reads the switch values
 		uint32_t switches = XGpio_DiscreteRead(&gpSW, 1);
-		xil_printf("switch vals: %x\r\n", switches);
-
 		//checks if the switches have moved from low to high
-		if((switches & SW_6) && !(SW_6_d1)){
-			SW_6_d1 = switches & SW_6;	//saves the last value of the switch
-			setEvent(SW_6_ON_EVENT);	//set the event
+		if ((switches & SW_6) && !(SW_6_d1)) {
+			SW_6_d1 = switches & SW_6; //saves the last value of the switch
+			setEvent(SW_6_ON_EVENT); //set the event
 		}
-		if((switches & SW_5) && !(SW_5_d1)){
-			SW_5_d1 = switches & SW_5;	//saves the last value of the switch
+		if ((switches & SW_5) && !(SW_5_d1)) {
+			SW_5_d1 = switches & SW_5; //saves the last value of the switch
 			setEvent(SW_5_ON_EVENT);
 		}
 
 		//checks if the switches have moved from high to low
-		if(!(switches & SW_6) && (SW_6_d1)){
-			SW_6_d1 = switches & SW_6;	//saves the last value of the switch
-			setEvent(SW_6_OFF_EVENT);	//set the event
+		if (!(switches & SW_6) && (SW_6_d1)) {
+			SW_6_d1 = switches & SW_6; //saves the last value of the switch
+			setEvent(SW_6_OFF_EVENT); //set the event
 		}
-		if(!(switches & SW_5) && (SW_5_d1)){
-			SW_5_d1 = switches & SW_5;	//saves the last value of the switch
+		if (!(switches & SW_5) && (SW_5_d1)) {
+			SW_5_d1 = switches & SW_5; //saves the last value of the switch
 			setEvent(SW_5_OFF_EVENT);
 		}
 	}
@@ -262,103 +259,106 @@ void updateSwitchPollCounter(){
 void timerInterruptHandler() {
 	// Decrement every counter; queue event when a counter reaches zero and
 	// reset the counter.
-    // Most of these counters should only update if events are enabled.
+	// Most of these counters should only update if events are enabled.
 	if (eventsEnabled()) {
-		updateButtonCounter();
-		updateBulletsCounter();
-		updateAliensCounter();
-		updateAliensFireCounter();
-		updateAlienExplosionCounter();
-		updateUfoUpdateCounter();
-		updateUfoExplosionCounter();
-		updateUfoAppearanceCounter();
+		// these counters should not update if a screen shot is being taken
+		if (!screenShotEnabled()) {
+			updateButtonCounter();
+			updateBulletsCounter();
+			updateAliensCounter();
+			updateAliensFireCounter();
+			updateAlienExplosionCounter();
+			updateUfoUpdateCounter();
+			updateUfoExplosionCounter();
+			updateUfoAppearanceCounter();
+		}
 		updateUartPollCounter();
 		updateSwitchPollCounter();
-	} else {
-        // This counter is updated while events are disabled - it will re-enable events when it expires.
+	} else if (!screenShotEnabled()) {
+		// This counter is updated while events are disabled - it will re-enable events when it expires.
 		updateTankDeathCounter();
 	}
-    // The heartbeat counter will always update - used for utilization
+	// The heartbeat counter will always update - used for utilization
 	updateHeartbeatCounter();
 }
 
 // Main interrupt handler, queries the interrupt controller to see what peripheral
 // fired the interrupt and then dispatches the corresponding interrupt handler.
 void interrupt_handler_dispatcher(void* ptr) {
-    int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
-    // Check the FIT interrupt first.
-    if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
-        XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
-        timerInterruptHandler();
-    }
-    // Check the AC97 (sound chip) interrupt. Queue up the audio event if it did interrupt so that
-    // another frame of audio will be written to the AC97.
-    if (intc_status & XPAR_AXI_AC97_0_INTERRUPT_MASK) {
-        XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
-        setEvent(AUDIO_EVENT);
-    }
-    //not working for some reason....
-//    if (intc_status & XPAR_SWITCHES_IP2INTC_IRPT_MASK) {
-//    	xil_printf("switch interrupt");
-//    	XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_SWITCHES_IP2INTC_IRPT_MASK);
-//    	setEvent(SWITCH_EVENT);
-//    }
+	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
+	// Check the FIT interrupt first.
+	if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
+		timerInterruptHandler();
+	}
+	// Check the AC97 (sound chip) interrupt. Queue up the audio event if it did interrupt so that
+	// another frame of audio will be written to the AC97.
+	if (intc_status & XPAR_AXI_AC97_0_INTERRUPT_MASK) {
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
+		setEvent(AUDIO_EVENT);
+	}
+	//not working for some reason....
+	//    if (intc_status & XPAR_SWITCHES_IP2INTC_IRPT_MASK) {
+	//    	xil_printf("switch interrupt");
+	//    	XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_SWITCHES_IP2INTC_IRPT_MASK);
+	//    	setEvent(SWITCH_EVENT);
+	//    }
 }
 
 // Resets all counters that are updated by the FIT ISR handler
 void resetCounters() {
-    buttonCounter = BUTTON_POLL_COUNT;
-    bulletsCounter = BULLETS_UPDATE_COUNT;
-    aliensCounter = ALIENS_UPDATE_COUNT;
-    aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
-    heartbeatCounter = ONE_SECOND_COUNT;
-    tankDeathCounter = TANK_DEATH_COUNT;
-    ufoUpdateCounter = UFO_UPDATE_COUNT;
-    uartCounter  = UART_POLL_COUNT;
-    switchCounter = SWITCH_POLL_COUNT;
-    resetUfoAppearanceCounter();
+	buttonCounter = BUTTON_POLL_COUNT;
+	bulletsCounter = BULLETS_UPDATE_COUNT;
+	aliensCounter = ALIENS_UPDATE_COUNT;
+	aliensFireCounter = rand() % MAX_ALIENS_FIRE_COUNT + 1;
+	heartbeatCounter = ONE_SECOND_COUNT;
+	tankDeathCounter = TANK_DEATH_COUNT;
+	ufoUpdateCounter = UFO_UPDATE_COUNT;
+	uartCounter = UART_POLL_COUNT;
+	switchCounter = SWITCH_POLL_COUNT;
+	resetUfoAppearanceCounter();
 }
 
 void timerInit() {
-    // Initialize the GPIO peripherals.
-    int32_t buttons;
-    buttons = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
-    // Set the push button peripheral to be inputs.
-    XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
-    int32_t switches;
+	// Initialize the GPIO peripherals.
+	int32_t buttons;
+	buttons = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
+	// Set the push button peripheral to be inputs.
+	XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
+	int32_t switches;
 	switches = XGpio_Initialize(&gpSW, XPAR_SWITCHES_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpSW, 1, 0x0000001F);
 
-    // Initialize interrupts - only have the FIT interrupt
-    microblaze_register_handler(interrupt_handler_dispatcher, NULL);
-    XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
-    XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
-    microblaze_enable_interrupts();
+	// Initialize interrupts - only have the FIT interrupt
+	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
+	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
+	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
+	microblaze_enable_interrupts();
 	pitInit(PIT_INITIAL_DELAY);
 	pitStart();
-    // Need to initialize counters for anything to happen
-    resetCounters();
+	// Need to initialize counters for anything to happen
+	resetCounters();
 }
 
 void setAlienExplosionCounter() {
-    // In order to make sure the alien gets erased before the rest of the aliens move,
-    // make this counter either its regular value or the counter for moving the aliens - 1,
-    // whichever is less
-    alienExplosionCounter
-            = ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ? ALIEN_EXPLOSION_COUNT
-                    : aliensCounter - 1;
+	// In order to make sure the alien gets erased before the rest of the aliens move,
+	// make this counter either its regular value or the counter for moving the aliens - 1,
+	// whichever is less
+	alienExplosionCounter
+			= ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ? ALIEN_EXPLOSION_COUNT
+					: aliensCounter - 1;
 }
 
 // See header file
 void setUfoExplosionCounter() {
-    ufoExplosionCounter = UFO_EXPLOSION_COUNT;
+	ufoExplosionCounter = UFO_EXPLOSION_COUNT;
 }
 
 // See header file
 // We use rand and a minimum value to make the UFO appear somewhat randomly,
 // within a certain amount of time
 void resetUfoAppearanceCounter() {
-    int32_t temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM);
-    ufoAppearCounter = UFO_APPEAR_COUNT_MINIMUM + (rand() % temp);
+	int32_t temp = (UFO_APPEAR_COUNT_MAXIMUM - UFO_APPEAR_COUNT_MINIMUM);
+	ufoAppearCounter = UFO_APPEAR_COUNT_MINIMUM + (rand() % temp);
 }

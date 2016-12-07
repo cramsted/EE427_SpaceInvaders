@@ -24,5 +24,6 @@ void render();
 void editFrameBuffer(Sprite *sp, Position *p);
 //changes which frame is in use.
 void changeFrame(uint8_t x);
-
+//copies everything in framebuffer0 to framebuffer1
+void screenShot();
 #endif /* RENDER_H_ */

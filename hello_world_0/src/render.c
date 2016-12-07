@@ -25,7 +25,7 @@ void drawGround();
 // Starting location in DDR where we will store the images that we display.
 #define FRAME_BUFFER_0_ADDR 0xC3000000
 
-static XAxiVdma videoDMAController;
+XAxiVdma videoDMAController;
 
 
 // Now, let's get ready to start displaying some stuff on the screen.
@@ -64,7 +64,7 @@ void videoInit() {
 	drawAliens(0, 0); //draws aliens block
 	drawBunkers(BUNKER_START_X, BUNKER_START_Y); //draws bunkers
 	drawLives(); //draws the tank shaped lives
-	render(); //needed only for changing the index of the frame buffer
+//	render(); //needed only for changing the index of the frame buffer
 
 }
 
@@ -78,23 +78,25 @@ void drawGround() {
 	}
 }
 
-//switches beteen two different frame buffers
+//switches between two different frame buffers
 //not currently in use
 void render() {
+	xil_printf("frame: %d\r\n", frame);
 	if (XST_FAILURE == XAxiVdma_StartParking(&videoDMAController, frame,
 			XAXIVDMA_READ)) {
 		xil_printf("vdma parking failed\n\r");
 	}
 }
 
-void screen_shot(){
-	int32_t row, col;
-	for(row = 0; row < SCREEN_HEIGHT; row++){
-		for(col = 0; col < SCREEN_WIDTH; col++){
-			uint32_t *temp = &framePointer0[row * SCREEN_WIDTH + col];
-			 &framePointer1[row * SCREEN_WIDTH + col] = *temp;
-		}
-	}
+//copies everything in framebuffer0 to framebuffer1
+void screenShot(){
+	memcpy(framePointer1, framePointer0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+//	int32_t row, col;
+//	for(row = 0; row < SCREEN_HEIGHT; row++){
+//		for(col = 0; col < SCREEN_WIDTH; col++){
+//			 framePointer1[row * SCREEN_WIDTH + col] = framePointer0[row * SCREEN_WIDTH + col];
+//		}
+//	}
 }
 
 //changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at
@@ -130,7 +132,6 @@ int32_t findPixelValue(int32_t x, int32_t y, int32_t col, int32_t row, Sprite *s
 //sets up the video DMA controller
 void initVideoDMAController() {
 	int32_t Status; // Keep track of success/failure of system function calls.
-	XAxiVdma videoDMAController;
 	// There are 3 steps to initializing the vdma driver and IP.
 	// Step 1: lookup the memory structure that is used to access the vdma driver.
 	XAxiVdma_Config * VideoDMAConfig = XAxiVdma_LookupConfig(

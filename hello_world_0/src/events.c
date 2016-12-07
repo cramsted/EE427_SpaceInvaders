@@ -33,7 +33,7 @@
 // Holds all pending events, where each event is a different bit
 uint32_t events = 0;
 uint32_t enabled = 1; //1 for enabled, 0 for diabled
-
+uint32_t screen_shot_pause = 0; //0 for disabled, 1 for enabled
 //used to calculate the utilization of the processor
 uint32_t utilizationCounter = 0;
 
@@ -41,6 +41,10 @@ static XUartLite uart;
 
 static int32_t isDigit(char c);
 static uint32_t power(uint32_t base, int32_t exp);
+
+//function declarations
+void disableEvents();
+void setScreenShotFreeze(uint32_t x);
 
 //sets the passed in event
 void setEvent(int event) {
@@ -226,34 +230,66 @@ void uartEvent() {
 // switch 6 has been turned on
 void switch_6_on_Event(){
 	if (events & SW_6_ON_EVENT){
+		xil_printf("sw 6 on\r\n");
 		clearEvent(SW_6_ON_EVENT);
+		//freeze the game
+		setScreenShotFreeze(SCREEN_SHOT_ON);
+		//take the screen shot
+		screenShot();
 	}
 }
 
 // switch 6 has been turned off
 void switch_6_off_Event(){
 	if (events & SW_6_OFF_EVENT){
+		xil_printf("sw 6 off\r\n");
 		clearEvent(SW_6_OFF_EVENT);
+		//unfreeze the game
+		setScreenShotFreeze(SCREEN_SHOT_OFF);
 	}
 }
+
 // switch 5 has been turned on
 void switch_5_on_Event(){
 	if (events & SW_5_ON_EVENT){
+		xil_printf("sw 5 on\r\n");
 		clearEvent(SW_5_ON_EVENT);
+		//switch the frame buffer to the screen shot
 		changeFrame(SCREEN_SHOT_ON);
+		//update what buffer is being rendered
+		render();
 	}
 }
 
 // switch 5 has been turned off
 void switch_5_off_Event(){
 	if (events & SW_5_OFF_EVENT){
+		xil_printf("sw 5 off\r\n");
 		clearEvent(SW_5_OFF_EVENT);
+		//switch the frame buffer to the normal game
 		changeFrame(SCREEN_SHOT_OFF);
+		//update what buffer is being rendered
+		render();
 	}
 }
+
 //returns 1 if events are enabled, 0 otherwise
 int eventsEnabled() {
 	return enabled;
+}
+
+void setScreenShotFreeze(uint32_t x){
+	screen_shot_pause = x;
+}
+
+//returns if the system is paused due to a screen shot being taken
+int screenShotEnabled(){
+	return screen_shot_pause;
+}
+
+//disables events
+void disableEvents(){
+	enabled = 0;
 }
 
 //enables events
