@@ -1,0 +1,9 @@
+-batch 
+-create dmacontroller 
+-ver 1.00.a 
+-dir "C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders" 
+-lang vhdl 
+-bus axi4lite ms 
+-reg 4 
+-xps 
+-driver 

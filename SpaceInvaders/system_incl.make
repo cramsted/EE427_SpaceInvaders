@@ -22,7 +22,7 @@ DEVICE = xc6slx45csg324-3
 INTSTYLE = default
 
 LANGUAGE = vhdl
-GLOBAL_SEARCHPATHOPT = 
+GLOBAL_SEARCHPATHOPT =  -lp C:/Users/superman/Desktop/db/space_invaders/user_hardware
 PROJECT_SEARCHPATHOPT =  -lp C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/
 
 SEARCHPATHOPT = $(PROJECT_SEARCHPATHOPT) $(GLOBAL_SEARCHPATHOPT)

@@ -1,0 +1,11 @@
+##############################################################################
+## Filename:          C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/pcores/dmacontroller_v1_00_a/data/dmacontroller_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Wed Dec 07 15:26:56 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib axi_master_lite_v1_00_a  all 
+lib dmacontroller_v1_00_a user_logic vhdl
+lib dmacontroller_v1_00_a dmacontroller vhdl
