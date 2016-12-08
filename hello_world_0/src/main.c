@@ -41,11 +41,11 @@ int main() {
     volatile int delay = START_GAME_DELAY;
     while (--delay)
         ;
-
+//    xil_printf("after the delay\r\n");
     //initializes buttons, the FIT timer, and interrupts
     // Do this AFTER the delay so there's time to draw the screen
     timerInit();
-
+//    xil_printf("after the timer init\r\n");
     //	while (1) {
     //		readInput(); //waits for control input
     //	}

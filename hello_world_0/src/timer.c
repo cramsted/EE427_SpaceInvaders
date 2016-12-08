@@ -325,10 +325,12 @@ void timerInit() {
 	buttons = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
+//	xil_printf("init buttons\r\n");
 	int32_t switches;
 	switches = XGpio_Initialize(&gpSW, XPAR_SWITCHES_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpSW, 1, 0x0000001F);
+//	xil_printf("init switches\r\n");
 
 	// Initialize interrupts - only have the FIT interrupt
 	microblaze_register_handler(interrupt_handler_dispatcher, NULL);

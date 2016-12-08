@@ -311,6 +311,7 @@ void eventsLoop() {
 	pitSetDelay(PIT_INITIAL_DELAY);
 	while (1) {
 		if (events && enabled) {
+			xil_printf("events loop top\n\r");
 			// An event is pending. Check all events round-robin style.
 			leftButtonEvent();
 			rightButtonEvent();
@@ -326,10 +327,12 @@ void eventsLoop() {
 			heartbeatEvent();
 			audioEvent();
 			uartEvent();
+//			xil_printf("events loop middle\n\r");
 			switch_6_on_Event();
 			switch_6_off_Event();
 			switch_5_on_Event();
 			switch_5_off_Event();
+//			xil_printf("events loop bottom\n\r");
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization

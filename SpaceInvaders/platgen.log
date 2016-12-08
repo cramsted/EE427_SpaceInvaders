@@ -3,7 +3,8 @@ Release 13.4 - platgen Xilinx EDK 13.4 Build EDK_O.87xd
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 Command Line: platgen -p xc6slx45csg324-3 -lang vhdl -intstyle default -lp
-C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/ -msg
+C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/ -lp
+C:/Users/superman/Desktop/db/space_invaders/user_hardware -msg
 __xps/ise/xmsgprops.lst system.mhs 
 
 WARNING:EDK - INFO:Security:51 - The XILINXD_LICENSE_FILE environment variable
@@ -31,6 +32,9 @@ WARNING:EDK:3605 - Use of the repository located at
    (equivalent of $XILINX_EDK/../edk_user_repository) is now deprecated. 
    It is recommended that you use Global SearchPath preference to specify search
    paths that apply to all the projects.
+WARNING:EDK:3243 - specified path
+   'C:\Users\superman\Desktop\db\space_invaders\user_hardware\' is not a
+   directory!
 
 Overriding IP level properties ...
 INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
@@ -347,9 +351,6 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 218
 IPNAME:axi_ac97 INSTANCE:axi_ac97_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 252
 - Copying cache implementation netlist
-IPNAME:axi_interconnect INSTANCE:axi4_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
-- Copying cache implementation netlist
 IPNAME:axi_uartlite INSTANCE:rs232_uart_1 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 282
 - Copying cache implementation netlist
@@ -367,6 +368,12 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 378
 - Copying cache implementation netlist
 IPNAME:pit INSTANCE:pit_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 386
+- Copying cache implementation netlist
+IPNAME:capacitive_buttons INSTANCE:capacitive_buttons_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 396
+- Copying cache implementation netlist
+IPNAME:axi_gpio INSTANCE:switches -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 406
 - Copying cache implementation netlist
 
 Elaborating instances ...
@@ -407,6 +414,9 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 252
 INSTANCE:axi4lite_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 267
 - Running XST synthesis
+INSTANCE:axi4_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
+- Running XST synthesis
 INSTANCE:axi_intc_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 357
 - Running XST synthesis
@@ -416,9 +426,6 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 386
 INSTANCE:capacitive_buttons_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 396
 - Running XST synthesis
-INSTANCE:switches -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 406
-- Running XST synthesis
 
 Running NGCBUILD ...
 IPNAME:clock_generator_0_wrapper INSTANCE:clock_generator_0 -
@@ -427,10 +434,13 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 161
 IPNAME:axi4lite_0_wrapper INSTANCE:axi4lite_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 267
 - Running NGCBUILD
+IPNAME:axi4_0_wrapper INSTANCE:axi4_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
+- Running NGCBUILD
 INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
    If any constraint needs to be overridden, this should be done by modifying
    the data/system.ucf file.
 
 Rebuilding cache ...
 
-Total run time: 73.00 seconds
+Total run time: 177.00 seconds

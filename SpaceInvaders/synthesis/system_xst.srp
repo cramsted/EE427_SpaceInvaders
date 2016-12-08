@@ -1845,12 +1845,12 @@ pit_0/pit_0/USER_LOGIC_I/state_reg[1]_PWR_54_o_Mux_89_o|         |         |    
 =========================================================================
 
 
-Total REAL time to Xst completion: 22.00 secs
-Total CPU time to Xst completion: 22.12 secs
+Total REAL time to Xst completion: 23.00 secs
+Total CPU time to Xst completion: 23.26 secs
  
 --> 
 
-Total memory usage is 354120 kilobytes
+Total memory usage is 354428 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   18 (   0 filtered)

@@ -594,9 +594,6 @@ begin
               mst_cmd_sm_state  <= CMD_IDLE;
               mst_cmd_sm_busy   <= '0';
             end if;
-				--how to deal with the cmd-done move in the read write states (what doe sbus2ip-mst-cmplt mean?)
-					--how to alternate between doing a read and a write
-					--how t 
 					
           when CMD_READ =>
             if ( Bus2IP_Mst_CmdAck = '1' and Bus2IP_Mst_Cmplt = '0' ) then

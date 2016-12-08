@@ -2,7 +2,7 @@
 * Filename:          C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders/drivers/dmacontroller_v1_00_a/src/dmacontroller.h
 * Version:           1.00.a
 * Description:       dmacontroller Driver Header File
-* Date:              Wed Dec 07 15:26:56 2016 (by Create and Import Peripheral Wizard)
+* Date:              Wed Dec 07 20:58:11 2016 (by Create and Import Peripheral Wizard)
 *****************************************************************************/
 
 #ifndef DMACONTROLLER_H
@@ -23,12 +23,20 @@
  * -- SLV_REG1 : user logic slave module register 1
  * -- SLV_REG2 : user logic slave module register 2
  * -- SLV_REG3 : user logic slave module register 3
+ * -- SLV_REG4 : user logic slave module register 4
+ * -- SLV_REG5 : user logic slave module register 5
+ * -- SLV_REG6 : user logic slave module register 6
+ * -- SLV_REG7 : user logic slave module register 7
  */
 #define DMACONTROLLER_USER_SLV_SPACE_OFFSET (0x00000000)
 #define DMACONTROLLER_SLV_REG0_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000000)
 #define DMACONTROLLER_SLV_REG1_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000004)
 #define DMACONTROLLER_SLV_REG2_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000008)
 #define DMACONTROLLER_SLV_REG3_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x0000000C)
+#define DMACONTROLLER_SLV_REG4_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000010)
+#define DMACONTROLLER_SLV_REG5_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000014)
+#define DMACONTROLLER_SLV_REG6_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x00000018)
+#define DMACONTROLLER_SLV_REG7_OFFSET (DMACONTROLLER_USER_SLV_SPACE_OFFSET + 0x0000001C)
 
 /**
  * User Logic Master Space Offsets
@@ -145,6 +153,14 @@
  	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG2_OFFSET) + (RegOffset), (Xuint32)(Value))
 #define DMACONTROLLER_mWriteSlaveReg3(BaseAddress, RegOffset, Value) \
  	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG3_OFFSET) + (RegOffset), (Xuint32)(Value))
+#define DMACONTROLLER_mWriteSlaveReg4(BaseAddress, RegOffset, Value) \
+ 	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG4_OFFSET) + (RegOffset), (Xuint32)(Value))
+#define DMACONTROLLER_mWriteSlaveReg5(BaseAddress, RegOffset, Value) \
+ 	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG5_OFFSET) + (RegOffset), (Xuint32)(Value))
+#define DMACONTROLLER_mWriteSlaveReg6(BaseAddress, RegOffset, Value) \
+ 	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG6_OFFSET) + (RegOffset), (Xuint32)(Value))
+#define DMACONTROLLER_mWriteSlaveReg7(BaseAddress, RegOffset, Value) \
+ 	Xil_Out32((BaseAddress) + (DMACONTROLLER_SLV_REG7_OFFSET) + (RegOffset), (Xuint32)(Value))
 
 #define DMACONTROLLER_mReadSlaveReg0(BaseAddress, RegOffset) \
  	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG0_OFFSET) + (RegOffset))
@@ -154,6 +170,14 @@
  	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG2_OFFSET) + (RegOffset))
 #define DMACONTROLLER_mReadSlaveReg3(BaseAddress, RegOffset) \
  	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG3_OFFSET) + (RegOffset))
+#define DMACONTROLLER_mReadSlaveReg4(BaseAddress, RegOffset) \
+ 	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG4_OFFSET) + (RegOffset))
+#define DMACONTROLLER_mReadSlaveReg5(BaseAddress, RegOffset) \
+ 	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG5_OFFSET) + (RegOffset))
+#define DMACONTROLLER_mReadSlaveReg6(BaseAddress, RegOffset) \
+ 	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG6_OFFSET) + (RegOffset))
+#define DMACONTROLLER_mReadSlaveReg7(BaseAddress, RegOffset) \
+ 	Xil_In32((BaseAddress) + (DMACONTROLLER_SLV_REG7_OFFSET) + (RegOffset))
 
 /**
  *
@@ -222,7 +246,7 @@ void DMACONTROLLER_MasterRecvWord(Xuint32 BaseAddress, Xuint32 SrcAddress);
 XStatus DMACONTROLLER_SelfTest(void * baseaddr_p);
 /**
 *  Defines the number of registers available for read and write*/
-#define TEST_AXI_LITE_USER_NUM_REG 4
+#define TEST_AXI_LITE_USER_NUM_REG 8
 
 
 #endif /** DMACONTROLLER_H */

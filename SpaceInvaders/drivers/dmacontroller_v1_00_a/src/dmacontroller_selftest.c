@@ -2,7 +2,7 @@
 * Filename:          C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders/drivers/dmacontroller_v1_00_a/src/dmacontroller_selftest.c
 * Version:           1.00.a
 * Description:       Contains a diagnostic self-test function for the dmacontroller driver
-* Date:              Wed Dec 07 15:26:56 2016 (by Create and Import Peripheral Wizard)
+* Date:              Wed Dec 07 20:58:11 2016 (by Create and Import Peripheral Wizard)
 *****************************************************************************/
 
 
@@ -18,7 +18,7 @@
 
 #define READ_WRITE_MUL_FACTOR 0x10
 #define DMACONTROLLER_SELFTEST_BUFSIZE  4 /* Size of buffer (n bytes) is fixed to 4 for lite Master */
-#define DMACONTROLLER_USER_NUM_REG  4/* Number of registers in slave */
+#define DMACONTROLLER_USER_NUM_REG  8/* Number of registers in slave */
 
 /************************** Variable Definitions ****************************/
 

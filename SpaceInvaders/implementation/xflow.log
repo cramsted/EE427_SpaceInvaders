@@ -330,8 +330,8 @@ NGDBUILD Design Results Summary:
   Number of warnings:  37
 
 Writing NGD file "system.ngd" ...
-Total REAL time to NGDBUILD completion:  45 sec
-Total CPU time to NGDBUILD completion:   45 sec
+Total REAL time to NGDBUILD completion:  47 sec
+Total CPU time to NGDBUILD completion:   47 sec
 
 Writing NGDBUILD log file "system.bld"...
 
@@ -392,34 +392,34 @@ WARNING:Timing:3159 - The DCM, axi_hdmi_0/axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITr
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 23 secs 
-Total CPU  time at the beginning of Placer: 22 secs 
+Total REAL time at the beginning of Placer: 24 secs 
+Total CPU  time at the beginning of Placer: 23 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:e3040a7) REAL time: 25 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:e3040a7) REAL time: 26 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:e3040a7) REAL time: 26 secs 
+Phase 2.7  Design Feasibility Check (Checksum:e3040a7) REAL time: 27 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:423ba0d7) REAL time: 26 secs 
+Phase 3.31  Local Placement Optimization (Checksum:423ba0d7) REAL time: 27 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:d0165193) REAL time: 53 secs 
+(Checksum:d0165193) REAL time: 56 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:d0165193) REAL time: 53 secs 
+Phase 5.36  Local Placement Optimization (Checksum:d0165193) REAL time: 56 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:d0165193) REAL time: 53 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:d0165193) REAL time: 56 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:d0165193) REAL time: 53 secs 
+Phase 7.3  Local Placement Optimization (Checksum:d0165193) REAL time: 56 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:d0165193) REAL time: 53 secs 
+Phase 8.5  Local Placement Optimization (Checksum:d0165193) REAL time: 56 secs 
 
 Phase 9.8  Global Placement
 .......................
@@ -427,22 +427,22 @@ Phase 9.8  Global Placement
 ....................................................................................
 .................................................................................................
 .......
-Phase 9.8  Global Placement (Checksum:27e27d8b) REAL time: 1 mins 32 secs 
+Phase 9.8  Global Placement (Checksum:27e27d8b) REAL time: 1 mins 36 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:27e27d8b) REAL time: 1 mins 32 secs 
+Phase 10.5  Local Placement Optimization (Checksum:27e27d8b) REAL time: 1 mins 37 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:3ef4aad6) REAL time: 1 mins 45 secs 
+Phase 11.18  Placement Optimization (Checksum:3ef4aad6) REAL time: 1 mins 50 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:3ef4aad6) REAL time: 1 mins 45 secs 
+Phase 12.5  Local Placement Optimization (Checksum:3ef4aad6) REAL time: 1 mins 50 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:f3227998) REAL time: 1 mins 45 secs 
+Phase 13.34  Placement Validation (Checksum:f3227998) REAL time: 1 mins 50 secs 
 
-Total REAL time to Placer completion: 1 mins 54 secs 
-Total CPU  time to Placer completion: 1 mins 54 secs 
+Total REAL time to Placer completion: 2 mins 
+Total CPU  time to Placer completion: 1 mins 59 secs 
 Running post-placement packing...
 Writing output files...
 
@@ -538,9 +538,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                3.91
 
-Peak Memory Usage:  734 MB
-Total REAL time to MAP completion:  2 mins 
-Total CPU time to MAP completion:   2 mins 
+Peak Memory Usage:  731 MB
+Total REAL time to MAP completion:  2 mins 6 secs 
+Total CPU time to MAP completion:   2 mins 5 secs 
 
 Mapping completed.
 See MAP report file "system_map.mrp" for details.
@@ -761,23 +761,23 @@ Phase  2  : 40451 unrouted;      REAL time: 18 secs
 
 Phase  3  : 16827 unrouted;      REAL time: 31 secs 
 
-Phase  4  : 16827 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 32 secs 
+Phase  4  : 16827 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 33 secs 
 
 Updating file: system.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 49 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 49 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 49 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 49 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
 
-Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 49 secs 
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 51 secs 
-Total REAL time to Router completion: 51 secs 
-Total CPU time to Router completion: 51 secs 
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 53 secs 
+Total REAL time to Router completion: 53 secs 
+Total CPU time to Router completion: 53 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -1049,8 +1049,8 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 23 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 1 mins 2 secs 
-Total CPU time to PAR completion: 53 secs 
+Total REAL time to PAR completion: 1 mins 4 secs 
+Total CPU time to PAR completion: 55 secs 
 
 Peak Memory Usage:  665 MB
 
@@ -1128,13 +1128,13 @@ Design statistics:
    Maximum path delay from/to any node:   5.423ns
 
 
-Analysis completed Fri Dec 02 16:11:18 2016
+Analysis completed Wed Dec 07 21:58:36 2016
 --------------------------------------------------------------------------------
 
 Generating Report ...
 
 Number of warnings: 2
 Number of info messages: 4
-Total time: 17 secs 
+Total time: 18 secs 
 
 
