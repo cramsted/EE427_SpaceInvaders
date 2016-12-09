@@ -29,7 +29,7 @@ static XAxiVdma videoDMAController;
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
 // of frame 0 and frame 1.
-unsigned int32_t * framePointer0 = (unsigned int32_t *) FRAME_BUFFER_0_ADDR;
+uint32_t * framePointer0 = (uint32_t *) FRAME_BUFFER_0_ADDR;
 //	unsigned int32_t * framePointer1 = ((unsigned int32_t *) FRAME_BUFFER_0_ADDR)
 //		+ SCREEN_WIDTH
 //			* SCREEN_HEIGHT;
@@ -84,7 +84,7 @@ void editFrameBuffer(Sprite *sp, Position *p) {
 	int32_t row, col;
 	for (row = p->y; row < maxRow; row++) {
 		for (col = p->x; col < maxCol; col++) {
-			unsigned int32_t *temp = &framePointer0[row * SCREEN_WIDTH + col];
+			uint32_t *temp = &framePointer0[row * SCREEN_WIDTH + col];
 			//if sprite value is 1 then it draws the sprite's color at that pixel
 			if (findPixelValue(p->x, p->y, col, row, sp)) {
 				*temp = sp->Color.color;

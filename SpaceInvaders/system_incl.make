@@ -154,7 +154,8 @@ implementation/digilent_quadspi_cntlr_wrapper.ngc \
 implementation/axi_intc_0_wrapper.ngc \
 implementation/axi_timer_0_wrapper.ngc \
 implementation/fit_timer_0_wrapper.ngc \
-implementation/pit_0_wrapper.ngc
+implementation/pit_0_wrapper.ngc \
+implementation/switches_wrapper.ngc
 
 POSTSYN_NETLIST = implementation/$(SYSTEM).ngc
 

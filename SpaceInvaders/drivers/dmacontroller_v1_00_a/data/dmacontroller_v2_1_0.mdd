@@ -1,0 +1,15 @@
+##############################################################################
+## Filename:          C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders/drivers/dmacontroller_v1_00_a/data/dmacontroller_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Fri Dec 09 15:00:44 2016 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER dmacontroller
+
+  OPTION supported_peripherals = (dmacontroller);
+  OPTION depends = (common_v1_00_a);
+  OPTION copyfiles = all;
+
+END DRIVER
