@@ -334,7 +334,7 @@ void timerInit() {
 
 	// Initialize interrupts - only have the FIT interrupt
 	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
-	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK);
+	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK | XPAR_SWITCHES_IP2INTC_IRPT_MASK  );
 	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
 	microblaze_enable_interrupts();
 	pitInit(PIT_INITIAL_DELAY);

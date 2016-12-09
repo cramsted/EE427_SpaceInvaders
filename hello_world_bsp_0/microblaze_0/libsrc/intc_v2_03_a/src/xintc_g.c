@@ -49,10 +49,6 @@ XIntc_Config XIntc_ConfigTable[] =
 			{
 				XNullHandler,
 				(void *) XNULL
-			},
-			{
-				XNullHandler,
-				(void *) XNULL
 			}
 		}
 

@@ -29,7 +29,7 @@ TABLE OF CONTENTS
 ---- Source Parameters
 Input Format                       : MIXED
 Input File Name                    : "axi_hdmi_0_wrapper_xst.prj"
-Verilog Include Directory          : {"C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
+Verilog Include Directory          : {"C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\pcores\" "C:\EE427\Atlys_BSB_Support_v_3_4\Atlys_AXI_BSB_Support\lib\Digilent\pcores\" "C:\Xilinx\13.4\ISE_DS\edk_user_repository\MyProcessorIPLib\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxBFMinterface\pcores\" "C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\" }
 
 ---- Target Parameters
 Target Device                      : xc6slx45csg324-3
@@ -143,7 +143,7 @@ Parsing architecture <Behavioral> of entity <axi_hdmi_receiver>.
 Parsing VHDL file "C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/Digilent/pcores/axi_hdmi_v1_00_a/hdl/vhdl/axi_hdmi.vhd" into library axi_hdmi_v1_00_a
 Parsing entity <axi_hdmi>.
 Parsing architecture <Behavioral> of entity <axi_hdmi>.
-Parsing VHDL file "C:\Users\superman\Desktop\cramshall\EE427_SpaceInvaders\SpaceInvaders\hdl\axi_hdmi_0_wrapper.vhd" into library work
+Parsing VHDL file "C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\hdl\axi_hdmi_0_wrapper.vhd" into library work
 Parsing entity <axi_hdmi_0_wrapper>.
 Parsing architecture <STRUCTURE> of entity <axi_hdmi_0_wrapper>.
 
@@ -198,7 +198,7 @@ Elaborating entity <twi_slave_rom> (architecture <Behavioral>) with generics fro
 =========================================================================
 
 Synthesizing Unit <axi_hdmi_0_wrapper>.
-    Related source file is "c:/users/superman/desktop/cramshall/ee427_spaceinvaders/spaceinvaders/hdl/axi_hdmi_0_wrapper.vhd".
+    Related source file is "c:/users/superman/desktop/ee427_spaceinvaders/spaceinvaders/hdl/axi_hdmi_0_wrapper.vhd".
     Summary:
 	no macro.
 Unit <axi_hdmi_0_wrapper> synthesized.
@@ -1283,7 +1283,7 @@ axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITransmitter/Inst_DynClkGen/PLL_BASE_inst/CLK
 
 
 Total REAL time to Xst completion: 9.00 secs
-Total CPU time to Xst completion: 8.19 secs
+Total CPU time to Xst completion: 8.16 secs
  
 --> 
 

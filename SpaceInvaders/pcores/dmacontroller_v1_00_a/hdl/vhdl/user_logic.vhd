@@ -172,9 +172,9 @@ architecture IMP of user_logic is
   ------------------------------------------
   -- Signals for user logic slave model s/w accessible register example
   ------------------------------------------
-  signal slv_reg0                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
-  signal slv_reg1                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
-  signal slv_reg2                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
+  signal slv_reg0                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);	--source
+  signal slv_reg1                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);	--destination
+  signal slv_reg2                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);	--word count
   signal slv_reg3                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
   signal slv_reg4                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
   signal slv_reg5                       : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
@@ -556,7 +556,8 @@ begin
         mst_cmd_sm_set_error      <= '0';
         mst_cmd_sm_set_timeout    <= '0';
         mst_cmd_sm_busy           <= '0';
-                
+        intr											<= '0';  
+--				slv_reg3 <= (others => '0');
       else
 
         -- default condition
@@ -571,7 +572,7 @@ begin
         mst_cmd_sm_set_error      <= '0';
         mst_cmd_sm_set_timeout    <= '0';
         mst_cmd_sm_busy           <= '1';
-                
+        intr											<= '0';        
         -- state transition
         case mst_cmd_sm_state is
 
@@ -579,12 +580,14 @@ begin
             if ( mst_go = '1' ) then
               mst_cmd_sm_state  <= CMD_READ;
               mst_cmd_sm_clr_go <= '1';
+--							slv_reg3 <= std_logic_vector(unsigned(slv_reg3) + 1); 
             else
               mst_cmd_sm_state  <= CMD_IDLE;
               mst_cmd_sm_busy   <= '0';
             end if;
 					
           when CMD_READ =>
+--						slv_reg4 <= std_logic_vector(unsigned(slv_reg4) + 1); 
             if ( Bus2IP_Mst_CmdAck = '1' and Bus2IP_Mst_Cmplt = '0' ) then
               mst_cmd_sm_state <= CMD_WAIT_FOR_READ_DATA;
             elsif ( Bus2IP_Mst_Cmplt = '1' ) then
@@ -607,6 +610,7 @@ begin
             end if;
 
           when CMD_WAIT_FOR_READ_DATA =>
+--						slv_reg5 <= std_logic_vector(unsigned(slv_reg5) + 1); 
             if ( Bus2IP_Mst_Cmplt = '1' ) then
               mst_cmd_sm_state <= CMD_WRITE;
               if ( Bus2IP_Mst_Cmd_Timeout = '1' ) then
@@ -624,6 +628,7 @@ begin
             end if;
 						
           when CMD_WRITE =>
+--						slv_reg6 <= std_logic_vector(unsigned(slv_reg6) + 1); 
             if ( Bus2IP_Mst_CmdAck = '1' and Bus2IP_Mst_Cmplt = '0' ) then
               mst_cmd_sm_state <= CMD_WAIT_FOR_WRITE_DATA;
             elsif ( Bus2IP_Mst_Cmplt = '1' ) then
@@ -637,7 +642,7 @@ begin
                 mst_cmd_sm_set_error   <= '1';
               end if;
             else
-              mst_cmd_sm_state       <= CMD_READ;
+              mst_cmd_sm_state       <= CMD_WRITE;
               mst_cmd_sm_rd_req      <= '0';
               mst_cmd_sm_wr_req      <= '1';
               mst_cmd_sm_ip2bus_addr <= std_logic_vector(unsigned(slv_reg1) + address_offset);
@@ -647,7 +652,8 @@ begin
 
           when CMD_WAIT_FOR_WRITE_DATA =>
             if ( Bus2IP_Mst_Cmplt = '1' ) then
-							if (word_copy_count = unsigned(slv_reg2)) then
+--						slv_reg7 <= std_logic_vector(unsigned(slv_reg7) + 1); 
+							if (word_copy_count = (unsigned(slv_reg2)-1)) then
 								mst_cmd_sm_state <= CMD_DONE; 
 							else
 								word_copy_count <= word_copy_count + 1; 

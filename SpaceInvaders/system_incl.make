@@ -22,7 +22,7 @@ DEVICE = xc6slx45csg324-3
 INTSTYLE = default
 
 LANGUAGE = vhdl
-GLOBAL_SEARCHPATHOPT =  -lp C:/Users/superman/Desktop/db/space_invaders/user_hardware
+GLOBAL_SEARCHPATHOPT = 
 PROJECT_SEARCHPATHOPT =  -lp C:/EE427/Atlys_BSB_Support_v_3_4/Atlys_AXI_BSB_Support/lib/
 
 SEARCHPATHOPT = $(PROJECT_SEARCHPATHOPT) $(GLOBAL_SEARCHPATHOPT)
@@ -133,7 +133,12 @@ pcores/axi_ac97_v1_00_a/hdl/vhdl/axi_ac97.vhd \
 pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd \
 pcores/pit_v1_00_a/hdl/vhdl/pit.vhd \
 pcores/capacitive_buttons_v1_00_a/hdl/vhdl/user_logic.vhd \
-pcores/capacitive_buttons_v1_00_a/hdl/vhdl/capacitive_buttons.vhd
+pcores/capacitive_buttons_v1_00_a/hdl/vhdl/capacitive_buttons.vhd \
+C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_master_lite_v1_00_a/hdl/vhdl/axi_master_lite_reset.vhd \
+C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_master_lite_v1_00_a/hdl/vhdl/axi_master_lite_cntlr.vhd \
+C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_master_lite_v1_00_a/hdl/vhdl/axi_master_lite.vhd \
+pcores/dmacontroller_v1_00_a/hdl/vhdl/user_logic.vhd \
+pcores/dmacontroller_v1_00_a/hdl/vhdl/dmacontroller.vhd
 
 WRAPPER_NGC_FILES = implementation/proc_sys_reset_0_wrapper.ngc \
 implementation/microblaze_0_ilmb_wrapper.ngc \
@@ -158,7 +163,8 @@ implementation/axi_timer_0_wrapper.ngc \
 implementation/fit_timer_0_wrapper.ngc \
 implementation/pit_0_wrapper.ngc \
 implementation/capacitive_buttons_0_wrapper.ngc \
-implementation/switches_wrapper.ngc
+implementation/switches_wrapper.ngc \
+implementation/dmacontroller_0_wrapper.ngc
 
 POSTSYN_NETLIST = implementation/$(SYSTEM).ngc
 
