@@ -18,7 +18,7 @@
 #define BULLET_WIDTH (3 * 2)	//sprite width
 #define BULLET_HEIGHT (5 * 2)	//sprite height
 #define ALIEN_BULLETS_UPDATE_Y 6	//alien bullet speed
-#define TANK_BULLET_UPDATE_Y -8	//tank bullet speed
+#define TANK_BULLET_UPDATE_Y -12	//tank bullet speed
 #define BULLET_MIN_Y 45	//min y position of a bullet
 #define BULLET_MAX_Y 435	//max y position of a bullet
 

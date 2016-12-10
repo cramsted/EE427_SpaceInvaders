@@ -27,6 +27,8 @@
 #define SW_6_OFF_EVENT			0x8000
 #define SW_5_ON_EVENT			0x10000
 #define SW_5_OFF_EVENT			0x20000
+#define SW_7_ON_EVENT			0x40000
+#define SW_7_OFF_EVENT			0x80000
 
 // Check all events round-robin style.
 // if there are no events, it runs the utilization counter

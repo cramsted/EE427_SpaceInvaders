@@ -102,9 +102,6 @@ Loading design module
 "C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/implementation/fit_
 timer_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/implementation/pit_
-0_wrapper.ngc"...
-Loading design module
 "C:/Users/superman/Desktop/EE427_SpaceInvaders/SpaceInvaders/implementation/dmac
 ontroller_0_wrapper.ngc"...
 Loading design module
@@ -333,8 +330,8 @@ NGDBUILD Design Results Summary:
   Number of warnings:  37
 
 Writing NGD file "system.ngd" ...
-Total REAL time to NGDBUILD completion:  47 sec
-Total CPU time to NGDBUILD completion:   47 sec
+Total REAL time to NGDBUILD completion:  46 sec
+Total CPU time to NGDBUILD completion:   46 sec
 
 Writing NGDBUILD log file "system.bld"...
 
@@ -395,74 +392,74 @@ WARNING:Timing:3159 - The DCM, axi_hdmi_0/axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITr
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 26 secs 
-Total CPU  time at the beginning of Placer: 25 secs 
+Total REAL time at the beginning of Placer: 24 secs 
+Total CPU  time at the beginning of Placer: 24 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:3bd32492) REAL time: 28 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:e6570232) REAL time: 26 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:3bd32492) REAL time: 29 secs 
+Phase 2.7  Design Feasibility Check (Checksum:e6570232) REAL time: 27 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:f4987542) REAL time: 29 secs 
+Phase 3.31  Local Placement Optimization (Checksum:2d592592) REAL time: 27 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:aa8ee55) REAL time: 58 secs 
+(Checksum:26a7b468) REAL time: 55 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:aa8ee55) REAL time: 58 secs 
+Phase 5.36  Local Placement Optimization (Checksum:26a7b468) REAL time: 55 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:aa8ee55) REAL time: 58 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:26a7b468) REAL time: 55 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:aa8ee55) REAL time: 58 secs 
+Phase 7.3  Local Placement Optimization (Checksum:26a7b468) REAL time: 55 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:aa8ee55) REAL time: 59 secs 
+Phase 8.5  Local Placement Optimization (Checksum:26a7b468) REAL time: 55 secs 
 
 Phase 9.8  Global Placement
-.........................
-.......................................................................
-....................................................................................................................................
-......................................................................
+........................
+...................................................................................................
+..............................................................................
+................................................................
 ......
-Phase 9.8  Global Placement (Checksum:d4607b69) REAL time: 1 mins 43 secs 
+Phase 9.8  Global Placement (Checksum:1d0deebd) REAL time: 1 mins 38 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:d4607b69) REAL time: 1 mins 43 secs 
+Phase 10.5  Local Placement Optimization (Checksum:1d0deebd) REAL time: 1 mins 38 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:58ee1533) REAL time: 1 mins 52 secs 
+Phase 11.18  Placement Optimization (Checksum:1b7dad61) REAL time: 1 mins 47 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:58ee1533) REAL time: 1 mins 52 secs 
+Phase 12.5  Local Placement Optimization (Checksum:1b7dad61) REAL time: 1 mins 47 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:596886f4) REAL time: 1 mins 52 secs 
+Phase 13.34  Placement Validation (Checksum:cbc4d48) REAL time: 1 mins 48 secs 
 
-Total REAL time to Placer completion: 2 mins 3 secs 
-Total CPU  time to Placer completion: 2 mins 1 secs 
+Total REAL time to Placer completion: 1 mins 58 secs 
+Total CPU  time to Placer completion: 1 mins 57 secs 
 Running post-placement packing...
 Writing output files...
 
 Design Summary:
 Number of errors:      0
-Number of warnings:   39
+Number of warnings:   37
 Slice Logic Utilization:
-  Number of Slice Registers:                 7,329 out of  54,576   13%
-    Number used as Flip Flops:               7,284
-    Number used as Latches:                     37
+  Number of Slice Registers:                 7,125 out of  54,576   13%
+    Number used as Flip Flops:               7,115
+    Number used as Latches:                      2
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                8
-  Number of Slice LUTs:                      7,585 out of  27,288   27%
-    Number used as logic:                    6,946 out of  27,288   25%
-      Number using O6 output only:           5,405
-      Number using O5 output only:             125
-      Number using O5 and O6:                1,416
+  Number of Slice LUTs:                      7,379 out of  27,288   27%
+    Number used as logic:                    6,681 out of  27,288   24%
+      Number using O6 output only:           5,167
+      Number using O5 output only:             122
+      Number using O5 and O6:                1,392
       Number used as ROM:                        0
     Number used as Memory:                     310 out of   6,408    4%
       Number used as Dual Port RAM:             88
@@ -474,21 +471,21 @@ Slice Logic Utilization:
         Number using O6 output only:            70
         Number using O5 output only:             1
         Number using O5 and O6:                151
-    Number used exclusively as route-thrus:    329
-      Number with same-slice register load:    303
+    Number used exclusively as route-thrus:    388
+      Number with same-slice register load:    358
       Number with same-slice carry load:        26
-      Number with other load:                    0
+      Number with other load:                    4
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 3,301 out of   6,822   48%
-  Nummber of MUXCYs used:                    1,284 out of  13,644    9%
-  Number of LUT Flip Flop pairs used:        9,703
-    Number with an unused Flip Flop:         3,040 out of   9,703   31%
-    Number with an unused LUT:               2,118 out of   9,703   21%
-    Number of fully used LUT-FF pairs:       4,545 out of   9,703   46%
-    Number of unique control sets:             464
+  Number of occupied Slices:                 3,126 out of   6,822   45%
+  Nummber of MUXCYs used:                    1,248 out of  13,644    9%
+  Number of LUT Flip Flop pairs used:        9,254
+    Number with an unused Flip Flop:         2,862 out of   9,254   30%
+    Number with an unused LUT:               1,875 out of   9,254   20%
+    Number of fully used LUT-FF pairs:       4,517 out of   9,254   48%
+    Number of unique control sets:             453
     Number of slice register sites lost
-      to control set restrictions:           1,782 out of  54,576    3%
+      to control set restrictions:           1,730 out of  54,576    3%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -510,8 +507,8 @@ Specific Feature Utilization:
     Number used as BUFIO2s:                      1
     Number used as BUFIO2_2CLKs:                 0
   Number of BUFIO2FB/BUFIO2FB_2CLKs:             0 out of      32    0%
-  Number of BUFG/BUFGMUXs:                       6 out of      16   37%
-    Number used as BUFGs:                        6
+  Number of BUFG/BUFGMUXs:                       5 out of      16   31%
+    Number used as BUFGs:                        5
     Number used as BUFGMUX:                      0
   Number of DCM/DCM_CLKGENs:                     1 out of       8   12%
     Number used as DCMs:                         0
@@ -539,11 +536,11 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                3.94
+Average Fanout of Non-Clock Nets:                3.92
 
-Peak Memory Usage:  729 MB
-Total REAL time to MAP completion:  2 mins 9 secs 
-Total CPU time to MAP completion:   2 mins 8 secs 
+Peak Memory Usage:  747 MB
+Total REAL time to MAP completion:  2 mins 4 secs 
+Total CPU time to MAP completion:   2 mins 3 secs 
 
 Mapping completed.
 See MAP report file "system_map.mrp" for details.
@@ -590,16 +587,16 @@ Device speed data version:  "PRODUCTION 1.21 2012-01-07".
 Device Utilization Summary:
 
 Slice Logic Utilization:
-  Number of Slice Registers:                 7,329 out of  54,576   13%
-    Number used as Flip Flops:               7,284
-    Number used as Latches:                     37
+  Number of Slice Registers:                 7,125 out of  54,576   13%
+    Number used as Flip Flops:               7,115
+    Number used as Latches:                      2
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                8
-  Number of Slice LUTs:                      7,585 out of  27,288   27%
-    Number used as logic:                    6,946 out of  27,288   25%
-      Number using O6 output only:           5,405
-      Number using O5 output only:             125
-      Number using O5 and O6:                1,416
+  Number of Slice LUTs:                      7,379 out of  27,288   27%
+    Number used as logic:                    6,681 out of  27,288   24%
+      Number using O6 output only:           5,167
+      Number using O5 output only:             122
+      Number using O5 and O6:                1,392
       Number used as ROM:                        0
     Number used as Memory:                     310 out of   6,408    4%
       Number used as Dual Port RAM:             88
@@ -611,18 +608,18 @@ Slice Logic Utilization:
         Number using O6 output only:            70
         Number using O5 output only:             1
         Number using O5 and O6:                151
-    Number used exclusively as route-thrus:    329
-      Number with same-slice register load:    303
+    Number used exclusively as route-thrus:    388
+      Number with same-slice register load:    358
       Number with same-slice carry load:        26
-      Number with other load:                    0
+      Number with other load:                    4
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 3,301 out of   6,822   48%
-  Nummber of MUXCYs used:                    1,284 out of  13,644    9%
-  Number of LUT Flip Flop pairs used:        9,703
-    Number with an unused Flip Flop:         3,040 out of   9,703   31%
-    Number with an unused LUT:               2,118 out of   9,703   21%
-    Number of fully used LUT-FF pairs:       4,545 out of   9,703   46%
+  Number of occupied Slices:                 3,126 out of   6,822   45%
+  Nummber of MUXCYs used:                    1,248 out of  13,644    9%
+  Number of LUT Flip Flop pairs used:        9,254
+    Number with an unused Flip Flop:         2,862 out of   9,254   30%
+    Number with an unused LUT:               1,875 out of   9,254   20%
+    Number of fully used LUT-FF pairs:       4,517 out of   9,254   48%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -646,8 +643,8 @@ Specific Feature Utilization:
     Number used as BUFIO2s:                      1
     Number used as BUFIO2_2CLKs:                 0
   Number of BUFIO2FB/BUFIO2FB_2CLKs:             0 out of      32    0%
-  Number of BUFG/BUFGMUXs:                       6 out of      16   37%
-    Number used as BUFGs:                        6
+  Number of BUFG/BUFGMUXs:                       5 out of      16   31%
+    Number used as BUFGs:                        5
     Number used as BUFGMUX:                      0
   Number of DCM/DCM_CLKGENs:                     1 out of       8   12%
     Number used as DCMs:                         0
@@ -686,48 +683,45 @@ WARNING:Timing:3159 - The DCM, axi_hdmi_0/axi_hdmi_0/USE_HDMI_OUT.Inst_AxiHDMITr
 INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
    Command Line Tools User Guide for information on generating a TSI report.
 Starting initial Timing Analysis.  REAL time: 15 secs 
-Finished initial Timing Analysis.  REAL time: 16 secs 
+Finished initial Timing Analysis.  REAL time: 15 secs 
 
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy1_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy5_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy2_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy4_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy3_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy4_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31> has no load.  PAR will not attempt to route
-   this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[0].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy1_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy5_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[12].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[8].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[7].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[11].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Using_DCache.Using_WriteThrough.DCache_I1/Mram_cacheline_copy2_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31> has no load.  PAR will not attempt to route
+   this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[2].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[10].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[12].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[13].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[5].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[9].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[4].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[5].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[6].ram32m_i_RAMD_D1_O has no
@@ -735,22 +729,25 @@ WARNING:Par:288 - The signal
 WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<30> has no load.  PAR will not attempt to route
    this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[9].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[10].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[14].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[4].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[0].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[3].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[11].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[15].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[8].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[2].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[1].ram32m_i_RAMD_D1_O has no
@@ -758,29 +755,29 @@ WARNING:Par:288 - The signal
 Starting Router
 
 
-Phase  1  : 52076 unrouted;      REAL time: 18 secs 
+Phase  1  : 50591 unrouted;      REAL time: 18 secs 
 
-Phase  2  : 44018 unrouted;      REAL time: 20 secs 
+Phase  2  : 42660 unrouted;      REAL time: 20 secs 
 
-Phase  3  : 18376 unrouted;      REAL time: 35 secs 
+Phase  3  : 18037 unrouted;      REAL time: 34 secs 
 
-Phase  4  : 18376 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 37 secs 
+Phase  4  : 18037 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 36 secs 
 
 Updating file: system.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 56 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 55 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 56 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 55 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 56 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 55 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 56 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 55 secs 
 
-Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 56 secs 
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 55 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 58 secs 
-Total REAL time to Router completion: 58 secs 
-Total CPU time to Router completion: 57 secs 
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 57 secs 
+Total REAL time to Router completion: 57 secs 
+Total CPU time to Router completion: 55 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -798,54 +795,32 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-| clk_100_0000MHzPLL0 |  BUFGMUX_X2Y3| No   | 2561 |  0.567     |  1.778      |
+| clk_100_0000MHzPLL0 |  BUFGMUX_X2Y3| No   | 2472 |  0.567     |  1.778      |
 +---------------------+--------------+------+------+------------+-------------+
 |S_AXIS_MM2S_ACLK_int |              |      |      |            |             |
-|                     |  BUFGMUX_X2Y4| No   |  127 |  0.058     |  1.272      |
+|                     |  BUFGMUX_X2Y4| No   |  125 |  0.062     |  1.274      |
 +---------------------+--------------+------+------+------------+-------------+
 |axi_ac97_0_Bit_Clk_p |              |      |      |            |             |
-|            in_BUFGP |  BUFGMUX_X2Y2| No   |   48 |  0.482     |  1.693      |
-+---------------------+--------------+------+------+------------+-------------+
-|pit_0/pit_0/USER_LOG |              |      |      |            |             |
-|IC_I/state_reg[1]_GN |              |      |      |            |             |
-|D_19_o_Mux_20_o_BUFG |              |      |      |            |             |
-|                     | BUFGMUX_X2Y12| No   |    8 |  0.010     |  1.246      |
+|            in_BUFGP |  BUFGMUX_X2Y2| No   |   45 |  0.456     |  1.693      |
 +---------------------+--------------+------+------+------------+-------------+
 |microblaze_0_debug_D |              |      |      |            |             |
-|              bg_Clk |  BUFGMUX_X2Y1| No   |   62 |  0.039     |  1.251      |
+|              bg_Clk |  BUFGMUX_X2Y1| No   |   59 |  0.040     |  1.251      |
 +---------------------+--------------+------+------+------------+-------------+
 |axi_hdmi_0/axi_hdmi_ |              |      |      |            |             |
 |0/USE_HDMI_OUT.Inst_ |              |      |      |            |             |
 |AxiHDMITransmitter/P |              |      |      |            |             |
-|              Clk_x2 | BUFGMUX_X3Y13| No   |   15 |  0.231     |  1.456      |
+|              Clk_x2 | BUFGMUX_X3Y13| No   |   13 |  0.231     |  1.456      |
 +---------------------+--------------+------+------+------------+-------------+
-|axi_ac97_0/axi_ac97_ |              |      |      |            |             |
-|0/USER_LOGIC_I/AC97_ |              |      |      |            |             |
-|CONTROLLER/AC97_FIFO |              |      |      |            |             |
-|_I/IpClk_ac97_reg_ac |              |      |      |            |             |
-|              cess_S |         Local|      |    2 |  0.000     |  0.447      |
+|microblaze_0_debug_D |              |      |      |            |             |
+|           bg_Update |         Local|      |   21 |  4.957     |  7.043      |
 +---------------------+--------------+------+------+------------+-------------+
 |axi_ac97_0/axi_ac97_ |              |      |      |            |             |
 |0/AXI_LITE_IPIF_I/I_ |              |      |      |            |             |
 |SLAVE_ATTACHMENT/rst |              |      |      |            |             |
-|             _rstpot |         Local|      |   33 |  0.000     |  1.189      |
-+---------------------+--------------+------+------+------------+-------------+
-|pit_0/pit_0/USER_LOG |              |      |      |            |             |
-|IC_I/state_reg[1]_GN |              |      |      |            |             |
-|     D_83_o_Mux_84_o |         Local|      |    1 |  0.000     |  0.676      |
+|             _rstpot |         Local|      |   29 |  0.000     |  1.921      |
 +---------------------+--------------+------+------+------------+-------------+
 |axi_ac97_0_Interrupt |              |      |      |            |             |
-|                     |         Local|      |    1 |  0.000     |  0.487      |
-+---------------------+--------------+------+------+------------+-------------+
-|microblaze_0_debug_D |              |      |      |            |             |
-|           bg_Update |         Local|      |   19 |  3.692     |  5.257      |
-+---------------------+--------------+------+------+------------+-------------+
-|fit_timer_0_Interrup |              |      |      |            |             |
-|                   t |         Local|      |    1 |  0.000     |  1.733      |
-+---------------------+--------------+------+------+------------+-------------+
-|pit_0/pit_0/USER_LOG |              |      |      |            |             |
-|IC_I/state_reg[1]_PW |              |      |      |            |             |
-|     R_54_o_Mux_89_o |         Local|      |    1 |  0.000     |  1.095      |
+|                     |         Local|      |    1 |  0.000     |  1.200      |
 +---------------------+--------------+------+------+------------+-------------+
 |MCB_DDR2/sysclk_2x_b |              |      |      |            |             |
 |             ufpll_o |         Local|      |   34 |  0.571     |  1.543      |
@@ -882,6 +857,15 @@ Generating Clock Report
 |b_ui_top_0/mcb_raw_w |              |      |      |            |             |
 |rapper_inst/idelay_u |              |      |      |            |             |
 |           dqs_ioi_m |         Local|      |    1 |  0.000     |  0.002      |
++---------------------+--------------+------+------+------------+-------------+
+|axi_ac97_0/axi_ac97_ |              |      |      |            |             |
+|0/USER_LOGIC_I/AC97_ |              |      |      |            |             |
+|CONTROLLER/AC97_FIFO |              |      |      |            |             |
+|_I/IpClk_ac97_reg_ac |              |      |      |            |             |
+|              cess_S |         Local|      |    2 |  0.000     |  0.917      |
++---------------------+--------------+------+------+------------+-------------+
+|fit_timer_0_Interrup |              |      |      |            |             |
+|                   t |         Local|      |    1 |  0.000     |  1.470      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -924,8 +908,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_ | MINLOWPULSE |     6.666ns|     3.334ns|       0|           0
   pin" 100 MHz HIGH 50%                     |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_axi_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Ins | SETUP       |     1.943ns|     4.777ns|       0|           0
-  t_AxiHDMITransmitter_Inst_DynClkGen_PllOu | HOLD        |     0.193ns|            |       0|           0
+  TS_axi_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Ins | SETUP       |     1.843ns|     4.877ns|       0|           0
+  t_AxiHDMITransmitter_Inst_DynClkGen_PllOu | HOLD        |     0.155ns|            |       0|           0
   t_x2         = PERIOD TIMEGRP         "ax |             |            |            |        |            
   i_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Inst_Axi |             |            |            |        |            
   HDMITransmitter_Inst_DynClkGen_PllOut_x2" |             |            |            |        |            
@@ -933,14 +917,14 @@ Asterisk (*) preceding a constraint indicates it was not met.
   I_OUT_Inst_AxiHDMITransmitter_Inst_DynClk |             |            |            |        |            
   Gen_DcmClkO         * 2 HIGH 50%          |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     4.247ns|     5.753ns|       0|           0
-  G_PLL0_CLKOUT2 = PERIOD TIMEGRP         " | HOLD        |     0.950ns|            |       0|           0
+  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     4.473ns|     5.527ns|       0|           0
+  G_PLL0_CLKOUT2 = PERIOD TIMEGRP         " | HOLD        |     1.293ns|            |       0|           0
   clock_generator_0_clock_generator_0_SIG_P | MINPERIOD   |     4.010ns|     5.990ns|       0|           0
   LL0_CLKOUT2" TS_sys_clk_pin         HIGH  |             |            |            |        |            
   50%                                       |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_axi_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Ins | SETUP       |     7.579ns|     5.861ns|       0|           0
-  t_AxiHDMITransmitter_Inst_DynClkGen_PllOu | HOLD        |     0.381ns|            |       0|           0
+  TS_axi_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Ins | SETUP       |     7.481ns|     5.959ns|       0|           0
+  t_AxiHDMITransmitter_Inst_DynClkGen_PllOu | HOLD        |     0.356ns|            |       0|           0
   t_x1         = PERIOD TIMEGRP         "ax |             |            |            |        |            
   i_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Inst_Axi |             |            |            |        |            
   HDMITransmitter_Inst_DynClkGen_PllOut_x1" |             |            |            |        |            
@@ -948,7 +932,7 @@ Asterisk (*) preceding a constraint indicates it was not met.
   I_OUT_Inst_AxiHDMITransmitter_Inst_DynClk |             |            |            |        |            
   Gen_DcmClkO         HIGH 50%              |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_path1 = MAXDELAY FROM TIMEGRP "globclk | MAXDELAY    |     8.579ns|     5.421ns|       0|           0
+  TS_path1 = MAXDELAY FROM TIMEGRP "globclk | MAXDELAY    |     8.576ns|     5.424ns|       0|           0
   " TO TIMEGRP "hdmipclk" 14 ns             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   TS_axi_hdmi_0_axi_hdmi_0_USE_HDMI_OUT_Ins | N/A         |         N/A|         N/A|     N/A|         N/A
@@ -963,32 +947,32 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_path2 = MAXDELAY FROM TIMEGRP "hdmipcl | N/A         |         N/A|         N/A|     N/A|         N/A
   k" TO TIMEGRP "globclk" 10 ns             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_ilmb_POR_FF_I_p | SETUP       |         N/A|     2.667ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_ilmb_POR_FF_I_p | SETUP       |         N/A|     2.522ns|     N/A|           0
   ath" TIG                                  |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_dlmb_POR_FF_I_p | SETUP       |         N/A|     3.073ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_dlmb_POR_FF_I_p | SETUP       |         N/A|     2.024ns|     N/A|           0
   ath" TIG                                  |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_MCB_DDR2_SYS_RST_SYNCH_path" | SETUP       |         N/A|     1.958ns|     N/A|           0
+  PATH "TS_TIG_MCB_DDR2_SYS_RST_SYNCH_path" | SETUP       |         N/A|     2.178ns|     N/A|           0
    TIG                                      |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   PATH "TS_TIG_MCB_DDR2_CALIB_DONE_SYNCH_pa | N/A         |         N/A|         N/A|     N/A|         N/A
   th" TIG                                   |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_axi4lite_0_reset_resync_path" TI | MAXDELAY    |         N/A|     4.948ns|     N/A|           0
+  PATH "TS_axi4lite_0_reset_resync_path" TI | MAXDELAY    |         N/A|     4.943ns|     N/A|           0
   G                                         |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_axi4_0_reset_resync_path" TIG    | MAXDELAY    |         N/A|     4.946ns|     N/A|           0
+  PATH "TS_axi4_0_reset_resync_path" TIG    | MAXDELAY    |         N/A|     4.949ns|     N/A|           0
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_Interrupt_path" | SETUP       |         N/A|     1.945ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_Interrupt_path" | SETUP       |         N/A|     2.030ns|     N/A|           0
    TIG                                      |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_Reset_path" TIG | SETUP       |         N/A|     3.576ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_Reset_path" TIG | SETUP       |         N/A|     2.658ns|     N/A|           0
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_axi_vdma_0_from_m_axis_mm2s_aclk | SETUP       |         N/A|     7.734ns|     N/A|           0
+  PATH "TS_axi_vdma_0_from_m_axis_mm2s_aclk | SETUP       |         N/A|     7.956ns|     N/A|           0
   _to_m_axi_mm2s_aclk_path" TIG             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_axi_vdma_0_from_m_axi_mm2s_aclk_ | SETUP       |         N/A|    10.294ns|     N/A|           0
+  PATH "TS_axi_vdma_0_from_m_axi_mm2s_aclk_ | SETUP       |         N/A|    11.292ns|     N/A|           0
   to_m_axis_mm2s_aclk_path" TIG             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   PATH "TS_axi_vdma_0_from_m_axis_mm2s_aclk | N/A         |         N/A|         N/A|     N/A|         N/A
@@ -997,7 +981,7 @@ Asterisk (*) preceding a constraint indicates it was not met.
   PATH "TS_axi_vdma_0_from_s_axi_lite_aclk_ | N/A         |         N/A|         N/A|     N/A|         N/A
   to_m_axis_mm2s_aclk_path" TIG             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_axi_vdma_0_from_m_axi_mm2s_aclk_ | SETUP       |         N/A|    12.690ns|     N/A|           0
+  PATH "TS_axi_vdma_0_from_m_axi_mm2s_aclk_ | SETUP       |         N/A|    13.543ns|     N/A|           0
   to_s_axi_lite_aclk_path" TIG              |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   PATH "TS_axi_vdma_0_from_s_axi_lite_aclk_ | N/A         |         N/A|         N/A|     N/A|         N/A
@@ -1019,16 +1003,16 @@ Derived Constraints for TS_sys_clk_pin
 | TS_clk_600_0000MHz180PLL0_nobu|      1.667ns|      1.499ns|          N/A|            0|            0|            0|            0|
 | f                             |             |             |             |             |             |             |             |
 | TS_clk_600_0000MHzPLL0_nobuf  |      1.667ns|      1.499ns|          N/A|            0|            0|            0|            0|
-| TS_clock_generator_0_clock_gen|     10.000ns|      5.990ns|      7.108ns|            0|            0|           61|         7097|
+| TS_clock_generator_0_clock_gen|     10.000ns|      5.990ns|      7.257ns|            0|            0|           61|         7097|
 | erator_0_SIG_PLL0_CLKOUT2     |             |             |             |             |             |             |             |
-|  TS_axi_hdmi_0_axi_hdmi_0_USE_|     13.441ns|      5.000ns|      9.554ns|            0|            0|            0|         7097|
+|  TS_axi_hdmi_0_axi_hdmi_0_USE_|     13.441ns|      5.000ns|      9.754ns|            0|            0|            0|         7097|
 |  HDMI_OUT_Inst_AxiHDMITransmit|             |             |             |             |             |             |             |
 |  ter_Inst_DynClkGen_DcmClkO   |             |             |             |             |             |             |             |
-|   TS_axi_hdmi_0_axi_hdmi_0_USE|      6.720ns|      4.777ns|          N/A|            0|            0|           83|            0|
+|   TS_axi_hdmi_0_axi_hdmi_0_USE|      6.720ns|      4.877ns|          N/A|            0|            0|           83|            0|
 |   _HDMI_OUT_Inst_AxiHDMITransm|             |             |             |             |             |             |             |
 |   itter_Inst_DynClkGen_PllOut_|             |             |             |             |             |             |             |
 |   x2                          |             |             |             |             |             |             |             |
-|   TS_axi_hdmi_0_axi_hdmi_0_USE|     13.441ns|      5.861ns|          N/A|            0|            0|         7014|            0|
+|   TS_axi_hdmi_0_axi_hdmi_0_USE|     13.441ns|      5.959ns|          N/A|            0|            0|         7014|            0|
 |   _HDMI_OUT_Inst_AxiHDMITransm|             |             |             |             |             |             |             |
 |   itter_Inst_DynClkGen_PllOut_|             |             |             |             |             |             |             |
 |   x1                          |             |             |             |             |             |             |             |
@@ -1052,10 +1036,10 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 23 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 1 mins 10 secs 
-Total CPU time to PAR completion: 1 mins 
+Total REAL time to PAR completion: 1 mins 8 secs 
+Total CPU time to PAR completion: 58 secs 
 
-Peak Memory Usage:  685 MB
+Peak Memory Usage:  676 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
@@ -1124,20 +1108,20 @@ Timing summary:
 
 Timing errors: 0  Score: 0 (Setup/Max: 0, Hold: 0)
 
-Constraints cover 1020417 paths, 0 nets, and 43875 connections
+Constraints cover 1014283 paths, 0 nets, and 42797 connections
 
 Design statistics:
    Minimum period:   5.990ns (Maximum frequency: 166.945MHz)
-   Maximum path delay from/to any node:   5.421ns
+   Maximum path delay from/to any node:   5.424ns
 
 
-Analysis completed Fri Dec 09 12:38:52 2016
+Analysis completed Fri Dec 09 16:42:27 2016
 --------------------------------------------------------------------------------
 
 Generating Report ...
 
 Number of warnings: 2
 Number of info messages: 4
-Total time: 19 secs 
+Total time: 18 secs 
 
 

@@ -27,7 +27,7 @@
 #define MAX_ALIENS_FIRE_COUNT 300 // maximum time between alien bullets
 #define ALIEN_EXPLOSION_COUNT 15 // time until an alien explosion sprite gets erased
 #define TANK_DEATH_COUNT 150
-#define SWITCH_POLL_COUNT 5
+#define SWITCH_POLL_COUNT 3
 
 // UFO appears about every 25-30 seconds
 #define UFO_APPEAR_COUNT_MINIMUM 1500
@@ -53,6 +53,7 @@
 #define UNUSED_CAP 0x20
 
 // Switch bit mask
+#define SW_7 0x80
 #define SW_6 0x40
 #define SW_5 0x20
 
@@ -223,6 +224,7 @@ void updateUartPollCounter() {
 
 // last read values of the switches
 // used to check for changes in value
+uint8_t SW_7_d1 = 0;
 uint8_t SW_6_d1 = 0;
 uint8_t SW_5_d1 = 0;
 
@@ -235,6 +237,10 @@ void updateSwitchPollCounter() {
 		//reads the switch values
 		uint32_t switches = XGpio_DiscreteRead(&gpSW, 1);
 		//checks if the switches have moved from low to high
+		if ((switches & SW_7) && !(SW_7_d1)) {
+			SW_7_d1 = switches & SW_7; //saves the last value of the switch
+			setEvent(SW_7_ON_EVENT);
+		}
 		if ((switches & SW_6) && !(SW_6_d1)) {
 			SW_6_d1 = switches & SW_6; //saves the last value of the switch
 			setEvent(SW_6_ON_EVENT); //set the event
@@ -244,7 +250,12 @@ void updateSwitchPollCounter() {
 			setEvent(SW_5_ON_EVENT);
 		}
 
+
 		//checks if the switches have moved from high to low
+		if (!(switches & SW_7) && (SW_7_d1)) {
+			SW_7_d1 = switches & SW_7; //saves the last value of the switch
+			setEvent(SW_7_OFF_EVENT);
+		}
 		if (!(switches & SW_6) && (SW_6_d1)) {
 			SW_6_d1 = switches & SW_6; //saves the last value of the switch
 			setEvent(SW_6_OFF_EVENT); //set the event
@@ -253,6 +264,7 @@ void updateSwitchPollCounter() {
 			SW_5_d1 = switches & SW_5; //saves the last value of the switch
 			setEvent(SW_5_OFF_EVENT);
 		}
+
 	}
 }
 // This is invoked in response to a timer interrupt every 10 ms.
@@ -287,8 +299,9 @@ void timerInterruptHandler() {
 void interrupt_handler_dispatcher(void* ptr) {
 	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
 	// Check the FIT interrupt first.
-	if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
-		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
+	if (intc_status & XPAR_FIT_TIMER_0_INTERRUPT_MASK) {
+//		xil_printf("fit timer interrupt\n\r");
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
 		timerInterruptHandler();
 	}
 	// Check the AC97 (sound chip) interrupt. Queue up the audio event if it did interrupt so that
@@ -297,12 +310,15 @@ void interrupt_handler_dispatcher(void* ptr) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_AXI_AC97_0_INTERRUPT_MASK);
 		setEvent(AUDIO_EVENT);
 	}
-	//not working for some reason....
-	//    if (intc_status & XPAR_SWITCHES_IP2INTC_IRPT_MASK) {
-	//    	xil_printf("switch interrupt");
-	//    	XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_SWITCHES_IP2INTC_IRPT_MASK);
-	//    	setEvent(SWITCH_EVENT);
-	//    }
+	if (intc_status & XPAR_DMACONTROLLER_0_INTR_MASK) {
+		xil_printf("dmacontroller interrupt\n\r");
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_DMACONTROLLER_0_INTR_MASK);
+	}
+//	//interrupts for the switches
+//	if (intc_status & XPAR_SWITCHES_IP2INTC_IRPT_MASK) {
+//		xil_printf("switch interrupt\n\r");
+//		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_SWITCHES_IP2INTC_IRPT_MASK);
+//	}
 }
 
 // Resets all counters that are updated by the FIT ISR handler
@@ -325,16 +341,16 @@ void timerInit() {
 	buttons = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
-//	xil_printf("init buttons\r\n");
+	//	xil_printf("init buttons\r\n");
 	int32_t switches;
 	switches = XGpio_Initialize(&gpSW, XPAR_SWITCHES_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpSW, 1, 0x0000001F);
-//	xil_printf("init switches\r\n");
+	//	xil_printf("init switches\r\n");
 
 	// Initialize interrupts - only have the FIT interrupt
 	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
-	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK | XPAR_SWITCHES_IP2INTC_IRPT_MASK  );
+	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK | XPAR_AXI_AC97_0_INTERRUPT_MASK | XPAR_DMACONTROLLER_0_INTR_MASK );
 	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
 	microblaze_enable_interrupts();
 	pitInit(PIT_INITIAL_DELAY);
@@ -348,8 +364,8 @@ void setAlienExplosionCounter() {
 	// make this counter either its regular value or the counter for moving the aliens - 1,
 	// whichever is less
 	alienExplosionCounter
-			= ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ? ALIEN_EXPLOSION_COUNT
-					: aliensCounter - 1;
+	= ALIEN_EXPLOSION_COUNT < (aliensCounter - 1) ? ALIEN_EXPLOSION_COUNT
+			: aliensCounter - 1;
 }
 
 // See header file

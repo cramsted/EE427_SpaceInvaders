@@ -19,6 +19,7 @@
 #include "xil_io.h"
 #include "xuartlite.h"
 #include "render.h"
+#include "dmacontroller.h"
 
 // took the average of 45 samples
 // the zero utilization count (excluding event handlers)
@@ -226,6 +227,22 @@ void uartEvent() {
 		}
 	}
 }
+// switch 6 has been turned on
+void switch_7_on_Event(){
+	if (events & SW_7_ON_EVENT){
+		xil_printf("sw 7 on\r\n");
+		clearEvent(SW_7_ON_EVENT);
+		dmaScreenShot();
+	}
+}
+
+// switch 6 has been turned off
+void switch_7_off_Event(){
+	if (events & SW_7_OFF_EVENT){
+		xil_printf("sw 7 off\r\n");
+		clearEvent(SW_7_OFF_EVENT);
+	}
+}
 
 // switch 6 has been turned on
 void switch_6_on_Event(){
@@ -311,7 +328,6 @@ void eventsLoop() {
 	pitSetDelay(PIT_INITIAL_DELAY);
 	while (1) {
 		if (events && enabled) {
-			xil_printf("events loop top\n\r");
 			// An event is pending. Check all events round-robin style.
 			leftButtonEvent();
 			rightButtonEvent();
@@ -327,12 +343,17 @@ void eventsLoop() {
 			heartbeatEvent();
 			audioEvent();
 			uartEvent();
-//			xil_printf("events loop middle\n\r");
+			switch_7_on_Event();
+			switch_7_off_Event();
 			switch_6_on_Event();
 			switch_6_off_Event();
 			switch_5_on_Event();
 			switch_5_off_Event();
-//			xil_printf("events loop bottom\n\r");
+//			xil_printf("left idle: %x\n\r", DMACONTROLLER_mReadSlaveReg3(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG3_OFFSET));
+//			xil_printf("left read: %x\n\r", DMACONTROLLER_mReadSlaveReg4(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG4_OFFSET));
+//			xil_printf("left wait for read: %x\n\r", DMACONTROLLER_mReadSlaveReg5(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG5_OFFSET));
+//			xil_printf("left write: %x\n\r", DMACONTROLLER_mReadSlaveReg6(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG6_OFFSET));
+//			xil_printf("left wait for write: %x\n\r", DMACONTROLLER_mReadSlaveReg7(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG7_OFFSET));
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization

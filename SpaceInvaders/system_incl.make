@@ -130,8 +130,6 @@ pcores/axi_ac97_v1_00_a/hdl/vhdl/ac97_fifo.vhd \
 pcores/axi_ac97_v1_00_a/hdl/vhdl/opb_ac97.vhd \
 pcores/axi_ac97_v1_00_a/hdl/vhdl/user_logic.vhd \
 pcores/axi_ac97_v1_00_a/hdl/vhdl/axi_ac97.vhd \
-pcores/pit_v1_00_a/hdl/vhdl/user_logic.vhd \
-pcores/pit_v1_00_a/hdl/vhdl/pit.vhd \
 pcores/capacitive_buttons_v1_00_a/hdl/vhdl/user_logic.vhd \
 pcores/capacitive_buttons_v1_00_a/hdl/vhdl/capacitive_buttons.vhd \
 C:/Xilinx/13.4/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_master_lite_v1_00_a/hdl/vhdl/axi_master_lite_reset.vhd \
@@ -161,7 +159,6 @@ implementation/digilent_quadspi_cntlr_wrapper.ngc \
 implementation/axi_intc_0_wrapper.ngc \
 implementation/axi_timer_0_wrapper.ngc \
 implementation/fit_timer_0_wrapper.ngc \
-implementation/pit_0_wrapper.ngc \
 implementation/capacitive_buttons_0_wrapper.ngc \
 implementation/switches_wrapper.ngc \
 implementation/dmacontroller_0_wrapper.ngc

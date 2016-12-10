@@ -9,6 +9,8 @@
 #include "sprites.h"    //for access to sprite structs
 #include "xaxivdma.h"
 #include "xparameters.h"
+#include "dmacontroller.h"
+#include "platform.h"
 #include "xio.h"
 #include "aliens.h"     //for access to alien initializers
 #include "bullets.h"    //for access to bullet initializer
@@ -91,12 +93,22 @@ void render() {
 //copies everything in framebuffer0 to framebuffer1
 void screenShot(){
 	memcpy(framePointer1, framePointer0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
-//	int32_t row, col;
-//	for(row = 0; row < SCREEN_HEIGHT; row++){
-//		for(col = 0; col < SCREEN_WIDTH; col++){
-//			 framePointer1[row * SCREEN_WIDTH + col] = framePointer0[row * SCREEN_WIDTH + col];
-//		}
-//	}
+}
+
+void dmaScreenShot(){
+	//write to slave regs
+	DMACONTROLLER_mWriteSlaveReg0(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer0);
+	DMACONTROLLER_mWriteSlaveReg1(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer1);
+	DMACONTROLLER_mWriteSlaveReg2(XPAR_DMACONTROLLER_0_BASEADDR, 0, SCREEN_WIDTH * SCREEN_HEIGHT);
+
+	//start the dma controller
+	disable_caches();
+	xil_printf("before BE\n\r");
+	Xil_Out16(XPAR_DMACONTROLLER_0_BASEADDR+DMACONTROLLER_MST_BE_REG_OFFSET, 0xFFFF);
+	xil_printf("before start\n\r");
+	Xil_Out8(XPAR_DMACONTROLLER_0_BASEADDR+DMACONTROLLER_MST_GO_PORT_OFFSET, MST_START);
+	xil_printf("after start\n\r");
+	enable_caches();
 }
 
 //changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at

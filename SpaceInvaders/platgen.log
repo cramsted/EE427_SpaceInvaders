@@ -66,7 +66,7 @@ INFO:EDK:4130 - IPNAME: axi_s6_ddrx, INSTANCE:MCB_DDR2 - tcl is overriding
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_s6_ddrx_v1_05_a\
    data\axi_s6_ddrx_v2_1_0.mpd line 237 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
-   PARAMETER C_NUM_INTR_INPUTS value to 7 -
+   PARAMETER C_NUM_INTR_INPUTS value to 6 -
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_intc_v1_01_a\dat
    a\axi_intc_v2_1_0.mpd line 80 
 
@@ -98,7 +98,6 @@ Address Map for Processor microblaze_0
   (0x41400000-0x4140ffff) debug_module	axi4lite_0
   (0x41c00000-0x41c0ffff) axi_timer_0	axi4lite_0
   (0x7b000000-0x7b00ffff) dmacontroller_0	axi4lite_0
-  (0x7bc00000-0x7bc0ffff) pit_0	axi4lite_0
   (0x7e200000-0x7e20ffff) axi_vdma_0	axi4lite_0
   (0x7e220000-0x7e22ffff) axi_hdmi_0	axi4lite_0
   (0x7e240000-0x7e24ffff) axi_ac97_0	axi4lite_0
@@ -123,7 +122,7 @@ Checking platform address map ...
 Checking platform configuration ...
 IPNAME: lmb_v10, INSTANCE: microblaze_0_ilmb - 1 master(s) : 1 slave(s) 
 IPNAME: lmb_v10, INSTANCE: microblaze_0_dlmb - 1 master(s) : 1 slave(s) 
-IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 13 slave(s) 
+IPNAME: axi_interconnect, INSTANCE: axi4lite_0 - 1 master(s) : 12 slave(s) 
 IPNAME: axi_interconnect, INSTANCE: axi4_0 - 4 master(s) : 1 slave(s) 
 WARNING:EDK:3977 - AXI4 protocol type BUSIF: S0_AXI of IPINSTANCE: MCB_DDR2 
    connected with AXI4LITE type BUSIF: M_AXI of IPINSTANCE: dmacontroller_0.
@@ -256,7 +255,7 @@ INFO:EDK:4130 - IPNAME: axi_s6_ddrx, INSTANCE:MCB_DDR2 - tcl is overriding
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_s6_ddrx_v1_05_a\
    data\axi_s6_ddrx_v2_1_0.mpd line 230 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
-   PARAMETER C_KIND_OF_INTR value to 0b11111111111111111111111111001000 -
+   PARAMETER C_KIND_OF_INTR value to 0b11111111111111111111111111100100 -
    C:\Xilinx\13.4\ISE_DS\EDK\hw\XilinxProcessorIPLib\pcores\axi_intc_v1_01_a\dat
    a\axi_intc_v2_1_0.mpd line 81 
 INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:axi_intc_0 - tcl is overriding
@@ -350,12 +349,6 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 218
 IPNAME:axi_ac97 INSTANCE:axi_ac97_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 252
 - Copying cache implementation netlist
-IPNAME:axi_interconnect INSTANCE:axi4lite_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 267
-- Copying cache implementation netlist
-IPNAME:axi_interconnect INSTANCE:axi4_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
-- Copying cache implementation netlist
 IPNAME:axi_uartlite INSTANCE:rs232_uart_1 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 282
 - Copying cache implementation netlist
@@ -365,26 +358,17 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 297
 IPNAME:d_qspi_axi INSTANCE:digilent_quadspi_cntlr -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 345
 - Copying cache implementation netlist
-IPNAME:axi_intc INSTANCE:axi_intc_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 357
-- Copying cache implementation netlist
 IPNAME:axi_timer INSTANCE:axi_timer_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 368
 - Copying cache implementation netlist
 IPNAME:fit_timer INSTANCE:fit_timer_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 378
 - Copying cache implementation netlist
-IPNAME:pit INSTANCE:pit_0 -
+IPNAME:capacitive_buttons INSTANCE:capacitive_buttons_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 386
 - Copying cache implementation netlist
-IPNAME:capacitive_buttons INSTANCE:capacitive_buttons_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 396
-- Copying cache implementation netlist
 IPNAME:axi_gpio INSTANCE:switches -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 406
-- Copying cache implementation netlist
-IPNAME:dmacontroller INSTANCE:dmacontroller_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 419
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 396
 - Copying cache implementation netlist
 
 Elaborating instances ...
@@ -422,19 +406,31 @@ C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 161
 INSTANCE:axi_ac97_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 252
 - Running XST synthesis
-INSTANCE:pit_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 386
+INSTANCE:axi4lite_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 267
+- Running XST synthesis
+INSTANCE:axi4_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
+- Running XST synthesis
+INSTANCE:axi_intc_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 357
 - Running XST synthesis
 INSTANCE:capacitive_buttons_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 396
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 386
 - Running XST synthesis
 INSTANCE:dmacontroller_0 -
-C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 419
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 409
 - Running XST synthesis
 
 Running NGCBUILD ...
 IPNAME:clock_generator_0_wrapper INSTANCE:clock_generator_0 -
 C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 161
+- Running NGCBUILD
+IPNAME:axi4lite_0_wrapper INSTANCE:axi4lite_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 267
+- Running NGCBUILD
+IPNAME:axi4_0_wrapper INSTANCE:axi4_0 -
+C:\Users\superman\Desktop\EE427_SpaceInvaders\SpaceInvaders\system.mhs line 275
 - Running NGCBUILD
 INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
    If any constraint needs to be overridden, this should be done by modifying
@@ -442,4 +438,4 @@ INFO:EDK:3509 - NCF files should not be modified as they will be regenerated.
 
 Rebuilding cache ...
 
-Total run time: 58.00 seconds
+Total run time: 176.00 seconds
