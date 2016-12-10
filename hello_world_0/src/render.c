@@ -19,6 +19,7 @@
 #include "tank.h"       //for access to tank initializer
 #include "text.h"       //for access to text related initializers
 #include <stdint.h>
+#include "xtmrctr.h"
 
 //function prototypes
 int32_t findPixelValue(int32_t x, int32_t y, int32_t col, int32_t row, Sprite *sp);
@@ -28,7 +29,7 @@ void drawGround();
 #define FRAME_BUFFER_0_ADDR 0xC3000000
 
 XAxiVdma videoDMAController;
-
+XTmrCtr timer;
 
 // Now, let's get ready to start displaying some stuff on the screen.
 // The variables framePointer and framePointer1 are just pointers to the base address
@@ -50,7 +51,7 @@ void changeFrame(uint8_t x){
 // init bunker positions and erosion and draw them
 // init score (numbers)
 void videoInit() {
-
+	XTmrCtr_Initialize(&timer, 0);
 	memset(framePointer0, 0, SCREEN_WIDTH * SCREEN_HEIGHT * 4); //clears screen
 
 	tank = initTank(TANK_START_X, TANK_START_Y); //creates tank struct
@@ -92,23 +93,32 @@ void render() {
 
 //copies everything in framebuffer0 to framebuffer1
 void screenShot(){
+	XTmrCtr_Start(&timer, 0);
 	memcpy(framePointer1, framePointer0, SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	XTmrCtr_Stop(&timer, 0);
+	xil_printf("software screen shot time value: %d\n\r", XTmrCtr_GetValue(&timer, 0));
+	XTmrCtr_Reset(&timer, 0);
 }
 
+//sets up and starts the hardware screen shot
 void dmaScreenShot(){
-	//write to slave regs
-	DMACONTROLLER_mWriteSlaveReg0(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer0);
-	DMACONTROLLER_mWriteSlaveReg1(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer1);
-	DMACONTROLLER_mWriteSlaveReg2(XPAR_DMACONTROLLER_0_BASEADDR, 0, SCREEN_WIDTH * SCREEN_HEIGHT);
+	XTmrCtr_Start(&timer, 0);
+	//write to dma registers
+	DMACONTROLLER_mWriteSlaveReg0(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer0); 	//source address
+	DMACONTROLLER_mWriteSlaveReg1(XPAR_DMACONTROLLER_0_BASEADDR, 0, framePointer1);		//destination address
+	DMACONTROLLER_mWriteSlaveReg2(XPAR_DMACONTROLLER_0_BASEADDR, 0, SCREEN_WIDTH * SCREEN_HEIGHT);	//number of words to transfer
 
-	//start the dma controller
+	//disable caches to ensure we are reading the correct data
 	disable_caches();
-	xil_printf("before BE\n\r");
+	//set byte enable control bit
 	Xil_Out16(XPAR_DMACONTROLLER_0_BASEADDR+DMACONTROLLER_MST_BE_REG_OFFSET, 0xFFFF);
-	xil_printf("before start\n\r");
+	//set go control bit
 	Xil_Out8(XPAR_DMACONTROLLER_0_BASEADDR+DMACONTROLLER_MST_GO_PORT_OFFSET, MST_START);
-	xil_printf("after start\n\r");
+	//enable caches again
 	enable_caches();
+	XTmrCtr_Stop(&timer, 0);
+	xil_printf("dma controller screen shot time value: %d\n\r", XTmrCtr_GetValue(&timer, 0));
+	XTmrCtr_Reset(&timer, 0);
 }
 
 //changes the values in the frame buffer array given a sprite and a postion it needs to be drawn at

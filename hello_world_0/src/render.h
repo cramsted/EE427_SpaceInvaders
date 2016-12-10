@@ -26,6 +26,6 @@ void editFrameBuffer(Sprite *sp, Position *p);
 void changeFrame(uint8_t x);
 //copies everything in framebuffer0 to framebuffer1
 void screenShot();
-//hardware takes the screen shots
+//sets up and starts the hardware screen shot
 void dmaScreenShot();
 #endif /* RENDER_H_ */

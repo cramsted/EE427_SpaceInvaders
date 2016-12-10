@@ -227,19 +227,18 @@ void uartEvent() {
 		}
 	}
 }
-// switch 6 has been turned on
+// switch 7 has been turned on
 void switch_7_on_Event(){
 	if (events & SW_7_ON_EVENT){
-		xil_printf("sw 7 on\r\n");
 		clearEvent(SW_7_ON_EVENT);
+		//trigger dma to take the screenshot
 		dmaScreenShot();
 	}
 }
 
-// switch 6 has been turned off
+// switch 7 has been turned off
 void switch_7_off_Event(){
 	if (events & SW_7_OFF_EVENT){
-		xil_printf("sw 7 off\r\n");
 		clearEvent(SW_7_OFF_EVENT);
 	}
 }
@@ -247,7 +246,6 @@ void switch_7_off_Event(){
 // switch 6 has been turned on
 void switch_6_on_Event(){
 	if (events & SW_6_ON_EVENT){
-		xil_printf("sw 6 on\r\n");
 		clearEvent(SW_6_ON_EVENT);
 		//freeze the game
 		setScreenShotFreeze(SCREEN_SHOT_ON);
@@ -259,7 +257,6 @@ void switch_6_on_Event(){
 // switch 6 has been turned off
 void switch_6_off_Event(){
 	if (events & SW_6_OFF_EVENT){
-		xil_printf("sw 6 off\r\n");
 		clearEvent(SW_6_OFF_EVENT);
 		//unfreeze the game
 		setScreenShotFreeze(SCREEN_SHOT_OFF);
@@ -269,7 +266,6 @@ void switch_6_off_Event(){
 // switch 5 has been turned on
 void switch_5_on_Event(){
 	if (events & SW_5_ON_EVENT){
-		xil_printf("sw 5 on\r\n");
 		clearEvent(SW_5_ON_EVENT);
 		//switch the frame buffer to the screen shot
 		changeFrame(SCREEN_SHOT_ON);
@@ -281,7 +277,6 @@ void switch_5_on_Event(){
 // switch 5 has been turned off
 void switch_5_off_Event(){
 	if (events & SW_5_OFF_EVENT){
-		xil_printf("sw 5 off\r\n");
 		clearEvent(SW_5_OFF_EVENT);
 		//switch the frame buffer to the normal game
 		changeFrame(SCREEN_SHOT_OFF);
@@ -349,11 +344,6 @@ void eventsLoop() {
 			switch_6_off_Event();
 			switch_5_on_Event();
 			switch_5_off_Event();
-//			xil_printf("left idle: %x\n\r", DMACONTROLLER_mReadSlaveReg3(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG3_OFFSET));
-//			xil_printf("left read: %x\n\r", DMACONTROLLER_mReadSlaveReg4(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG4_OFFSET));
-//			xil_printf("left wait for read: %x\n\r", DMACONTROLLER_mReadSlaveReg5(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG5_OFFSET));
-//			xil_printf("left write: %x\n\r", DMACONTROLLER_mReadSlaveReg6(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG6_OFFSET));
-//			xil_printf("left wait for write: %x\n\r", DMACONTROLLER_mReadSlaveReg7(XPAR_DMACONTROLLER_0_BASEADDR, DMACONTROLLER_SLV_REG7_OFFSET));
 		} else {
 			++utilizationCounter;
 			// We used the following to get a baseline for utilization

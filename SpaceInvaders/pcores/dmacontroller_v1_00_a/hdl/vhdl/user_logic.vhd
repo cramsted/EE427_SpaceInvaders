@@ -118,7 +118,7 @@ entity user_logic is
   (
     -- ADD USER PORTS BELOW THIS LINE ------------------
     --USER ports added here
-				intr													 : out std_logic; 
+				intr													 : out std_logic; --interrupt signal
 
     -- ADD USER PORTS ABOVE THIS LINE ------------------
 
@@ -226,8 +226,8 @@ architecture IMP of user_logic is
   signal mst_fifo_valid_write_xfer      : std_logic;
   signal mst_fifo_valid_read_xfer       : std_logic;
   signal Bus2IP_Reset                   : std_logic;
-	signal word_copy_count								: unsigned(31 downto 0); 
-	signal address_offset									: unsigned(31 downto 0); 
+	signal word_copy_count								: unsigned(31 downto 0); --keeps track of the number of words that have been transferred
+	signal address_offset									: unsigned(31 downto 0); --keeps track of the address offset
 attribute SIGIS of Bus2IP_Reset   : signal is "RST";
 begin
 
@@ -557,7 +557,6 @@ begin
         mst_cmd_sm_set_timeout    <= '0';
         mst_cmd_sm_busy           <= '0';
         intr											<= '0';  
---				slv_reg3 <= (others => '0');
       else
 
         -- default condition
@@ -580,14 +579,12 @@ begin
             if ( mst_go = '1' ) then
               mst_cmd_sm_state  <= CMD_READ;
               mst_cmd_sm_clr_go <= '1';
---							slv_reg3 <= std_logic_vector(unsigned(slv_reg3) + 1); 
             else
               mst_cmd_sm_state  <= CMD_IDLE;
               mst_cmd_sm_busy   <= '0';
             end if;
 					
           when CMD_READ =>
---						slv_reg4 <= std_logic_vector(unsigned(slv_reg4) + 1); 
             if ( Bus2IP_Mst_CmdAck = '1' and Bus2IP_Mst_Cmplt = '0' ) then
               mst_cmd_sm_state <= CMD_WAIT_FOR_READ_DATA;
             elsif ( Bus2IP_Mst_Cmplt = '1' ) then
@@ -610,7 +607,6 @@ begin
             end if;
 
           when CMD_WAIT_FOR_READ_DATA =>
---						slv_reg5 <= std_logic_vector(unsigned(slv_reg5) + 1); 
             if ( Bus2IP_Mst_Cmplt = '1' ) then
               mst_cmd_sm_state <= CMD_WRITE;
               if ( Bus2IP_Mst_Cmd_Timeout = '1' ) then
@@ -628,7 +624,6 @@ begin
             end if;
 						
           when CMD_WRITE =>
---						slv_reg6 <= std_logic_vector(unsigned(slv_reg6) + 1); 
             if ( Bus2IP_Mst_CmdAck = '1' and Bus2IP_Mst_Cmplt = '0' ) then
               mst_cmd_sm_state <= CMD_WAIT_FOR_WRITE_DATA;
             elsif ( Bus2IP_Mst_Cmplt = '1' ) then
@@ -652,10 +647,11 @@ begin
 
           when CMD_WAIT_FOR_WRITE_DATA =>
             if ( Bus2IP_Mst_Cmplt = '1' ) then
---						slv_reg7 <= std_logic_vector(unsigned(slv_reg7) + 1); 
+						--checks if it has copied the same number of words as what is in slv_reg2
 							if (word_copy_count = (unsigned(slv_reg2)-1)) then
-								mst_cmd_sm_state <= CMD_DONE; 
+								mst_cmd_sm_state <= CMD_DONE; --finish if yes
 							else
+								--increment the word count and address values
 								word_copy_count <= word_copy_count + 1; 
 								address_offset <= address_offset + 4; 
 								mst_cmd_sm_state <= CMD_READ;
@@ -678,6 +674,7 @@ begin
             mst_cmd_sm_state    <= CMD_IDLE;
             mst_cmd_sm_set_done <= '1';
             mst_cmd_sm_busy     <= '0';
+						--clear the word and address counts
 						word_copy_count <= (others => '0');
 						address_offset <= (others => '0'); 
 						intr <= '1'; 
